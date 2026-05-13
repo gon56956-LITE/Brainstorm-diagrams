@@ -125,6 +125,8 @@ aspect ratio: 16:9
 background: #FFFFFF or #F7FAFD
 ```
 
+Dense nested fault-tree diagrams may expand SVG height beyond 1080 px to preserve readable cards and avoid clipping. The default `review_compact` mode should keep width compact while allowing vertical expansion when nested branches require it.
+
 Default structure:
 
 ```text
@@ -692,9 +694,9 @@ Recommended algorithm:
 
 1. Parse the tree into levels.
 2. Assign the top event to the top center.
-3. Place first-level intermediate events evenly across the canvas width.
-4. For each parent, place children evenly below it.
-5. Reserve upper-left area for title and subtitle.
+3. Place first-level intermediate events across the canvas width.
+4. In `review_compact`, draw each first-level subtree as a vertical trunk with leftward branch lines to direct children; nested intermediate events start their own trunk below.
+5. Reserve upper-left area for event detail when provided, otherwise title and subtitle.
 6. Reserve upper-right area for legend if enabled.
 7. Avoid overlap between legend and diagram nodes.
 8. Use orthogonal connector lines.
@@ -707,7 +709,7 @@ Supported first implementation scope:
 levels: 2-4
 first-level events: 2-5
 children per intermediate event: 1-4
-canvas: 16:9 only
+canvas: base 16:9, with vertical expansion allowed for dense nested content
 output: SVG only, PNG optional later
 ```
 

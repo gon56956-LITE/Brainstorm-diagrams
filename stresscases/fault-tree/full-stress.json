@@ -1,0 +1,88 @@
+{
+  "diagram_type": "fault_tree",
+  "title": "Fault Tree Analysis",
+  "subtitle": "Top Event - System Intermittently Fails During Startup Validation",
+  "output": "svg",
+  "theme": "business_simple",
+  "show_legend": true,
+  "top_event": {
+    "id": "T0",
+    "label": "System Intermittently Fails During Startup Validation",
+    "description": "The unit sometimes fails to complete startup validation after overnight storage and requires a full power cycle to recover."
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "The unit sometimes fails to complete startup validation after overnight storage and requires a full power cycle to recover.",
+    "bullets": [
+      "Observed across mixed environmental chambers during validation",
+      "Failure appears after long idle time followed by cold startup",
+      "Scope includes engineering samples from two assembly lots",
+      "Impact is delayed shipment qualification until root cause is isolated"
+    ]
+  },
+  "tree": {
+    "gate": "OR",
+    "children": [
+      {
+        "id": "1",
+        "type": "intermediate_event",
+        "label": "Input Power Path Instability",
+        "gate": "OR",
+        "children": [
+          {"id": "1.1", "type": "basic_event", "label": "Supply Rail Brownout During Inrush Current"},
+          {"id": "1.2", "type": "basic_event", "label": "Aged Bulk Capacitor With High ESR"},
+          {"id": "1.3", "type": "basic_event", "label": "Loose Connector Contact Under Vibration"},
+          {"id": "1.4", "type": "basic_event", "label": "Protection Circuit Trips Prematurely"}
+        ]
+      },
+      {
+        "id": "2",
+        "type": "intermediate_event",
+        "label": "Control Firmware Startup Weakness",
+        "gate": "AND",
+        "children": [
+          {"id": "2.1", "type": "basic_event", "label": "Retry Timer Too Short For Cold Components"},
+          {"id": "2.2", "type": "basic_event", "label": "Boot State Machine Misses Sensor Ready Signal"},
+          {"id": "2.3", "type": "basic_event", "label": "Configuration Defaults Not Persisted Correctly"},
+          {"id": "2.4", "type": "basic_event", "label": "Watchdog Reset Masks Original Fault"}
+        ]
+      },
+      {
+        "id": "3",
+        "type": "intermediate_event",
+        "label": "Thermal And Mechanical Interaction",
+        "gate": "AND",
+        "children": [
+          {"id": "3.1", "type": "basic_event", "label": "Thermal Expansion Opens Marginal Solder Joint"},
+          {"id": "3.2", "type": "basic_event", "label": "Heat Sink Pressure Warps Local PCB Area"},
+          {"id": "3.3", "type": "basic_event", "label": "Cold Start Condensation Increases Leakage Path"},
+          {"id": "3.4", "type": "basic_event", "label": "Mounting Torque Variation Changes Ground Contact"}
+        ]
+      },
+      {
+        "id": "4",
+        "type": "intermediate_event",
+        "label": "Signal Integrity Margin Loss",
+        "gate": "OR",
+        "children": [
+          {"id": "4.1", "type": "basic_event", "label": "Clock Jitter Exceeds Startup Qualification Window"},
+          {"id": "4.2", "type": "basic_event", "label": "Reference Signal Noise Couples Into Reset Line"},
+          {"id": "4.3", "type": "basic_event", "label": "Cable Shield Termination Is Intermittent"},
+          {"id": "4.4", "type": "basic_event", "label": "Long Harness Adds Unexpected Startup Delay"}
+        ]
+      },
+      {
+        "id": "5",
+        "type": "intermediate_event",
+        "label": "Manufacturing Variation",
+        "gate": "OR",
+        "children": [
+          {"id": "5.1", "type": "basic_event", "label": "Solder Paste Volume Variation On Power Pins"},
+          {"id": "5.2", "type": "basic_event", "label": "Supplier Lot Has Wider Sensor Threshold Spread"},
+          {"id": "5.3", "type": "basic_event", "label": "Test Fixture Contact Resistance Not Controlled"},
+          {"id": "5.4", "type": "basic_event", "label": "Assembly Rework Introduces Local Stress"}
+        ]
+      }
+    ]
+  }
+}

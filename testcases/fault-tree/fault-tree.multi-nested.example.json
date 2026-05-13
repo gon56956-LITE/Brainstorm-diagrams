@@ -1,0 +1,66 @@
+{
+  "diagram_type": "fault_tree",
+  "title": "Fault Tree Analysis",
+  "subtitle": "Top Event - Safety Chain Does Not Release",
+  "output": "svg",
+  "theme": "business_simple",
+  "show_legend": true,
+  "top_event": {
+    "id": "T0",
+    "label": "Safety Chain Does Not Release",
+    "description": "A single first-level branch contains multiple nested logic groups that must remain visually distinct."
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "This case protects multiple second-level intermediate events under one first-level intermediate event.",
+    "bullets": [
+      "Safety Path has two nested intermediate events",
+      "Each nested event owns its own gate and leaves",
+      "Direct basic leaves remain on the first-level trunk"
+    ]
+  },
+  "tree": {
+    "gate": "OR",
+    "children": [
+      {
+        "id": "1",
+        "type": "intermediate_event",
+        "label": "Safety Path",
+        "gate": "OR",
+        "children": [
+          {"id": "1.1", "type": "basic_event", "label": "Emergency Stop Active"},
+          {
+            "id": "1.2",
+            "type": "intermediate_event",
+            "label": "Relay Logic",
+            "gate": "AND",
+            "children": [
+              {"id": "1.2.1", "type": "basic_event", "label": "Relay Coil Open"},
+              {"id": "1.2.2", "type": "basic_event", "label": "Contact Welded"}
+            ]
+          },
+          {
+            "id": "1.3",
+            "type": "intermediate_event",
+            "label": "Sensor Logic",
+            "gate": "OR",
+            "children": [
+              {"id": "1.3.1", "type": "basic_event", "label": "Guard Switch Open"},
+              {"id": "1.3.2", "type": "basic_event", "label": "Door Sensor Drift"}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "intermediate_event",
+        "label": "Controller Path",
+        "gate": "AND",
+        "children": [
+          {"id": "2.1", "type": "basic_event", "label": "Firmware Interlock Latched"},
+          {"id": "2.2", "type": "basic_event", "label": "Reset Command Missing"}
+        ]
+      }
+    ]
+  }
+}

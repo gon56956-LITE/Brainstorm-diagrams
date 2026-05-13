@@ -1,0 +1,66 @@
+{
+  "diagram_type": "fault_tree",
+  "title": "Fault Tree Analysis",
+  "subtitle": "Top Event - Startup Interlock Failure",
+  "output": "svg",
+  "theme": "business_simple",
+  "show_legend": true,
+  "top_event": {
+    "id": "T0",
+    "label": "Startup Interlock Failure",
+    "description": "Startup interlock does not release because one failure path contains mixed logical conditions."
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "The top event can be caused by independent failures or by a combined condition inside the power path.",
+    "bullets": [
+      "Power path uses OR at the first level",
+      "One child condition expands into an AND gate",
+      "Each direct child group still has one gate"
+    ]
+  },
+  "tree": {
+    "gate": "OR",
+    "children": [
+      {
+        "id": "1",
+        "type": "intermediate_event",
+        "label": "Power Path Issue",
+        "gate": "OR",
+        "children": [
+          {"id": "1.1", "type": "basic_event", "label": "No Input Power"},
+          {"id": "1.2", "type": "basic_event", "label": "Power Module Fault"},
+          {
+            "id": "1.3",
+            "type": "intermediate_event",
+            "label": "Fuse Opens Under Startup Surge",
+            "gate": "AND",
+            "children": [
+              {"id": "1.3.1", "type": "basic_event", "label": "Fuse Aging"},
+              {"id": "1.3.2", "type": "basic_event", "label": "High Inrush Current"}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "intermediate_event",
+        "label": "Control Path Issue",
+        "gate": "AND",
+        "children": [
+          {"id": "2.1", "type": "basic_event", "label": "Firmware Retry Disabled"},
+          {
+            "id": "2.2",
+            "type": "intermediate_event",
+            "label": "Ready Signal Not Detected",
+            "gate": "OR",
+            "children": [
+              {"id": "2.2.1", "type": "basic_event", "label": "Sensor Drift"},
+              {"id": "2.2.2", "type": "basic_event", "label": "Signal Line Disconnected"}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

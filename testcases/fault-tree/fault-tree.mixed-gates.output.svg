@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Intermittent Output Drop">
+<defs>
+<filter id="faultSoftShadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#16324F" flood-opacity="0.10"/>
+</filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#FFFFFF"/>
+<circle cx="1690" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1714" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1738" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1762" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1786" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1810" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1834" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1858" cy="20" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1690" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1714" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1738" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1762" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1786" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1810" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1834" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1858" cy="44" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1690" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1714" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1738" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1762" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1786" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1810" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1834" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1858" cy="68" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1690" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1714" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1738" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1762" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1786" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1810" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1834" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1858" cy="92" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="24" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="48" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="72" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="96" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="120" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="144" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="168" cy="960" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="24" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="48" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="72" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="96" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="120" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="144" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="168" cy="984" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="24" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="48" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="72" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="96" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="120" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="144" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="168" cy="1008" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="24" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="48" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="72" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="96" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="120" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="144" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="168" cy="1032" r="3.2" fill="#BCD2EA" opacity="0.55"/>
+<line x1="1590" y1="992" x2="1435" y2="992" stroke="#BCD2EA" stroke-width="2" opacity="0.55"/>
+<polyline points="1508,992 1478,962 1415,962" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.55"/>
+<circle cx="1590" cy="992" r="5" fill="#BCD2EA" opacity="0.55"/>
+<circle cx="1435" cy="992" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.55"/>
+<circle cx="1415" cy="962" r="5" fill="#BCD2EA" opacity="0.55"/>
+<g id="fault-event-detail-panel" class="fault-event-detail-panel">
+<rect x="60" y="52" width="610" height="215" rx="14" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8" filter="url(#faultSoftShadow)"/>
+<text x="84" y="90" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Event Detail</text>
+<line x1="84" y1="108" x2="646" y2="108" stroke="#E6EDF5" stroke-width="2"/>
+<text x="84" y="138" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="500" fill="#5B6B80">Output intermittently drops under combined thermal and</text>
+<text x="84" y="161" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="500" fill="#5B6B80">power-margin stress.</text>
+<text x="84" y="184" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="500" fill="#5B6B80">- Observed during extended high-temperature run</text>
+<text x="84" y="207" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="500" fill="#5B6B80">- Failure is recoverable after cooldown</text>
+<text x="84" y="230" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="500" fill="#5B6B80">- Impact: temporary output interruption</text>
+</g>
+<g id="fault-tree-legend" class="fault-tree-legend">
+<rect x="1550.0" y="52" width="300.0" height="208.0" rx="12" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="1574" y="86" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#0B2E63">Legend</text>
+<g class="fault-gate fault-gate-or" data-gate="OR">
+<path d="M 1577.3 137.9 C 1586.0 110.1 1608.0 110.1 1616.7 137.9 C 1604.9 130.7 1589.1 130.7 1577.3 137.9 Z" fill="#0B2E63"/>
+<text x="1597.0" y="128.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="8.7" font-weight="700" fill="#FFFFFF">OR</text>
+</g>
+<text x="1644.0" y="131.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="600" fill="#0B2E63">OR Gate</text>
+<g class="fault-gate fault-gate-and" data-gate="AND">
+<path d="M 1577.3 179.9 L 1577.3 166.0 C 1577.3 152.1 1616.7 152.1 1616.7 166.0 L 1616.7 179.9 Z" fill="#DCEBFF" stroke="#2F6FB6" stroke-width="0.9"/>
+<text x="1597.0" y="170.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="8.7" font-weight="700" fill="#0B2E63">AND</text>
+</g>
+<text x="1644.0" y="173.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="600" fill="#0B2E63">AND Gate</text>
+<rect x="1578.0" y="193.0" width="38" height="30" rx="7" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.5"/>
+<text x="1644.0" y="215.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="600" fill="#0B2E63">Basic Event</text>
+</g>
+<line x1="960.0" y1="228.0" x2="960.0" y2="255.6" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<g class="fault-gate fault-gate-and" data-gate="AND">
+<path d="M 926.0 303.6 L 926.0 279.6 C 926.0 255.6 994.0 255.6 994.0 279.6 L 994.0 303.6 Z" fill="#DCEBFF" stroke="#2F6FB6" stroke-width="1.5"/>
+<text x="960.0" y="287.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15.0" font-weight="700" fill="#0B2E63">AND</text>
+</g>
+<line x1="960.0" y1="303.6" x2="960.0" y2="316.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="656.5" y1="316.0" x2="1412.5" y2="316.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="656.5" y1="316.0" x2="656.5" y2="348.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="1059.5" y1="316.0" x2="1059.5" y2="348.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="1412.5" y1="316.0" x2="1412.5" y2="348.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="656.5" y1="426.0" x2="656.5" y2="452.7" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<g class="fault-gate fault-gate-or" data-gate="OR">
+<path d="M 622.5 500.7 C 637.5 452.7 675.5 452.7 690.5 500.7 C 670.1 488.3 642.9 488.3 622.5 500.7 Z" fill="#0B2E63"/>
+<text x="656.5" y="484.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15.0" font-weight="700" fill="#FFFFFF">OR</text>
+</g>
+<line class="fault-branch-trunk" x1="656.5" y1="500.7" x2="656.5" y2="739.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="656.5" y1="581.0" x2="632.5" y2="581.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="656.5" y1="663.0" x2="632.5" y2="663.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="656.5" y1="739.0" x2="632.5" y2="739.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="1059.5" y1="426.0" x2="1059.5" y2="452.7" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<g class="fault-gate fault-gate-and" data-gate="AND">
+<path d="M 1025.5 500.7 L 1025.5 476.7 C 1025.5 452.7 1093.5 452.7 1093.5 476.7 L 1093.5 500.7 Z" fill="#DCEBFF" stroke="#2F6FB6" stroke-width="1.5"/>
+<text x="1059.5" y="484.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15.0" font-weight="700" fill="#0B2E63">AND</text>
+</g>
+<line class="fault-branch-trunk" x1="1059.5" y1="500.7" x2="1059.5" y2="663.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="1059.5" y1="581.0" x2="1035.5" y2="581.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="1059.5" y1="663.0" x2="1035.5" y2="663.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="1412.5" y1="426.0" x2="1412.5" y2="452.7" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<g class="fault-gate fault-gate-or" data-gate="OR">
+<path d="M 1378.5 500.7 C 1393.5 452.7 1431.5 452.7 1446.5 500.7 C 1426.1 488.3 1398.9 488.3 1378.5 500.7 Z" fill="#0B2E63"/>
+<text x="1412.5" y="484.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15.0" font-weight="700" fill="#FFFFFF">OR</text>
+</g>
+<line class="fault-branch-trunk" x1="1412.5" y1="500.7" x2="1412.5" y2="663.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="1412.5" y1="581.0" x2="1388.5" y2="581.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<line class="fault-branch-line" x1="1412.5" y1="663.0" x2="1388.5" y2="663.0" stroke="#2F6FB6" stroke-width="2.2" stroke-linecap="round"/>
+<g class="fault-event fault-top-event">
+<rect id="top-event-block" x="805.0" y="118.0" width="310" height="110" rx="15" fill="#0B2E63" filter="url(#faultSoftShadow)"/>
+<path d="M 841.0 137.0 L 863.0 175.0 L 819.0 175.0 Z" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" opacity="0.92"/>
+<line x1="841.0" y1="150.0" x2="841.0" y2="163.0" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+<circle cx="841.0" cy="170.0" r="2.6" fill="#FFFFFF"/>
+<text x="982.0" y="163.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">Intermittent</text>
+<text x="982.0" y="191.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">Output Drop</text>
+</g>
+<g class="fault-event fault-intermediate-event">
+<rect x="541.5" y="348.0" width="230" height="78" rx="11" fill="#F3F8FF" stroke="#2F6FB6" stroke-width="1.8"/>
+<text x="656.5" y="390.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B2E63">Thermal Stress</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="392.5" y="544.0" width="240" height="74" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="512.5" y="576.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">High Ambient</text>
+<text x="512.5" y="595.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Temperature</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="462.5" y="632.0" width="170" height="62" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="547.5" y="668.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Airflow Blocked</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="462.5" y="708.0" width="170" height="62" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="547.5" y="744.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Heat Sink Gap</text>
+</g>
+<g class="fault-event fault-intermediate-event">
+<rect x="944.5" y="348.0" width="230" height="78" rx="11" fill="#F3F8FF" stroke="#2F6FB6" stroke-width="1.8"/>
+<text x="1059.5" y="390.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B2E63">Control Path Weakness</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="805.5" y="544.0" width="230" height="74" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="920.5" y="576.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Firmware Retry</text>
+<text x="920.5" y="595.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Disabled</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="865.5" y="632.0" width="170" height="62" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="950.5" y="668.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Sensor Drift</text>
+</g>
+<g class="fault-event fault-intermediate-event">
+<rect x="1297.5" y="348.0" width="230" height="78" rx="11" fill="#F3F8FF" stroke="#2F6FB6" stroke-width="1.8"/>
+<text x="1412.5" y="390.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B2E63">Power Margin Loss</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="1208.5" y="544.0" width="180" height="74" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="1298.5" y="576.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Input Voltage</text>
+<text x="1298.5" y="595.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Sag</text>
+</g>
+<g class="fault-event fault-basic-event">
+<rect x="1218.5" y="632.0" width="170" height="62" rx="11" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8"/>
+<text x="1303.5" y="668.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="600" fill="#0B2E63">Aged Capacitor</text>
+</g>
+</svg>

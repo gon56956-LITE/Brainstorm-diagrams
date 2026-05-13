@@ -1,13 +1,13 @@
 ---
 name: brainstorm-diagrams
-description: Generate clean, PPT-ready structured brainstorming diagrams for product design, process design, failure analysis, root-cause analysis, cause-and-effect mapping, solution exploration, workshop visuals, and fishbone / Ishikawa diagrams. Version 1 supports business-simple fishbone diagrams as deterministic SVG from JSON or structured Markdown, with future workflows for redrawing existing fishbone files or whiteboard photos.
+description: Generate clean, PPT-ready structured brainstorming and analysis diagrams for product design, process design, failure analysis, root-cause analysis, cause-and-effect mapping, solution exploration, fishbone / Ishikawa diagrams, and fault tree analysis. Supports business-simple fishbone and fault_tree SVG diagrams from JSON or structured Markdown.
 ---
 
 # Brainstorm Diagrams
 
 Use this skill to create structured thinking diagrams for brainstorming, root-cause analysis, product design, process design, and solution exploration.
 
-Version 1 supports only `diagram_type="fishbone"`, generates editable SVG output, can export work SVGs to PNG for sharing, and supports Codex-assisted fishbone drafts from natural-language source text. For non-technical users, prefer the double-click launcher after the draft structure exists:
+Current version supports `diagram_type="fishbone"` and `diagram_type="fault_tree"` as editable SVG output. Fishbone work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting is currently fishbone-only. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
 
 ```text
 鱼骨图工具.cmd
@@ -19,19 +19,43 @@ English fallback:
 fishbone_tool.cmd
 ```
 
+For non-technical fault-tree users, use the dedicated launcher:
+
+```text
+故障树工具.cmd
+```
+
+English fallback:
+
+```text
+fault_tree_tool.cmd
+```
+
 Command-line usage is also available:
 
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fishbone.py my-analysis --format md
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
 ```
 
-This creates a user-owned input and initial SVG under `work/fishbone/`. To render an existing input directly, use `scripts/generate_diagram.py`.
+This creates a user-owned input and initial SVG under `work/fishbone/` or `work/fault-tree/`. To render an existing input directly, use `scripts/generate_diagram.py`.
 Work names must be safe file stems: lowercase letters, numbers, hyphen, and underscore only, such as `my-analysis` or `customer_complaints_v1`.
+
+## Supported Diagram Types
+
+- `fishbone`: divergent cause brainstorming and category-based problem decomposition.
+- `fault_tree`: logical failure decomposition with a top event, event detail panel, AND/OR gates, intermediate events, and basic event leaves.
 
 After editing a `work/fishbone/` input, regenerate it with:
 
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_work.py my-analysis
+```
+
+After editing a `work/fault-tree/` input, regenerate it with:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_fault_tree_work.py startup-failure
 ```
 
 Export a generated work SVG to PNG with:
@@ -78,28 +102,29 @@ To protect natural-language extraction examples:
 
 Prefer JSON for automation and structured Markdown for user-authored briefs.
 
-- JSON: follows the shared fishbone model described in `references/input_contract.md`.
-- Markdown: use `#` for the topic, `##` for categories, and bullet lists for cause items.
+- JSON: use `diagram_type` to select `fishbone` or `fault_tree`; fishbone follows `references/input_contract.md`, and fault tree follows `brainstorm_diagrams_fault_tree_spec.md`.
+- Markdown fishbone: use `#` for the topic, `##` for categories, and bullet lists for cause items.
+- Markdown fault tree: include `diagram_type: fault_tree` front matter, use `#` for the top event, optional `Event Detail:` bullets for the left-side detail panel, `Gate: OR` or `Gate: AND` for logic gates, `##` for intermediate events, and bullets for basic event leaves.
 - Markdown subcategories: a primary bullet with indented bullets becomes a subcategory with child causes.
 - Starting templates live in `templates/`; copy them before authoring a new diagram.
 - Natural-language source text: Codex must first extract a structured Markdown draft using `references/natural_language_extraction.md` and `references/natural_language_prompt_template.md`; do not pass raw `.txt` directly to `scripts/generate_diagram.py` for semantic extraction.
 
 ## Workflow
 
-1. For structured Markdown/JSON, normalize the user input into the fishbone data model.
+1. For structured Markdown/JSON, normalize the user input into the selected diagram data model.
 2. For natural-language source text, first extract or confirm `topic`, domain-specific `categories`, and primary `items` using `references/natural_language_extraction.md`; use `references/natural_language_prompt_template.md` as the execution template when drafting from raw text.
-3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md` or `--format json`.
+3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md` or `scripts/new_fault_tree.py <name> --format md`; use `--format json` when needed.
 4. For a Codex-assisted natural-language fishbone draft, write the extracted Markdown to `work/fishbone/<name>.md`; use safe file stems only.
-5. Render a work input with `scripts/render_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
+5. Render a fishbone work input with `scripts/render_work.py <name>` or a fault-tree work input with `scripts/render_fault_tree_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
 6. Optionally run `scripts/export_png.py <name>` when the user needs a PNG for quick sharing.
 7. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
 8. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
 9. For natural-language fishbone drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/` as examples, not as generated output storage.
 10. For naturalcase edits, run `scripts/verify_naturalcases.py`.
 11. For renderer, badge, testcase, template, work-entrypoint, extraction-doc, or export edits, run `scripts/verify_testcases.py` before finishing.
-12. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect `stresscases/fishbone/full-stress.svg` by eye using `references/visual_review_checklist.md`.
+12. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect the relevant `stresscases/<diagram-type>/full-stress.svg` by eye using `references/visual_review_checklist.md`.
 
-## Layout Rules
+## Fishbone Layout Rules
 
 - Keep the topic block as a rounded SVG `<rect>` with `id="topic-block"`.
 - Render ordinary primary causes as short secondary bones: anchor circle on the main branch, short horizontal connector, then text.
@@ -119,13 +144,32 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Use `testcases/fishbone/fishbone.five-primary.*` and `testcases/fishbone/fishbone.five-subcategories.*` as stress tests for the densest supported category content.
 - Use `stresscases/fishbone/full-stress.*` as an optional manual visual stresscase; it is deliberately denser than normal regression testcases.
 - Use `naturalcases/fishbone/*.source.txt` and `naturalcases/fishbone/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
-- Keep `templates/fishbone.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
+- Keep `templates/fishbone.template.*` and `templates/fault-tree.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
 - Keep `assets/lucide-candidates/` as the reusable Lucide badge library. `scripts/verify_testcases.py` protects required mapped icons and verifies the candidate catalog can still render.
 - Keep user-authored fishbone files in `work/fishbone/`; do not mix them into `testcases/fishbone/`, `templates/`, `stresscases/fishbone/`, or `naturalcases/fishbone/`.
+- Keep user-authored fault-tree files in `work/fault-tree/`; do not mix them into `testcases/fault-tree/`, `templates/`, or `stresscases/fault-tree/`.
+
+## Fault Tree Layout Rules
+
+- Keep the top event as a navy rounded SVG `<rect>` with `id="top-event-block"`.
+- When `event_detail` exists, render it as a left-side rounded detail panel with `id="fault-event-detail-panel"` instead of using the old title-only area.
+- Use top-down orthogonal connectors from parent event to gate, then to child events.
+- Render AND and OR gates with visually distinct symbols and stable classes: `fault-gate-and` and `fault-gate-or`.
+- Use nested intermediate events when one first-level event subtree needs both AND and OR logic; do not mix AND/OR among direct children of one gate.
+- Render intermediate events as pale-blue rounded rectangles and basic events as white rounded rectangles without internal marker icons.
+- Size basic event cards from their label content while preserving readable minimum dimensions.
+- Use `layout_mode="review_compact"` by default: first-level events are horizontal, and basic events stack vertically under their parent to avoid extreme wide canvases.
+- In `review_compact`, draw each first-level subtree with a vertical trunk and leftward branch lines so direct children and nested intermediate events read as separate hierarchy levels.
+- Allow dense nested fault-tree content to expand the SVG height instead of clipping event cards or shrinking text.
+- Keep the legend enabled by default for templates and testcases.
+- Keep generated fault-tree regression files in `testcases/fault-tree/`.
+- Use `stresscases/fault-tree/full-stress.*` after fault-tree layout changes to check wide-canvas behavior, long labels, event detail, legend, and mixed gates.
+- Use `testcases/fault-tree/fault-tree.nested-gates.*` and `stresscases/fault-tree/nested-gates.*` to protect nested AND/OR subtrees.
 
 ## Current Limits
 
-- Only `fishbone` is implemented.
+- Implemented diagram types: `fishbone`, `fault_tree`.
 - Each main category renders up to five primary entries; each subcategory renders up to three child causes.
+- Fault tree MVP supports a top event, event detail panel, AND/OR gates, intermediate events, and basic event leaves. It does not calculate probabilities, simplify Boolean logic, or support dynamic fault tree semantics.
 - Natural-language extraction is a Codex skill workflow, not an offline local script or `.cmd` menu feature.
 - Redrawing existing fishbone files or whiteboard photos is planned but not implemented.

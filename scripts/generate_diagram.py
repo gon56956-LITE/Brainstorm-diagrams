@@ -11,9 +11,10 @@ from pathlib import Path
 from typing import Any
 
 from renderers.fishbone import render_fishbone_to_file
+from renderers.fault_tree import parse_fault_tree_markdown, render_fault_tree_to_file
 
 
-SUPPORTED_DIAGRAMS = {"fishbone"}
+SUPPORTED_DIAGRAMS = {"fishbone", "fault_tree"}
 
 
 def parse_args() -> argparse.Namespace:
@@ -45,6 +46,10 @@ def parse_input(path: Path) -> dict[str, Any]:
 
 
 def parse_structured_markdown(text: str) -> dict[str, Any]:
+    metadata, body = split_markdown_front_matter(text)
+    if markdown_requests_fault_tree(text, metadata):
+        return parse_fault_tree_markdown(text)
+
     topic = ""
     categories: list[dict[str, Any]] = []
     current_category: dict[str, Any] | None = None
@@ -52,7 +57,7 @@ def parse_structured_markdown(text: str) -> dict[str, Any]:
     loose_lines: list[str] = []
     diagnostics: list[str] = []
 
-    for raw_line in text.splitlines():
+    for raw_line in body.splitlines():
         raw_line = raw_line.rstrip()
         line = raw_line.strip().lstrip("\ufeff")
         if not line:
@@ -98,11 +103,47 @@ def parse_structured_markdown(text: str) -> dict[str, Any]:
         topic = normalize_topic_heading(collapse_text(loose_lines)) or "Problem / Topic"
 
     return {
-        "diagram_type": "fishbone",
+        "diagram_type": canonical_diagram_type(metadata.get("diagram_type", "fishbone")) or "fishbone",
+        "title": metadata.get("title", ""),
+        "subtitle": metadata.get("subtitle", ""),
         "topic": topic,
         "categories": categories,
         "_diagnostics": diagnostics,
     }
+
+
+def split_markdown_front_matter(text: str) -> tuple[dict[str, str], str]:
+    clean = text.lstrip("\ufeff")
+    lines = clean.splitlines()
+    metadata: dict[str, str] = {}
+    if lines and lines[0].strip() == "---":
+        for index in range(1, len(lines)):
+            if lines[index].strip() == "---":
+                for raw in lines[1:index]:
+                    parsed = parse_metadata_line(raw)
+                    if parsed is not None:
+                        metadata[parsed[0]] = parsed[1]
+                return metadata, "\n".join(lines[index + 1 :])
+    return metadata, clean
+
+
+def parse_metadata_line(line: str) -> tuple[str, str] | None:
+    match = re.match(r"^([A-Za-z_][A-Za-z0-9_-]*)\s*:\s*(.*?)\s*$", line.strip())
+    if not match:
+        return None
+    key = match.group(1).strip().lower().replace("-", "_")
+    value = match.group(2).strip().strip("\"'")
+    return key, value
+
+
+def markdown_requests_fault_tree(text: str, metadata: dict[str, str]) -> bool:
+    if canonical_diagram_type(metadata.get("diagram_type", "")) == "fault_tree":
+        return True
+    return bool(re.search(r"(?im)^\s*diagram_type\s*:\s*[\"']?fault[-_ ]tree[\"']?\s*$", text))
+
+
+def canonical_diagram_type(value: Any) -> str:
+    return collapse_text(value).lower().replace("-", "_").replace(" ", "_")
 
 
 def parse_bullet(line: str) -> tuple[int, str] | None:
@@ -140,13 +181,15 @@ def main() -> int:
 
     try:
         data = parse_input(input_path)
-        diagram_type = str(data.get("diagram_type", "fishbone")).strip().lower()
+        diagram_type = canonical_diagram_type(data.get("diagram_type", "fishbone"))
         if diagram_type not in SUPPORTED_DIAGRAMS:
             raise ValueError(
-                'This version of brainstorm-diagrams supports only diagram_type="fishbone". '
-                "The requested diagram type can be added in a future version."
+                "Unsupported diagram_type. Supported values: fishbone, fault_tree."
             )
-        result = render_fishbone_to_file(data, output_path)
+        if diagram_type == "fault_tree":
+            result = render_fault_tree_to_file(data, output_path)
+        else:
+            result = render_fishbone_to_file(data, output_path)
     except Exception as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1

@@ -2,7 +2,7 @@
 
 `brainstorm-diagrams` is a Codex skill for generating clean, PPT-ready structured brainstorming diagrams.
 
-Version `0.1.0` implements a deterministic SVG fishbone / Ishikawa renderer with a business-simple visual style.
+Version `0.2.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams and fault tree analysis diagrams.
 
 ## What This Is
 
@@ -10,7 +10,7 @@ Version `0.1.0` implements a deterministic SVG fishbone / Ishikawa renderer with
 
 From Codex's perspective, it is a skill: `SKILL.md` and the reference files define when to use it, how inputs should be interpreted, what visual rules to follow, and how output should be verified.
 
-From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone SVG files without writing Python code.
+From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone and fault-tree SVG files without writing Python code.
 
 In short:
 
@@ -22,12 +22,15 @@ tools = the local scripts and double-click launchers that perform the work
 ## What Works Now
 
 - `diagram_type="fishbone"`
+- `diagram_type="fault_tree"`
 - JSON input
 - Structured Markdown input
+- Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
+- Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
 - Codex-assisted natural-language fishbone drafting into editable Markdown
 - SVG output
 - PNG export from generated work SVG files
-- Automatic canvas expansion for dense fishbone content while keeping fonts, cards, and line widths fixed
+- Automatic canvas expansion for dense fishbone and nested fault-tree content while keeping fonts, cards, and line widths fixed
 - Lucide-based blue badge candidate library, with confirmed category mappings used by the renderer
 - Default six-category fishbone when categories are missing
 
@@ -35,7 +38,7 @@ tools = the local scripts and double-click launchers that perform the work
 
 - Redrawing from existing fishbone files
 - Redrawing from whiteboard photos
-- Other diagram types
+- Probability calculation, Boolean simplification, and dynamic fault tree semantics
 
 ## Non-Technical User Workflow
 
@@ -51,7 +54,19 @@ English fallback:
 fishbone_tool.cmd
 ```
 
-The menu can create a new fishbone diagram, regenerate a work SVG after editing, or run verification.
+Fault tree has its own non-technical launcher:
+
+```text
+故障树工具.cmd
+```
+
+English fallback:
+
+```text
+fault_tree_tool.cmd
+```
+
+The fishbone menu can create a new fishbone diagram, regenerate a work SVG after editing, export PNG, or run verification. The fault-tree menu can create a new fault tree diagram, regenerate its SVG, and run the same verification/stresscase checks.
 
 Menu options:
 
@@ -85,7 +100,9 @@ Typical usage:
 
 The `work/` folder is for your own diagrams, grouped by diagram type such as `work/fishbone/`. The `testcases/`, `stresscases/`, and `naturalcases/` folders are also grouped by diagram type, such as `testcases/fishbone/`. `templates/` contains protected starting templates.
 
-Diagram names are file names under `work/fishbone/` for fishbone diagrams. Use safe names such as `my-analysis` or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
+Fault tree usage is the same pattern: double-click `故障树工具.cmd`, create a named diagram, edit the generated file in `work/fault-tree/`, then regenerate the SVG from the same menu.
+
+Diagram names are file names under `work/fishbone/` or `work/fault-tree/`. Use safe names such as `my-analysis`, `startup-failure`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
 ## Natural-Language Drafting
 
@@ -170,6 +187,25 @@ Markdown input works the same way:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\generate_diagram.py templates\fishbone.template.md output.svg
 ```
 
+Fault tree templates render through the same dispatcher:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\generate_diagram.py templates\fault-tree.template.json output.svg
+```
+
+For user-owned fault-tree work files, use the fault-tree entrypoints:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_fault_tree_work.py startup-failure
+```
+
+Markdown fault tree inputs must declare `diagram_type: fault_tree` in front matter:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\generate_diagram.py templates\fault-tree.template.md output.svg
+```
+
 Do not use raw `.txt` input as a semantic extractor. Plain text passed directly to `generate_diagram.py` is treated as a simple topic fallback; Codex should first convert natural language into structured Markdown.
 
 Verify all maintained testcases, templates, and layout invariants:
@@ -211,6 +247,8 @@ cmd /c fishbone_tool.cmd verify
 
 ## Structured Markdown Format
 
+Fishbone Markdown:
+
 ```markdown
 # Improve Product Reliability
 
@@ -223,6 +261,35 @@ cmd /c fishbone_tool.cmd verify
 - Accuracy
 - Speed
 - Capacity
+```
+
+Fault tree Markdown:
+
+```markdown
+---
+diagram_type: fault_tree
+title: Fault Tree Analysis
+subtitle: Top Event - System Fails to Start
+show_legend: true
+---
+
+# System Fails to Start
+Gate: OR
+
+Event Detail:
+- Observed during cold start after overnight storage
+- Scope: units from batch A
+- Impact: startup blocked until power cycle
+
+## Power Issue
+Gate: OR
+- No Power Supply
+- Power Module Fault
+
+## Control Unit Issue
+Gate: AND
+- Firmware Crash
+- Controller Fault
 ```
 
 ## Subcategories
@@ -247,11 +314,16 @@ Dense diagrams may also report that the canvas was expanded. Sparse diagrams sta
 ## JSON Format
 
 See `templates/fishbone.template.json` and `references/input_contract.md`.
+For fault tree, see `templates/fault-tree.template.json` and `brainstorm_diagrams_fault_tree_spec.md`.
+Fault tree JSON may include `event_detail` for the left-side detail panel; `top_event.description` is also accepted as a fallback. Fault tree uses `layout_mode="review_compact"` by default: first-level events are arranged across the page, while children inside each subtree connect through a vertical trunk with leftward branch lines for review readability.
+Nested intermediate events may use their own `gate`, allowing one first-level event subtree to contain both AND and OR logic while each direct child group still has one gate.
 
 ## Templates
 
 - `templates/fishbone.template.md`
 - `templates/fishbone.template.json`
+- `templates/fault-tree.template.md`
+- `templates/fault-tree.template.json`
 
 Copy a template, edit the content, then render it with `scripts/generate_diagram.py`.
 
@@ -261,13 +333,15 @@ Copy a template, edit the content, then render it with `scripts/generate_diagram
 
 ## Stresscases
 
-`stresscases/fishbone/` contains intentionally dense fishbone diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
+`stresscases/fishbone/` and `stresscases/fault-tree/` contain intentionally dense diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
 
 `scripts/verify_stresscases.py` protects this area from structural drift: it checks that the full-density SVG expands beyond the base canvas, keeps the topic block on the right, preserves the expected category and brace counts, and does not render `README.md` as an SVG.
 
 Use `references/visual_review_checklist.md` when inspecting the generated stresscase by eye.
 
 - `stresscases/fishbone/full-stress.md` -> `stresscases/fishbone/full-stress.svg`
+- `stresscases/fault-tree/full-stress.json` -> `stresscases/fault-tree/full-stress.svg`
+- `stresscases/fault-tree/nested-gates.json` -> `stresscases/fault-tree/nested-gates.svg`
 
 ## Naturalcases
 
@@ -286,3 +360,8 @@ The optical-module case covers an English product design / manufacturing / appli
 - `testcases/fishbone/fishbone.five-primary.example.json` -> `testcases/fishbone/fishbone.five-primary.output.svg`
 - `testcases/fishbone/fishbone.five-subcategories.example.json` -> `testcases/fishbone/fishbone.five-subcategories.output.svg`
 - `testcases/fishbone/fishbone.dense-collision.example.json` -> `testcases/fishbone/fishbone.dense-collision.output.svg`
+- `testcases/fault-tree/fault-tree.input.example.json` -> `testcases/fault-tree/fault-tree.output.example.svg`
+- `testcases/fault-tree/fault-tree.input.example.md` -> `testcases/fault-tree/fault-tree.output.md.svg`
+- `testcases/fault-tree/fault-tree.mixed-gates.example.json` -> `testcases/fault-tree/fault-tree.mixed-gates.output.svg`
+- `testcases/fault-tree/fault-tree.nested-gates.example.json` -> `testcases/fault-tree/fault-tree.nested-gates.output.svg`
+- `testcases/fault-tree/fault-tree.multi-nested.example.json` -> `testcases/fault-tree/fault-tree.multi-nested.output.svg`

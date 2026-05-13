@@ -1,0 +1,90 @@
+{
+  "diagram_type": "fault_tree",
+  "title": "Fault Tree Analysis",
+  "subtitle": "Top Event - Nested Logic Startup Failure",
+  "output": "svg",
+  "theme": "business_simple",
+  "show_legend": true,
+  "top_event": {
+    "id": "T0",
+    "label": "Nested Logic Startup Failure",
+    "description": "A dense review case where first-level failure paths contain nested AND and OR gates."
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "This stresscase protects mixed-gate subtrees under first-level events while keeping each direct child group governed by one explicit gate.",
+    "bullets": [
+      "Power path contains an OR branch with nested AND conditions",
+      "Control path contains an AND branch with nested OR conditions",
+      "Signal path and manufacturing path add long-label leaf events"
+    ]
+  },
+  "tree": {
+    "gate": "OR",
+    "children": [
+      {
+        "id": "1",
+        "type": "intermediate_event",
+        "label": "Power Path Mixed Logic",
+        "gate": "OR",
+        "children": [
+          {"id": "1.1", "type": "basic_event", "label": "No Input Power During Cold Startup"},
+          {"id": "1.2", "type": "basic_event", "label": "Power Module Fault After Long Idle Time"},
+          {
+            "id": "1.3",
+            "type": "intermediate_event",
+            "label": "Fuse Opens Under Startup Surge",
+            "gate": "AND",
+            "children": [
+              {"id": "1.3.1", "type": "basic_event", "label": "Fuse Aging Increases Resistance"},
+              {"id": "1.3.2", "type": "basic_event", "label": "High Inrush Current Exceeds Margin"},
+              {"id": "1.3.3", "type": "basic_event", "label": "Ambient Temperature Lowers Startup Headroom"}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "intermediate_event",
+        "label": "Control Path Mixed Logic",
+        "gate": "AND",
+        "children": [
+          {"id": "2.1", "type": "basic_event", "label": "Firmware Retry Disabled For Validation Build"},
+          {
+            "id": "2.2",
+            "type": "intermediate_event",
+            "label": "Ready Signal Not Detected",
+            "gate": "OR",
+            "children": [
+              {"id": "2.2.1", "type": "basic_event", "label": "Sensor Drift Across Supplier Lot"},
+              {"id": "2.2.2", "type": "basic_event", "label": "Signal Line Disconnected Under Fixture Motion"},
+              {"id": "2.2.3", "type": "basic_event", "label": "Controller Input Threshold Too Narrow"}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "type": "intermediate_event",
+        "label": "Signal Integrity Path",
+        "gate": "OR",
+        "children": [
+          {"id": "3.1", "type": "basic_event", "label": "Clock Jitter Exceeds Startup Qualification Window"},
+          {"id": "3.2", "type": "basic_event", "label": "Reference Signal Noise Couples Into Reset Line"},
+          {"id": "3.3", "type": "basic_event", "label": "Cable Shield Termination Is Intermittent"}
+        ]
+      },
+      {
+        "id": "4",
+        "type": "intermediate_event",
+        "label": "Manufacturing Variation Path",
+        "gate": "OR",
+        "children": [
+          {"id": "4.1", "type": "basic_event", "label": "Solder Paste Volume Variation On Power Pins"},
+          {"id": "4.2", "type": "basic_event", "label": "Supplier Lot Has Wider Sensor Threshold Spread"},
+          {"id": "4.3", "type": "basic_event", "label": "Test Fixture Contact Resistance Not Controlled"}
+        ]
+      }
+    ]
+  }
+}
