@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="1200" viewBox="0 0 4000 1200" role="img" aria-label="Maximum Fishbone Stress Test">
+<defs>
+<linearGradient id="topCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0B3A75"/>
+<stop offset="100%" stop-color="#1F5A98"/>
+</linearGradient>
+<linearGradient id="bottomCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#DDECF9"/>
+<stop offset="100%" stop-color="#BCD5ED"/>
+</linearGradient>
+<filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#16324F" flood-opacity="0.12"/>
+</filter>
+</defs>
+<rect x="0" y="0" width="4000" height="1200" fill="#FFFFFF"/>
+<circle cx="3776" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3800" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3824" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3848" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3872" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3896" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3920" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3944" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3968" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3776" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3800" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3824" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3848" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3872" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3896" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3920" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3944" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3968" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3776" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3800" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3824" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3848" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3872" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3896" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3920" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3944" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3968" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3776" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3800" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3824" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3848" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3872" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3896" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3920" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3944" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3968" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3840" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3864" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3888" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3912" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3936" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3960" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3984" cy="968" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3840" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3864" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3888" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3912" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3936" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3960" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3984" cy="992" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3840" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3864" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3888" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3912" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3936" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3960" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3984" cy="1016" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3840" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3864" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3888" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3912" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3936" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3960" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3984" cy="1040" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3840" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3864" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3888" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3912" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3936" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3960" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3984" cy="1064" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1102" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1102" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1102" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1102" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1102" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1102" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1126" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1126" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1126" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1126" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1126" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1126" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1150" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1150" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1150" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1150" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1150" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1150" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1174" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1174" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1174" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1174" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1174" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1174" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="3690" y1="98" x2="3850" y2="98" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="3772,98 3802,130 3868,130" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="3690" cy="98" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3850" cy="98" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="3868" cy="130" r="5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="3610" y1="1120" x2="3450" y2="1120" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="3528,1120 3498,1152 3432,1152" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="3610" cy="1120" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="3450" cy="1120" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="3432" cy="1152" r="5" fill="#BCD2EA" opacity="0.65"/>
+
+<polyline points="78,552 120,600 78,648" fill="none" stroke="#0B3A75" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.98"/>
+<polyline points="116,552 158,600 116,648" fill="none" stroke="#BFD5EB" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.94"/>
+<polyline points="154,552 196,600 154,648" fill="none" stroke="#D9E8F7" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.92"/>
+<line x1="214" y1="600" x2="3606" y2="600" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="3582" y1="576" x2="3606" y2="600" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="3582" y1="624" x2="3606" y2="600" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="654" y1="600" x2="540" y2="174" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="654" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="654" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="511" y="86" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="559" cy="130" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="544" y="115" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="559" cy="130" r="5" fill="#1E5AA8"/>
+<text x="613" y="132" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">Category 1</text>
+<line x1="561" y1="245" x2="617" y2="245" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="561" cy="245" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="617" y="226" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="631" y="249" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 1.1</text>
+<path class="child-curly-brace" d="M 816.0 212.0 C 806.0 212.0 806.0 217.0 806.0 223.0 L 806.0 235.0 C 806.0 240.0 794.0 240.0 794.0 243.0 C 794.0 246.0 806.0 246.0 806.0 251.0 L 806.0 263.0 C 806.0 269.0 806.0 274.0 816.0 274.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="815" cy="223.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="829" y="228.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.1.1</text>
+<circle cx="815" cy="243.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="829" y="248.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.1.2</text>
+<circle cx="815" cy="263.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="829" y="268.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.1.3</text>
+<line x1="580" y1="317" x2="524" y2="317" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="580" cy="317" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="354" y="298" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="510" y="321" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 1.2</text>
+<path class="child-curly-brace" d="M 325.0 284.0 C 335.0 284.0 335.0 289.0 335.0 295.0 L 335.0 307.0 C 335.0 312.0 347.0 312.0 347.0 315.0 C 347.0 318.0 335.0 318.0 335.0 323.0 L 335.0 335.0 C 335.0 341.0 335.0 346.0 325.0 346.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="326" cy="295.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="312" y="300.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.2.1</text>
+<circle cx="326" cy="315.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="312" y="320.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.2.2</text>
+<circle cx="326" cy="335.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="312" y="340.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.2.3</text>
+<line x1="599" y1="389" x2="655" y2="389" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="599" cy="389" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="655" y="370" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="669" y="393" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 1.3</text>
+<path class="child-curly-brace" d="M 854.0 356.0 C 844.0 356.0 844.0 361.0 844.0 367.0 L 844.0 379.0 C 844.0 384.0 832.0 384.0 832.0 387.0 C 832.0 390.0 844.0 390.0 844.0 395.0 L 844.0 407.0 C 844.0 413.0 844.0 418.0 854.0 418.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="853" cy="367.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="867" y="372.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.3.1</text>
+<circle cx="853" cy="387.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="867" y="392.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.3.2</text>
+<circle cx="853" cy="407.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="867" y="412.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.3.3</text>
+<line x1="618" y1="461" x2="562" y2="461" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="618" cy="461" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="392" y="442" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="548" y="465" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 1.4</text>
+<path class="child-curly-brace" d="M 363.0 428.0 C 373.0 428.0 373.0 433.0 373.0 439.0 L 373.0 451.0 C 373.0 456.0 385.0 456.0 385.0 459.0 C 385.0 462.0 373.0 462.0 373.0 467.0 L 373.0 479.0 C 373.0 485.0 373.0 490.0 363.0 490.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="364" cy="439.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="350" y="444.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.4.1</text>
+<circle cx="364" cy="459.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="350" y="464.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.4.2</text>
+<circle cx="364" cy="479.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="350" y="484.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.4.3</text>
+<line x1="638" y1="533" x2="694" y2="533" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="638" cy="533" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="694" y="514" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="708" y="537" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 1.5</text>
+<path class="child-curly-brace" d="M 893.0 500.0 C 883.0 500.0 883.0 505.0 883.0 511.0 L 883.0 523.0 C 883.0 528.0 871.0 528.0 871.0 531.0 C 871.0 534.0 883.0 534.0 883.0 539.0 L 883.0 551.0 C 883.0 557.0 883.0 562.0 893.0 562.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="892" cy="511.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="906" y="516.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.5.1</text>
+<circle cx="892" cy="531.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="906" y="536.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.5.2</text>
+<circle cx="892" cy="551.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="906" y="556.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 1.5.3</text>
+<line x1="1485" y1="600" x2="1371" y2="174" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1485" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1485" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1342" y="86" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1390" cy="130" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="1375" y="115" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="1390" cy="130" r="5" fill="#1E5AA8"/>
+<text x="1444" y="132" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">Category 2</text>
+<line x1="1392" y1="245" x2="1448" y2="245" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1392" cy="245" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1448" y="226" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1462" y="249" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 2.1</text>
+<path class="child-curly-brace" d="M 1647.0 212.0 C 1637.0 212.0 1637.0 217.0 1637.0 223.0 L 1637.0 235.0 C 1637.0 240.0 1625.0 240.0 1625.0 243.0 C 1625.0 246.0 1637.0 246.0 1637.0 251.0 L 1637.0 263.0 C 1637.0 269.0 1637.0 274.0 1647.0 274.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1646" cy="223.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1660" y="228.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.1.1</text>
+<circle cx="1646" cy="243.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1660" y="248.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.1.2</text>
+<circle cx="1646" cy="263.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1660" y="268.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.1.3</text>
+<line x1="1411" y1="317" x2="1355" y2="317" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1411" cy="317" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1185" y="298" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1341" y="321" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 2.2</text>
+<path class="child-curly-brace" d="M 1156.0 284.0 C 1166.0 284.0 1166.0 289.0 1166.0 295.0 L 1166.0 307.0 C 1166.0 312.0 1178.0 312.0 1178.0 315.0 C 1178.0 318.0 1166.0 318.0 1166.0 323.0 L 1166.0 335.0 C 1166.0 341.0 1166.0 346.0 1156.0 346.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1157" cy="295.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1143" y="300.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.2.1</text>
+<circle cx="1157" cy="315.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1143" y="320.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.2.2</text>
+<circle cx="1157" cy="335.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1143" y="340.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.2.3</text>
+<line x1="1430" y1="389" x2="1486" y2="389" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1430" cy="389" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1486" y="370" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1500" y="393" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 2.3</text>
+<path class="child-curly-brace" d="M 1685.0 356.0 C 1675.0 356.0 1675.0 361.0 1675.0 367.0 L 1675.0 379.0 C 1675.0 384.0 1663.0 384.0 1663.0 387.0 C 1663.0 390.0 1675.0 390.0 1675.0 395.0 L 1675.0 407.0 C 1675.0 413.0 1675.0 418.0 1685.0 418.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1684" cy="367.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1698" y="372.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.3.1</text>
+<circle cx="1684" cy="387.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1698" y="392.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.3.2</text>
+<circle cx="1684" cy="407.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1698" y="412.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.3.3</text>
+<line x1="1449" y1="461" x2="1393" y2="461" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1449" cy="461" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1223" y="442" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1379" y="465" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 2.4</text>
+<path class="child-curly-brace" d="M 1194.0 428.0 C 1204.0 428.0 1204.0 433.0 1204.0 439.0 L 1204.0 451.0 C 1204.0 456.0 1216.0 456.0 1216.0 459.0 C 1216.0 462.0 1204.0 462.0 1204.0 467.0 L 1204.0 479.0 C 1204.0 485.0 1204.0 490.0 1194.0 490.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1195" cy="439.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1181" y="444.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.4.1</text>
+<circle cx="1195" cy="459.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1181" y="464.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.4.2</text>
+<circle cx="1195" cy="479.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1181" y="484.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.4.3</text>
+<line x1="1469" y1="533" x2="1525" y2="533" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1469" cy="533" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1525" y="514" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1539" y="537" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 2.5</text>
+<path class="child-curly-brace" d="M 1724.0 500.0 C 1714.0 500.0 1714.0 505.0 1714.0 511.0 L 1714.0 523.0 C 1714.0 528.0 1702.0 528.0 1702.0 531.0 C 1702.0 534.0 1714.0 534.0 1714.0 539.0 L 1714.0 551.0 C 1714.0 557.0 1714.0 562.0 1724.0 562.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1723" cy="511.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1737" y="516.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.5.1</text>
+<circle cx="1723" cy="531.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1737" y="536.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.5.2</text>
+<circle cx="1723" cy="551.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1737" y="556.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 2.5.3</text>
+<line x1="2315" y1="600" x2="2201" y2="174" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="2315" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="2315" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="2172" y="86" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="2220" cy="130" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="2205" y="115" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="2220" cy="130" r="5" fill="#1E5AA8"/>
+<text x="2274" y="132" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">Category 3</text>
+<line x1="2222" y1="245" x2="2278" y2="245" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2222" cy="245" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2278" y="226" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2292" y="249" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 3.1</text>
+<path class="child-curly-brace" d="M 2477.0 212.0 C 2467.0 212.0 2467.0 217.0 2467.0 223.0 L 2467.0 235.0 C 2467.0 240.0 2455.0 240.0 2455.0 243.0 C 2455.0 246.0 2467.0 246.0 2467.0 251.0 L 2467.0 263.0 C 2467.0 269.0 2467.0 274.0 2477.0 274.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2476" cy="223.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2490" y="228.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.1.1</text>
+<circle cx="2476" cy="243.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2490" y="248.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.1.2</text>
+<circle cx="2476" cy="263.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2490" y="268.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.1.3</text>
+<line x1="2241" y1="317" x2="2185" y2="317" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2241" cy="317" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2015" y="298" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2171" y="321" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 3.2</text>
+<path class="child-curly-brace" d="M 1986.0 284.0 C 1996.0 284.0 1996.0 289.0 1996.0 295.0 L 1996.0 307.0 C 1996.0 312.0 2008.0 312.0 2008.0 315.0 C 2008.0 318.0 1996.0 318.0 1996.0 323.0 L 1996.0 335.0 C 1996.0 341.0 1996.0 346.0 1986.0 346.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1987" cy="295.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1973" y="300.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.2.1</text>
+<circle cx="1987" cy="315.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1973" y="320.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.2.2</text>
+<circle cx="1987" cy="335.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1973" y="340.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.2.3</text>
+<line x1="2260" y1="389" x2="2316" y2="389" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2260" cy="389" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2316" y="370" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2330" y="393" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 3.3</text>
+<path class="child-curly-brace" d="M 2515.0 356.0 C 2505.0 356.0 2505.0 361.0 2505.0 367.0 L 2505.0 379.0 C 2505.0 384.0 2493.0 384.0 2493.0 387.0 C 2493.0 390.0 2505.0 390.0 2505.0 395.0 L 2505.0 407.0 C 2505.0 413.0 2505.0 418.0 2515.0 418.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2514" cy="367.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2528" y="372.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.3.1</text>
+<circle cx="2514" cy="387.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2528" y="392.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.3.2</text>
+<circle cx="2514" cy="407.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2528" y="412.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.3.3</text>
+<line x1="2279" y1="461" x2="2223" y2="461" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2279" cy="461" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2053" y="442" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2209" y="465" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 3.4</text>
+<path class="child-curly-brace" d="M 2024.0 428.0 C 2034.0 428.0 2034.0 433.0 2034.0 439.0 L 2034.0 451.0 C 2034.0 456.0 2046.0 456.0 2046.0 459.0 C 2046.0 462.0 2034.0 462.0 2034.0 467.0 L 2034.0 479.0 C 2034.0 485.0 2034.0 490.0 2024.0 490.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2025" cy="439.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2011" y="444.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.4.1</text>
+<circle cx="2025" cy="459.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2011" y="464.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.4.2</text>
+<circle cx="2025" cy="479.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2011" y="484.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.4.3</text>
+<line x1="2299" y1="533" x2="2355" y2="533" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2299" cy="533" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2355" y="514" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2369" y="537" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 3.5</text>
+<path class="child-curly-brace" d="M 2554.0 500.0 C 2544.0 500.0 2544.0 505.0 2544.0 511.0 L 2544.0 523.0 C 2544.0 528.0 2532.0 528.0 2532.0 531.0 C 2532.0 534.0 2544.0 534.0 2544.0 539.0 L 2544.0 551.0 C 2544.0 557.0 2544.0 562.0 2554.0 562.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2553" cy="511.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2567" y="516.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.5.1</text>
+<circle cx="2553" cy="531.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2567" y="536.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.5.2</text>
+<circle cx="2553" cy="551.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2567" y="556.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 3.5.3</text>
+<line x1="3146" y1="600" x2="3032" y2="174" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="3146" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="3146" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="3003" y="86" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="3051" cy="130" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="3036" y="115" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="3051" cy="130" r="5" fill="#1E5AA8"/>
+<text x="3105" y="132" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">Category 4</text>
+<line x1="3053" y1="245" x2="2997" y2="245" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3053" cy="245" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2827" y="226" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2983" y="249" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 4.1</text>
+<path class="child-curly-brace" d="M 2798.0 212.0 C 2808.0 212.0 2808.0 217.0 2808.0 223.0 L 2808.0 235.0 C 2808.0 240.0 2820.0 240.0 2820.0 243.0 C 2820.0 246.0 2808.0 246.0 2808.0 251.0 L 2808.0 263.0 C 2808.0 269.0 2808.0 274.0 2798.0 274.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2799" cy="223.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2785" y="228.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.1.1</text>
+<circle cx="2799" cy="243.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2785" y="248.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.1.2</text>
+<circle cx="2799" cy="263.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2785" y="268.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.1.3</text>
+<line x1="3072" y1="317" x2="3128" y2="317" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3072" cy="317" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="3128" y="298" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3142" y="321" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 4.2</text>
+<path class="child-curly-brace" d="M 3327.0 284.0 C 3317.0 284.0 3317.0 289.0 3317.0 295.0 L 3317.0 307.0 C 3317.0 312.0 3305.0 312.0 3305.0 315.0 C 3305.0 318.0 3317.0 318.0 3317.0 323.0 L 3317.0 335.0 C 3317.0 341.0 3317.0 346.0 3327.0 346.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3326" cy="295.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3340" y="300.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.2.1</text>
+<circle cx="3326" cy="315.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3340" y="320.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.2.2</text>
+<circle cx="3326" cy="335.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3340" y="340.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.2.3</text>
+<line x1="3091" y1="389" x2="3035" y2="389" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3091" cy="389" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2865" y="370" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3021" y="393" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 4.3</text>
+<path class="child-curly-brace" d="M 2836.0 356.0 C 2846.0 356.0 2846.0 361.0 2846.0 367.0 L 2846.0 379.0 C 2846.0 384.0 2858.0 384.0 2858.0 387.0 C 2858.0 390.0 2846.0 390.0 2846.0 395.0 L 2846.0 407.0 C 2846.0 413.0 2846.0 418.0 2836.0 418.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2837" cy="367.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2823" y="372.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.3.1</text>
+<circle cx="2837" cy="387.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2823" y="392.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.3.2</text>
+<circle cx="2837" cy="407.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2823" y="412.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.3.3</text>
+<line x1="3110" y1="461" x2="3166" y2="461" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3110" cy="461" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="3166" y="442" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3180" y="465" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 4.4</text>
+<path class="child-curly-brace" d="M 3365.0 428.0 C 3355.0 428.0 3355.0 433.0 3355.0 439.0 L 3355.0 451.0 C 3355.0 456.0 3343.0 456.0 3343.0 459.0 C 3343.0 462.0 3355.0 462.0 3355.0 467.0 L 3355.0 479.0 C 3355.0 485.0 3355.0 490.0 3365.0 490.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3364" cy="439.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3378" y="444.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.4.1</text>
+<circle cx="3364" cy="459.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3378" y="464.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.4.2</text>
+<circle cx="3364" cy="479.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3378" y="484.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.4.3</text>
+<line x1="3130" y1="533" x2="3074" y2="533" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3130" cy="533" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2904" y="514" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3060" y="537" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 4.5</text>
+<path class="child-curly-brace" d="M 2875.0 500.0 C 2885.0 500.0 2885.0 505.0 2885.0 511.0 L 2885.0 523.0 C 2885.0 528.0 2897.0 528.0 2897.0 531.0 C 2897.0 534.0 2885.0 534.0 2885.0 539.0 L 2885.0 551.0 C 2885.0 557.0 2885.0 562.0 2875.0 562.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2876" cy="511.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2862" y="516.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.5.1</text>
+<circle cx="2876" cy="531.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2862" y="536.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.5.2</text>
+<circle cx="2876" cy="551.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2862" y="556.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 4.5.3</text>
+<line x1="654" y1="600" x2="540" y2="1026" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="654" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="654" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="511" y="1026" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="559" cy="1070" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<rect x="544" y="1055" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="559" cy="1070" r="5" fill="#1E5AA8"/>
+<text x="613" y="1072" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">Category 5</text>
+<line x1="633" y1="671" x2="689" y2="671" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="633" cy="671" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="689" y="652" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="703" y="675" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 5.1</text>
+<path class="child-curly-brace" d="M 888.0 638.0 C 878.0 638.0 878.0 643.0 878.0 649.0 L 878.0 661.0 C 878.0 666.0 866.0 666.0 866.0 669.0 C 866.0 672.0 878.0 672.0 878.0 677.0 L 878.0 689.0 C 878.0 695.0 878.0 700.0 888.0 700.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="887" cy="649.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="901" y="654.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.1.1</text>
+<circle cx="887" cy="669.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="901" y="674.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.1.2</text>
+<circle cx="887" cy="689.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="901" y="694.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.1.3</text>
+<line x1="614" y1="743" x2="558" y2="743" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="614" cy="743" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="388" y="724" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="544" y="747" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 5.2</text>
+<path class="child-curly-brace" d="M 359.0 710.0 C 369.0 710.0 369.0 715.0 369.0 721.0 L 369.0 733.0 C 369.0 738.0 381.0 738.0 381.0 741.0 C 381.0 744.0 369.0 744.0 369.0 749.0 L 369.0 761.0 C 369.0 767.0 369.0 772.0 359.0 772.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="360" cy="721.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="346" y="726.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.2.1</text>
+<circle cx="360" cy="741.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="346" y="746.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.2.2</text>
+<circle cx="360" cy="761.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="346" y="766.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.2.3</text>
+<line x1="595" y1="815" x2="651" y2="815" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="595" cy="815" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="651" y="796" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="665" y="819" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 5.3</text>
+<path class="child-curly-brace" d="M 850.0 782.0 C 840.0 782.0 840.0 787.0 840.0 793.0 L 840.0 805.0 C 840.0 810.0 828.0 810.0 828.0 813.0 C 828.0 816.0 840.0 816.0 840.0 821.0 L 840.0 833.0 C 840.0 839.0 840.0 844.0 850.0 844.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="849" cy="793.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="863" y="798.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.3.1</text>
+<circle cx="849" cy="813.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="863" y="818.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.3.2</text>
+<circle cx="849" cy="833.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="863" y="838.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.3.3</text>
+<line x1="576" y1="887" x2="520" y2="887" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="576" cy="887" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="350" y="868" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="506" y="891" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 5.4</text>
+<path class="child-curly-brace" d="M 321.0 854.0 C 331.0 854.0 331.0 859.0 331.0 865.0 L 331.0 877.0 C 331.0 882.0 343.0 882.0 343.0 885.0 C 343.0 888.0 331.0 888.0 331.0 893.0 L 331.0 905.0 C 331.0 911.0 331.0 916.0 321.0 916.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="322" cy="865.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="308" y="870.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.4.1</text>
+<circle cx="322" cy="885.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="308" y="890.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.4.2</text>
+<circle cx="322" cy="905.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="308" y="910.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.4.3</text>
+<line x1="556" y1="959" x2="612" y2="959" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="556" cy="959" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="612" y="940" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="626" y="963" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 5.5</text>
+<path class="child-curly-brace" d="M 811.0 926.0 C 801.0 926.0 801.0 931.0 801.0 937.0 L 801.0 949.0 C 801.0 954.0 789.0 954.0 789.0 957.0 C 789.0 960.0 801.0 960.0 801.0 965.0 L 801.0 977.0 C 801.0 983.0 801.0 988.0 811.0 988.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="810" cy="937.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="824" y="942.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.5.1</text>
+<circle cx="810" cy="957.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="824" y="962.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.5.2</text>
+<circle cx="810" cy="977.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="824" y="982.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 5.5.3</text>
+<line x1="1485" y1="600" x2="1371" y2="1026" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1485" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1485" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1342" y="1026" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1390" cy="1070" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<rect x="1375" y="1055" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="1390" cy="1070" r="5" fill="#1E5AA8"/>
+<text x="1444" y="1072" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">Category 6</text>
+<line x1="1464" y1="671" x2="1520" y2="671" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1464" cy="671" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1520" y="652" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1534" y="675" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 6.1</text>
+<path class="child-curly-brace" d="M 1719.0 638.0 C 1709.0 638.0 1709.0 643.0 1709.0 649.0 L 1709.0 661.0 C 1709.0 666.0 1697.0 666.0 1697.0 669.0 C 1697.0 672.0 1709.0 672.0 1709.0 677.0 L 1709.0 689.0 C 1709.0 695.0 1709.0 700.0 1719.0 700.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1718" cy="649.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1732" y="654.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.1.1</text>
+<circle cx="1718" cy="669.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1732" y="674.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.1.2</text>
+<circle cx="1718" cy="689.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1732" y="694.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.1.3</text>
+<line x1="1445" y1="743" x2="1389" y2="743" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1445" cy="743" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1219" y="724" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1375" y="747" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 6.2</text>
+<path class="child-curly-brace" d="M 1190.0 710.0 C 1200.0 710.0 1200.0 715.0 1200.0 721.0 L 1200.0 733.0 C 1200.0 738.0 1212.0 738.0 1212.0 741.0 C 1212.0 744.0 1200.0 744.0 1200.0 749.0 L 1200.0 761.0 C 1200.0 767.0 1200.0 772.0 1190.0 772.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1191" cy="721.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1177" y="726.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.2.1</text>
+<circle cx="1191" cy="741.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1177" y="746.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.2.2</text>
+<circle cx="1191" cy="761.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1177" y="766.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.2.3</text>
+<line x1="1426" y1="815" x2="1482" y2="815" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1426" cy="815" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1482" y="796" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1496" y="819" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 6.3</text>
+<path class="child-curly-brace" d="M 1681.0 782.0 C 1671.0 782.0 1671.0 787.0 1671.0 793.0 L 1671.0 805.0 C 1671.0 810.0 1659.0 810.0 1659.0 813.0 C 1659.0 816.0 1671.0 816.0 1671.0 821.0 L 1671.0 833.0 C 1671.0 839.0 1671.0 844.0 1681.0 844.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1680" cy="793.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1694" y="798.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.3.1</text>
+<circle cx="1680" cy="813.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1694" y="818.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.3.2</text>
+<circle cx="1680" cy="833.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1694" y="838.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.3.3</text>
+<line x1="1407" y1="887" x2="1351" y2="887" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1407" cy="887" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1181" y="868" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1337" y="891" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 6.4</text>
+<path class="child-curly-brace" d="M 1152.0 854.0 C 1162.0 854.0 1162.0 859.0 1162.0 865.0 L 1162.0 877.0 C 1162.0 882.0 1174.0 882.0 1174.0 885.0 C 1174.0 888.0 1162.0 888.0 1162.0 893.0 L 1162.0 905.0 C 1162.0 911.0 1162.0 916.0 1152.0 916.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1153" cy="865.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1139" y="870.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.4.1</text>
+<circle cx="1153" cy="885.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1139" y="890.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.4.2</text>
+<circle cx="1153" cy="905.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1139" y="910.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.4.3</text>
+<line x1="1387" y1="959" x2="1443" y2="959" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1387" cy="959" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1443" y="940" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1457" y="963" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 6.5</text>
+<path class="child-curly-brace" d="M 1642.0 926.0 C 1632.0 926.0 1632.0 931.0 1632.0 937.0 L 1632.0 949.0 C 1632.0 954.0 1620.0 954.0 1620.0 957.0 C 1620.0 960.0 1632.0 960.0 1632.0 965.0 L 1632.0 977.0 C 1632.0 983.0 1632.0 988.0 1642.0 988.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1641" cy="937.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1655" y="942.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.5.1</text>
+<circle cx="1641" cy="957.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1655" y="962.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.5.2</text>
+<circle cx="1641" cy="977.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1655" y="982.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 6.5.3</text>
+<line x1="2315" y1="600" x2="2201" y2="1026" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="2315" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="2315" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="2172" y="1026" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="2220" cy="1070" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<rect x="2205" y="1055" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="2220" cy="1070" r="5" fill="#1E5AA8"/>
+<text x="2274" y="1072" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">Category 7</text>
+<line x1="2294" y1="671" x2="2350" y2="671" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2294" cy="671" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2350" y="652" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2364" y="675" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 7.1</text>
+<path class="child-curly-brace" d="M 2549.0 638.0 C 2539.0 638.0 2539.0 643.0 2539.0 649.0 L 2539.0 661.0 C 2539.0 666.0 2527.0 666.0 2527.0 669.0 C 2527.0 672.0 2539.0 672.0 2539.0 677.0 L 2539.0 689.0 C 2539.0 695.0 2539.0 700.0 2549.0 700.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2548" cy="649.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2562" y="654.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.1.1</text>
+<circle cx="2548" cy="669.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2562" y="674.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.1.2</text>
+<circle cx="2548" cy="689.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2562" y="694.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.1.3</text>
+<line x1="2275" y1="743" x2="2219" y2="743" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2275" cy="743" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2049" y="724" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2205" y="747" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 7.2</text>
+<path class="child-curly-brace" d="M 2020.0 710.0 C 2030.0 710.0 2030.0 715.0 2030.0 721.0 L 2030.0 733.0 C 2030.0 738.0 2042.0 738.0 2042.0 741.0 C 2042.0 744.0 2030.0 744.0 2030.0 749.0 L 2030.0 761.0 C 2030.0 767.0 2030.0 772.0 2020.0 772.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2021" cy="721.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2007" y="726.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.2.1</text>
+<circle cx="2021" cy="741.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2007" y="746.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.2.2</text>
+<circle cx="2021" cy="761.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2007" y="766.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.2.3</text>
+<line x1="2256" y1="815" x2="2312" y2="815" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2256" cy="815" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2312" y="796" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2326" y="819" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 7.3</text>
+<path class="child-curly-brace" d="M 2511.0 782.0 C 2501.0 782.0 2501.0 787.0 2501.0 793.0 L 2501.0 805.0 C 2501.0 810.0 2489.0 810.0 2489.0 813.0 C 2489.0 816.0 2501.0 816.0 2501.0 821.0 L 2501.0 833.0 C 2501.0 839.0 2501.0 844.0 2511.0 844.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2510" cy="793.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2524" y="798.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.3.1</text>
+<circle cx="2510" cy="813.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2524" y="818.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.3.2</text>
+<circle cx="2510" cy="833.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2524" y="838.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.3.3</text>
+<line x1="2237" y1="887" x2="2181" y2="887" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2237" cy="887" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2011" y="868" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2167" y="891" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 7.4</text>
+<path class="child-curly-brace" d="M 1982.0 854.0 C 1992.0 854.0 1992.0 859.0 1992.0 865.0 L 1992.0 877.0 C 1992.0 882.0 2004.0 882.0 2004.0 885.0 C 2004.0 888.0 1992.0 888.0 1992.0 893.0 L 1992.0 905.0 C 1992.0 911.0 1992.0 916.0 1982.0 916.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1983" cy="865.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1969" y="870.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.4.1</text>
+<circle cx="1983" cy="885.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1969" y="890.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.4.2</text>
+<circle cx="1983" cy="905.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1969" y="910.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.4.3</text>
+<line x1="2217" y1="959" x2="2273" y2="959" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2217" cy="959" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2273" y="940" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2287" y="963" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 7.5</text>
+<path class="child-curly-brace" d="M 2472.0 926.0 C 2462.0 926.0 2462.0 931.0 2462.0 937.0 L 2462.0 949.0 C 2462.0 954.0 2450.0 954.0 2450.0 957.0 C 2450.0 960.0 2462.0 960.0 2462.0 965.0 L 2462.0 977.0 C 2462.0 983.0 2462.0 988.0 2472.0 988.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2471" cy="937.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2485" y="942.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.5.1</text>
+<circle cx="2471" cy="957.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2485" y="962.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.5.2</text>
+<circle cx="2471" cy="977.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2485" y="982.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 7.5.3</text>
+<line x1="3146" y1="600" x2="3032" y2="1026" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="3146" cy="600" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="3146" cy="600" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="3003" y="1026" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="3051" cy="1070" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<rect x="3036" y="1055" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="3051" cy="1070" r="5" fill="#1E5AA8"/>
+<text x="3105" y="1072" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">Category 8</text>
+<line x1="3125" y1="671" x2="3069" y2="671" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3125" cy="671" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2899" y="652" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3055" y="675" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 8.1</text>
+<path class="child-curly-brace" d="M 2870.0 638.0 C 2880.0 638.0 2880.0 643.0 2880.0 649.0 L 2880.0 661.0 C 2880.0 666.0 2892.0 666.0 2892.0 669.0 C 2892.0 672.0 2880.0 672.0 2880.0 677.0 L 2880.0 689.0 C 2880.0 695.0 2880.0 700.0 2870.0 700.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2871" cy="649.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2857" y="654.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.1.1</text>
+<circle cx="2871" cy="669.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2857" y="674.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.1.2</text>
+<circle cx="2871" cy="689.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2857" y="694.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.1.3</text>
+<line x1="3106" y1="743" x2="3162" y2="743" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3106" cy="743" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="3162" y="724" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3176" y="747" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 8.2</text>
+<path class="child-curly-brace" d="M 3361.0 710.0 C 3351.0 710.0 3351.0 715.0 3351.0 721.0 L 3351.0 733.0 C 3351.0 738.0 3339.0 738.0 3339.0 741.0 C 3339.0 744.0 3351.0 744.0 3351.0 749.0 L 3351.0 761.0 C 3351.0 767.0 3351.0 772.0 3361.0 772.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3360" cy="721.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3374" y="726.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.2.1</text>
+<circle cx="3360" cy="741.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3374" y="746.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.2.2</text>
+<circle cx="3360" cy="761.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3374" y="766.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.2.3</text>
+<line x1="3087" y1="815" x2="3031" y2="815" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3087" cy="815" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2861" y="796" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3017" y="819" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 8.3</text>
+<path class="child-curly-brace" d="M 2832.0 782.0 C 2842.0 782.0 2842.0 787.0 2842.0 793.0 L 2842.0 805.0 C 2842.0 810.0 2854.0 810.0 2854.0 813.0 C 2854.0 816.0 2842.0 816.0 2842.0 821.0 L 2842.0 833.0 C 2842.0 839.0 2842.0 844.0 2832.0 844.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2833" cy="793.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2819" y="798.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.3.1</text>
+<circle cx="2833" cy="813.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2819" y="818.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.3.2</text>
+<circle cx="2833" cy="833.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2819" y="838.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.3.3</text>
+<line x1="3068" y1="887" x2="3124" y2="887" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3068" cy="887" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="3124" y="868" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="3138" y="891" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 8.4</text>
+<path class="child-curly-brace" d="M 3323.0 854.0 C 3313.0 854.0 3313.0 859.0 3313.0 865.0 L 3313.0 877.0 C 3313.0 882.0 3301.0 882.0 3301.0 885.0 C 3301.0 888.0 3313.0 888.0 3313.0 893.0 L 3313.0 905.0 C 3313.0 911.0 3313.0 916.0 3323.0 916.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3322" cy="865.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3336" y="870.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.4.1</text>
+<circle cx="3322" cy="885.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3336" y="890.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.4.2</text>
+<circle cx="3322" cy="905.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="3336" y="910.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.4.3</text>
+<line x1="3048" y1="959" x2="2992" y2="959" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="3048" cy="959" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="2822" y="940" width="170" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="2978" y="963" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">Sub-category 8.5</text>
+<path class="child-curly-brace" d="M 2793.0 926.0 C 2803.0 926.0 2803.0 931.0 2803.0 937.0 L 2803.0 949.0 C 2803.0 954.0 2815.0 954.0 2815.0 957.0 C 2815.0 960.0 2803.0 960.0 2803.0 965.0 L 2803.0 977.0 C 2803.0 983.0 2803.0 988.0 2793.0 988.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="2794" cy="937.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2780" y="942.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.5.1</text>
+<circle cx="2794" cy="957.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2780" y="962.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.5.2</text>
+<circle cx="2794" cy="977.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="2780" y="982.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">2nd reason 8.5.3</text>
+<rect id="topic-block" x="3630" y="435" width="280" height="330" rx="14" ry="14" fill="#F8FBFF" stroke="#0B3A75" stroke-width="3" filter="url(#softShadow)"/>
+<circle cx="3770" cy="505" r="38" fill="#D9E8F7" opacity="0.9"/>
+<circle cx="3770" cy="505" r="24" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<circle cx="3770" cy="505" r="10" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<line x1="3770" y1="505" x2="3795" y2="480" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<polyline points="3787,480 3798,477 3795,488" fill="none" stroke="#1E5AA8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="3770" y="584" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="28" font-weight="700" fill="#0B3A75">Maximum</text>
+<text x="3770" y="617" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="28" font-weight="700" fill="#0B3A75">Fishbone Stress</text>
+<text x="3770" y="650" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="28" font-weight="700" fill="#0B3A75">Test</text>
+</svg>

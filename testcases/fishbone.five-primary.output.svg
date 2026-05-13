@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Five Primary Causes Layout">
+<defs>
+<linearGradient id="topCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0B3A75"/>
+<stop offset="100%" stop-color="#1F5A98"/>
+</linearGradient>
+<linearGradient id="bottomCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#DDECF9"/>
+<stop offset="100%" stop-color="#BCD5ED"/>
+</linearGradient>
+<filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#16324F" flood-opacity="0.12"/>
+</filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#FFFFFF"/>
+<circle cx="1696" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1696" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1696" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1696" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="1610" y1="98" x2="1770" y2="98" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="1692,98 1722,130 1788,130" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1610" cy="98" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1770" cy="98" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1788" cy="130" r="5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="1530" y1="1000" x2="1370" y2="1000" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="1448,1000 1418,1032 1352,1032" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1530" cy="1000" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1370" cy="1000" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1352" cy="1032" r="5" fill="#BCD2EA" opacity="0.65"/>
+
+<polyline points="78,492 120,540 78,588" fill="none" stroke="#0B3A75" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.98"/>
+<polyline points="116,492 158,540 116,588" fill="none" stroke="#BFD5EB" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.94"/>
+<polyline points="154,492 196,540 154,588" fill="none" stroke="#D9E8F7" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.92"/>
+<line x1="214" y1="540" x2="1526" y2="540" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="1502" y1="516" x2="1526" y2="540" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="1502" y1="564" x2="1526" y2="540" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="441" y1="540" x2="372" y2="284" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="441" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="441" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="298" y="196" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="346" cy="240" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<circle cx="346" cy="228" r="8" fill="#1E5AA8"/>
+<path d="M 329 259 Q 346 238 363 259 Z" fill="#1E5AA8"/>
+<text x="400" y="242" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">People</text>
+<line x1="388" y1="336" x2="422" y2="336" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="388" cy="336" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="436" y="342" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Training</text>
+<line x1="398" y1="374" x2="364" y2="374" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="398" cy="374" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="350" y="380" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Role clarity</text>
+<line x1="408" y1="412" x2="442" y2="412" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="408" cy="412" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="456" y="418" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Handoff quality</text>
+<line x1="418" y1="450" x2="384" y2="450" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="418" cy="450" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="370" y="456" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Decision rights</text>
+<line x1="429" y1="488" x2="463" y2="488" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="429" cy="488" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="477" y="494" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Workload balance</text>
+<line x1="1317" y1="540" x2="1269" y2="360" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1317" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1317" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1174" y="272" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1222" cy="316" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<line x1="1206" y1="300" x2="1238" y2="332" stroke="#1E5AA8" stroke-width="7" stroke-linecap="round"/>
+<line x1="1236" y1="299" x2="1208" y2="333" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<circle cx="1204" cy="298" r="4" fill="#1E5AA8"/>
+<text x="1276" y="318" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">Tools</text>
+<line x1="1290" y1="431" x2="1256" y2="431" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1290" cy="431" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="1242" y="437" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Calibration</text>
+<line x1="1300" y1="469" x2="1334" y2="469" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1300" cy="469" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="1348" y="475" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Coverage</text>
+<line x1="441" y1="540" x2="379" y2="770" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="441" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="441" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="298" y="770" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="346" cy="814" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<circle cx="346" cy="814" r="14" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<line x1="346" y1="792" x2="346" y2="800" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<line x1="346" y1="828" x2="346" y2="836" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<line x1="324" y1="814" x2="332" y2="814" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<line x1="360" y1="814" x2="368" y2="814" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<text x="400" y="816" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">Process</text>
+<line x1="419" y1="617" x2="453" y2="617" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="419" cy="617" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="467" y="623" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Inspection</text>
+<line x1="408" y1="655" x2="374" y2="655" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="408" cy="655" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="360" y="661" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Escalation</text>
+<line x1="398" y1="693" x2="432" y2="693" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="398" cy="693" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="446" y="699" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Closure</text>
+<line x1="1317" y1="540" x2="1269" y2="720" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1317" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1317" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1174" y="720" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1222" cy="764" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<g class="lucide-icon" transform="translate(1197.4 739.4) scale(2.05)" fill="none" stroke="#1E5AA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
+  <path d="m7 16.5-4.74-2.85" />
+  <path d="m7 16.5 5-3" />
+  <path d="M7 16.5v5.17" />
+  <path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
+  <path d="m17 16.5-5-3" />
+  <path d="m17 16.5 4.74-2.85" />
+  <path d="M17 16.5v5.17" />
+  <path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
+  <path d="M12 8 7.26 5.15" />
+  <path d="m12 8 4.74-2.85" />
+  <path d="M12 13.5V8" /></g>
+<text x="1276" y="766" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">Materials</text>
+<line x1="1296" y1="611" x2="1262" y2="611" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1296" cy="611" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="1248" y="617" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Supplier variation</text>
+<line x1="1286" y1="649" x2="1320" y2="649" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1286" cy="649" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="1334" y="655" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">Packaging</text>
+<rect id="topic-block" x="1550" y="375" width="280" height="330" rx="14" ry="14" fill="#F8FBFF" stroke="#0B3A75" stroke-width="3" filter="url(#softShadow)"/>
+<circle cx="1690" cy="445" r="38" fill="#D9E8F7" opacity="0.9"/>
+<circle cx="1690" cy="445" r="24" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<circle cx="1690" cy="445" r="10" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<line x1="1690" y1="445" x2="1715" y2="420" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<polyline points="1707,420 1718,417 1715,428" fill="none" stroke="#1E5AA8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1690" y="542" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="28" font-weight="700" fill="#0B3A75">Five Primary</text>
+<text x="1690" y="575" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="28" font-weight="700" fill="#0B3A75">Causes Layout</text>
+</svg>

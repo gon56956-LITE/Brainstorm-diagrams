@@ -1,0 +1,51 @@
+{
+  "diagram_type": "fishbone",
+  "topic": "Customer Field Failures",
+  "output": "svg",
+  "theme": "business_simple",
+  "categories": [
+    {
+      "name_en": "People",
+      "items": [
+        {
+          "subcategory": "Training",
+          "items": ["Onboarding", "Skill matrix", "Certification"]
+        },
+        "Role clarity",
+        "Handoff quality"
+      ]
+    },
+    {
+      "name_en": "Process",
+      "items": [
+        {
+          "subcategory": "Inspection",
+          "items": ["Sampling plan", "Recheck rules"]
+        },
+        "Escalation path",
+        "Closure speed"
+      ]
+    },
+    {
+      "name_en": "Tools",
+      "items": [
+        {
+          "subcategory": "Calibration",
+          "items": ["Fixture wear", "Gauge repeatability"]
+        },
+        "Test coverage",
+        "Data logging"
+      ]
+    },
+    {
+      "name_en": "Materials",
+      "items": [
+        "Supplier variation",
+        {
+          "subcategory": "Packaging",
+          "items": ["Shock protection", "Label accuracy"]
+        }
+      ]
+    }
+  ]
+}

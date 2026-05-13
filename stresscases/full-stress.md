@@ -1,0 +1,177 @@
+# Maximum Fishbone Stress Test
+
+## Category 1
+- Sub-category 1.1
+  - 2nd reason 1.1.1
+  - 2nd reason 1.1.2
+  - 2nd reason 1.1.3
+- Sub-category 1.2
+  - 2nd reason 1.2.1
+  - 2nd reason 1.2.2
+  - 2nd reason 1.2.3
+- Sub-category 1.3
+  - 2nd reason 1.3.1
+  - 2nd reason 1.3.2
+  - 2nd reason 1.3.3
+- Sub-category 1.4
+  - 2nd reason 1.4.1
+  - 2nd reason 1.4.2
+  - 2nd reason 1.4.3
+- Sub-category 1.5
+  - 2nd reason 1.5.1
+  - 2nd reason 1.5.2
+  - 2nd reason 1.5.3
+
+## Category 2
+- Sub-category 2.1
+  - 2nd reason 2.1.1
+  - 2nd reason 2.1.2
+  - 2nd reason 2.1.3
+- Sub-category 2.2
+  - 2nd reason 2.2.1
+  - 2nd reason 2.2.2
+  - 2nd reason 2.2.3
+- Sub-category 2.3
+  - 2nd reason 2.3.1
+  - 2nd reason 2.3.2
+  - 2nd reason 2.3.3
+- Sub-category 2.4
+  - 2nd reason 2.4.1
+  - 2nd reason 2.4.2
+  - 2nd reason 2.4.3
+- Sub-category 2.5
+  - 2nd reason 2.5.1
+  - 2nd reason 2.5.2
+  - 2nd reason 2.5.3
+
+## Category 3
+- Sub-category 3.1
+  - 2nd reason 3.1.1
+  - 2nd reason 3.1.2
+  - 2nd reason 3.1.3
+- Sub-category 3.2
+  - 2nd reason 3.2.1
+  - 2nd reason 3.2.2
+  - 2nd reason 3.2.3
+- Sub-category 3.3
+  - 2nd reason 3.3.1
+  - 2nd reason 3.3.2
+  - 2nd reason 3.3.3
+- Sub-category 3.4
+  - 2nd reason 3.4.1
+  - 2nd reason 3.4.2
+  - 2nd reason 3.4.3
+- Sub-category 3.5
+  - 2nd reason 3.5.1
+  - 2nd reason 3.5.2
+  - 2nd reason 3.5.3
+
+## Category 4
+- Sub-category 4.1
+  - 2nd reason 4.1.1
+  - 2nd reason 4.1.2
+  - 2nd reason 4.1.3
+- Sub-category 4.2
+  - 2nd reason 4.2.1
+  - 2nd reason 4.2.2
+  - 2nd reason 4.2.3
+- Sub-category 4.3
+  - 2nd reason 4.3.1
+  - 2nd reason 4.3.2
+  - 2nd reason 4.3.3
+- Sub-category 4.4
+  - 2nd reason 4.4.1
+  - 2nd reason 4.4.2
+  - 2nd reason 4.4.3
+- Sub-category 4.5
+  - 2nd reason 4.5.1
+  - 2nd reason 4.5.2
+  - 2nd reason 4.5.3
+
+## Category 5
+- Sub-category 5.1
+  - 2nd reason 5.1.1
+  - 2nd reason 5.1.2
+  - 2nd reason 5.1.3
+- Sub-category 5.2
+  - 2nd reason 5.2.1
+  - 2nd reason 5.2.2
+  - 2nd reason 5.2.3
+- Sub-category 5.3
+  - 2nd reason 5.3.1
+  - 2nd reason 5.3.2
+  - 2nd reason 5.3.3
+- Sub-category 5.4
+  - 2nd reason 5.4.1
+  - 2nd reason 5.4.2
+  - 2nd reason 5.4.3
+- Sub-category 5.5
+  - 2nd reason 5.5.1
+  - 2nd reason 5.5.2
+  - 2nd reason 5.5.3
+
+## Category 6
+- Sub-category 6.1
+  - 2nd reason 6.1.1
+  - 2nd reason 6.1.2
+  - 2nd reason 6.1.3
+- Sub-category 6.2
+  - 2nd reason 6.2.1
+  - 2nd reason 6.2.2
+  - 2nd reason 6.2.3
+- Sub-category 6.3
+  - 2nd reason 6.3.1
+  - 2nd reason 6.3.2
+  - 2nd reason 6.3.3
+- Sub-category 6.4
+  - 2nd reason 6.4.1
+  - 2nd reason 6.4.2
+  - 2nd reason 6.4.3
+- Sub-category 6.5
+  - 2nd reason 6.5.1
+  - 2nd reason 6.5.2
+  - 2nd reason 6.5.3
+
+## Category 7
+- Sub-category 7.1
+  - 2nd reason 7.1.1
+  - 2nd reason 7.1.2
+  - 2nd reason 7.1.3
+- Sub-category 7.2
+  - 2nd reason 7.2.1
+  - 2nd reason 7.2.2
+  - 2nd reason 7.2.3
+- Sub-category 7.3
+  - 2nd reason 7.3.1
+  - 2nd reason 7.3.2
+  - 2nd reason 7.3.3
+- Sub-category 7.4
+  - 2nd reason 7.4.1
+  - 2nd reason 7.4.2
+  - 2nd reason 7.4.3
+- Sub-category 7.5
+  - 2nd reason 7.5.1
+  - 2nd reason 7.5.2
+  - 2nd reason 7.5.3
+
+## Category 8
+- Sub-category 8.1
+  - 2nd reason 8.1.1
+  - 2nd reason 8.1.2
+  - 2nd reason 8.1.3
+- Sub-category 8.2
+  - 2nd reason 8.2.1
+  - 2nd reason 8.2.2
+  - 2nd reason 8.2.3
+- Sub-category 8.3
+  - 2nd reason 8.3.1
+  - 2nd reason 8.3.2
+  - 2nd reason 8.3.3
+- Sub-category 8.4
+  - 2nd reason 8.4.1
+  - 2nd reason 8.4.2
+  - 2nd reason 8.4.3
+- Sub-category 8.5
+  - 2nd reason 8.5.1
+  - 2nd reason 8.5.2
+  - 2nd reason 8.5.3

@@ -1,0 +1,32 @@
+{
+  "diagram_type": "fishbone",
+  "topic": "Improve Product Reliability",
+  "output": "svg",
+  "theme": "business_simple",
+  "categories": [
+    {
+      "name_en": "User Needs",
+      "items": ["Usage scenario", "Pain points", "Expectation"]
+    },
+    {
+      "name_en": "Functions",
+      "items": ["Core function", "Optional feature", "Interface"]
+    },
+    {
+      "name_en": "Performance",
+      "items": ["Accuracy", "Speed", "Capacity"]
+    },
+    {
+      "name_en": "Reliability",
+      "items": ["Failure mode", "Lifetime", "Robustness"]
+    },
+    {
+      "name_en": "Cost",
+      "items": ["BOM", "Manufacturing", "Maintenance"]
+    },
+    {
+      "name_en": "Manufacturing",
+      "items": ["Process window", "Yield", "Scalability"]
+    }
+  ]
+}

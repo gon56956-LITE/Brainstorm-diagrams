@@ -1,0 +1,30 @@
+﻿{
+  "diagram_type": "fishbone",
+  "topic": "Five Subcategory Layout",
+  "output": "svg",
+  "theme": "business_simple",
+  "categories": [
+    {
+      "name_en": "People",
+      "items": [
+        {"subcategory": "Training", "items": ["Onboarding", "Skill matrix", "Certification"]},
+        {"subcategory": "Roles", "items": ["Ownership", "Escalation", "Coverage"]},
+        {"subcategory": "Handoff", "items": ["Checklist", "Timing", "Feedback"]},
+        {"subcategory": "Capacity", "items": ["Load", "Backup", "Priorities"]},
+        {"subcategory": "Quality", "items": ["Review", "Coaching", "Standards"]}
+      ]
+    },
+    {
+      "name_en": "Process",
+      "items": ["Inspection", "Escalation", "Closure"]
+    },
+    {
+      "name_en": "Tools",
+      "items": ["Calibration", "Coverage"]
+    },
+    {
+      "name_en": "Materials",
+      "items": ["Supplier variation", "Packaging"]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "diagram_type": "fishbone",
+  "topic": "Dense Category Collision",
+  "output": "svg",
+  "theme": "business_simple",
+  "categories": [
+    {
+      "name_en": "People",
+      "items": [
+        {"subcategory": "Training", "items": ["Onboarding", "Skill matrix", "Certification"]},
+        "Role clarity",
+        {"subcategory": "Handoff", "items": ["Checklist", "Timing", "Feedback"]},
+        "Workload balance",
+        {"subcategory": "Quality", "items": ["Review", "Coaching", "Standards"]}
+      ]
+    },
+    {
+      "name_en": "Process",
+      "items": [
+        "Inspection",
+        {"subcategory": "Escalation path", "items": ["Ownership", "Response time", "Closure"]},
+        "Closure speed",
+        {"subcategory": "Packaging", "items": ["Shock protection", "Label accuracy", "Handling"]}
+      ]
+    },
+    {
+      "name_en": "Tools",
+      "items": [
+        "Calibration",
+        {"subcategory": "Fixture", "items": ["Wear", "Setup", "Repeatability"]},
+        "Data logging",
+        {"subcategory": "Coverage", "items": ["Limits", "Traceability", "Alerts"]}
+      ]
+    },
+    {
+      "name_en": "Materials",
+      "items": ["Supplier variation", "Packaging"]
+    },
+    {
+      "name_en": "Methods",
+      "items": ["Checklist", "Sampling"]
+    },
+    {
+      "name_en": "Environment",
+      "items": ["Temperature", "Humidity"]
+    }
+  ]
+}

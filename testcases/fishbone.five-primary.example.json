@@ -1,0 +1,24 @@
+﻿{
+  "diagram_type": "fishbone",
+  "topic": "Five Primary Causes Layout",
+  "output": "svg",
+  "theme": "business_simple",
+  "categories": [
+    {
+      "name_en": "People",
+      "items": ["Training", "Role clarity", "Handoff quality", "Decision rights", "Workload balance"]
+    },
+    {
+      "name_en": "Process",
+      "items": ["Inspection", "Escalation", "Closure"]
+    },
+    {
+      "name_en": "Tools",
+      "items": ["Calibration", "Coverage"]
+    },
+    {
+      "name_en": "Materials",
+      "items": ["Supplier variation", "Packaging"]
+    }
+  ]
+}
