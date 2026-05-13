@@ -16,7 +16,7 @@ Use this checklist after changing fishbone layout logic, especially row spacing,
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_stresscases.py
 ```
 
-3. Open `stresscases/full-stress.svg` and inspect it by eye.
+3. Open `stresscases/fishbone/full-stress.svg` and inspect it by eye.
 
 ## What To Check
 

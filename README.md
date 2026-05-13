@@ -59,13 +59,13 @@ Menu options:
   - Enter a diagram name, such as `my-analysis`.
   - Names may use lowercase letters, numbers, hyphen, and underscore only.
   - Choose Markdown unless you specifically need JSON.
-  - The tool creates `work/my-analysis.md` and `work/my-analysis.svg`.
+  - The tool creates `work/fishbone/my-analysis.md` and `work/fishbone/my-analysis.svg`.
 - `2. Regenerate work SVG`
-  - Use this after editing `work/my-analysis.md` or `work/my-analysis.json`.
+  - Use this after editing `work/fishbone/my-analysis.md` or `work/fishbone/my-analysis.json`.
   - Enter the same diagram name, such as `my-analysis`.
-  - The tool updates `work/my-analysis.svg`.
+  - The tool updates `work/fishbone/my-analysis.svg`.
 - `3. Export work SVG to PNG`
-  - Converts `work/my-analysis.svg` to `work/my-analysis.png`.
+  - Converts `work/fishbone/my-analysis.svg` to `work/fishbone/my-analysis.png`.
   - Use PNG for quick sharing in chat, email, Word, or places where SVG is inconvenient.
 - `4. Verify testcases and templates`
   - Runs the built-in checks for renderer layout, maintained testcases, and templates.
@@ -78,14 +78,14 @@ Typical usage:
 
 1. Double-click `鱼骨图工具.cmd`.
 2. Choose `1` to create a new diagram.
-3. Edit the generated file in `work/`.
+3. Edit the generated file in `work/fishbone/`.
 4. Double-click `鱼骨图工具.cmd` again.
 5. Choose `2` to regenerate the SVG.
-6. Open the SVG in `work/` to inspect the result.
+6. Open the SVG in `work/fishbone/` to inspect the result.
 
-The `work/` folder is for your own diagrams. The `testcases/` folder is for regression tests, `templates/` is for protected starting templates, `stresscases/` is for optional manual visual checks, and `naturalcases/` is for natural-language extraction examples.
+The `work/` folder is for your own diagrams, grouped by diagram type such as `work/fishbone/`. The `testcases/`, `stresscases/`, and `naturalcases/` folders are also grouped by diagram type, such as `testcases/fishbone/`. `templates/` contains protected starting templates.
 
-Diagram names are file names under `work/`. Use safe names such as `my-analysis` or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
+Diagram names are file names under `work/fishbone/` for fishbone diagrams. Use safe names such as `my-analysis` or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
 ## Natural-Language Drafting
 
@@ -102,14 +102,14 @@ Example prompt:
 
 Expected output:
 
-- `work/customer-complaints.md`
-- `work/customer-complaints.svg`
-- Optional `work/customer-complaints.png`
+- `work/fishbone/customer-complaints.md`
+- `work/fishbone/customer-complaints.svg`
+- Optional `work/fishbone/customer-complaints.png`
 
 Natural-language drafts should use categories found in the source text, not default categories. See `references/natural_language_extraction.md`.
 For a reusable Codex prompt shape, see `references/natural_language_prompt_template.md`.
 Use `references/natural_language_review_checklist.md` to review whether the generated draft stayed faithful to the source text.
-See `naturalcases/` for source text and expected Markdown examples.
+See `naturalcases/fishbone/` for source text and expected Markdown examples.
 
 ## Badge Library
 
@@ -126,7 +126,7 @@ Regenerate the blue-styled review board with:
 Output:
 
 ```text
-work/lucide-badge-candidates.svg
+work/fishbone/lucide-badge-candidates.svg
 ```
 
 `scripts/verify_testcases.py` protects the key Lucide files and checks that the review catalog still renders as well-formed SVG.
@@ -139,7 +139,7 @@ Command-line usage is available for technical users or automation:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fishbone.py my-analysis --format md
 ```
 
-This creates `work/my-analysis.md` and `work/my-analysis.svg` from the Markdown template. Use `--format json` for the JSON template. Existing work files are not overwritten unless `--force` is passed.
+This creates `work/fishbone/my-analysis.md` and `work/fishbone/my-analysis.svg` from the Markdown template. Use `--format json` for the JSON template. Existing work files are not overwritten unless `--force` is passed.
 
 After editing a work input, regenerate its SVG with:
 
@@ -147,7 +147,7 @@ After editing a work input, regenerate its SVG with:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_work.py my-analysis
 ```
 
-If both `work/my-analysis.md` and `work/my-analysis.json` exist, pass `--format md` or `--format json`.
+If both `work/fishbone/my-analysis.md` and `work/fishbone/my-analysis.json` exist, pass `--format md` or `--format json`.
 
 Export an existing work SVG to PNG:
 
@@ -257,32 +257,32 @@ Copy a template, edit the content, then render it with `scripts/generate_diagram
 
 ## Work Files
 
-`scripts/new_fishbone.py` creates user-owned inputs and SVGs in `work/`. This directory is for local authoring output, separate from `testcases/` regression files.
+`scripts/new_fishbone.py` creates user-owned inputs and SVGs in `work/fishbone/`. This directory is for local authoring output, separate from `testcases/fishbone/` regression files.
 
 ## Stresscases
 
-`stresscases/` contains intentionally dense diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
+`stresscases/fishbone/` contains intentionally dense fishbone diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
 
 `scripts/verify_stresscases.py` protects this area from structural drift: it checks that the full-density SVG expands beyond the base canvas, keeps the topic block on the right, preserves the expected category and brace counts, and does not render `README.md` as an SVG.
 
 Use `references/visual_review_checklist.md` when inspecting the generated stresscase by eye.
 
-- `stresscases/full-stress.md` -> `stresscases/full-stress.svg`
+- `stresscases/fishbone/full-stress.md` -> `stresscases/fishbone/full-stress.svg`
 
 ## Naturalcases
 
-`naturalcases/` contains source text and expected structured Markdown examples for Codex-assisted natural-language fishbone drafting. It does not store generated SVG or PNG outputs.
+`naturalcases/fishbone/` contains source text and expected structured Markdown examples for Codex-assisted natural-language fishbone drafting. It does not store generated SVG or PNG outputs.
 
-- `naturalcases/reliability-power-drop.source.txt` -> `naturalcases/reliability-power-drop.expected.md`
-- `naturalcases/optical-module-stability.source.txt` -> `naturalcases/optical-module-stability.expected.md`
+- `naturalcases/fishbone/reliability-power-drop.source.txt` -> `naturalcases/fishbone/reliability-power-drop.expected.md`
+- `naturalcases/fishbone/optical-module-stability.source.txt` -> `naturalcases/fishbone/optical-module-stability.expected.md`
 
 The optical-module case covers an English product design / manufacturing / application scenario and protects confirmed Lucide badge mappings for technical categories.
 
 ## Maintained Testcases
 
-- `testcases/fishbone.input.example.json` -> `testcases/fishbone.output.example.svg`
-- `testcases/fishbone.subcategory.example.md` -> `testcases/fishbone.subcategory.output.md.svg`
-- `testcases/fishbone.subcategory.example.json` -> `testcases/fishbone.subcategory.output.json.svg`
-- `testcases/fishbone.five-primary.example.json` -> `testcases/fishbone.five-primary.output.svg`
-- `testcases/fishbone.five-subcategories.example.json` -> `testcases/fishbone.five-subcategories.output.svg`
-- `testcases/fishbone.dense-collision.example.json` -> `testcases/fishbone.dense-collision.output.svg`
+- `testcases/fishbone/fishbone.input.example.json` -> `testcases/fishbone/fishbone.output.example.svg`
+- `testcases/fishbone/fishbone.subcategory.example.md` -> `testcases/fishbone/fishbone.subcategory.output.md.svg`
+- `testcases/fishbone/fishbone.subcategory.example.json` -> `testcases/fishbone/fishbone.subcategory.output.json.svg`
+- `testcases/fishbone/fishbone.five-primary.example.json` -> `testcases/fishbone/fishbone.five-primary.output.svg`
+- `testcases/fishbone/fishbone.five-subcategories.example.json` -> `testcases/fishbone/fishbone.five-subcategories.output.svg`
+- `testcases/fishbone/fishbone.dense-collision.example.json` -> `testcases/fishbone/fishbone.dense-collision.output.svg`

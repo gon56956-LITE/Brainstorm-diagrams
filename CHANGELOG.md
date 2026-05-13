@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.4 - 2026-05-13
+
+### Multi-Diagram Structure
+
+- Moved maintained fishbone regression files under `testcases/fishbone/`.
+- Moved optional fishbone stress review files under `stresscases/fishbone/`.
+- Moved fishbone natural-language examples under `naturalcases/fishbone/`.
+- Moved local fishbone work outputs under `work/fishbone/`.
+- Updated fishbone work, export, stresscase, naturalcase, and verification scripts to use diagram-type scoped directories.
+- Updated README, SKILL, and maintenance references for the diagram-type scoped folder structure.
+
 ## 0.1.3 - 2026-05-12
 
 ### Workflow And User Tools

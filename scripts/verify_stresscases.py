@@ -10,7 +10,7 @@ from xml.etree import ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parents[1]
-STRESSCASES = ROOT / "stresscases"
+STRESSCASES = ROOT / "stresscases" / "fishbone"
 RENDER_STRESSCASES = ROOT / "scripts" / "render_stresscases.py"
 PYTHON = Path(sys.executable)
 

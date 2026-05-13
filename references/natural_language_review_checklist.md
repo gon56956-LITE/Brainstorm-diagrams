@@ -20,9 +20,9 @@ Use this checklist after Codex turns raw text into a fishbone Markdown draft. It
 
 ## File Outputs
 
-- The editable draft is saved as `work/<safe-name>.md`.
-- The rendered SVG is saved as `work/<safe-name>.svg`.
-- PNG is exported only when useful, as `work/<safe-name>.png`.
+- The editable fishbone draft is saved as `work/fishbone/<safe-name>.md`.
+- The rendered SVG is saved as `work/fishbone/<safe-name>.svg`.
+- PNG is exported only when useful, as `work/fishbone/<safe-name>.png`.
 - Raw `.txt` is not passed directly to `scripts/generate_diagram.py` for semantic extraction.
 
 ## Review Questions

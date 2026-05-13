@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NATURALCASES = ROOT / "naturalcases"
+NATURALCASES = ROOT / "naturalcases" / "fishbone"
 PROMPT_TEMPLATE = ROOT / "references" / "natural_language_prompt_template.md"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
@@ -60,7 +60,7 @@ def verify_prompt_template() -> None:
         "Put 2-5 primary causes",
         "Do not create subcategories or second-level causes",
         "If the source is too thin",
-        "Write structured Markdown to `work/<safe-name>.md`",
+        "Write structured Markdown to `work/fishbone/<safe-name>.md`",
         "references/natural_language_review_checklist.md",
     ]
     for phrase in required_phrases:

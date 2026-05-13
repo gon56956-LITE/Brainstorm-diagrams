@@ -32,7 +32,7 @@ echo 6. Verify stresscases
 echo 7. Exit
 echo.
 echo Notes:
-echo - Diagram names create files under work\.
+echo - Diagram names create files under work\fishbone\.
 echo - Use lowercase letters, numbers, hyphen, or underscore only.
 echo - Good examples: my-analysis, customer_complaints_v1
 echo - Do not enter spaces, folders, ..\, or full paths.

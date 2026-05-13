@@ -37,11 +37,11 @@ Then render that Markdown through the existing SVG/PNG toolchain.
 1. Read the user's natural-language source.
 2. Identify the central topic or problem statement.
 3. Extract domain-specific categories and primary causes.
-4. Write structured Markdown to `work/<safe-name>.md`.
+4. Write structured Markdown to `work/fishbone/<safe-name>.md`.
 5. Render the SVG with `scripts/render_work.py <safe-name>` or `scripts/generate_diagram.py`.
 6. Export PNG with `scripts/export_png.py <safe-name>` only if the user wants a shareable image.
 7. Review semantic quality with `references/natural_language_review_checklist.md`.
-8. When the request is similar to an existing naturalcase, compare against `naturalcases/` examples for expected depth and category specificity.
+8. When the request is similar to an existing naturalcase, compare against `naturalcases/fishbone/` examples for expected depth and category specificity.
 
 ## Prompt Example
 
@@ -54,7 +54,7 @@ Then render that Markdown through the existing SVG/PNG toolchain.
 
 Expected behavior:
 
-- Create `work/customer-complaints.md`.
+- Create `work/fishbone/customer-complaints.md`.
 - Use categories derived from the feedback, such as delivery, packaging, service response, field installation, supplier quality, and test coverage.
-- Render `work/customer-complaints.svg`.
+- Render `work/fishbone/customer-complaints.svg`.
 - Do not default to generic categories unless they fit the actual feedback.

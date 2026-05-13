@@ -18,5 +18,5 @@ Run this to regenerate the blue-styled review board:
 Output:
 
 ```text
-work/lucide-badge-candidates.svg
+work/fishbone/lucide-badge-candidates.svg
 ```

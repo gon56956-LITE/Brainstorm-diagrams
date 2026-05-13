@@ -12,9 +12,9 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-TESTCASES = ROOT / "testcases"
+TESTCASES = ROOT / "testcases" / "fishbone"
 TEMPLATES = ROOT / "templates"
-WORK = ROOT / "work"
+WORK = ROOT / "work" / "fishbone"
 LUCIDE_CANDIDATES = ROOT / "assets" / "lucide-candidates"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 NEW_FISHBONE = ROOT / "scripts" / "new_fishbone.py"

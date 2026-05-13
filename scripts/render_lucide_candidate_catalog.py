@@ -12,7 +12,7 @@ from renderers.fishbone import FONT_STACK, PALETTE
 
 ROOT = Path(__file__).resolve().parents[1]
 ICON_DIR = ROOT / "assets" / "lucide-candidates"
-WORK = ROOT / "work"
+WORK = ROOT / "work" / "fishbone"
 
 GROUPS = [
     ("Confirmed Core", ["workflow", "network", "aperture", "thermometer", "cog"]),

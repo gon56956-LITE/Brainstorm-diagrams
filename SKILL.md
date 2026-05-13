@@ -25,10 +25,10 @@ Command-line usage is also available:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fishbone.py my-analysis --format md
 ```
 
-This creates a user-owned input and initial SVG under `work/`. To render an existing input directly, use `scripts/generate_diagram.py`.
+This creates a user-owned input and initial SVG under `work/fishbone/`. To render an existing input directly, use `scripts/generate_diagram.py`.
 Work names must be safe file stems: lowercase letters, numbers, hyphen, and underscore only, such as `my-analysis` or `customer_complaints_v1`.
 
-After editing a `work/` input, regenerate it with:
+After editing a `work/fishbone/` input, regenerate it with:
 
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_work.py my-analysis
@@ -89,15 +89,15 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 1. For structured Markdown/JSON, normalize the user input into the fishbone data model.
 2. For natural-language source text, first extract or confirm `topic`, domain-specific `categories`, and primary `items` using `references/natural_language_extraction.md`; use `references/natural_language_prompt_template.md` as the execution template when drafting from raw text.
 3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md` or `--format json`.
-4. For a Codex-assisted natural-language draft, write the extracted Markdown to `work/<name>.md`; use safe file stems only.
+4. For a Codex-assisted natural-language fishbone draft, write the extracted Markdown to `work/fishbone/<name>.md`; use safe file stems only.
 5. Render a work input with `scripts/render_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
 6. Optionally run `scripts/export_png.py <name>` when the user needs a PNG for quick sharing.
 7. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
 8. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
-9. For natural-language drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/` as examples, not as generated output storage.
+9. For natural-language fishbone drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/` as examples, not as generated output storage.
 10. For naturalcase edits, run `scripts/verify_naturalcases.py`.
 11. For renderer, badge, testcase, template, work-entrypoint, extraction-doc, or export edits, run `scripts/verify_testcases.py` before finishing.
-12. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect `stresscases/full-stress.svg` by eye using `references/visual_review_checklist.md`.
+12. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect `stresscases/fishbone/full-stress.svg` by eye using `references/visual_review_checklist.md`.
 
 ## Layout Rules
 
@@ -116,12 +116,12 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Plan top/bottom category placement by content load, while preserving input-relative order within each half.
 - Keep every category internally left/right alternating, including subcategory entries.
 - Place categories horizontally by estimated left/right footprint instead of simple equal spacing.
-- Use `testcases/fishbone.five-primary.*` and `testcases/fishbone.five-subcategories.*` as stress tests for the densest supported category content.
-- Use `stresscases/full-stress.*` as an optional manual visual stresscase; it is deliberately denser than normal regression testcases.
-- Use `naturalcases/*.source.txt` and `naturalcases/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
+- Use `testcases/fishbone/fishbone.five-primary.*` and `testcases/fishbone/fishbone.five-subcategories.*` as stress tests for the densest supported category content.
+- Use `stresscases/fishbone/full-stress.*` as an optional manual visual stresscase; it is deliberately denser than normal regression testcases.
+- Use `naturalcases/fishbone/*.source.txt` and `naturalcases/fishbone/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
 - Keep `templates/fishbone.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
 - Keep `assets/lucide-candidates/` as the reusable Lucide badge library. `scripts/verify_testcases.py` protects required mapped icons and verifies the candidate catalog can still render.
-- Keep user-authored files in `work/`; do not mix them into `testcases/`, `templates/`, `stresscases/`, or `naturalcases/`.
+- Keep user-authored fishbone files in `work/fishbone/`; do not mix them into `testcases/fishbone/`, `templates/`, `stresscases/fishbone/`, or `naturalcases/fishbone/`.
 
 ## Current Limits
 

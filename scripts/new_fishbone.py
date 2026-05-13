@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "templates"
-WORK = ROOT / "work"
+WORK = ROOT / "work" / "fishbone"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
@@ -21,14 +21,14 @@ SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create a new fishbone input in work/ and render an initial SVG."
+        description="Create a new fishbone input in work/fishbone/ and render an initial SVG."
     )
     parser.add_argument("name", help="Diagram name, used as the output file stem")
     parser.add_argument(
         "--format",
         choices=["md", "json"],
         default="md",
-        help="Template format to copy into work/ (default: md)",
+        help="Template format to copy into work/fishbone/ (default: md)",
     )
     parser.add_argument(
         "--force",

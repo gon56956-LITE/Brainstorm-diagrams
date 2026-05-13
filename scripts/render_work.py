@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a fishbone SVG from a work/ input file."""
+"""Render a fishbone SVG from a work/fishbone/ input file."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-WORK = ROOT / "work"
+WORK = ROOT / "work" / "fishbone"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
@@ -19,13 +19,13 @@ SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Render work/<name>.md or work/<name>.json to work/<name>.svg."
+        description="Render work/fishbone/<name>.md or work/fishbone/<name>.json to work/fishbone/<name>.svg."
     )
     parser.add_argument("name", help="Diagram name or work file stem")
     parser.add_argument(
         "--format",
         choices=["md", "json"],
-        help="Input format when both work/<name>.md and work/<name>.json exist",
+        help="Input format when both work/fishbone/<name>.md and work/fishbone/<name>.json exist",
     )
     return parser.parse_args()
 
@@ -72,11 +72,11 @@ def resolve_input_path(stem: str, requested_format: str | None) -> Path | None:
     if len(existing) == 1:
         return existing[0]
     if not existing:
-        print(f"Error: no work input found for '{stem}'. Expected work/{stem}.md or work/{stem}.json.", file=sys.stderr)
+        print(f"Error: no work input found for '{stem}'. Expected work/fishbone/{stem}.md or work/fishbone/{stem}.json.", file=sys.stderr)
         return None
 
     print(
-        f"Error: both work/{stem}.md and work/{stem}.json exist. Use --format md or --format json.",
+        f"Error: both work/fishbone/{stem}.md and work/fishbone/{stem}.json exist. Use --format md or --format json.",
         file=sys.stderr,
     )
     return None

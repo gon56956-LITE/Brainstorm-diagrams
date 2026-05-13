@@ -11,7 +11,7 @@ from renderers.fishbone import render_fishbone_to_file
 
 
 ROOT = Path(__file__).resolve().parents[1]
-STRESSCASES = ROOT / "stresscases"
+STRESSCASES = ROOT / "stresscases" / "fishbone"
 
 
 def main() -> int:

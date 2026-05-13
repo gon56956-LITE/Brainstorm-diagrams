@@ -10,7 +10,7 @@ from renderers.fishbone import FONT_STACK, PALETTE, render_icon
 
 
 ROOT = Path(__file__).resolve().parents[1]
-WORK = ROOT / "work"
+WORK = ROOT / "work" / "fishbone"
 
 BADGES = [
     ("people", "People / operators / users"),

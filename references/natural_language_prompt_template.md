@@ -28,7 +28,7 @@ For product design / manufacturing / application text:
 - Do not force every category from this list.
 
 Execution:
-1. Write structured Markdown to `work/<safe-name>.md`.
+1. Write structured Markdown to `work/fishbone/<safe-name>.md`.
 2. Render SVG with `scripts/render_work.py <safe-name>`.
 3. Export PNG only if the user requests it.
 4. Review with `references/natural_language_review_checklist.md`.
@@ -58,4 +58,4 @@ Source text:
 - Each primary cause is traceable to source wording or a conservative summary of source meaning.
 - Similar causes are grouped rather than duplicated.
 - The draft stays within renderer limits: 4-8 categories and up to 5 primary entries per category.
-- The file name is a safe stem for `work/`: lowercase letters, numbers, hyphen, or underscore.
+- The file name is a safe stem for `work/fishbone/`: lowercase letters, numbers, hyphen, or underscore.

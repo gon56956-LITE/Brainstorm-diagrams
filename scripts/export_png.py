@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export a work/ fishbone SVG to PNG using the bundled Python runtime."""
+"""Export a work/fishbone/ SVG to PNG using the bundled Python runtime."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from PIL import Image, ImageColor, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-WORK = ROOT / "work"
+WORK = ROOT / "work" / "fishbone"
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 NUMBER_RE = re.compile(r"-?(?:\d+(?:\.\d+)?|\.\d+)")
 PATH_TOKEN_RE = re.compile(r"[MLHVCSQTAZmlhvcsqtaz]|-?(?:\d+(?:\.\d+)?|\.\d+)")
@@ -27,7 +27,7 @@ SOLID_PAINTS = {
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Export work/<name>.svg to work/<name>.png.")
+    parser = argparse.ArgumentParser(description="Export work/fishbone/<name>.svg to work/fishbone/<name>.png.")
     parser.add_argument("name", help="Diagram name, such as my-analysis")
     parser.add_argument("--scale", type=float, default=1.0, help="PNG scale factor (default: 1.0)")
     return parser.parse_args()
