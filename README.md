@@ -66,7 +66,19 @@ English fallback:
 fault_tree_tool.cmd
 ```
 
-The fishbone menu can create a new fishbone diagram, regenerate a work SVG after editing, export PNG, or run verification. The fault-tree menu can create a new fault tree diagram, regenerate its SVG, export PNG, and run the same verification/stresscase checks.
+For a browser-based editor, use the unified local builder:
+
+```text
+图表编辑器.cmd
+```
+
+English fallback:
+
+```text
+diagram_builder.cmd
+```
+
+The fishbone menu can create a new fishbone diagram, regenerate a work SVG after editing, export PNG, or run verification. The fault-tree menu can create a new fault tree diagram, regenerate its SVG, export PNG, and run the same verification/stresscase checks. The browser builder edits structured JSON through a local HTML form, saves into `work/fishbone/` or `work/fault-tree/`, and reuses the same SVG/PNG renderers.
 
 Menu options:
 
@@ -101,6 +113,8 @@ Typical usage:
 The `work/` folder is for your own diagrams, grouped by diagram type such as `work/fishbone/`. The `testcases/`, `stresscases/`, and `naturalcases/` folders are also grouped by diagram type, such as `testcases/fishbone/`. `templates/` contains protected starting templates.
 
 Fault tree usage is the same pattern: double-click `故障树工具.cmd`, create a named diagram, edit the generated file in `work/fault-tree/`, then regenerate the SVG from the same menu.
+
+Browser-builder usage is similar: double-click `图表编辑器.cmd`, choose a diagram type, edit the form, save JSON, render SVG, and export PNG from the browser page.
 
 Diagram names are file names under `work/fishbone/` or `work/fault-tree/`. Use safe names such as `my-analysis`, `startup-failure`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
@@ -199,6 +213,12 @@ For user-owned fault-tree work files, use the fault-tree entrypoints:
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_fault_tree_work.py startup-failure
+```
+
+Start the local HTML builder with:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\diagram_builder_server.py
 ```
 
 Markdown fault tree inputs must declare `diagram_type: fault_tree` in front matter:

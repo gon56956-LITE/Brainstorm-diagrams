@@ -25,6 +25,7 @@ RENDER_WORK = ROOT / "scripts" / "render_work.py"
 RENDER_FAULT_TREE_WORK = ROOT / "scripts" / "render_fault_tree_work.py"
 EXPORT_PNG = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE_PNG = ROOT / "scripts" / "export_fault_tree_png.py"
+DIAGRAM_BUILDER_SERVER = ROOT / "scripts" / "diagram_builder_server.py"
 PYTHON = Path(sys.executable)
 
 REQUIRED_LUCIDE_ICONS = [
@@ -117,6 +118,7 @@ def main() -> int:
     verify_render_fault_tree_work_entrypoint()
     verify_export_png_entrypoint()
     verify_export_fault_tree_png_entrypoint()
+    verify_diagram_builder_service()
     verify_work_name_validation()
     verify_no_tmp_files(TESTCASES)
     verify_no_tmp_files(FAULT_TREE_TESTCASES)
@@ -1060,6 +1062,48 @@ def verify_export_fault_tree_png_entrypoint() -> None:
             raise AssertionError("export_fault_tree_png.py accepted an unsafe name")
     finally:
         for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+
+def verify_diagram_builder_service() -> None:
+    from PIL import Image
+
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import diagram_builder_server
+
+    stems = {
+        "fishbone": f"verify-builder-fishbone-{os.getpid()}",
+        "fault_tree": f"verify-builder-fault-tree-{os.getpid()}",
+    }
+    paths: list[Path] = []
+    try:
+        for diagram_type, stem in stems.items():
+            data = diagram_builder_server.load_template(diagram_type)
+            json_path = diagram_builder_server.save_work_json(diagram_type, stem, data)
+            svg_text_message = diagram_builder_server.render_work(diagram_type, stem)
+            png_message = diagram_builder_server.export_png(diagram_type, stem)
+            svg_path = diagram_builder_server.work_path(diagram_type, stem, ".svg")
+            png_path = diagram_builder_server.work_path(diagram_type, stem, ".png")
+            paths.extend([json_path, svg_path, png_path])
+            if not svg_path.exists() or not png_path.exists():
+                raise AssertionError(f"diagram_builder_server did not create SVG/PNG for {diagram_type}")
+            if "Generated:" not in svg_text_message and "Rendered" not in svg_text_message:
+                raise AssertionError(f"Unexpected render message for {diagram_type}: {svg_text_message}")
+            if "Exported PNG" not in png_message:
+                raise AssertionError(f"Unexpected PNG message for {diagram_type}: {png_message}")
+            expected_size = svg_dimensions(svg_path)
+            with Image.open(png_path) as image:
+                if image.size != expected_size:
+                    raise AssertionError(f"Builder PNG dimensions {image.size} do not match SVG dimensions {expected_size}")
+
+        for unsafe_name in ["../outside", r"..\outside", "has space", "UPPER", "name.ext"]:
+            try:
+                diagram_builder_server.validate_work_name(unsafe_name)
+            except ValueError:
+                continue
+            raise AssertionError(f"diagram_builder_server accepted unsafe name: {unsafe_name}")
+    finally:
+        for path in paths:
             path.unlink(missing_ok=True)
 
 

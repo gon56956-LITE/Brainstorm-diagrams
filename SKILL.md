@@ -31,11 +31,24 @@ English fallback:
 fault_tree_tool.cmd
 ```
 
+For a browser-based local editor that supports both diagram types, use:
+
+```text
+图表编辑器.cmd
+```
+
+English fallback:
+
+```text
+diagram_builder.cmd
+```
+
 Command-line usage is also available:
 
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fishbone.py my-analysis --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\diagram_builder_server.py
 ```
 
 This creates a user-owned input and initial SVG under `work/fishbone/` or `work/fault-tree/`. To render an existing input directly, use `scripts/generate_diagram.py`.
@@ -108,6 +121,7 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Markdown fault tree: include `diagram_type: fault_tree` front matter, use `#` for the top event, optional `Event Detail:` bullets for the left-side detail panel, `Gate: OR` or `Gate: AND` for logic gates, `##` for intermediate events, and bullets for basic event leaves.
 - Markdown subcategories: a primary bullet with indented bullets becomes a subcategory with child causes.
 - Starting templates live in `templates/`; copy them before authoring a new diagram.
+- Browser editor: `scripts/diagram_builder_server.py` edits the existing JSON contracts through a local HTML UI and saves into the appropriate `work/<diagram-type>/` folder; it is not a new input schema.
 - Natural-language source text: Codex must first extract a structured Markdown draft using `references/natural_language_extraction.md` and `references/natural_language_prompt_template.md`; do not pass raw `.txt` directly to `scripts/generate_diagram.py` for semantic extraction.
 
 ## Workflow
@@ -118,12 +132,13 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 4. For a Codex-assisted natural-language fishbone draft, write the extracted Markdown to `work/fishbone/<name>.md`; use safe file stems only.
 5. Render a fishbone work input with `scripts/render_work.py <name>` or a fault-tree work input with `scripts/render_fault_tree_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
 6. Optionally run `scripts/export_png.py <name>` for fishbone or `scripts/export_fault_tree_png.py <name>` for fault tree when the user needs a PNG for quick sharing.
-7. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
-8. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
-9. For natural-language fishbone drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/` as examples, not as generated output storage.
-10. For naturalcase edits, run `scripts/verify_naturalcases.py`.
-11. For renderer, badge, testcase, template, work-entrypoint, extraction-doc, or export edits, run `scripts/verify_testcases.py` before finishing.
-12. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect the relevant `stresscases/<diagram-type>/full-stress.svg` by eye using `references/visual_review_checklist.md`.
+7. For non-technical editing, run `diagram_builder.cmd` or `scripts/diagram_builder_server.py`; the browser UI should save JSON, render SVG, and export PNG using the same work folders and renderers.
+8. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
+9. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
+10. For natural-language fishbone drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/` as examples, not as generated output storage.
+11. For naturalcase edits, run `scripts/verify_naturalcases.py`.
+12. For renderer, badge, testcase, template, work-entrypoint, browser-builder, extraction-doc, or export edits, run `scripts/verify_testcases.py` before finishing.
+13. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect the relevant `stresscases/<diagram-type>/full-stress.svg` by eye using `references/visual_review_checklist.md`.
 
 ## Fishbone Layout Rules
 
