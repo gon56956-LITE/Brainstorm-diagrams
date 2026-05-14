@@ -16,6 +16,7 @@ if not exist "%PY%" (
 if /i "%~1"=="verify" goto vnp
 if /i "%~1"=="stress" goto snp
 if /i "%~1"=="verify-stress" goto vstressnp
+if /i "%~1"=="export-png" goto pnp
 
 :menu
 cls
@@ -24,26 +25,28 @@ echo =======================
 echo.
 echo 1. Create new fault tree diagram
 echo 2. Regenerate work SVG
-echo 3. Verify testcases and templates
-echo 4. Render stresscases
-echo 5. Verify stresscases
-echo 6. Exit
+echo 3. Export work SVG to PNG
+echo 4. Verify testcases and templates
+echo 5. Render stresscases
+echo 6. Verify stresscases
+echo 7. Exit
 echo.
 echo Notes:
 echo - Diagram names create files under work\fault-tree\.
 echo - Use lowercase letters, numbers, hyphen, or underscore only.
 echo - Good examples: startup-failure, safety_chain_v1
 echo - Do not enter spaces, folders, ..\, or full paths.
-echo - Fault tree output is SVG.
+echo - SVG is editable. PNG is for quick sharing.
 echo.
-set /p "choice=Choose 1-6: "
+set /p "choice=Choose 1-7: "
 
 if "%choice%"=="1" goto create
 if "%choice%"=="2" goto render
-if "%choice%"=="3" goto verify
-if "%choice%"=="4" goto stress
-if "%choice%"=="5" goto vstress
-if "%choice%"=="6" goto done
+if "%choice%"=="3" goto png
+if "%choice%"=="4" goto verify
+if "%choice%"=="5" goto stress
+if "%choice%"=="6" goto vstress
+if "%choice%"=="7" goto done
 echo.
 echo Invalid choice.
 pause
@@ -83,6 +86,28 @@ echo.
 echo.
 pause
 goto menu
+
+:png
+echo.
+set /p "name=Diagram name, for example startup-failure: "
+if "%name%"=="" (
+  echo Name cannot be empty.
+  pause
+  goto menu
+)
+echo.
+"%PY%" "%ROOT%scripts\export_fault_tree_png.py" "%name%"
+echo.
+pause
+goto menu
+
+:pnp
+if "%~2"=="" (
+  echo Diagram name is required.
+  exit /b 1
+)
+"%PY%" "%ROOT%scripts\export_fault_tree_png.py" "%~2"
+exit /b %ERRORLEVEL%
 
 :verify
 echo.

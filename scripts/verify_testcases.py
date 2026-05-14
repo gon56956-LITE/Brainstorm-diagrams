@@ -24,6 +24,7 @@ NEW_FAULT_TREE = ROOT / "scripts" / "new_fault_tree.py"
 RENDER_WORK = ROOT / "scripts" / "render_work.py"
 RENDER_FAULT_TREE_WORK = ROOT / "scripts" / "render_fault_tree_work.py"
 EXPORT_PNG = ROOT / "scripts" / "export_png.py"
+EXPORT_FAULT_TREE_PNG = ROOT / "scripts" / "export_fault_tree_png.py"
 PYTHON = Path(sys.executable)
 
 REQUIRED_LUCIDE_ICONS = [
@@ -115,6 +116,7 @@ def main() -> int:
     verify_render_work_entrypoint()
     verify_render_fault_tree_work_entrypoint()
     verify_export_png_entrypoint()
+    verify_export_fault_tree_png_entrypoint()
     verify_work_name_validation()
     verify_no_tmp_files(TESTCASES)
     verify_no_tmp_files(FAULT_TREE_TESTCASES)
@@ -1004,6 +1006,58 @@ def verify_export_png_entrypoint() -> None:
         )
         if unsafe_result.returncode == 0:
             raise AssertionError("export_png.py accepted an unsafe name")
+    finally:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+
+def verify_export_fault_tree_png_entrypoint() -> None:
+    from PIL import Image
+
+    stem = f"verify-export-fault-tree-png-{os.getpid()}"
+    input_path = FAULT_TREE_WORK / f"{stem}.md"
+    svg_path = FAULT_TREE_WORK / f"{stem}.svg"
+    png_path = FAULT_TREE_WORK / f"{stem}.png"
+    try:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_FAULT_TREE), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_fault_tree.py failed during PNG export verification:\n{create_result.stderr}")
+
+        export_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_FAULT_TREE_PNG), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if export_result.returncode != 0:
+            raise AssertionError(f"export_fault_tree_png.py failed:\n{export_result.stderr}")
+        if not png_path.exists():
+            raise AssertionError("export_fault_tree_png.py did not create the expected PNG")
+
+        svg_size = svg_dimensions(svg_path)
+        with Image.open(png_path) as image:
+            if image.size != svg_size:
+                raise AssertionError(f"Fault tree PNG dimensions {image.size} do not match SVG dimensions {svg_size}")
+
+        unsafe_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_FAULT_TREE_PNG), "../outside"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if unsafe_result.returncode == 0:
+            raise AssertionError("export_fault_tree_png.py accepted an unsafe name")
     finally:
         for path in [input_path, svg_path, png_path]:
             path.unlink(missing_ok=True)
