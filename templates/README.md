@@ -4,9 +4,9 @@ These files are starting points for user-authored diagram inputs. Copy a templat
 
 Templates are protected by structural checks in `scripts/verify_testcases.py`. They should remain parseable and include:
 
-- fishbone: a topic, multiple categories, ordinary primary causes, and at least one subcategory with child causes
+- fishbone: a topic, multiple categories, ordinary primary causes, at least one subcategory with child causes, and Markdown authoring guidance with current renderer limits
 - fault_tree: a top event, event detail content, multiple first-level events, AND/OR gates, basic event leaves, and at least one nested intermediate-event example
 
-Fault tree templates intentionally include more guidance than fishbone templates because gate placement and nested-event structure are easier to misread. For Markdown, keep guidance in front matter comments and keep the body limited to headings, `Gate:` lines, `Event Detail:`, and bullets.
+Markdown templates keep user guidance in front matter comments so the parser ignores it. Keep the renderable body limited to headings, recognized key-value lines such as `Gate:` for fault tree, and bullets.
 
 Do not store generated SVG outputs in this directory.
