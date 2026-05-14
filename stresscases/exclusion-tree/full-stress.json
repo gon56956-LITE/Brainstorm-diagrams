@@ -1,0 +1,89 @@
+{
+  "diagram_type": "exclusion_tree",
+  "title": "Exclusion Tree / 排除树",
+  "subtitle": "Dense bilingual troubleshooting path used to verify wrapping, branch spacing, and canvas expansion.",
+  "problem": {
+    "text_en": "Intermittent Startup Failure After Overnight Storage",
+    "text_zh": "隔夜存储后间歇性启动失败"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "The unit intermittently fails during startup after overnight storage, then recovers after a full power cycle.",
+    "bullets": [
+      "Observed in validation and engineering debug",
+      "Use this path to eliminate common causes first",
+      "Escalate only after all checks pass"
+    ]
+  },
+  "checks": [
+    {
+      "id": "1",
+      "text_en": "External power source and input connector remain stable during startup?",
+      "text_zh": "外部电源和输入连接器在启动期间是否稳定？",
+      "icon": "bolt",
+      "fail_conclusion": {
+        "text_en": "Input Power Connection Instability",
+        "text_zh": "输入电源连接不稳定",
+        "detail_en": "Check adapter, cable bend, connector retention, and contact resistance."
+      }
+    },
+    {
+      "id": "2",
+      "text_en": "Power module output reaches nominal voltage before controller boot?",
+      "text_zh": "控制器启动前电源模块输出是否达到标称电压？",
+      "icon": "module",
+      "fail_conclusion": {
+        "text_en": "Delayed Power Module Ramp",
+        "text_zh": "电源模块上电延迟",
+        "detail_en": "Measure ramp time and load transient at low temperature."
+      }
+    },
+    {
+      "id": "3",
+      "text_en": "Control board clock and reset signals are present and sequenced correctly?",
+      "text_zh": "控制板时钟和复位信号是否存在且时序正确？",
+      "icon": "chip",
+      "fail_conclusion": {
+        "text_en": "Controller Reset Or Clock Fault",
+        "text_zh": "控制器复位或时钟故障"
+      }
+    },
+    {
+      "id": "4",
+      "text_en": "Startup command signal is detected by the controller input pin?",
+      "text_zh": "控制器输入脚是否检测到启动命令信号？",
+      "icon": "signal",
+      "fail_conclusion": {
+        "text_en": "Start Signal Path Issue",
+        "text_zh": "启动信号路径异常"
+      }
+    },
+    {
+      "id": "5",
+      "text_en": "Chamber temperature profile and soak duration match the validation procedure?",
+      "text_zh": "温箱曲线和保温时间是否符合验证流程？",
+      "icon": "thermometer",
+      "fail_conclusion": {
+        "text_en": "Thermal Test Method Deviation",
+        "text_zh": "温度测试方法偏离"
+      }
+    },
+    {
+      "id": "6",
+      "text_en": "Operator setup record confirms the correct fixture and released test instruction?",
+      "text_zh": "操作记录是否确认使用正确夹具和发布版测试指导？",
+      "icon": "operator",
+      "fail_conclusion": {
+        "text_en": "Setup Or Method Error",
+        "text_zh": "设置或方法错误",
+        "detail_en": "Review fixture revision, work instruction, and setup photo evidence."
+      }
+    }
+  ],
+  "final_pass_conclusion": {
+    "text_en": "No issue found in this path. Escalate to rare component-level causes or deeper waveform capture.",
+    "text_zh": "该路径未发现异常。升级检查少见器件级原因或进行更深入波形捕获。"
+  },
+  "show_legend": true,
+  "show_how_to_use": true
+}

@@ -1,0 +1,56 @@
+{
+  "diagram_type": "exclusion_tree",
+  "title": "Exclusion Tree / 排除树",
+  "problem": {
+    "text_en": "Unit Intermittently Fails During Cold Startup Validation",
+    "text_zh": "低温启动验证中设备间歇性失败"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "The unit sometimes fails to complete cold startup validation after overnight storage and requires a full power cycle to recover.",
+    "bullets": [
+      "Observed across mixed environmental chambers",
+      "Impacts delayed shipment qualification",
+      "Scope includes engineering samples from two assembly lots"
+    ]
+  },
+  "checks": [
+    {
+      "id": "1",
+      "text_en": "Input voltage remains within the specified startup window?",
+      "text_zh": "输入电压是否保持在启动规格窗口内？",
+      "icon": "bolt",
+      "fail_conclusion": {
+        "text_en": "Input Power Path Instability",
+        "text_zh": "输入电源路径不稳定",
+        "detail_en": "Review adapter, harness, and connector contact resistance."
+      }
+    },
+    {
+      "id": "2",
+      "text_en": "Firmware version and boot configuration match the released validation baseline?",
+      "text_zh": "固件版本和启动配置是否符合验证基线？",
+      "icon": "document",
+      "fail_conclusion": {
+        "text_en": "Firmware Baseline Mismatch",
+        "text_zh": "固件基线不一致"
+      }
+    },
+    {
+      "id": "3",
+      "text_en": "Thermal chamber ramp and soak conditions match the test method?",
+      "text_zh": "温箱升降温和保温条件是否符合测试方法？",
+      "icon": "thermometer",
+      "fail_conclusion": {
+        "text_en": "Environment Setup Deviation",
+        "text_zh": "环境设置偏离"
+      }
+    }
+  ],
+  "final_pass_conclusion": {
+    "text_en": "No issue found in this path. Continue with rare causes or deeper electrical analysis.",
+    "text_zh": "该路径未发现异常。继续检查少见原因或进行更深入电气分析。"
+  },
+  "show_legend": true,
+  "show_how_to_use": true
+}

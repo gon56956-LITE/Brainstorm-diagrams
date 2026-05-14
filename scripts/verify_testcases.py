@@ -14,17 +14,22 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 TESTCASES = ROOT / "testcases" / "fishbone"
 FAULT_TREE_TESTCASES = ROOT / "testcases" / "fault-tree"
+EXCLUSION_TREE_TESTCASES = ROOT / "testcases" / "exclusion-tree"
 TEMPLATES = ROOT / "templates"
 WORK = ROOT / "work" / "fishbone"
 FAULT_TREE_WORK = ROOT / "work" / "fault-tree"
+EXCLUSION_TREE_WORK = ROOT / "work" / "exclusion-tree"
 LUCIDE_CANDIDATES = ROOT / "assets" / "lucide-candidates"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 NEW_FISHBONE = ROOT / "scripts" / "new_fishbone.py"
 NEW_FAULT_TREE = ROOT / "scripts" / "new_fault_tree.py"
+NEW_EXCLUSION_TREE = ROOT / "scripts" / "new_exclusion_tree.py"
 RENDER_WORK = ROOT / "scripts" / "render_work.py"
 RENDER_FAULT_TREE_WORK = ROOT / "scripts" / "render_fault_tree_work.py"
+RENDER_EXCLUSION_TREE_WORK = ROOT / "scripts" / "render_exclusion_tree_work.py"
 EXPORT_PNG = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE_PNG = ROOT / "scripts" / "export_fault_tree_png.py"
+EXPORT_EXCLUSION_TREE_PNG = ROOT / "scripts" / "export_exclusion_tree_png.py"
 DIAGRAM_BUILDER_SERVER = ROOT / "scripts" / "diagram_builder_server.py"
 PYTHON = Path(sys.executable)
 
@@ -76,6 +81,12 @@ FAULT_TREE_TESTCASE_PAIRS = [
     ("fault-tree.multi-nested.example.json", "fault-tree.multi-nested.output.svg"),
 ]
 
+EXCLUSION_TREE_TESTCASE_PAIRS = [
+    ("exclusion-tree.input.example.json", "exclusion-tree.output.example.svg"),
+    ("exclusion-tree.input.example.md", "exclusion-tree.output.md.svg"),
+    ("exclusion-tree.long-text.example.json", "exclusion-tree.long-text.output.svg"),
+]
+
 FORBIDDEN_WORDS = [
     "fish head",
     "fish tail",
@@ -96,6 +107,9 @@ def main() -> int:
     for input_name, output_name in FAULT_TREE_TESTCASE_PAIRS:
         run_generate(FAULT_TREE_TESTCASES / input_name, FAULT_TREE_TESTCASES / output_name)
 
+    for input_name, output_name in EXCLUSION_TREE_TESTCASE_PAIRS:
+        run_generate(EXCLUSION_TREE_TESTCASES / input_name, EXCLUSION_TREE_TESTCASES / output_name)
+
     for _, output_name in TESTCASE_PAIRS:
         verify_svg_basics(TESTCASES / output_name)
 
@@ -103,6 +117,9 @@ def main() -> int:
         verify_fault_tree_svg_basics(FAULT_TREE_TESTCASES / output_name)
     verify_fault_tree_nested_gates(FAULT_TREE_TESTCASES / "fault-tree.nested-gates.output.svg")
     verify_fault_tree_multi_nested(FAULT_TREE_TESTCASES / "fault-tree.multi-nested.output.svg")
+
+    for _, output_name in EXCLUSION_TREE_TESTCASE_PAIRS:
+        verify_exclusion_tree_svg_basics(EXCLUSION_TREE_TESTCASES / output_name)
 
     verify_canvas_dimensions()
     verify_subcategory_braces(TESTCASES / "fishbone.subcategory.output.md.svg")
@@ -114,17 +131,22 @@ def main() -> int:
     verify_templates()
     verify_new_fishbone_entrypoint()
     verify_new_fault_tree_entrypoint()
+    verify_new_exclusion_tree_entrypoint()
     verify_render_work_entrypoint()
     verify_render_fault_tree_work_entrypoint()
+    verify_render_exclusion_tree_work_entrypoint()
     verify_export_png_entrypoint()
     verify_export_fault_tree_png_entrypoint()
+    verify_export_exclusion_tree_png_entrypoint()
     verify_diagram_builder_service()
     verify_work_name_validation()
     verify_no_tmp_files(TESTCASES)
     verify_no_tmp_files(FAULT_TREE_TESTCASES)
+    verify_no_tmp_files(EXCLUSION_TREE_TESTCASES)
     verify_no_tmp_files(TEMPLATES)
     verify_no_tmp_files(WORK)
     verify_no_tmp_files(FAULT_TREE_WORK)
+    verify_no_tmp_files(EXCLUSION_TREE_WORK)
 
     print("Verification passed")
     return 0
@@ -197,6 +219,333 @@ def verify_fault_tree_svg_basics(path: Path) -> None:
     hits = [word for word in FORBIDDEN_WORDS if word in text]
     if hits:
         raise AssertionError(f"{path.name}: forbidden words found: {hits}")
+
+
+def verify_exclusion_tree_svg_basics(path: Path) -> None:
+    root = ET.parse(path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError(f"{path.name}: root is not svg")
+
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width < 1920 or height < 1080:
+        raise AssertionError(f"{path.name}: canvas must not shrink below 1920x1080, got {width}x{height}")
+
+    top_blocks = [element for element in root.iter() if element.attrib.get("id") == "exclusion-top-event-block"]
+    if len(top_blocks) != 1:
+        raise AssertionError(f"{path.name}: expected one exclusion-top-event-block, got {len(top_blocks)}")
+    top_block = top_blocks[0]
+    if not top_block.tag.endswith("rect") or not top_block.attrib.get("rx"):
+        raise AssertionError(f"{path.name}: exclusion-top-event-block must be a rounded rect")
+
+    classes = " ".join(element.attrib.get("class", "") for element in root.iter())
+    for required_class in [
+        "exclusion-checkpoint",
+        "exclusion-pass-chip",
+        "exclusion-fail-chip",
+        "exclusion-fail-conclusion",
+        "exclusion-final-pass",
+    ]:
+        if required_class not in classes:
+            raise AssertionError(f"{path.name}: missing required class {required_class}")
+    if "lucide-icon" not in classes:
+        raise AssertionError(f"{path.name}: exclusion-tree checkpoint badges should use the shared lucide icon library")
+
+    legends = [element for element in root.iter() if element.attrib.get("id") == "exclusion-tree-legend"]
+    if len(legends) != 1:
+        raise AssertionError(f"{path.name}: expected one exclusion-tree-legend, got {len(legends)}")
+
+    detail_panels = [element for element in root.iter() if element.attrib.get("id") == "exclusion-event-detail-panel"]
+    if len(detail_panels) != 1:
+        raise AssertionError(f"{path.name}: expected one exclusion-event-detail-panel, got {len(detail_panels)}")
+
+    how_to_use = [element for element in root.iter() if element.attrib.get("id") == "exclusion-how-to-use"]
+    if len(how_to_use) != 1:
+        raise AssertionError(f"{path.name}: expected one exclusion-how-to-use, got {len(how_to_use)}")
+
+    checkpoint_groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-checkpoint" in element.attrib.get("class", "")
+    ]
+    fail_groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-fail-conclusion" in element.attrib.get("class", "")
+    ]
+    if len(checkpoint_groups) < 3:
+        raise AssertionError(f"{path.name}: expected at least 3 checkpoints, got {len(checkpoint_groups)}")
+    if len(fail_groups) != len(checkpoint_groups):
+        raise AssertionError(f"{path.name}: expected one fail conclusion per checkpoint")
+
+    verify_exclusion_chip_alignment(root, path.name)
+    verify_exclusion_language_fidelity(root, path.name)
+    verify_exclusion_text_boxes(root, path.name)
+    verify_exclusion_legend_alignment(root, path.name)
+    verify_exclusion_cause_card_layout(root, path.name)
+    verify_exclusion_content_cards(root, path.name)
+    verify_exclusion_auxiliary_layout(root, path.name)
+    drop_connectors = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("path") and "exclusion-fail-drop-connector" in element.attrib.get("class", "")
+    ]
+    if len(drop_connectors) != len(checkpoint_groups):
+        raise AssertionError(f"{path.name}: expected one fail drop connector per checkpoint")
+    for connector_path in drop_connectors:
+        path_data = connector_path.attrib.get("d", "")
+        if path_data.count("L") < 2:
+            raise AssertionError(f"{path.name}: fail drop connector should include horizontal and vertical segments")
+    fail_chip_connectors = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and element.attrib.get("marker-end") != "url(#arrowNavy)"
+    ]
+    if len(fail_chip_connectors) < len(checkpoint_groups):
+        raise AssertionError(f"{path.name}: expected visible connector lines into fail chips")
+
+    text = path.read_text(encoding="utf-8").lower()
+    hits = [word for word in FORBIDDEN_WORDS if word in text]
+    if hits:
+        raise AssertionError(f"{path.name}: forbidden words found: {hits}")
+
+
+def verify_exclusion_chip_alignment(root: ET.Element, label: str) -> None:
+    def chip_rect_y(class_name: str) -> list[float]:
+        values: list[float] = []
+        for group in root.iter():
+            if not group.tag.endswith("g") or class_name not in group.attrib.get("class", ""):
+                continue
+            rects = [child for child in list(group) if child.tag.endswith("rect")]
+            if rects:
+                values.append(float(rects[0].attrib.get("y", "0")))
+        return sorted(values)
+
+    pass_y = chip_rect_y("exclusion-pass-chip")
+    fail_y = chip_rect_y("exclusion-fail-chip")
+    if len(pass_y) != len(fail_y):
+        raise AssertionError(f"{label}: pass/fail chip counts differ: {len(pass_y)} vs {len(fail_y)}")
+    for index, (pass_value, fail_value) in enumerate(zip(pass_y, fail_y), start=1):
+        if abs(pass_value - fail_value) > 0.1:
+            raise AssertionError(f"{label}: pass/fail chips for checkpoint {index} are not horizontally aligned")
+
+
+def verify_exclusion_text_boxes(root: ET.Element, label: str) -> None:
+    groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g")
+        and (
+            "exclusion-checkpoint" in element.attrib.get("class", "")
+            or "exclusion-top-event" in element.attrib.get("class", "")
+        )
+    ]
+    for group in groups:
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        texts = [child for child in list(group) if child.tag.endswith("text")]
+        if not rects or not texts:
+            continue
+        rect = rects[0]
+        rect_y = float(rect.attrib.get("y", "0"))
+        rect_h = float(rect.attrib.get("height", "0"))
+        for text in texts:
+            text_y = float(text.attrib.get("y", "0"))
+            if text_y < rect_y + 20 or text_y > rect_y + rect_h - 12:
+                raise AssertionError(f"{label}: top/checkpoint text should stay inside its content-sized card")
+
+
+def verify_exclusion_language_fidelity(root: ET.Element, label: str) -> None:
+    content_texts: list[str] = []
+    for group in root.iter():
+        if not group.tag.endswith("g"):
+            continue
+        class_name = group.attrib.get("class", "")
+        if not any(
+            token in class_name
+            for token in [
+                "exclusion-top-event",
+                "exclusion-checkpoint",
+                "exclusion-fail-conclusion",
+                "exclusion-final-pass",
+                "exclusion-pass-chip",
+                "exclusion-fail-chip",
+            ]
+        ):
+            continue
+        content_texts.extend(child.text or "" for child in list(group) if child.tag.endswith("text"))
+    bilingual_lines = [text for text in content_texts if " / " in text]
+    if bilingual_lines:
+        raise AssertionError(f"{label}: exclusion-tree content should not auto-render bilingual labels: {bilingual_lines[:2]}")
+
+
+def verify_exclusion_legend_alignment(root: ET.Element, label: str) -> None:
+    legends = [element for element in root.iter() if element.attrib.get("id") == "exclusion-tree-legend"]
+    if not legends:
+        return
+    rows: list[tuple[float, float]] = []
+    for child in list(legends[0]):
+        if not child.tag.endswith("text"):
+            continue
+        text = child.text or ""
+        if text == "Legend":
+            continue
+        if float(child.attrib.get("x", "0")) < 1620:
+            continue
+        rows.append((float(child.attrib.get("y", "0")), 0.0))
+    expected_centers = [126.0, 202.0, 278.0, 354.0, 430.0]
+    label_ys = [row[0] for row in rows[:5]]
+    if len(label_ys) < 5:
+        raise AssertionError(f"{label}: legend should include five aligned labels")
+    for text_y, center_y in zip(label_ys, expected_centers):
+        if abs((text_y - 6) - center_y) > 1:
+            raise AssertionError(f"{label}: legend labels should align with icon centers")
+
+
+def verify_exclusion_cause_card_layout(root: ET.Element, label: str) -> None:
+    fail_card_rects: list[tuple[float, float, float, float]] = []
+    for group in root.iter():
+        if not group.tag.endswith("g") or "exclusion-fail-conclusion" not in group.attrib.get("class", ""):
+            continue
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if rects:
+            rect = rects[0]
+            fail_card_rects.append(
+                (
+                    float(rect.attrib.get("x", "0")),
+                    float(rect.attrib.get("y", "0")),
+                    float(rect.attrib.get("width", "0")),
+                    float(rect.attrib.get("height", "0")),
+                )
+            )
+    fail_card_x_values = [rect[0] for rect in fail_card_rects]
+    if len(fail_card_x_values) >= 3 and len(set(round(value, 1) for value in fail_card_x_values)) < 2:
+        raise AssertionError(f"{label}: fail conclusion cards should not all share one x column")
+    for previous_x, next_x in zip(fail_card_x_values, fail_card_x_values[1:]):
+        if next_x > previous_x + 0.1:
+            raise AssertionError(f"{label}: fail conclusion cards should step from upper-right to lower-left")
+    for previous, current in zip(fail_card_rects, fail_card_rects[1:]):
+        previous_bottom = previous[1] + previous[3]
+        if current[1] < previous_bottom + 18:
+            raise AssertionError(f"{label}: fail conclusion cards should not vertically collide")
+
+
+def verify_exclusion_content_cards(root: ET.Element, label: str) -> None:
+    final_heights = []
+    final_rects: list[tuple[float, float, float, float]] = []
+    fail_heights = []
+    detail_heights = []
+    final_text_lines: list[str] = []
+    for group in root.iter():
+        class_name = group.attrib.get("class", "")
+        group_id = group.attrib.get("id", "")
+        if not group.tag.endswith("g"):
+            continue
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if not rects:
+            continue
+        height = float(rects[0].attrib.get("height", "0"))
+        if "exclusion-final-pass" in class_name:
+            final_heights.append(height)
+            final_rects.append(
+                (
+                    float(rects[0].attrib.get("x", "0")),
+                    float(rects[0].attrib.get("y", "0")),
+                    float(rects[0].attrib.get("width", "0")),
+                    height,
+                )
+            )
+            final_text_lines.extend((child.text or "") for child in list(group) if child.tag.endswith("text"))
+        elif "exclusion-fail-conclusion" in class_name:
+            fail_heights.append(height)
+        elif group_id == "exclusion-event-detail-panel":
+            detail_heights.append(height)
+    if not final_heights or final_heights[0] < 118:
+        raise AssertionError(f"{label}: final pass card should keep enough height for its content")
+    if final_rects and final_rects[0][2] < 360:
+        raise AssertionError(f"{label}: final pass card should be wider than cause cards")
+    if fail_heights and min(fail_heights) < 118:
+        raise AssertionError(f"{label}: fail conclusion cards should keep enough height for their content")
+    if detail_heights and detail_heights[0] < 220:
+        raise AssertionError(f"{label}: event detail panel should preserve the minimum content height")
+    long_final_lines = [line for line in final_text_lines if visual_len(line) > 30]
+    if long_final_lines:
+        raise AssertionError(f"{label}: final pass card text should wrap within the card: {long_final_lines[:2]}")
+
+    final_connectors = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("path") and "exclusion-final-pass-connector" in element.attrib.get("class", "")
+    ]
+    if len(final_connectors) != 1:
+        raise AssertionError(f"{label}: expected one final pass connector")
+    path_numbers = parse_path_numbers(final_connectors[0].attrib.get("d", ""))
+    x_values = path_numbers[0::2]
+    if len(set(round(value, 1) for value in x_values)) != 1:
+        raise AssertionError(f"{label}: final pass connector should drop straight into the final card")
+    if final_rects:
+        final_x, final_y, final_w, _ = final_rects[0]
+        final_anchor_x = x_values[0]
+        if not (final_x <= final_anchor_x <= final_x + final_w):
+            raise AssertionError(f"{label}: final pass connector should enter within final card width")
+        fail_bottoms = []
+        for group in root.iter():
+            if not group.tag.endswith("g") or "exclusion-fail-conclusion" not in group.attrib.get("class", ""):
+                continue
+            rects = [child for child in list(group) if child.tag.endswith("rect")]
+            if rects:
+                fail_bottoms.append(float(rects[0].attrib.get("y", "0")) + float(rects[0].attrib.get("height", "0")))
+        if fail_bottoms and final_y > max(fail_bottoms) + 20:
+            raise AssertionError(f"{label}: final pass card should not be pushed below unrelated fail cards")
+
+
+def visual_len(text: str) -> int:
+    return sum(2 if ord(char) > 127 else 1 for char in text)
+
+
+def verify_exclusion_auxiliary_layout(root: ET.Element, label: str) -> None:
+    decorative_dots = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("circle") and element.attrib.get("fill", "").lower() == "#d8e7f6"
+    ]
+    if decorative_dots:
+        raise AssertionError(f"{label}: decorative dots should not be placed near exclusion-tree content")
+
+    how_to_use = [element for element in root.iter() if element.attrib.get("id") == "exclusion-how-to-use"]
+    if len(how_to_use) != 1:
+        return
+    how_rects = [child for child in list(how_to_use[0]) if child.tag.endswith("rect")]
+    if not how_rects:
+        raise AssertionError(f"{label}: how-to-use panel missing rect")
+    how_rect = how_rects[0]
+    how_x = float(how_rect.attrib.get("x", "0"))
+    how_y = float(how_rect.attrib.get("y", "0"))
+    how_w = float(how_rect.attrib.get("width", "0"))
+
+    legend_bottom = 0.0
+    legends = [element for element in root.iter() if element.attrib.get("id") == "exclusion-tree-legend"]
+    if legends:
+        legend_rects = [child for child in list(legends[0]) if child.tag.endswith("rect")]
+        if legend_rects:
+            legend_bottom = float(legend_rects[0].attrib.get("y", "0")) + float(legend_rects[0].attrib.get("height", "0"))
+
+    required_y = legend_bottom + 36
+    for group in root.iter():
+        if not group.tag.endswith("g") or "exclusion-fail-conclusion" not in group.attrib.get("class", ""):
+            continue
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if not rects:
+            continue
+        rect = rects[0]
+        x = float(rect.attrib.get("x", "0"))
+        y = float(rect.attrib.get("y", "0"))
+        w = float(rect.attrib.get("width", "0"))
+        h = float(rect.attrib.get("height", "0"))
+        if x < how_x + how_w + 28 and x + w > how_x - 28:
+            required_y = max(required_y, y + h + 36)
+
+    if abs(how_y - required_y) > 1.0:
+        raise AssertionError(f"{label}: how-to-use panel should sit at the highest non-colliding right-side position")
 
 
 def verify_fault_tree_basic_events(root: ET.Element, label: str) -> None:
@@ -632,7 +981,16 @@ def verify_templates() -> None:
     json_template = TEMPLATES / "fishbone.template.json"
     fault_tree_md_template = TEMPLATES / "fault-tree.template.md"
     fault_tree_json_template = TEMPLATES / "fault-tree.template.json"
-    for path in [md_template, json_template, fault_tree_md_template, fault_tree_json_template]:
+    exclusion_tree_md_template = TEMPLATES / "exclusion-tree.template.md"
+    exclusion_tree_json_template = TEMPLATES / "exclusion-tree.template.json"
+    for path in [
+        md_template,
+        json_template,
+        fault_tree_md_template,
+        fault_tree_json_template,
+        exclusion_tree_md_template,
+        exclusion_tree_json_template,
+    ]:
         if not path.exists():
             raise AssertionError(f"Missing template: {path.name}")
         if not path.read_text(encoding="utf-8").strip():
@@ -657,22 +1015,36 @@ def verify_templates() -> None:
         raise AssertionError(f"{fault_tree_json_template.name}: JSON template must be an object")
     verify_fault_tree_template_structure(fault_json_data, fault_tree_json_template.name)
 
+    exclusion_md_data = parse_input(exclusion_tree_md_template)
+    verify_exclusion_tree_template_structure(exclusion_md_data, exclusion_tree_md_template.name)
+
+    exclusion_json_data = json.loads(exclusion_tree_json_template.read_text(encoding="utf-8"))
+    if not isinstance(exclusion_json_data, dict):
+        raise AssertionError(f"{exclusion_tree_json_template.name}: JSON template must be an object")
+    verify_exclusion_tree_template_structure(exclusion_json_data, exclusion_tree_json_template.name)
+
     pid = os.getpid()
     template_outputs = [
         TEMPLATES / f"fishbone.template.md.{pid}.tmp.svg",
         TEMPLATES / f"fishbone.template.json.{pid}.tmp.svg",
         TEMPLATES / f"fault-tree.template.md.{pid}.tmp.svg",
         TEMPLATES / f"fault-tree.template.json.{pid}.tmp.svg",
+        TEMPLATES / f"exclusion-tree.template.md.{pid}.tmp.svg",
+        TEMPLATES / f"exclusion-tree.template.json.{pid}.tmp.svg",
     ]
     try:
         run_generate(md_template, template_outputs[0])
         run_generate(json_template, template_outputs[1])
         run_generate(fault_tree_md_template, template_outputs[2])
         run_generate(fault_tree_json_template, template_outputs[3])
+        run_generate(exclusion_tree_md_template, template_outputs[4])
+        run_generate(exclusion_tree_json_template, template_outputs[5])
         verify_svg_basics(template_outputs[0])
         verify_svg_basics(template_outputs[1])
         verify_fault_tree_svg_basics(template_outputs[2])
         verify_fault_tree_svg_basics(template_outputs[3])
+        verify_exclusion_tree_svg_basics(template_outputs[4])
+        verify_exclusion_tree_svg_basics(template_outputs[5])
     finally:
         for output_path in template_outputs:
             output_path.unlink(missing_ok=True)
@@ -765,6 +1137,45 @@ def verify_fault_tree_template_structure(data: dict[str, object], label: str) ->
         raise AssertionError(f"{label}: template must include at least one nested intermediate-event example")
 
 
+def verify_exclusion_tree_template_structure(data: dict[str, object], label: str) -> None:
+    if str(data.get("diagram_type", "")).replace("-", "_") != "exclusion_tree":
+        raise AssertionError(f"{label}: template must use diagram_type=exclusion_tree")
+
+    problem = data.get("problem")
+    if not isinstance(problem, dict) or not (str(problem.get("text_en", "")).strip() or str(problem.get("text_zh", "")).strip()):
+        raise AssertionError(f"{label}: template must include a problem object")
+
+    event_detail = data.get("event_detail")
+    if not isinstance(event_detail, dict):
+        raise AssertionError(f"{label}: template must include an event_detail object")
+    has_detail_text = str(event_detail.get("text", "")).strip()
+    bullets = event_detail.get("bullets")
+    has_detail_bullets = isinstance(bullets, list) and any(str(item).strip() for item in bullets)
+    if not has_detail_text and not has_detail_bullets:
+        raise AssertionError(f"{label}: template event_detail must include text or bullets")
+
+    checks = data.get("checks")
+    if not isinstance(checks, list) or len(checks) < 3:
+        raise AssertionError(f"{label}: template must include at least 3 checks")
+
+    for index, check in enumerate(checks, start=1):
+        if not isinstance(check, dict):
+            raise AssertionError(f"{label}: check {index} must be an object")
+        if not (str(check.get("text_en", "")).strip() or str(check.get("text_zh", "")).strip()):
+            raise AssertionError(f"{label}: check {index} must include text")
+        conclusion = check.get("fail_conclusion")
+        if not isinstance(conclusion, dict) or not (
+            str(conclusion.get("text_en", "")).strip() or str(conclusion.get("text_zh", "")).strip()
+        ):
+            raise AssertionError(f"{label}: check {index} must include a fail_conclusion")
+
+    final_pass = data.get("final_pass_conclusion")
+    if not isinstance(final_pass, dict) or not (
+        str(final_pass.get("text_en", "")).strip() or str(final_pass.get("text_zh", "")).strip()
+    ):
+        raise AssertionError(f"{label}: template must include final_pass_conclusion")
+
+
 def verify_no_tmp_files(path: Path) -> None:
     if not path.exists():
         return
@@ -837,6 +1248,40 @@ def verify_new_fault_tree_entrypoint() -> None:
         )
         if overwrite_result.returncode == 0:
             raise AssertionError("new_fault_tree.py should refuse to overwrite existing work files without --force")
+    finally:
+        input_path.unlink(missing_ok=True)
+        output_path.unlink(missing_ok=True)
+
+
+def verify_new_exclusion_tree_entrypoint() -> None:
+    stem = f"verify-new-exclusion-tree-{os.getpid()}"
+    input_path = EXCLUSION_TREE_WORK / f"{stem}.md"
+    output_path = EXCLUSION_TREE_WORK / f"{stem}.svg"
+    try:
+        input_path.unlink(missing_ok=True)
+        output_path.unlink(missing_ok=True)
+        result = subprocess.run(
+            [str(PYTHON), str(NEW_EXCLUSION_TREE), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise AssertionError(f"new_exclusion_tree.py failed:\n{result.stderr}")
+        if not input_path.exists() or not output_path.exists():
+            raise AssertionError("new_exclusion_tree.py did not create expected work files")
+        verify_exclusion_tree_svg_basics(output_path)
+
+        overwrite_result = subprocess.run(
+            [str(PYTHON), str(NEW_EXCLUSION_TREE), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if overwrite_result.returncode == 0:
+            raise AssertionError("new_exclusion_tree.py should refuse to overwrite existing work files without --force")
     finally:
         input_path.unlink(missing_ok=True)
         output_path.unlink(missing_ok=True)
@@ -961,6 +1406,66 @@ def verify_render_fault_tree_work_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_render_exclusion_tree_work_entrypoint() -> None:
+    stem = f"verify-render-exclusion-tree-{os.getpid()}"
+    md_input_path = EXCLUSION_TREE_WORK / f"{stem}.md"
+    json_input_path = EXCLUSION_TREE_WORK / f"{stem}.json"
+    output_path = EXCLUSION_TREE_WORK / f"{stem}.svg"
+    try:
+        EXCLUSION_TREE_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_EXCLUSION_TREE), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_exclusion_tree.py failed during render_exclusion_tree_work verification:\n{create_result.stderr}")
+
+        output_path.unlink(missing_ok=True)
+        render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_EXCLUSION_TREE_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if render_result.returncode != 0:
+            raise AssertionError(f"render_exclusion_tree_work.py failed:\n{render_result.stderr}")
+        if not output_path.exists():
+            raise AssertionError("render_exclusion_tree_work.py did not create the expected SVG")
+        verify_exclusion_tree_svg_basics(output_path)
+
+        json_input_path.write_text((TEMPLATES / "exclusion-tree.template.json").read_text(encoding="utf-8"), encoding="utf-8")
+        ambiguous_result = subprocess.run(
+            [str(PYTHON), str(RENDER_EXCLUSION_TREE_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if ambiguous_result.returncode == 0:
+            raise AssertionError("render_exclusion_tree_work.py should require --format when md and json inputs both exist")
+
+        format_result = subprocess.run(
+            [str(PYTHON), str(RENDER_EXCLUSION_TREE_WORK), stem, "--format", "json"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if format_result.returncode != 0:
+            raise AssertionError(f"render_exclusion_tree_work.py --format json failed:\n{format_result.stderr}")
+        verify_exclusion_tree_svg_basics(output_path)
+    finally:
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_export_png_entrypoint() -> None:
     from PIL import Image
 
@@ -1065,18 +1570,84 @@ def verify_export_fault_tree_png_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_export_exclusion_tree_png_entrypoint() -> None:
+    from PIL import Image
+
+    stem = f"verify-export-exclusion-tree-png-{os.getpid()}"
+    input_path = EXCLUSION_TREE_WORK / f"{stem}.md"
+    svg_path = EXCLUSION_TREE_WORK / f"{stem}.svg"
+    png_path = EXCLUSION_TREE_WORK / f"{stem}.png"
+    try:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_EXCLUSION_TREE), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_exclusion_tree.py failed during PNG export verification:\n{create_result.stderr}")
+
+        export_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_EXCLUSION_TREE_PNG), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if export_result.returncode != 0:
+            raise AssertionError(f"export_exclusion_tree_png.py failed:\n{export_result.stderr}")
+        if not png_path.exists():
+            raise AssertionError("export_exclusion_tree_png.py did not create the expected PNG")
+
+        svg_size = svg_dimensions(svg_path)
+        with Image.open(png_path) as image:
+            if image.size != svg_size:
+                raise AssertionError(f"Exclusion tree PNG dimensions {image.size} do not match SVG dimensions {svg_size}")
+
+        unsafe_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_EXCLUSION_TREE_PNG), "../outside"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if unsafe_result.returncode == 0:
+            raise AssertionError("export_exclusion_tree_png.py accepted an unsafe name")
+    finally:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_diagram_builder_service() -> None:
     from PIL import Image
 
     sys.path.insert(0, str(ROOT / "scripts"))
     import diagram_builder_server
+    verify_diagram_builder_exclusion_language_ui(diagram_builder_server.INDEX_HTML)
+    verify_diagram_builder_load_file_ui(diagram_builder_server.INDEX_HTML)
+    verify_diagram_builder_preview_zoom_ui(diagram_builder_server.INDEX_HTML)
 
     stems = {
         "fishbone": f"verify-builder-fishbone-{os.getpid()}",
         "fault_tree": f"verify-builder-fault-tree-{os.getpid()}",
+        "exclusion_tree": f"verify-builder-exclusion-tree-{os.getpid()}",
     }
     paths: list[Path] = []
     try:
+        fishbone_json = json.dumps(diagram_builder_server.load_template("fishbone"), ensure_ascii=False)
+        loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-fishbone.json", fishbone_json)
+        if loaded_type != "fishbone" or loaded_data.get("diagram_type") != "fishbone":
+            raise AssertionError("diagram_builder_server failed to parse a loaded fishbone JSON file")
+
+        exclusion_md = (TEMPLATES / "exclusion-tree.template.md").read_text(encoding="utf-8")
+        loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-exclusion.md", exclusion_md)
+        if loaded_type != "exclusion_tree" or loaded_data.get("diagram_type") != "exclusion_tree":
+            raise AssertionError("diagram_builder_server failed to parse a loaded exclusion-tree Markdown file")
+
         for diagram_type, stem in stems.items():
             data = diagram_builder_server.load_template(diagram_type)
             json_path = diagram_builder_server.save_work_json(diagram_type, stem, data)
@@ -1105,6 +1676,68 @@ def verify_diagram_builder_service() -> None:
     finally:
         for path in paths:
             path.unlink(missing_ok=True)
+
+
+def verify_diagram_builder_exclusion_language_ui(index_html: str) -> None:
+    start = index_html.find("function renderExclusionTreeForm()")
+    end = index_html.find('$("newBtn")', start)
+    exclusion_html = index_html[start:end] if start >= 0 and end > start else index_html
+    forbidden = [
+        "Problem EN",
+        "Problem ZH",
+        "Question EN",
+        "Question ZH",
+        "Pass Label EN",
+        "Pass Label ZH",
+        "Fail Label EN",
+        "Fail Label ZH",
+        "Fail Cause EN",
+        "Fail Cause ZH",
+        "Fail Detail EN",
+        "Fail Detail ZH",
+        "Conclusion EN",
+        "Conclusion ZH",
+        "Exclusion Tree /",
+        'row("Title"',
+        'row("Subtitle"',
+        'row("Icon"',
+        'row("Pass Label"',
+        'row("Fail Label"',
+    ]
+    hits = [text for text in forbidden if text in exclusion_html]
+    if hits:
+        raise AssertionError(f"diagram builder exclusion-tree UI should use single-language fields, found: {hits}")
+
+
+def verify_diagram_builder_load_file_ui(index_html: str) -> None:
+    required = [
+        "Load File",
+        'id="fileInput"',
+        "/api/parse-file",
+        "loadSelectedFile",
+    ]
+    missing = [text for text in required if text not in index_html]
+    if missing:
+        raise AssertionError(f"diagram builder Load File UI is missing: {missing}")
+    if "Load Saved" in index_html or "loadSaved" in index_html:
+        raise AssertionError("diagram builder should expose Load File instead of Load Saved")
+
+
+def verify_diagram_builder_preview_zoom_ui(index_html: str) -> None:
+    required = [
+        "zoom-controls",
+        'id="zoomOutBtn"',
+        'id="zoomInBtn"',
+        'id="zoomFitBtn"',
+        "setPreviewZoom",
+        "applyPreviewZoom",
+        "setPreviewSvg",
+    ]
+    missing = [text for text in required if text not in index_html]
+    if missing:
+        raise AssertionError(f"diagram builder preview zoom UI is missing: {missing}")
+    if "minmax(500px, 0.82fr) minmax(640px, 1.18fr)" not in index_html:
+        raise AssertionError("diagram builder editor/preview column ratio should reserve more width for preview")
 
 
 def verify_work_name_validation() -> None:
@@ -1149,6 +1782,26 @@ def verify_work_name_validation() -> None:
         )
         if fault_render_result.returncode == 0:
             raise AssertionError(f"render_fault_tree_work.py accepted unsafe name: {unsafe_name}")
+
+        exclusion_create_result = subprocess.run(
+            [str(PYTHON), str(NEW_EXCLUSION_TREE), unsafe_name, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if exclusion_create_result.returncode == 0:
+            raise AssertionError(f"new_exclusion_tree.py accepted unsafe name: {unsafe_name}")
+
+        exclusion_render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_EXCLUSION_TREE_WORK), unsafe_name],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if exclusion_render_result.returncode == 0:
+            raise AssertionError(f"render_exclusion_tree_work.py accepted unsafe name: {unsafe_name}")
 
 
 def parse_path_numbers(path_data: str) -> list[float]:

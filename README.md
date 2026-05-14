@@ -2,7 +2,7 @@
 
 `brainstorm-diagrams` is a Codex skill for generating clean, PPT-ready structured brainstorming diagrams.
 
-Version `0.2.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams and fault tree analysis diagrams.
+Version `0.3.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, and exclusion tree troubleshooting diagrams.
 
 ## What This Is
 
@@ -23,10 +23,12 @@ tools = the local scripts and double-click launchers that perform the work
 
 - `diagram_type="fishbone"`
 - `diagram_type="fault_tree"`
+- `diagram_type="exclusion_tree"`
 - JSON input
 - Structured Markdown input
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
 - Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
+- Exclusion tree target problems, sequential checkpoints, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
 - Codex-assisted natural-language fishbone drafting into editable Markdown
 - SVG output
 - PNG export from generated work SVG files
@@ -39,6 +41,7 @@ tools = the local scripts and double-click launchers that perform the work
 - Redrawing from existing fishbone files
 - Redrawing from whiteboard photos
 - Probability calculation, Boolean simplification, and dynamic fault tree semantics
+- Complex nested exclusion-tree decision logic beyond the linear Yes/No troubleshooting path
 
 ## Non-Technical User Workflow
 
@@ -66,6 +69,18 @@ English fallback:
 fault_tree_tool.cmd
 ```
 
+Exclusion tree has its own non-technical launcher:
+
+```text
+排除树工具.cmd
+```
+
+English fallback:
+
+```text
+exclusion_tree_tool.cmd
+```
+
 For a browser-based editor, use the unified local builder:
 
 ```text
@@ -78,7 +93,7 @@ English fallback:
 diagram_builder.cmd
 ```
 
-The fishbone menu can create a new fishbone diagram, regenerate a work SVG after editing, export PNG, or run verification. The fault-tree menu can create a new fault tree diagram, regenerate its SVG, export PNG, and run the same verification/stresscase checks. The browser builder edits structured JSON through a local HTML form, saves into `work/fishbone/` or `work/fault-tree/`, and reuses the same SVG/PNG renderers.
+The fishbone, fault-tree, and exclusion-tree menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON through a local HTML form, saves into `work/fishbone/`, `work/fault-tree/`, or `work/exclusion-tree/`, and reuses the same SVG/PNG renderers.
 
 Menu options:
 
@@ -114,9 +129,11 @@ The `work/` folder is for your own diagrams, grouped by diagram type such as `wo
 
 Fault tree usage is the same pattern: double-click `故障树工具.cmd`, create a named diagram, edit the generated file in `work/fault-tree/`, then regenerate the SVG from the same menu.
 
+Exclusion tree usage is also the same pattern: double-click `排除树工具.cmd`, create a named diagram, edit the generated file in `work/exclusion-tree/`, then regenerate the SVG from the same menu.
+
 Browser-builder usage is similar: double-click `图表编辑器.cmd`, choose a diagram type, edit the form, save JSON, render SVG, and export PNG from the browser page.
 
-Diagram names are file names under `work/fishbone/` or `work/fault-tree/`. Use safe names such as `my-analysis`, `startup-failure`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
+Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, or `work/exclusion-tree/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
 ## Natural-Language Drafting
 
@@ -185,6 +202,7 @@ Export an existing work SVG to PNG:
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_png.py my-analysis
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fault_tree_png.py startup-failure
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
 ```
 
 SVG remains the primary editable output. PNG is a convenience format for quick sharing.
@@ -213,6 +231,13 @@ For user-owned fault-tree work files, use the fault-tree entrypoints:
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_fault_tree_work.py startup-failure
+```
+
+For user-owned exclusion-tree work files, use the exclusion-tree entrypoints:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_exclusion_tree.py startup-checks --format md
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_exclusion_tree_work.py startup-checks
 ```
 
 Start the local HTML builder with:

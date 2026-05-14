@@ -17,12 +17,15 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
+from generate_diagram import parse_structured_markdown
+
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "templates"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 EXPORT_FISHBONE = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE = ROOT / "scripts" / "export_fault_tree_png.py"
+EXPORT_EXCLUSION_TREE = ROOT / "scripts" / "export_exclusion_tree_png.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
@@ -38,6 +41,12 @@ DIAGRAMS = {
         "work": ROOT / "work" / "fault-tree",
         "template": TEMPLATES / "fault-tree.template.json",
         "export": EXPORT_FAULT_TREE,
+    },
+    "exclusion_tree": {
+        "label": "Exclusion Tree",
+        "work": ROOT / "work" / "exclusion-tree",
+        "template": TEMPLATES / "exclusion-tree.template.json",
+        "export": EXPORT_EXCLUSION_TREE,
     },
 }
 
@@ -118,6 +127,11 @@ class DiagramBuilderHandler(BaseHTTPRequestHandler):
                 save_work_json(diagram_type, name, data)
                 result = render_work(diagram_type, name)
                 self.send_json({"ok": True, "message": result, "svg": read_work_svg(diagram_type, name)})
+            elif parsed.path == "/api/parse-file":
+                filename = str(payload.get("filename", ""))
+                content = str(payload.get("content", ""))
+                diagram_type, data = parse_uploaded_file(filename, content)
+                self.send_json({"ok": True, "diagram_type": diagram_type, "data": data})
             elif parsed.path == "/api/export":
                 diagram_type = canonical_diagram_type(payload.get("diagram_type", "fishbone"))
                 name = validate_work_name(str(payload.get("name", "")))
@@ -191,7 +205,7 @@ def request_model(payload: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
 def canonical_diagram_type(value: Any) -> str:
     diagram_type = str(value).strip().lower().replace("-", "_").replace(" ", "_")
     if diagram_type not in DIAGRAMS:
-        raise ValueError("diagram_type must be fishbone or fault_tree.")
+        raise ValueError("diagram_type must be fishbone, fault_tree, or exclusion_tree.")
     return diagram_type
 
 
@@ -233,6 +247,22 @@ def load_work_json(diagram_type: str, name: str) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise ValueError(f"{path.relative_to(ROOT)} must contain a JSON object.")
     return data
+
+
+def parse_uploaded_file(filename: str, content: str) -> tuple[str, dict[str, Any]]:
+    suffix = Path(filename).suffix.lower()
+    text = content.lstrip("\ufeff")
+    if suffix == ".json":
+        data = json.loads(text)
+    elif suffix in {".md", ".markdown"}:
+        data = parse_structured_markdown(text)
+    else:
+        raise ValueError("Load File supports .json, .md, and .markdown files.")
+    if not isinstance(data, dict):
+        raise ValueError("Loaded diagram file must contain a JSON object or structured Markdown diagram.")
+    diagram_type = canonical_diagram_type(data.get("diagram_type", "fishbone"))
+    data["diagram_type"] = diagram_type
+    return diagram_type, data
 
 
 def save_work_json(diagram_type: str, name: str, data: dict[str, Any]) -> Path:
@@ -321,7 +351,7 @@ INDEX_HTML = r"""<!doctype html>
     header span { color: #dbeaff; font-size: 13px; }
     main {
       display: grid;
-      grid-template-columns: minmax(500px, 0.95fr) minmax(520px, 1.05fr);
+      grid-template-columns: minmax(500px, 0.82fr) minmax(640px, 1.18fr);
       gap: 14px;
       padding: 14px;
       height: calc(100vh - 64px);
@@ -347,6 +377,33 @@ INDEX_HTML = r"""<!doctype html>
       padding: 12px 14px;
       border-bottom: 1px solid var(--line);
       background: #f8fbff;
+    }
+    .preview-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .zoom-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px;
+      border: 1px solid #c8d7e8;
+      border-radius: 7px;
+      background: #fff;
+    }
+    .zoom-controls button {
+      min-width: 34px;
+      padding: 5px 8px;
+    }
+    #zoomLabel {
+      min-width: 48px;
+      text-align: center;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
     }
     #previewBox {
       flex: 1;
@@ -529,7 +586,7 @@ INDEX_HTML = r"""<!doctype html>
   <header>
     <div>
       <h1>Brainstorm Diagram Builder</h1>
-      <span>Edit JSON-backed fishbone and fault-tree diagrams without touching Markdown.</span>
+      <span>Edit JSON-backed fishbone, fault-tree, and exclusion-tree diagrams without touching Markdown.</span>
     </div>
   </header>
   <main>
@@ -539,6 +596,7 @@ INDEX_HTML = r"""<!doctype html>
         <select id="diagramType">
           <option value="fishbone">Fishbone</option>
           <option value="fault_tree">Fault Tree</option>
+          <option value="exclusion_tree">Exclusion Tree</option>
         </select>
       </div>
       <div class="row">
@@ -547,19 +605,28 @@ INDEX_HTML = r"""<!doctype html>
       </div>
       <div class="toolbar">
         <button id="newBtn">Load Template</button>
-        <button id="loadBtn">Load Saved</button>
+        <button id="loadBtn">Load File</button>
         <button id="saveBtn">Save JSON</button>
         <button id="renderBtn" class="primary">Render SVG</button>
         <button id="exportBtn">Export PNG</button>
         <button id="openBtn">Open Work Folder</button>
       </div>
+      <input id="fileInput" type="file" accept=".json,.md,.markdown,application/json,text/markdown,text/plain" hidden>
       <div id="status" class="status"></div>
       <div id="formRoot"></div>
     </section>
     <section class="panel preview">
       <div class="preview-toolbar">
         <strong>SVG Preview</strong>
-        <span id="previewMeta" class="status"></span>
+        <div class="preview-actions">
+          <div class="zoom-controls" aria-label="Preview zoom controls">
+            <button id="zoomOutBtn" type="button" title="Zoom out">−</button>
+            <span id="zoomLabel">100%</span>
+            <button id="zoomInBtn" type="button" title="Zoom in">+</button>
+            <button id="zoomFitBtn" type="button" title="Fit to width">Fit</button>
+          </div>
+          <span id="previewMeta" class="status"></span>
+        </div>
       </div>
       <div id="previewBox"><div class="empty">Click Render SVG to preview the diagram.</div></div>
     </section>
@@ -567,9 +634,11 @@ INDEX_HTML = r"""<!doctype html>
   <script>
     const LIMITS = {
       fishbone: { categories: 8, minCategories: 4, entries: 5, children: 3 },
-      fault_tree: { first: 5, children: 4, nestedChildren: 4 }
+      fault_tree: { first: 5, children: 4, nestedChildren: 4 },
+      exclusion_tree: { checks: 6, minChecks: 3 }
     };
     let model = {};
+    let previewZoom = 1;
 
     const $ = (id) => document.getElementById(id);
     const typeEl = $("diagramType");
@@ -578,6 +647,8 @@ INDEX_HTML = r"""<!doctype html>
     const statusEl = $("status");
     const previewBox = $("previewBox");
     const previewMeta = $("previewMeta");
+    const fileInput = $("fileInput");
+    const zoomLabel = $("zoomLabel");
 
     function setStatus(message, kind = "") {
       statusEl.textContent = message || "";
@@ -590,6 +661,25 @@ INDEX_HTML = r"""<!doctype html>
 
     function currentType() {
       return typeEl.value;
+    }
+
+    function setPreviewZoom(value) {
+      previewZoom = Math.max(0.5, Math.min(2, value));
+      applyPreviewZoom();
+    }
+
+    function applyPreviewZoom() {
+      zoomLabel.textContent = Math.round(previewZoom * 100) + "%";
+      const svg = previewBox.querySelector("svg");
+      if (!svg) return;
+      svg.style.width = Math.round(previewZoom * 100) + "%";
+      svg.style.maxWidth = "none";
+      svg.style.height = "auto";
+    }
+
+    function setPreviewSvg(svgText) {
+      previewBox.innerHTML = svgText;
+      applyPreviewZoom();
     }
 
     async function api(path, options = {}) {
@@ -610,12 +700,31 @@ INDEX_HTML = r"""<!doctype html>
       setStatus("Template loaded.", "ok");
     }
 
-    async function loadSaved() {
-      const data = await api(`/api/load?diagram_type=${encodeURIComponent(currentType())}&name=${encodeURIComponent(safeName())}`);
-      model = data.data;
+    function nameFromFile(filename) {
+      const stem = filename.replace(/\.[^.]+$/, "").toLowerCase();
+      const clean = stem.replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 64);
+      return /^[a-z0-9][a-z0-9_-]{0,63}$/.test(clean) ? clean : "loaded-diagram";
+    }
+
+    function loadFile() {
+      fileInput.value = "";
+      fileInput.click();
+    }
+
+    async function loadSelectedFile(file) {
+      if (!file) return;
+      const content = await file.text();
+      const result = await api("/api/parse-file", {
+        method: "POST",
+        body: JSON.stringify({ filename: file.name, content })
+      });
+      typeEl.value = result.diagram_type;
+      nameEl.value = nameFromFile(file.name);
+      model = result.data;
       renderForm();
-      await loadSvgIfExists();
-      setStatus("Saved JSON loaded.", "ok");
+      previewMeta.textContent = "";
+      previewBox.innerHTML = '<div class="empty">File loaded. Click Render SVG to preview.</div>';
+      setStatus(`Loaded ${file.name}.`, "ok");
     }
 
     async function saveJson() {
@@ -633,7 +742,7 @@ INDEX_HTML = r"""<!doctype html>
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType(), name: safeName(), data: model })
       });
-      previewBox.innerHTML = result.svg;
+      setPreviewSvg(result.svg);
       previewMeta.textContent = safeName() + ".svg";
       setStatus(result.message, "ok");
     }
@@ -659,7 +768,7 @@ INDEX_HTML = r"""<!doctype html>
         const response = await fetch(`/api/svg?diagram_type=${encodeURIComponent(currentType())}&name=${encodeURIComponent(safeName())}`);
         const text = await response.text();
         if (response.ok) {
-          previewBox.innerHTML = text;
+          setPreviewSvg(text);
           previewMeta.textContent = safeName() + ".svg";
         }
       } catch (_error) {}
@@ -667,6 +776,7 @@ INDEX_HTML = r"""<!doctype html>
 
     function syncDiagramType() {
       model.diagram_type = currentType();
+      if (model.diagram_type === "exclusion_tree") cleanExclusionTreeModel();
     }
 
     function input(value, onInput, placeholder = "") {
@@ -736,7 +846,8 @@ INDEX_HTML = r"""<!doctype html>
     function renderForm() {
       formRoot.innerHTML = "";
       if (currentType() === "fishbone") renderFishboneForm();
-      else renderFaultTreeForm();
+      else if (currentType() === "fault_tree") renderFaultTreeForm();
+      else renderExclusionTreeForm();
     }
 
     function renderFishboneForm() {
@@ -948,14 +1059,125 @@ INDEX_HTML = r"""<!doctype html>
       return box;
     }
 
+    function oneLanguageValue(obj, base) {
+      if (!obj) return "";
+      return obj[base] || obj[base + "_en"] || obj[base + "_zh"] || "";
+    }
+
+    function setOneLanguageValue(obj, base, value) {
+      obj[base + "_en"] = value;
+      delete obj[base + "_zh"];
+    }
+
+    function cleanExclusionTreeModel() {
+      if (currentType() !== "exclusion_tree") return;
+      model.problem = model.problem || {};
+      setOneLanguageValue(model.problem, "text", oneLanguageValue(model.problem, "text") || "Target Problem");
+      delete model.language;
+      model.checks = Array.isArray(model.checks) ? model.checks : [];
+      model.checks.forEach((check, index) => {
+        setOneLanguageValue(check, "text", oneLanguageValue(check, "text") || `Check ${index + 1} OK?`);
+        check.pass_label_en = "Yes";
+        check.fail_label_en = "No";
+        delete check.pass_label_zh;
+        delete check.fail_label_zh;
+        delete check.icon;
+        check.fail_conclusion = check.fail_conclusion || {};
+        setOneLanguageValue(check.fail_conclusion, "text", oneLanguageValue(check.fail_conclusion, "text") || "Likely Cause");
+        setOneLanguageValue(check.fail_conclusion, "detail", oneLanguageValue(check.fail_conclusion, "detail"));
+      });
+      model.final_pass_conclusion = model.final_pass_conclusion || {};
+      setOneLanguageValue(
+        model.final_pass_conclusion,
+        "text",
+        oneLanguageValue(model.final_pass_conclusion, "text") || "No issue found in this path. Consider other rare causes or deeper analysis."
+      );
+      setOneLanguageValue(model.final_pass_conclusion, "detail", oneLanguageValue(model.final_pass_conclusion, "detail"));
+    }
+
+    function renderExclusionTreeForm() {
+      model.diagram_type = "exclusion_tree";
+      model.problem = model.problem || { text_en: "Target Problem" };
+      model.event_detail = model.event_detail || { title: "Event Detail", text: "", bullets: [] };
+      model.checks = Array.isArray(model.checks) ? model.checks : [];
+      model.final_pass_conclusion = model.final_pass_conclusion || { text_en: "" };
+      cleanExclusionTreeModel();
+      formRoot.appendChild(row("Problem", input(oneLanguageValue(model.problem, "text"), value => setOneLanguageValue(model.problem, "text", value), "System Fails to Start")));
+
+      const detail = section("Event Detail", "Shown in the upper-left panel. Use concise context and short bullets.");
+      detail.appendChild(row("Detail Title", input(model.event_detail.title, value => model.event_detail.title = value, "Event Detail")));
+      detail.appendChild(row("Detail Text", textarea(model.event_detail.text, value => model.event_detail.text = value)));
+      model.event_detail.bullets = Array.isArray(model.event_detail.bullets) ? model.event_detail.bullets : [];
+      model.event_detail.bullets.forEach((bulletText, index) => {
+        const line = document.createElement("div");
+        line.className = "inline";
+        line.append(
+          input(bulletText, value => model.event_detail.bullets[index] = value, "Detail bullet"),
+          button("Remove", () => {
+            model.event_detail.bullets.splice(index, 1);
+            renderForm();
+          })
+        );
+        detail.appendChild(line);
+      });
+      detail.appendChild(button("Add Detail Bullet", () => {
+        model.event_detail.bullets.push("New detail note");
+        renderForm();
+      }));
+      formRoot.appendChild(detail);
+
+      const limits = LIMITS.exclusion_tree;
+      const checks = section("Check Points", `Use ${limits.minChecks}-${limits.checks} sequential checks. Each check has one Yes/Pass path and one No/Fail conclusion.`);
+      checks.querySelector(".section-title").appendChild(button("Add Check", () => {
+        if (model.checks.length < limits.checks) {
+          model.checks.push({
+            id: String(model.checks.length + 1),
+            text_en: "New Check OK?",
+            pass_label_en: "Yes",
+            fail_label_en: "No",
+            fail_conclusion: { text_en: "Likely Cause", detail_en: "" }
+          });
+          renderForm();
+        }
+      }, model.checks.length >= limits.checks));
+      model.checks.forEach((check, index) => {
+        check.fail_conclusion = check.fail_conclusion || { text_en: "", detail_en: "" };
+        const box = document.createElement("div");
+        box.className = "item";
+        const head = document.createElement("div");
+        head.className = "item-head";
+        const title = document.createElement("h3");
+        title.textContent = `Check Point ${index + 1}`;
+        head.appendChild(title);
+        head.appendChild(button("Remove", () => {
+          model.checks.splice(index, 1);
+          renderForm();
+        }));
+        box.appendChild(head);
+        box.appendChild(row("Question", input(oneLanguageValue(check, "text"), value => setOneLanguageValue(check, "text", value), "Power Input OK?")));
+        box.appendChild(row("Fail Cause", input(oneLanguageValue(check.fail_conclusion, "text"), value => setOneLanguageValue(check.fail_conclusion, "text", value), "Likely Cause")));
+        box.appendChild(row("Fail Detail", input(oneLanguageValue(check.fail_conclusion, "detail"), value => setOneLanguageValue(check.fail_conclusion, "detail", value), "Optional detail")));
+        checks.appendChild(box);
+      });
+      formRoot.appendChild(checks);
+
+      const final = section("Final Pass Conclusion", "Shown when all checks pass and this path does not identify the cause.");
+      final.appendChild(row("Conclusion", textarea(oneLanguageValue(model.final_pass_conclusion, "text"), value => setOneLanguageValue(model.final_pass_conclusion, "text", value))));
+      formRoot.appendChild(final);
+    }
+
     $("newBtn").addEventListener("click", () => loadTemplate().catch(error => setStatus(error.message, "error")));
-    $("loadBtn").addEventListener("click", () => loadSaved().catch(error => setStatus(error.message, "error")));
+    $("loadBtn").addEventListener("click", () => loadFile());
+    fileInput.addEventListener("change", () => loadSelectedFile(fileInput.files[0]).catch(error => setStatus(error.message, "error")));
     $("saveBtn").addEventListener("click", () => saveJson().catch(error => setStatus(error.message, "error")));
     $("renderBtn").addEventListener("click", () => renderSvg().catch(error => setStatus(error.message, "error")));
     $("exportBtn").addEventListener("click", () => exportPng().catch(error => setStatus(error.message, "error")));
     $("openBtn").addEventListener("click", () => openFolder().catch(error => setStatus(error.message, "error")));
+    $("zoomOutBtn").addEventListener("click", () => setPreviewZoom(previewZoom - 0.1));
+    $("zoomInBtn").addEventListener("click", () => setPreviewZoom(previewZoom + 0.1));
+    $("zoomFitBtn").addEventListener("click", () => setPreviewZoom(1));
     typeEl.addEventListener("change", () => {
-      nameEl.value = currentType() === "fishbone" ? "my-analysis" : "startup-failure";
+      nameEl.value = currentType() === "fishbone" ? "my-analysis" : currentType() === "fault_tree" ? "startup-failure" : "startup-checks";
       loadTemplate().catch(error => setStatus(error.message, "error"));
     });
 

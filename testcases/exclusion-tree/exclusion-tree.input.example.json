@@ -1,0 +1,67 @@
+{
+  "diagram_type": "exclusion_tree",
+  "title": "Exclusion Tree / 排除树",
+  "subtitle": "通过一系列检验步骤，逐步排除不可能的原因，最终定位到最可能的根本原因。",
+  "problem": {
+    "text_en": "System Fails to Start",
+    "text_zh": "系统无法启动"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "The system does not complete startup after power is applied.",
+    "bullets": [
+      "Observed during validation after overnight storage",
+      "Use the checks below in sequence"
+    ]
+  },
+  "checks": [
+    {
+      "id": "1",
+      "text_en": "Power Input OK?",
+      "text_zh": "是否有电源输入？",
+      "icon": "bolt",
+      "fail_conclusion": {
+        "text_en": "No Power Input",
+        "text_zh": "无电源输入",
+        "detail_en": "Check power cable and outlet.",
+        "detail_zh": "检查电源线连接和插座供电。"
+      }
+    },
+    {
+      "id": "2",
+      "text_en": "Power Module Output OK?",
+      "text_zh": "电源模块输出是否正常？",
+      "icon": "module",
+      "fail_conclusion": {
+        "text_en": "Power Module Fault",
+        "text_zh": "电源模块故障"
+      }
+    },
+    {
+      "id": "3",
+      "text_en": "Control Board OK?",
+      "text_zh": "控制板是否正常工作？",
+      "icon": "chip",
+      "fail_conclusion": {
+        "text_en": "Control Board Fault",
+        "text_zh": "控制板故障"
+      }
+    },
+    {
+      "id": "4",
+      "text_en": "Start Signal OK?",
+      "text_zh": "启动信号是否正常？",
+      "icon": "signal",
+      "fail_conclusion": {
+        "text_en": "Start Signal Issue",
+        "text_zh": "启动信号异常"
+      }
+    }
+  ],
+  "final_pass_conclusion": {
+    "text_en": "No issue found in this path. Consider other rare causes or deeper analysis.",
+    "text_zh": "该路径未发现异常。考虑其他较不常见原因或进行更深入分析。"
+  },
+  "show_legend": true,
+  "show_how_to_use": true
+}

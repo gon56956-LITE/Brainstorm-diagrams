@@ -11,10 +11,11 @@ from pathlib import Path
 from typing import Any
 
 from renderers.fishbone import render_fishbone_to_file
+from renderers.exclusion_tree import parse_exclusion_tree_markdown, render_exclusion_tree_to_file
 from renderers.fault_tree import parse_fault_tree_markdown, render_fault_tree_to_file
 
 
-SUPPORTED_DIAGRAMS = {"fishbone", "fault_tree"}
+SUPPORTED_DIAGRAMS = {"fishbone", "fault_tree", "exclusion_tree"}
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +50,8 @@ def parse_structured_markdown(text: str) -> dict[str, Any]:
     metadata, body = split_markdown_front_matter(text)
     if markdown_requests_fault_tree(text, metadata):
         return parse_fault_tree_markdown(text)
+    if markdown_requests_exclusion_tree(text, metadata):
+        return parse_exclusion_tree_markdown(text)
 
     topic = ""
     categories: list[dict[str, Any]] = []
@@ -142,6 +145,12 @@ def markdown_requests_fault_tree(text: str, metadata: dict[str, str]) -> bool:
     return bool(re.search(r"(?im)^\s*diagram_type\s*:\s*[\"']?fault[-_ ]tree[\"']?\s*$", text))
 
 
+def markdown_requests_exclusion_tree(text: str, metadata: dict[str, str]) -> bool:
+    if canonical_diagram_type(metadata.get("diagram_type", "")) == "exclusion_tree":
+        return True
+    return bool(re.search(r"(?im)^\s*diagram_type\s*:\s*[\"']?exclusion[-_ ]tree[\"']?\s*$", text))
+
+
 def canonical_diagram_type(value: Any) -> str:
     return collapse_text(value).lower().replace("-", "_").replace(" ", "_")
 
@@ -184,9 +193,11 @@ def main() -> int:
         diagram_type = canonical_diagram_type(data.get("diagram_type", "fishbone"))
         if diagram_type not in SUPPORTED_DIAGRAMS:
             raise ValueError(
-                "Unsupported diagram_type. Supported values: fishbone, fault_tree."
+                "Unsupported diagram_type. Supported values: fishbone, fault_tree, exclusion_tree."
             )
-        if diagram_type == "fault_tree":
+        if diagram_type == "exclusion_tree":
+            result = render_exclusion_tree_to_file(data, output_path)
+        elif diagram_type == "fault_tree":
             result = render_fault_tree_to_file(data, output_path)
         else:
             result = render_fishbone_to_file(data, output_path)

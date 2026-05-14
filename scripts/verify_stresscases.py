@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import subprocess
+import re
 import sys
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -13,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 STRESSCASES_ROOT = ROOT / "stresscases"
 FISHBONE_STRESSCASES = STRESSCASES_ROOT / "fishbone"
 FAULT_TREE_STRESSCASES = STRESSCASES_ROOT / "fault-tree"
+EXCLUSION_TREE_STRESSCASES = STRESSCASES_ROOT / "exclusion-tree"
 RENDER_STRESSCASES = ROOT / "scripts" / "render_stresscases.py"
 PYTHON = Path(sys.executable)
 
@@ -29,6 +31,7 @@ def main() -> int:
     verify_fishbone_full_stress()
     verify_fault_tree_full_stress()
     verify_fault_tree_nested_gates_stress()
+    verify_exclusion_tree_full_stress()
     print("Stresscase verification passed")
     return 0
 
@@ -36,7 +39,7 @@ def main() -> int:
 def verify_directory() -> None:
     if not STRESSCASES_ROOT.exists():
         raise AssertionError("Missing stresscases directory")
-    for required_dir in [FISHBONE_STRESSCASES, FAULT_TREE_STRESSCASES]:
+    for required_dir in [FISHBONE_STRESSCASES, FAULT_TREE_STRESSCASES, EXCLUSION_TREE_STRESSCASES]:
         if not required_dir.exists():
             raise AssertionError(f"Missing stresscases directory: {required_dir.relative_to(ROOT)}")
 
@@ -260,6 +263,185 @@ def verify_fault_tree_nested_gates_stress() -> None:
     verify_fault_tree_branch_connectors(root, "fault-tree nested-gates.svg", min_trunks=5, min_branches=14)
 
 
+def verify_exclusion_tree_full_stress() -> None:
+    input_path = EXCLUSION_TREE_STRESSCASES / "full-stress.json"
+    output_path = EXCLUSION_TREE_STRESSCASES / "full-stress.svg"
+    if not input_path.exists():
+        raise AssertionError("Missing exclusion-tree/full-stress.json")
+    if not output_path.exists():
+        raise AssertionError("Missing exclusion-tree/full-stress.svg")
+
+    root = ET.parse(output_path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError("exclusion-tree full-stress.svg root is not svg")
+
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width != 1920 or height < 1080:
+        raise AssertionError(f"exclusion-tree full-stress.svg should keep 1920px width and at least 1080px height, got {width}x{height}")
+    if height <= 1080:
+        raise AssertionError(f"exclusion-tree full-stress.svg should expand vertically for 6 checks, got {width}x{height}")
+
+    top_blocks = [element for element in root.iter() if element.attrib.get("id") == "exclusion-top-event-block"]
+    if len(top_blocks) != 1:
+        raise AssertionError(f"Expected one exclusion-top-event-block, got {len(top_blocks)}")
+    detail_panels = [element for element in root.iter() if element.attrib.get("id") == "exclusion-event-detail-panel"]
+    if len(detail_panels) != 1:
+        raise AssertionError(f"Expected one exclusion-event-detail-panel, got {len(detail_panels)}")
+
+    classes = " ".join(element.attrib.get("class", "") for element in root.iter())
+    for required_class in [
+        "exclusion-checkpoint",
+        "exclusion-pass-chip",
+        "exclusion-fail-chip",
+        "exclusion-fail-conclusion",
+        "exclusion-final-pass",
+    ]:
+        if required_class not in classes:
+            raise AssertionError(f"exclusion-tree full-stress.svg missing {required_class}")
+
+    checkpoints = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-checkpoint" in element.attrib.get("class", "")
+    ]
+    fail_cards = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-fail-conclusion" in element.attrib.get("class", "")
+    ]
+    if len(checkpoints) != 6:
+        raise AssertionError(f"Expected 6 exclusion checkpoints, got {len(checkpoints)}")
+    if len(fail_cards) != 6:
+        raise AssertionError(f"Expected 6 fail conclusion cards, got {len(fail_cards)}")
+    content_groups = checkpoints + fail_cards
+    top_events = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-top-event" in element.attrib.get("class", "")
+    ]
+    final_cards_for_language = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-final-pass" in element.attrib.get("class", "")
+    ]
+    content_groups.extend(top_events)
+    content_groups.extend(final_cards_for_language)
+    bilingual_lines = [
+        child.text or ""
+        for group in content_groups
+        for child in list(group)
+        if child.tag.endswith("text") and " / " in (child.text or "")
+    ]
+    if bilingual_lines:
+        raise AssertionError(f"exclusion-tree full-stress.svg should not auto-render bilingual labels: {bilingual_lines[:2]}")
+    for group in checkpoints:
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        texts = [child for child in list(group) if child.tag.endswith("text")]
+        if not rects:
+            raise AssertionError("exclusion-tree full-stress.svg checkpoint missing rect")
+        rect_y = float(rects[0].attrib.get("y", "0"))
+        rect_h = float(rects[0].attrib.get("height", "0"))
+        for text in texts:
+            text_y = float(text.attrib.get("y", "0"))
+            if text_y < rect_y + 20 or text_y > rect_y + rect_h - 12:
+                raise AssertionError("exclusion-tree full-stress.svg checkpoint text should stay inside its card")
+    fail_card_rects = []
+    for group in fail_cards:
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if rects:
+            rect = rects[0]
+            fail_card_rects.append(
+                (
+                    float(rect.attrib.get("x", "0")),
+                    float(rect.attrib.get("y", "0")),
+                    float(rect.attrib.get("width", "0")),
+                    float(rect.attrib.get("height", "0")),
+                )
+            )
+    fail_card_x_values = [rect[0] for rect in fail_card_rects]
+    fail_card_heights = [rect[3] for rect in fail_card_rects]
+    if len(set(round(value, 1) for value in fail_card_x_values)) < 2:
+        raise AssertionError("exclusion-tree full-stress.svg should stagger fail conclusion cards horizontally")
+    for previous_x, next_x in zip(fail_card_x_values, fail_card_x_values[1:]):
+        if next_x > previous_x + 0.1:
+            raise AssertionError("exclusion-tree full-stress.svg fail cards should step from upper-right to lower-left")
+    for previous, current in zip(fail_card_rects, fail_card_rects[1:]):
+        previous_bottom = previous[1] + previous[3]
+        if current[1] < previous_bottom + 18:
+            raise AssertionError("exclusion-tree full-stress.svg fail cards should not vertically collide")
+    if max(fail_card_heights) <= 150:
+        raise AssertionError("exclusion-tree full-stress.svg should content-size fail conclusion card heights")
+    drop_connectors = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("path") and "exclusion-fail-drop-connector" in element.attrib.get("class", "")
+    ]
+    if len(drop_connectors) != 6:
+        raise AssertionError(f"Expected 6 fail drop connectors, got {len(drop_connectors)}")
+    fail_chip_inputs = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and element.attrib.get("marker-end") != "url(#arrowNavy)"
+    ]
+    if len(fail_chip_inputs) < 6:
+        raise AssertionError("exclusion-tree full-stress.svg should include visible connector lines into fail chips")
+    final_connectors = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("path") and "exclusion-final-pass-connector" in element.attrib.get("class", "")
+    ]
+    if len(final_connectors) != 1:
+        raise AssertionError("exclusion-tree full-stress.svg should include one final pass connector")
+    path_numbers = parse_path_numbers(final_connectors[0].attrib.get("d", ""))
+    x_values = path_numbers[0::2]
+    if len(set(round(value, 1) for value in x_values)) != 1:
+        raise AssertionError("exclusion-tree full-stress.svg final pass connector should drop straight into the final card")
+    final_cards = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "exclusion-final-pass" in element.attrib.get("class", "")
+    ]
+    if len(final_cards) != 1:
+        raise AssertionError("exclusion-tree full-stress.svg should include one final pass card")
+    final_rects = [child for child in list(final_cards[0]) if child.tag.endswith("rect")]
+    if not final_rects:
+        raise AssertionError("exclusion-tree full-stress.svg final pass card missing rect")
+    final_rect = final_rects[0]
+    final_width = float(final_rect.attrib.get("width", "0"))
+    final_y = float(final_rect.attrib.get("y", "0"))
+    if final_width < 360:
+        raise AssertionError("exclusion-tree full-stress.svg final pass card should be wider than cause cards")
+    if fail_card_rects and final_y > max(rect[1] + rect[3] for rect in fail_card_rects) + 20:
+        raise AssertionError("exclusion-tree full-stress.svg final pass card should not be pushed below unrelated fail cards")
+
+    legends = [element for element in root.iter() if element.attrib.get("id") == "exclusion-tree-legend"]
+    how_to_use = [element for element in root.iter() if element.attrib.get("id") == "exclusion-how-to-use"]
+    if len(legends) != 1 or len(how_to_use) != 1:
+        raise AssertionError("exclusion-tree full-stress.svg must include legend and how-to-use panels")
+    decorative_dots = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("circle") and element.attrib.get("fill", "").lower() == "#d8e7f6"
+    ]
+    if decorative_dots:
+        raise AssertionError("exclusion-tree full-stress.svg should not include background dots near content")
+    how_rects = [child for child in list(how_to_use[0]) if child.tag.endswith("rect")]
+    legend_rects = [child for child in list(legends[0]) if child.tag.endswith("rect")]
+    if not how_rects or not legend_rects:
+        raise AssertionError("exclusion-tree full-stress.svg auxiliary panels missing rects")
+    how_rect = how_rects[0]
+    how_x = float(how_rect.attrib.get("x", "0"))
+    how_y = float(how_rect.attrib.get("y", "0"))
+    how_w = float(how_rect.attrib.get("width", "0"))
+    required_y = float(legend_rects[0].attrib.get("y", "0")) + float(legend_rects[0].attrib.get("height", "0")) + 36
+    for x, y, w, h in fail_card_rects:
+        if x < how_x + how_w + 28 and x + w > how_x - 28:
+            required_y = max(required_y, y + h + 36)
+    if abs(how_y - required_y) > 1.0:
+        raise AssertionError("exclusion-tree full-stress.svg how-to-use panel should sit at the highest non-colliding right-side position")
+
+
 def verify_fault_event_rects_within_canvas(root: ET.Element, label: str) -> None:
     canvas_width = float(root.attrib["width"])
     canvas_height = float(root.attrib["height"])
@@ -302,6 +484,10 @@ def verify_fault_tree_branch_connectors(root: ET.Element, label: str, *, min_tru
     ]
     if rightward:
         raise AssertionError(f"{label}: compact branch lines must run left from the parent trunk")
+
+
+def parse_path_numbers(path_data: str) -> list[float]:
+    return [float(value) for value in re.findall(r"-?\d+\.\d+", path_data)]
 
 
 if __name__ == "__main__":

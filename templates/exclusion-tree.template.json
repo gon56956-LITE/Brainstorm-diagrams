@@ -1,0 +1,53 @@
+{
+  "diagram_type": "exclusion_tree",
+  "problem": {
+    "text_en": "System Fails to Start"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "The system does not complete startup after power is applied.",
+    "bullets": [
+      "Observed during validation after overnight storage",
+      "Use the checks below in sequence",
+      "Stop when a failed check identifies a likely root cause"
+    ]
+  },
+  "theme": "business_simple",
+  "checks": [
+    {
+      "id": "1",
+      "text_en": "Power Input OK?",
+      "fail_conclusion": {
+        "text_en": "No Power Input",
+        "detail_en": "Check power cord, connector, and outlet."
+      }
+    },
+    {
+      "id": "2",
+      "text_en": "Power Module Output OK?",
+      "fail_conclusion": {
+        "text_en": "Power Module Fault"
+      }
+    },
+    {
+      "id": "3",
+      "text_en": "Control Board OK?",
+      "fail_conclusion": {
+        "text_en": "Control Board Fault"
+      }
+    },
+    {
+      "id": "4",
+      "text_en": "Start Signal OK?",
+      "fail_conclusion": {
+        "text_en": "Start Signal Issue"
+      }
+    }
+  ],
+  "final_pass_conclusion": {
+    "text_en": "No issue found in this path. Consider other rare causes or deeper analysis."
+  },
+  "show_legend": true,
+  "show_how_to_use": true,
+  "output": "svg"
+}
