@@ -466,6 +466,47 @@ INDEX_HTML = r"""<!doctype html>
       padding-left: 12px;
       border-left: 3px solid #d7e6f6;
     }
+    .fishbone-subcategory {
+      margin: 12px 0 12px 18px;
+      padding: 0;
+      border: 1px solid #b8d2ef;
+      border-left: 5px solid var(--blue);
+      background: #f6fbff;
+    }
+    .subcategory-title {
+      display: grid;
+      grid-template-columns: 122px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #d4e4f6;
+      background: #eaf4ff;
+      border-radius: 7px 7px 0 0;
+    }
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      border-radius: 5px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .child-cause-area {
+      margin: 10px 10px 10px 28px;
+      padding: 10px 0 0 14px;
+      border-left: 3px solid #a9c9eb;
+    }
+    .child-cause-title {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
     .status {
       font-size: 13px;
       color: var(--muted);
@@ -742,15 +783,25 @@ INDEX_HTML = r"""<!doctype html>
           } else {
             item.items = Array.isArray(item.items) ? item.items : [];
             const sub = document.createElement("div");
-            sub.className = "nested item";
+            sub.className = "item fishbone-subcategory";
             const subHead = document.createElement("div");
-            subHead.className = "item-head";
+            subHead.className = "subcategory-title";
+            const badge = document.createElement("span");
+            badge.className = "level-badge";
+            badge.textContent = "Subcategory";
+            subHead.appendChild(badge);
             subHead.appendChild(input(item.subcategory, value => item.subcategory = value, "Subcategory"));
             subHead.appendChild(button("Remove", () => {
               category.items.splice(itemIndex, 1);
               renderForm();
             }));
             sub.appendChild(subHead);
+            const childArea = document.createElement("div");
+            childArea.className = "child-cause-area";
+            const childTitle = document.createElement("div");
+            childTitle.className = "child-cause-title";
+            childTitle.textContent = "Child causes";
+            childArea.appendChild(childTitle);
             item.items.forEach((child, childIndex) => {
               const line = document.createElement("div");
               line.className = "inline";
@@ -761,14 +812,15 @@ INDEX_HTML = r"""<!doctype html>
                   renderForm();
                 })
               );
-              sub.appendChild(line);
+              childArea.appendChild(line);
             });
-            sub.appendChild(button("Add Child Cause", () => {
+            childArea.appendChild(button("Add Child Cause", () => {
               if (item.items.length < limits.children) {
                 item.items.push("New child cause");
                 renderForm();
               }
             }, item.items.length >= limits.children));
+            sub.appendChild(childArea);
             box.appendChild(sub);
           }
         });
