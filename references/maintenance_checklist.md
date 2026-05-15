@@ -34,6 +34,14 @@ Use this checklist before finishing changes to `brainstorm-diagrams`.
 - Keep `stresscases/<diagram-type>/` for optional visual stress review.
 - Run `cmd /c fishbone_tool.cmd verify` after changes to double-click menu behavior or verification routing.
 
+## Browser Builder Changes
+
+- Manual acceptance on 2026-05-15 covered `diagram_builder.cmd`: New, Load File, Save JSON, Save As, Render SVG, Export PNG, Recent, Help, and Esc-close behavior; no issues were found.
+- Keep the builder as a local editor for the existing JSON contracts, not a separate schema.
+- Keep top-level actions compact enough to fit in one row: New, Load File, Save JSON, Save As, Render SVG, Export PNG, Work Folder, Help.
+- Keep `scripts/verify_testcases.py` covering builder template loading, loaded JSON/Markdown parsing, work JSON save, SVG render, PNG export, PNG/SVG dimension match, unsafe name rejection, preview zoom UI, Recent, Help, Save As, and warning-not-blocking validation.
+- After builder UI changes, run `scripts/verify_testcases.py` and manually smoke-test `diagram_builder.cmd` when button flow, file loading, browser save dialogs, or modal behavior changes.
+
 ## Full Verification Set
 
 Run this set before closing a substantial change:
