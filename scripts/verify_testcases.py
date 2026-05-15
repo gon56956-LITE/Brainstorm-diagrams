@@ -1731,6 +1731,23 @@ def verify_diagram_builder_load_file_ui(index_html: str) -> None:
         'id="formErrors"',
         "collectValidationErrors",
         "updateValidation",
+        'id="helpBtn"',
+        'id="helpDialog"',
+        "openHelpDialog",
+        "closeHelpDialog",
+        "Workflow",
+        "File Types",
+        "Diagram Limits",
+        "latest 12 work files",
+        'event.key === "Escape"',
+        "main-toolbar",
+        "Fishbone needs at least",
+        "Exclusion tree needs at least",
+        "collectValidationWarnings",
+        "confirmValidationWarnings",
+        "works best with",
+        "Continue rendering this draft?",
+        "normalized to the current simplified model",
     ]
     missing = [text for text in required if text not in index_html]
     if missing:
@@ -1741,6 +1758,17 @@ def verify_diagram_builder_load_file_ui(index_html: str) -> None:
     hits = [text for text in forbidden if text in index_html]
     if hits:
         raise AssertionError(f"diagram builder toolbar should use compact Save As actions, found: {hits}")
+    if ".toolbar {\n      display: flex;\n      flex-wrap: nowrap;" in index_html:
+        raise AssertionError("diagram builder should not force all toolbar instances to nowrap")
+    if 'class="toolbar main-toolbar"' not in index_html:
+        raise AssertionError("diagram builder top action bar should use a dedicated main-toolbar class")
+    forbidden_hard_minimums = [
+        "Fishbone needs at least ${LIMITS.fishbone.minCategories}",
+        "Exclusion tree needs at least ${LIMITS.exclusion_tree.minChecks}",
+    ]
+    hits = [text for text in forbidden_hard_minimums if text in index_html]
+    if hits:
+        raise AssertionError(f"diagram builder should warn, not hard-block, below recommended counts: {hits}")
 
 
 def verify_diagram_builder_preview_zoom_ui(index_html: str) -> None:
