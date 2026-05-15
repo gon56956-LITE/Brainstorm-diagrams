@@ -783,7 +783,7 @@ INDEX_HTML = r"""<!doctype html>
         <h3>Diagram Limits</h3>
         <ul>
           <li>Fishbone: recommended 4-8 categories, up to 5 primary entries per category, up to 3 child causes per subcategory.</li>
-          <li>Fault Tree: 1 top event, up to 5 first-level intermediate events, up to 4 children per intermediate event, currently supports second-level intermediate events.</li>
+          <li>Fault Tree: 1 top event, recommended 3-5 first-level intermediate events, up to 8 first-level intermediate events, up to 4 children per intermediate event, currently supports second-level intermediate events.</li>
           <li>Exclusion Tree: 1 target problem, recommended 3-6 sequential check points, each check has one Yes path and one No cause card.</li>
           <li>Drafts below the recommended count can still render after confirmation, but may not be useful for review.</li>
         </ul>
@@ -794,7 +794,7 @@ INDEX_HTML = r"""<!doctype html>
   <script>
     const LIMITS = {
       fishbone: { categories: 8, minCategories: 4, entries: 5, children: 3 },
-      fault_tree: { first: 5, children: 4, nestedChildren: 4 },
+      fault_tree: { first: 8, recommendedFirst: 5, minFirst: 3, children: 4, nestedChildren: 4 },
       exclusion_tree: { checks: 6, minChecks: 3 }
     };
     const RECENT_KEY = "brainstormDiagramBuilderRecent";
@@ -970,6 +970,13 @@ INDEX_HTML = r"""<!doctype html>
         const categories = Array.isArray(model.categories) ? model.categories : [];
         if (categories.length > 0 && categories.length < LIMITS.fishbone.minCategories) {
           warnings.push(`Fishbone works best with ${LIMITS.fishbone.minCategories}-${LIMITS.fishbone.categories} categories.`);
+        }
+      } else if (currentType() === "fault_tree") {
+        const children = Array.isArray(model.tree && model.tree.children) ? model.tree.children : [];
+        if (children.length > 0 && children.length < LIMITS.fault_tree.minFirst) {
+          warnings.push(`Fault tree works best with at least ${LIMITS.fault_tree.minFirst} first-level events.`);
+        } else if (children.length > LIMITS.fault_tree.recommendedFirst && children.length <= LIMITS.fault_tree.first) {
+          warnings.push(`Fault tree review is clearest with ${LIMITS.fault_tree.minFirst}-${LIMITS.fault_tree.recommendedFirst} first-level events; use up to ${LIMITS.fault_tree.first} when the source needs it.`);
         }
       } else if (currentType() === "exclusion_tree") {
         const checks = Array.isArray(model.checks) ? model.checks : [];
@@ -1513,7 +1520,7 @@ INDEX_HTML = r"""<!doctype html>
       formRoot.appendChild(detail);
 
       const limits = LIMITS.fault_tree;
-      const events = section("First-Level Events", `Up to ${limits.first} first-level intermediate events. Each intermediate event supports up to ${limits.children} direct children. Nested intermediate events can contain up to ${limits.nestedChildren} basic leaves.`);
+      const events = section("First-Level Events", `Recommended ${limits.minFirst}-${limits.recommendedFirst} first-level intermediate events; maximum ${limits.first}. Each intermediate event supports up to ${limits.children} direct children. Nested intermediate events can contain up to ${limits.nestedChildren} basic leaves.`);
       events.querySelector(".section-title").appendChild(button("Add Event", () => {
         if (model.tree.children.length < limits.first) {
           model.tree.children.push({ id: String(model.tree.children.length + 1), type: "intermediate_event", label: "New Event", gate: "OR", children: [] });

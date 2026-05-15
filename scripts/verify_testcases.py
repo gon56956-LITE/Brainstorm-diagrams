@@ -79,6 +79,7 @@ FAULT_TREE_TESTCASE_PAIRS = [
     ("fault-tree.mixed-gates.example.json", "fault-tree.mixed-gates.output.svg"),
     ("fault-tree.nested-gates.example.json", "fault-tree.nested-gates.output.svg"),
     ("fault-tree.multi-nested.example.json", "fault-tree.multi-nested.output.svg"),
+    ("fault-tree.eight-branches.example.json", "fault-tree.eight-branches.output.svg"),
 ]
 
 EXCLUSION_TREE_TESTCASE_PAIRS = [
@@ -117,6 +118,7 @@ def main() -> int:
         verify_fault_tree_svg_basics(FAULT_TREE_TESTCASES / output_name)
     verify_fault_tree_nested_gates(FAULT_TREE_TESTCASES / "fault-tree.nested-gates.output.svg")
     verify_fault_tree_multi_nested(FAULT_TREE_TESTCASES / "fault-tree.multi-nested.output.svg")
+    verify_fault_tree_eight_branches(FAULT_TREE_TESTCASES / "fault-tree.eight-branches.output.svg")
 
     for _, output_name in EXCLUSION_TREE_TESTCASE_PAIRS:
         verify_exclusion_tree_svg_basics(EXCLUSION_TREE_TESTCASES / output_name)
@@ -213,6 +215,8 @@ def verify_fault_tree_svg_basics(path: Path) -> None:
         raise AssertionError(f"{path.name}: expected one fault-event-detail-panel, got {len(detail_panels)}")
 
     verify_fault_tree_basic_events(root, path.name)
+    verify_fault_tree_event_text_integrity(root, path.name)
+    verify_fault_tree_connectors_avoid_top_block(root, path.name)
     verify_fault_event_rects_within_canvas(root, path.name)
 
     text = path.read_text(encoding="utf-8").lower()
@@ -573,18 +577,74 @@ def verify_fault_tree_basic_events(root: ET.Element, label: str) -> None:
         raise AssertionError(f"{label}: expected at least one content-sized basic event card")
 
 
+def verify_fault_tree_event_text_integrity(root: ET.Element, label: str) -> None:
+    protected_classes = [
+        "fault-top-event",
+        "fault-intermediate-event",
+        "fault-basic-event",
+    ]
+    for group in root.iter():
+        if not group.tag.endswith("g"):
+            continue
+        class_name = group.attrib.get("class", "")
+        if not any(token in class_name for token in protected_classes):
+            continue
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        texts = [child for child in list(group) if child.tag.endswith("text")]
+        if not rects:
+            raise AssertionError(f"{label}: fault event group missing rect")
+        rect = rects[0]
+        rect_y = float(rect.attrib.get("y", "0"))
+        rect_h = float(rect.attrib.get("height", "0"))
+        for text in texts:
+            value = text.text or ""
+            if "..." in value:
+                raise AssertionError(f"{label}: fault event text must not be ellipsized: {value}")
+            text_y = float(text.attrib.get("y", "0"))
+            if text_y < rect_y + 16 or text_y > rect_y + rect_h - 8:
+                raise AssertionError(f"{label}: fault event text should stay inside its content-sized card")
+
+
+def verify_fault_tree_connectors_avoid_top_block(root: ET.Element, label: str) -> None:
+    top_blocks = [element for element in root.iter() if element.attrib.get("id") == "top-event-block"]
+    if len(top_blocks) != 1:
+        return
+    top = top_blocks[0]
+    top_x = float(top.attrib.get("x", "0"))
+    top_y = float(top.attrib.get("y", "0"))
+    top_w = float(top.attrib.get("width", "0"))
+    top_h = float(top.attrib.get("height", "0"))
+    top_right = top_x + top_w
+    top_bottom = top_y + top_h
+
+    for line in root.iter():
+        if not line.tag.endswith("line"):
+            continue
+        x1 = float(line.attrib.get("x1", "0"))
+        x2 = float(line.attrib.get("x2", "0"))
+        y1 = float(line.attrib.get("y1", "0"))
+        y2 = float(line.attrib.get("y2", "0"))
+        if abs(y1 - y2) > 0.1:
+            continue
+        line_left = min(x1, x2)
+        line_right = max(x1, x2)
+        overlaps_top_x = line_left < top_right and line_right > top_x
+        crosses_top_y = top_y < y1 < top_bottom
+        if overlaps_top_x and crosses_top_y:
+            raise AssertionError(f"{label}: horizontal connector crosses through the top event block")
+
+
 def verify_fault_tree_nested_gates(path: Path) -> None:
     root = ET.parse(path).getroot()
-    text_values = [element.text or "" for element in root.iter() if element.tag.endswith("text")]
+    svg_text = path.read_text(encoding="utf-8")
     required_labels = [
         "Power Path Issue",
-        "Fuse Opens Under",
-        "Startup Surge",
+        "Fuse Opens Under Startup",
+        "Surge",
         "Control Path Issue",
-        "Ready Signal Not",
-        "Detected",
+        "Ready Signal Not Detected",
     ]
-    missing = [label for label in required_labels if label not in text_values]
+    missing = [label for label in required_labels if label not in svg_text]
     if missing:
         raise AssertionError(f"{path.name}: missing expected nested-gate labels: {missing}")
 
@@ -625,6 +685,48 @@ def verify_fault_tree_multi_nested(path: Path) -> None:
     for nested_x, nested_y in nested_centers:
         if not (nested_x < safety_x and nested_y > safety_y):
             raise AssertionError(f"{path.name}: nested intermediate events must branch left and below Safety Path")
+
+
+def verify_fault_tree_eight_branches(path: Path) -> None:
+    root = ET.parse(path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError(f"{path.name}: root is not svg")
+
+    svg_text = path.read_text(encoding="utf-8")
+    required_labels = [
+        "Laser Source",
+        "Instability",
+        "Optical Coupling",
+        "Drift",
+        "Thermal Control",
+        "Failure",
+        "Electrical Drive",
+        "Abnormality",
+        "Package Mechanical",
+        "Stress",
+        "Material Process",
+        "Weakness",
+        "External Environment",
+        "Overstress",
+        "Measurement System",
+        "Error",
+    ]
+    missing = [label for label in required_labels if label not in svg_text]
+    if missing:
+        raise AssertionError(f"{path.name}: expected all eight first-level branches to render, missing labels: {missing}")
+
+    intermediate_events = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "fault-intermediate-event" in element.attrib.get("class", "")
+    ]
+    if len(intermediate_events) != 8:
+        raise AssertionError(f"{path.name}: expected 8 first-level intermediate events, got {len(intermediate_events)}")
+
+    svg_text = path.read_text(encoding="utf-8")
+    if "only the first" in svg_text:
+        raise AssertionError(f"{path.name}: fault tree must not truncate eight first-level branches")
+    verify_fault_tree_branch_connectors(root, path.name, min_trunks=8, min_branches=16)
 
 
 def fault_event_centers_by_label(root: ET.Element, label_fragments: list[str]) -> list[tuple[float, float]]:
@@ -1743,6 +1845,8 @@ def verify_diagram_builder_load_file_ui(index_html: str) -> None:
         "main-toolbar",
         "Fishbone needs at least",
         "Exclusion tree needs at least",
+        "recommended 3-5 first-level intermediate events",
+        "Fault tree review is clearest",
         "collectValidationWarnings",
         "confirmValidationWarnings",
         "works best with",

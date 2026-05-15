@@ -7,7 +7,7 @@ description: Generate clean, PPT-ready structured brainstorming and analysis dia
 
 Use this skill to create structured thinking diagrams for brainstorming, root-cause analysis, product design, process design, and solution exploration.
 
-Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, and `diagram_type="exclusion_tree"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting is currently fishbone-only. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
+Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, and `diagram_type="exclusion_tree"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone and fault tree. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
 
 ```text
 鱼骨图工具.cmd
@@ -150,15 +150,15 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 ## Workflow
 
 1. For structured Markdown/JSON, normalize the user input into the selected diagram data model.
-2. For natural-language source text, first extract or confirm `topic`, domain-specific `categories`, and primary `items` using `references/natural_language_extraction.md`; use `references/natural_language_prompt_template.md` as the execution template when drafting from raw text.
+2. For natural-language source text, first choose the diagram type, then extract the appropriate structured Markdown using `references/natural_language_extraction.md`; use `references/natural_language_prompt_template.md` as the execution template when drafting from raw text.
 3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md`, `scripts/new_fault_tree.py <name> --format md`, or `scripts/new_exclusion_tree.py <name> --format md`; use `--format json` when needed.
-4. For a Codex-assisted natural-language fishbone draft, write the extracted Markdown to `work/fishbone/<name>.md`; use safe file stems only.
+4. For a Codex-assisted natural-language fishbone or fault-tree draft, write the extracted Markdown to `work/<diagram-type>/<name>.md`; use safe file stems only.
 5. Render a fishbone work input with `scripts/render_work.py <name>`, a fault-tree work input with `scripts/render_fault_tree_work.py <name>`, or an exclusion-tree work input with `scripts/render_exclusion_tree_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
 6. Optionally run `scripts/export_png.py <name>` for fishbone, `scripts/export_fault_tree_png.py <name>` for fault tree, or `scripts/export_exclusion_tree_png.py <name>` for exclusion tree when the user needs a PNG for quick sharing.
 7. For non-technical editing, run `diagram_builder.cmd` or `scripts/diagram_builder_server.py`; the browser UI should save JSON, render SVG, and export PNG using the same work folders and renderers.
 8. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
 9. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
-10. For natural-language fishbone drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/` as examples, not as generated output storage.
+10. For natural-language drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/` and `naturalcases/fault-tree/` as examples, not as generated output storage.
 11. For naturalcase edits, run `scripts/verify_naturalcases.py`.
 12. For renderer, badge, testcase, template, work-entrypoint, browser-builder, extraction-doc, or export edits, run `scripts/verify_testcases.py` before finishing.
 13. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect the relevant `stresscases/<diagram-type>/full-stress.svg` by eye using `references/visual_review_checklist.md`.
@@ -197,7 +197,7 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Place categories horizontally by estimated left/right footprint instead of simple equal spacing.
 - Use `testcases/fishbone/fishbone.five-primary.*` and `testcases/fishbone/fishbone.five-subcategories.*` as stress tests for the densest supported category content.
 - Use `stresscases/fishbone/full-stress.*` as an optional manual visual stresscase; it is deliberately denser than normal regression testcases.
-- Use `naturalcases/fishbone/*.source.txt` and `naturalcases/fishbone/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
+- Use `naturalcases/fishbone/*.source.txt`, `naturalcases/fishbone/*.expected.md`, `naturalcases/fault-tree/*.source.txt`, and `naturalcases/fault-tree/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
 - Keep `templates/fishbone.template.*`, `templates/fault-tree.template.*`, and `templates/exclusion-tree.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
 - Keep `assets/lucide-candidates/` as the reusable Lucide badge library. `scripts/verify_testcases.py` protects required mapped icons and verifies the candidate catalog can still render.
 - Keep user-authored fishbone files in `work/fishbone/`; do not mix them into `testcases/fishbone/`, `templates/`, `stresscases/fishbone/`, or `naturalcases/fishbone/`.
@@ -211,6 +211,7 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Use top-down orthogonal connectors from parent event to gate, then to child events.
 - Render AND and OR gates with visually distinct symbols and stable classes: `fault-gate-and` and `fault-gate-or`.
 - Use nested intermediate events when one first-level event subtree needs both AND and OR logic; do not mix AND/OR among direct children of one gate.
+- Prefer 3-5 first-level intermediate events for review clarity, but allow up to 8 first-level events when the source has distinct major branches.
 - Render intermediate events as pale-blue rounded rectangles and basic events as white rounded rectangles without internal marker icons.
 - Size basic event cards from their label content while preserving readable minimum dimensions.
 - Use `layout_mode="review_compact"` by default: first-level events are horizontal, and basic events stack vertically under their parent to avoid extreme wide canvases.
@@ -237,7 +238,7 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 
 - Implemented diagram types: `fishbone`, `fault_tree`, `exclusion_tree`.
 - Each main category renders up to five primary entries; each subcategory renders up to three child causes.
-- Fault tree MVP supports a top event, event detail panel, AND/OR gates, intermediate events, and basic event leaves. It does not calculate probabilities, simplify Boolean logic, or support dynamic fault tree semantics.
+- Fault tree MVP supports a top event, event detail panel, AND/OR gates, up to 8 first-level intermediate events, second-level intermediate events, and basic event leaves. It does not calculate probabilities, simplify Boolean logic, or support dynamic fault tree semantics.
 - Exclusion tree MVP supports a target problem, 3-6 sequential checkpoints, Yes/Pass continuation, No/Fail conclusion cards, a final pass conclusion, legend, and how-to-use panel. It does not support complex nested decision trees or multi-condition branching.
 - Natural-language extraction is a Codex skill workflow, not an offline local script or `.cmd` menu feature.
 - Redrawing existing fishbone files or whiteboard photos is planned but not implemented.

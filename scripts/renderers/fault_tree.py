@@ -20,24 +20,27 @@ CANVAS_WIDTH_STEP = 80
 CANVAS_HEIGHT_STEP = 60
 CANVAS_BOTTOM_MARGIN = 70
 MAX_DEPTH = 3
-MAX_FIRST_LEVEL_EVENTS = 5
+MAX_FIRST_LEVEL_EVENTS = 8
 MAX_CHILDREN_PER_EVENT = 4
 
-TOP_EVENT_W = 310
+TOP_EVENT_W = 460
 TOP_EVENT_H = 110
-INTERMEDIATE_W = 230
+INTERMEDIATE_W = 280
 INTERMEDIATE_H = 78
-BASIC_W = 170
+BASIC_W = 210
 BASIC_H = 62
-BASIC_MAX_W = 250
+BASIC_MAX_W = 320
 BASIC_TEXT_PADDING_X = 22
 BASIC_TEXT_PADDING_Y = 18
-BASIC_MAX_LINES = 4
+TOP_EVENT_TEXT_PADDING_X = 76
+TOP_EVENT_TEXT_PADDING_Y = 22
+INTERMEDIATE_TEXT_PADDING_X = 20
+INTERMEDIATE_TEXT_PADDING_Y = 18
 SUBTREE_GAP = 46
 COMPACT_COLUMN_GAP = 34
 COMPACT_CHILD_GAP = 14
-COMPACT_BRANCH_TOP_Y = 348
 COMPACT_BRANCH_GAP = 24
+PARENT_CHILD_GAP = 128
 EVENT_DETAIL_MAX_H = 230
 EVENT_DETAIL_MAX_LINES = 5
 
@@ -499,17 +502,18 @@ def build_layout_tree(node: FaultNode, depth: int) -> LayoutNode:
     return layout
 
 
-def assign_positions(layout: LayoutNode, left: float, depth: int) -> None:
+def assign_positions(layout: LayoutNode, left: float, depth: int, y: float | None = None) -> None:
     layout.x = left + layout.subtree_width / 2
-    layout.y = LEVEL_Y[min(depth, len(LEVEL_Y) - 1)]
+    layout.y = LEVEL_Y[min(depth, len(LEVEL_Y) - 1)] if y is None else y
     if not layout.children:
         return
 
     child_total = sum(child.subtree_width for child in layout.children)
     child_total += SUBTREE_GAP * max(0, len(layout.children) - 1)
     child_left = left + (layout.subtree_width - child_total) / 2
+    child_y = layout.y + layout.height + PARENT_CHILD_GAP
     for child in layout.children:
-        assign_positions(child, child_left, depth + 1)
+        assign_positions(child, child_left, depth + 1, child_y)
         child_left += child.subtree_width + SUBTREE_GAP
 
 
@@ -538,9 +542,10 @@ def assign_compact_positions(layout: LayoutNode, canvas_width: int) -> None:
     column_widths = [left + right for left, right in column_extents]
     total_width = sum(column_widths) + COMPACT_COLUMN_GAP * max(0, len(columns) - 1)
     left = max(SIDE_MARGIN, (canvas_width - total_width) / 2)
+    first_branch_y = layout.y + layout.height + PARENT_CHILD_GAP
     for child, (left_extent, _right_extent), column_width in zip(columns, column_extents, column_widths):
         center_x = left + left_extent
-        assign_compact_branch(child, center_x, COMPACT_BRANCH_TOP_Y)
+        assign_compact_branch(child, center_x, first_branch_y)
         left += column_width + COMPACT_COLUMN_GAP
 
 
@@ -574,7 +579,7 @@ def assign_compact_branch(layout: LayoutNode, center_x: float, y: float) -> floa
     if not layout.children:
         return y + layout.height
 
-    child_y = y + layout.height + 118
+    child_y = y + layout.height + PARENT_CHILD_GAP
     for child in layout.children:
         child_x = center_x - COMPACT_BRANCH_GAP - child.width / 2
         child_bottom = assign_compact_branch(child, child_x, child_y)
@@ -584,10 +589,28 @@ def assign_compact_branch(layout: LayoutNode, center_x: float, y: float) -> floa
 
 def node_size(node: FaultNode, depth: int) -> tuple[int, int]:
     if depth == 0 or node.kind == "top_event":
-        return TOP_EVENT_W, TOP_EVENT_H
+        return top_event_size(node)
     if node.kind == "basic_event" or not node.children:
         return basic_event_size(node)
-    return INTERMEDIATE_W, INTERMEDIATE_H
+    return intermediate_event_size(node)
+
+
+def top_event_size(node: FaultNode) -> tuple[int, int]:
+    text = join_bilingual(node.label, node.label_zh)
+    text_width = TOP_EVENT_W - TOP_EVENT_TEXT_PADDING_X - 20
+    char_limit = max(8, int(text_width / (24 * 0.55)))
+    line_count = len(wrap_label(text, char_limit, None))
+    height = max(TOP_EVENT_H, TOP_EVENT_TEXT_PADDING_Y * 2 + line_count * (24 + 4))
+    return TOP_EVENT_W, height
+
+
+def intermediate_event_size(node: FaultNode) -> tuple[int, int]:
+    text = join_bilingual(node.label, node.label_zh)
+    text_width = INTERMEDIATE_W - INTERMEDIATE_TEXT_PADDING_X * 2
+    char_limit = max(8, int(text_width / (18 * 0.55)))
+    line_count = len(wrap_label(text, char_limit, None))
+    height = max(INTERMEDIATE_H, INTERMEDIATE_TEXT_PADDING_Y * 2 + line_count * (18 + 4))
+    return INTERMEDIATE_W, height
 
 
 def basic_event_size(node: FaultNode) -> tuple[int, int]:
@@ -596,7 +619,7 @@ def basic_event_size(node: FaultNode) -> tuple[int, int]:
     width = round_up(max(BASIC_W, min(BASIC_MAX_W, math.ceil(estimated))), 10)
     text_width = width - BASIC_TEXT_PADDING_X * 2
     char_limit = max(8, int(text_width / (15 * 0.55)))
-    line_count = len(wrap_label(text, char_limit, BASIC_MAX_LINES))
+    line_count = len(wrap_label(text, char_limit, None))
     height = max(BASIC_H, BASIC_TEXT_PADDING_Y * 2 + line_count * 19)
     return width, height
 
@@ -863,7 +886,7 @@ def render_node(layout: LayoutNode) -> str:
             f'<rect id="top-event-block" x="{x:.1f}" y="{y:.1f}" width="{layout.width}" height="{layout.height}" rx="15" fill="{PALETTE["navy"]}" filter="url(#faultSoftShadow)"/>',
             render_warning_icon(layout.x - layout.width / 2 + 36, y + 38),
         ]
-        lines.extend(render_centered_text(node, layout.x + 22, y + layout.height / 2, layout.width - 72, 24, "#FFFFFF", 3, bold=True))
+        lines.extend(render_centered_text(node, layout.x + 22, y + layout.height / 2, layout.width - 72, 24, "#FFFFFF", None, bold=True))
         lines.append("</g>")
         return "\n".join(lines)
 
@@ -884,9 +907,8 @@ def render_node(layout: LayoutNode) -> str:
         f'<g class="{class_name}">',
         f'<rect x="{x:.1f}" y="{y:.1f}" width="{layout.width}" height="{layout.height}" rx="11" fill="{fill}" stroke="{stroke}" stroke-width="1.8"/>',
     ]
-    max_lines = BASIC_MAX_LINES if node.kind == "basic_event" or not node.children else 3
     text_width = layout.width - (BASIC_TEXT_PADDING_X * 2 if node.kind == "basic_event" or not node.children else 20)
-    lines.extend(render_centered_text(node, layout.x, label_y, text_width, text_size, PALETTE["navy"], max_lines, bold=node.kind != "basic_event"))
+    lines.extend(render_centered_text(node, layout.x, label_y, text_width, text_size, PALETTE["navy"], None, bold=node.kind != "basic_event"))
     lines.append("</g>")
     return "\n".join(lines)
 
@@ -898,7 +920,7 @@ def render_centered_text(
     width: float,
     font_size: int,
     color: str,
-    max_lines: int,
+    max_lines: int | None,
     *,
     bold: bool,
 ) -> list[str]:
@@ -1047,7 +1069,7 @@ def clean_text(value: Any) -> str:
     return " ".join(str(value).replace("\r", " ").replace("\n", " ").split()).strip()
 
 
-def wrap_label(text: str, limit: int, max_lines: int) -> list[str]:
+def wrap_label(text: str, limit: int, max_lines: int | None) -> list[str]:
     if not text:
         return [""]
     words = text.split()
@@ -1065,7 +1087,7 @@ def wrap_label(text: str, limit: int, max_lines: int) -> list[str]:
                 current = word
         if current:
             lines.append(current)
-    if len(lines) > max_lines:
+    if max_lines is not None and len(lines) > max_lines:
         lines = lines[:max_lines]
         lines[-1] = truncate(lines[-1], max(4, limit - 1))
     return lines

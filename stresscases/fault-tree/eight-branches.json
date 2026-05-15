@@ -1,0 +1,113 @@
+{
+  "diagram_type": "fault_tree",
+  "title": "Fault Tree Analysis",
+  "subtitle": "Dense Eight-Branch Review",
+  "output": "svg",
+  "theme": "business_simple",
+  "show_legend": true,
+  "top_event": {
+    "id": "T0",
+    "label": "Optical Transceiver Output Power Becomes Unstable At High Temperature"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "Stresscase for eight distinct first-level branches. It should expand canvas width or height instead of truncating major branches.",
+    "bullets": [
+      "Recommended review range remains 3-5 branches",
+      "Eight branches are allowed when the source has distinct major logic paths"
+    ]
+  },
+  "tree": {
+    "gate": "OR",
+    "children": [
+      {
+        "id": "1",
+        "type": "intermediate_event",
+        "label": "Laser Source Instability",
+        "gate": "OR",
+        "children": [
+          { "id": "1.1", "type": "basic_event", "label": "High-temperature laser margin is too low" },
+          { "id": "1.2", "type": "basic_event", "label": "Latent wafer fabrication defect appears under stress" },
+          { "id": "1.3", "type": "basic_event", "label": "Laser aging rate is higher than expected" }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "intermediate_event",
+        "label": "Optical Coupling Efficiency Degrades",
+        "gate": "OR",
+        "children": [
+          { "id": "2.1", "type": "basic_event", "label": "Lens alignment shifts during thermal exposure" },
+          { "id": "2.2", "type": "basic_event", "label": "Fiber position changes due to package stress" },
+          { "id": "2.3", "type": "basic_event", "label": "Contamination accumulates on optical surface" }
+        ]
+      },
+      {
+        "id": "3",
+        "type": "intermediate_event",
+        "label": "Thermal Control Failure",
+        "gate": "AND",
+        "children": [
+          { "id": "3.1", "type": "basic_event", "label": "Heat generation is higher than expected" },
+          { "id": "3.2", "type": "basic_event", "label": "Thermal path resistance is too high" },
+          { "id": "3.3", "type": "basic_event", "label": "TEC control loop becomes unstable" }
+        ]
+      },
+      {
+        "id": "4",
+        "type": "intermediate_event",
+        "label": "Electrical Drive Abnormality",
+        "gate": "OR",
+        "children": [
+          { "id": "4.1", "type": "basic_event", "label": "Driver circuit oscillates under high temperature" },
+          { "id": "4.2", "type": "basic_event", "label": "Power supply noise couples into current path" },
+          { "id": "4.3", "type": "basic_event", "label": "Current limit setting is incorrect" }
+        ]
+      },
+      {
+        "id": "5",
+        "type": "intermediate_event",
+        "label": "Package Mechanical Stress",
+        "gate": "OR",
+        "children": [
+          { "id": "5.1", "type": "basic_event", "label": "CTE mismatch creates optical assembly strain" },
+          { "id": "5.2", "type": "basic_event", "label": "Package design lacks stress relief" },
+          { "id": "5.3", "type": "basic_event", "label": "Fiber routing adds force to optical assembly" }
+        ]
+      },
+      {
+        "id": "6",
+        "type": "intermediate_event",
+        "label": "Material Or Process Weakness",
+        "gate": "OR",
+        "children": [
+          { "id": "6.1", "type": "basic_event", "label": "Adhesive batch variation affects fixation strength" },
+          { "id": "6.2", "type": "basic_event", "label": "Incorrect curing profile leaves residual stress" },
+          { "id": "6.3", "type": "basic_event", "label": "Solder voids increase current path resistance" }
+        ]
+      },
+      {
+        "id": "7",
+        "type": "intermediate_event",
+        "label": "External Environment Overstress",
+        "gate": "OR",
+        "children": [
+          { "id": "7.1", "type": "basic_event", "label": "Operating temperature exceeds specification" },
+          { "id": "7.2", "type": "basic_event", "label": "Customer system airflow is insufficient" },
+          { "id": "7.3", "type": "basic_event", "label": "Input power becomes unstable in application" }
+        ]
+      },
+      {
+        "id": "8",
+        "type": "intermediate_event",
+        "label": "Measurement System Error",
+        "gate": "OR",
+        "children": [
+          { "id": "8.1", "type": "basic_event", "label": "Power meter calibration drift" },
+          { "id": "8.2", "type": "basic_event", "label": "Temperature chamber setup is incorrect" },
+          { "id": "8.3", "type": "basic_event", "label": "Data acquisition error reports false instability" }
+        ]
+      }
+    ]
+  }
+}

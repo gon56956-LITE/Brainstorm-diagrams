@@ -13,11 +13,11 @@
 #   -  = basic event leaf under the current ## or ###
 # Current MVP limits:
 #   top event: exactly 1
-#   first-level intermediate events: up to 5 sections marked with ##
+#   first-level intermediate events: recommended 3-5 sections marked with ##, maximum 8
 #   child events under each intermediate event: up to 4 total
 #   second-level intermediate events: use ###, and each can have up to 4 basic leaves
 #   event levels: top event, first-level intermediate, second-level intermediate, then basic leaves
-# If you need more than these limits, split the analysis into multiple diagrams.
+# If you need more than 8 first-level events, split the analysis into multiple diagrams.
 # Put direct basic-event bullets before any ### nested events in the same ## block.
 # Current renderer supports top event, event detail, AND/OR gates,
 # intermediate events, and basic event leaves. Do not add probability,

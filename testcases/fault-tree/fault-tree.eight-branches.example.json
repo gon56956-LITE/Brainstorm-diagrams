@@ -1,0 +1,105 @@
+{
+  "diagram_type": "fault_tree",
+  "title": "Fault Tree Analysis",
+  "subtitle": "Eight First-Level Events",
+  "output": "svg",
+  "theme": "business_simple",
+  "show_legend": true,
+  "top_event": {
+    "id": "T0",
+    "label": "Optical Transceiver Fails to Maintain Stable Output Power During High-Temperature Operation"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "This testcase protects the supported maximum of eight first-level fault branches.",
+    "bullets": [
+      "Recommended review range remains 3-5 first-level events",
+      "Renderer must not truncate 6-8 distinct major branches"
+    ]
+  },
+  "tree": {
+    "gate": "OR",
+    "children": [
+      {
+        "id": "1",
+        "type": "intermediate_event",
+        "label": "Laser Source Instability",
+        "gate": "OR",
+        "children": [
+          { "id": "1.1", "type": "basic_event", "label": "Laser chip margin low" },
+          { "id": "1.2", "type": "basic_event", "label": "ESD damage during handling" }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "intermediate_event",
+        "label": "Optical Coupling Drift",
+        "gate": "OR",
+        "children": [
+          { "id": "2.1", "type": "basic_event", "label": "Lens alignment shifts" },
+          { "id": "2.2", "type": "basic_event", "label": "Optical surface contamination" }
+        ]
+      },
+      {
+        "id": "3",
+        "type": "intermediate_event",
+        "label": "Thermal Control Failure",
+        "gate": "AND",
+        "children": [
+          { "id": "3.1", "type": "basic_event", "label": "Heat generation high" },
+          { "id": "3.2", "type": "basic_event", "label": "Thermal resistance high" }
+        ]
+      },
+      {
+        "id": "4",
+        "type": "intermediate_event",
+        "label": "Electrical Drive Abnormality",
+        "gate": "OR",
+        "children": [
+          { "id": "4.1", "type": "basic_event", "label": "Driver circuit oscillates" },
+          { "id": "4.2", "type": "basic_event", "label": "Power supply noise" }
+        ]
+      },
+      {
+        "id": "5",
+        "type": "intermediate_event",
+        "label": "Package Mechanical Stress",
+        "gate": "OR",
+        "children": [
+          { "id": "5.1", "type": "basic_event", "label": "CTE mismatch" },
+          { "id": "5.2", "type": "basic_event", "label": "Curing shrinkage stress" }
+        ]
+      },
+      {
+        "id": "6",
+        "type": "intermediate_event",
+        "label": "Material Process Weakness",
+        "gate": "OR",
+        "children": [
+          { "id": "6.1", "type": "basic_event", "label": "Adhesive batch variation" },
+          { "id": "6.2", "type": "basic_event", "label": "Solder voids" }
+        ]
+      },
+      {
+        "id": "7",
+        "type": "intermediate_event",
+        "label": "External Environment Overstress",
+        "gate": "OR",
+        "children": [
+          { "id": "7.1", "type": "basic_event", "label": "Operating temperature beyond spec" },
+          { "id": "7.2", "type": "basic_event", "label": "Poor customer airflow" }
+        ]
+      },
+      {
+        "id": "8",
+        "type": "intermediate_event",
+        "label": "Measurement System Error",
+        "gate": "OR",
+        "children": [
+          { "id": "8.1", "type": "basic_event", "label": "Power meter calibration drift" },
+          { "id": "8.2", "type": "basic_event", "label": "Test fixture contact unstable" }
+        ]
+      }
+    ]
+  }
+}

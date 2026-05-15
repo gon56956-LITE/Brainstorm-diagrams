@@ -6,13 +6,14 @@
     "Use gate AND when all child events must happen together.",
     "Use type intermediate_event for events that have child events.",
     "Use type basic_event for leaf events with no children.",
+    "Use 3-5 first-level events for review clarity; the renderer supports up to 8 when the source needs it.",
     "The current renderer ignores probability, Boolean formulas, and dynamic fault tree syntax."
   ],
   "_structure_guide": {
     "top_event": "Short name of the failure being analyzed.",
     "event_detail": "Longer explanation shown in the upper-left detail panel.",
     "tree.gate": "Gate between the top event and first-level events.",
-    "tree.children": "First-level intermediate events.",
+    "tree.children": "First-level intermediate events. Recommended 3-5, maximum 8.",
     "children_under_intermediate_event": "Can include direct basic_event leaves and nested intermediate_event groups."
   },
   "diagram_type": "fault_tree",

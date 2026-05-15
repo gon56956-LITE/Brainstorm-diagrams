@@ -1,16 +1,17 @@
 # Natural Language Review Checklist
 
-Use this checklist after Codex turns raw text into a fishbone Markdown draft. It checks semantic quality before or alongside visual review.
+Use this checklist after Codex turns raw text into an editable Markdown draft. It checks semantic quality before or alongside visual review.
 
 ## Source Fidelity
 
-- The topic preserves the source's central problem, failure mode, design challenge, or analysis question.
-- Category names come from the source domain, not from generic defaults unless the source explicitly asks for them.
-- Causes are traceable to the source text.
+- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition.
+- The topic or top event preserves the source's central problem, failure mode, design challenge, or analysis question.
+- Labels come from the source domain, not from generic defaults unless the source explicitly asks for them.
+- Causes, branches, and leaves are traceable to the source text.
 - The draft does not add unsupported facts, measurements, root-cause conclusions, or corrective actions.
 - Wording may be shortened or normalized, but meaning should not shift.
 
-## Structure
+## Fishbone Structure
 
 - The draft uses 4-8 categories.
 - Each category has 2-5 primary entries when the source supports them.
@@ -18,17 +19,30 @@ Use this checklist after Codex turns raw text into a fishbone Markdown draft. It
 - If the source does not ask for subcategories, default to category + primary causes only.
 - Similar causes are grouped under sensible categories rather than duplicated across multiple categories.
 
+## Fault Tree Structure
+
+- The draft uses `diagram_type: fault_tree`.
+- The top event is one specific undesired event, not a broad project title.
+- `Event Detail:` captures observations, scope, conditions, impact, or review focus from the source.
+- First-level intermediate events are logical cause branches.
+- Basic event leaves are concrete enough to test or review.
+- `Gate: OR` is used for independent possible causes.
+- `Gate: AND` is used only when the source explicitly says conditions must occur together.
+- Nested `###` intermediate events are used only when mixed logic or second-level decomposition is needed.
+- The draft does not imply a proven root cause unless the source states it.
+
 ## File Outputs
 
-- The editable fishbone draft is saved as `work/fishbone/<safe-name>.md`.
-- The rendered SVG is saved as `work/fishbone/<safe-name>.svg`.
-- PNG is exported only when useful, as `work/fishbone/<safe-name>.png`.
+- The editable draft is saved as `work/<diagram-type>/<safe-name>.md`.
+- The rendered SVG is saved as `work/<diagram-type>/<safe-name>.svg`.
+- PNG is exported only when useful, as `work/<diagram-type>/<safe-name>.png`.
 - Raw `.txt` is not passed directly to `scripts/generate_diagram.py` for semantic extraction.
 
 ## Review Questions
 
-- Would a domain reviewer recognize these categories as belonging to the source problem?
-- Are any categories just placeholders that should be replaced with source-specific wording?
-- Are any causes too speculative for the provided text?
+- Would a domain reviewer recognize these labels as belonging to the source problem?
+- Are any categories or branches just placeholders that should be replaced with source-specific wording?
+- Are any causes, branches, or gate relationships too speculative for the provided text?
 - Are important source phrases missing from the draft?
-- Does the resulting diagram invite useful brainstorming rather than imply a final proven root cause?
+- For fishbone, does the resulting diagram invite useful brainstorming rather than imply a final proven root cause?
+- For fault tree, does the diagram show logical failure decomposition without overstating proof?

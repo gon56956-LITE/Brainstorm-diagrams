@@ -1,0 +1,13 @@
+Create a fault tree analysis draft for an engineering review.
+
+Observed issue: the unit intermittently fails to complete cold startup after overnight storage. The failure appears after low-temperature soak and usually clears after a full power cycle. It has been seen on engineering samples from two assembly lots, but not on every unit.
+
+Evidence so far:
+- Input voltage droop was captured during inrush on two failing samples.
+- A power-good signal is sometimes delayed long enough that the controller does not enter its normal boot sequence.
+- Firmware logs sometimes stop before the ready handshake.
+- The start signal is generated only when the power-good line is stable and the controller exits boot.
+- Harness inspection found intermittent connector seating on one lot.
+- Thermal chamber records show the issue is more likely after cold soak than after room-temperature storage.
+
+The review goal is to break down possible logical causes for the top event, not to prove a final root cause yet. Use AND only where the source says conditions must happen together.

@@ -9,7 +9,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NATURALCASES = ROOT / "naturalcases" / "fishbone"
+NATURALCASES_ROOT = ROOT / "naturalcases"
+FISHBONE_NATURALCASES = NATURALCASES_ROOT / "fishbone"
+FAULT_TREE_NATURALCASES = NATURALCASES_ROOT / "fault-tree"
 PROMPT_TEMPLATE = ROOT / "references" / "natural_language_prompt_template.md"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
@@ -36,18 +38,28 @@ def main() -> int:
 
 
 def verify_directory() -> None:
-    if not NATURALCASES.exists():
+    if not NATURALCASES_ROOT.exists():
         raise AssertionError("Missing naturalcases directory")
 
-    for path in NATURALCASES.iterdir():
-        if path.is_dir():
-            raise AssertionError(f"Unexpected subdirectory in naturalcases: {path.name}")
+    allowed_dirs = {"fishbone", "fault-tree"}
+    for path in NATURALCASES_ROOT.iterdir():
         if path.name == "README.md":
             continue
-        if path.suffix.lower() in {".svg", ".png"}:
-            raise AssertionError(f"Generated output does not belong in naturalcases: {path.name}")
-        if not (path.name.endswith(".source.txt") or path.name.endswith(".expected.md")):
-            raise AssertionError(f"Unexpected file in naturalcases: {path.name}")
+        if not path.is_dir() or path.name not in allowed_dirs:
+            raise AssertionError(f"Unexpected entry in naturalcases: {path.name}")
+
+    for directory in [FISHBONE_NATURALCASES, FAULT_TREE_NATURALCASES]:
+        if not directory.exists():
+            raise AssertionError(f"Missing naturalcase directory: {directory.name}")
+        for path in directory.iterdir():
+            if path.is_dir():
+                raise AssertionError(f"Unexpected subdirectory in naturalcases/{directory.name}: {path.name}")
+            if path.name == "README.md":
+                continue
+            if path.suffix.lower() in {".svg", ".png"}:
+                raise AssertionError(f"Generated output does not belong in naturalcases/{directory.name}: {path.name}")
+            if not (path.name.endswith(".source.txt") or path.name.endswith(".expected.md")):
+                raise AssertionError(f"Unexpected file in naturalcases/{directory.name}: {path.name}")
 
 
 def verify_prompt_template() -> None:
@@ -55,12 +67,14 @@ def verify_prompt_template() -> None:
         raise AssertionError("Missing natural-language prompt template")
     text = PROMPT_TEMPLATE.read_text(encoding="utf-8")
     required_phrases = [
+        "Choose `fishbone` when the source asks for broad cause brainstorming",
+        "Choose `fault_tree` when the source asks for logical failure decomposition",
         "do not start from default fishbone categories",
         "Extract 4-8 domain-specific categories",
-        "Put 2-5 primary causes",
-        "Do not create subcategories or second-level causes",
+        "Extract one specific top event",
+        "Use `Gate: AND` only when the source states that child conditions must occur together",
         "If the source is too thin",
-        "Write structured Markdown to `work/fishbone/<safe-name>.md`",
+        "Write structured Markdown to `work/<diagram-type>/<safe-name>.md`",
         "references/natural_language_review_checklist.md",
     ]
     for phrase in required_phrases:
@@ -69,25 +83,47 @@ def verify_prompt_template() -> None:
 
 
 def verify_case_pairs() -> None:
-    sources = sorted(NATURALCASES.glob("*.source.txt"))
+    verify_fishbone_case_pairs()
+    verify_fault_tree_case_pairs()
+
+
+def verify_fishbone_case_pairs() -> None:
+    sources = sorted(FISHBONE_NATURALCASES.glob("*.source.txt"))
     if not sources:
-        raise AssertionError("No naturalcase sources found")
+        raise AssertionError("No fishbone naturalcase sources found")
 
     for source_path in sources:
         stem = source_path.name.removesuffix(".source.txt")
-        expected_path = NATURALCASES / f"{stem}.expected.md"
-        if not expected_path.exists():
-            raise AssertionError(f"Missing expected Markdown for {source_path.name}")
-        if not source_path.read_text(encoding="utf-8").strip():
-            raise AssertionError(f"Empty source: {source_path.name}")
-        if not expected_path.read_text(encoding="utf-8").strip():
-            raise AssertionError(f"Empty expected Markdown: {expected_path.name}")
+        expected_path = FISHBONE_NATURALCASES / f"{stem}.expected.md"
+        verify_source_expected_pair(source_path, expected_path)
         verify_expected_markdown_renders(expected_path)
         verify_expected_badge_mappings(stem, expected_path)
 
 
+def verify_fault_tree_case_pairs() -> None:
+    sources = sorted(FAULT_TREE_NATURALCASES.glob("*.source.txt"))
+    if not sources:
+        raise AssertionError("No fault-tree naturalcase sources found")
+
+    for source_path in sources:
+        stem = source_path.name.removesuffix(".source.txt")
+        expected_path = FAULT_TREE_NATURALCASES / f"{stem}.expected.md"
+        verify_source_expected_pair(source_path, expected_path)
+        verify_expected_markdown_renders(expected_path)
+        verify_fault_tree_expected_structure(expected_path)
+
+
+def verify_source_expected_pair(source_path: Path, expected_path: Path) -> None:
+    if not expected_path.exists():
+        raise AssertionError(f"Missing expected Markdown for {source_path.name}")
+    if not source_path.read_text(encoding="utf-8").strip():
+        raise AssertionError(f"Empty source: {source_path.name}")
+    if not expected_path.read_text(encoding="utf-8").strip():
+        raise AssertionError(f"Empty expected Markdown: {expected_path.name}")
+
+
 def verify_expected_markdown_renders(path: Path) -> None:
-    output_path = NATURALCASES / f"{path.stem}.tmp.svg"
+    output_path = path.parent / f"{path.stem}.tmp.svg"
     try:
         result = subprocess.run(
             [str(PYTHON), str(GENERATE), str(path), str(output_path)],
@@ -118,6 +154,53 @@ def verify_expected_badge_mappings(stem: str, path: Path) -> None:
     missing_icons = expected_icons - actual_icons
     if missing_icons:
         raise AssertionError(f"{path.name}: missing expected Lucide badge mappings: {sorted(missing_icons)}")
+
+
+def verify_fault_tree_expected_structure(path: Path) -> None:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from generate_diagram import parse_input
+
+    data = parse_input(path)
+    if data.get("diagram_type") != "fault_tree":
+        raise AssertionError(f"{path.name}: expected diagram_type=fault_tree")
+    if not str(data.get("top_event", {}).get("label", "")).strip():
+        raise AssertionError(f"{path.name}: fault-tree naturalcase must include a top event")
+    if not data.get("event_detail"):
+        raise AssertionError(f"{path.name}: fault-tree naturalcase must include event_detail")
+
+    children = data.get("tree", {}).get("children", [])
+    if not isinstance(children, list) or len(children) < 2:
+        raise AssertionError(f"{path.name}: fault-tree naturalcase should include at least two first-level events")
+
+    gates: set[str] = {str(data.get("tree", {}).get("gate", "OR")).upper()}
+    basic_count = 0
+    nested_intermediate_count = 0
+    for child in children:
+        if not isinstance(child, dict):
+            continue
+        gates.add(str(child.get("gate", "OR")).upper())
+        for grandchild in child.get("children", []):
+            if not isinstance(grandchild, dict):
+                continue
+            if grandchild.get("type") == "basic_event":
+                basic_count += 1
+            elif grandchild.get("type") == "intermediate_event":
+                nested_intermediate_count += 1
+                gates.add(str(grandchild.get("gate", "OR")).upper())
+                basic_count += sum(
+                    1
+                    for leaf in grandchild.get("children", [])
+                    if isinstance(leaf, dict) and leaf.get("type") == "basic_event"
+                )
+
+    if not gates <= {"AND", "OR"}:
+        raise AssertionError(f"{path.name}: fault-tree gates must be AND or OR only: {sorted(gates)}")
+    if not {"AND", "OR"} <= gates:
+        raise AssertionError(f"{path.name}: fault-tree naturalcase should demonstrate both AND and OR gates")
+    if nested_intermediate_count < 1:
+        raise AssertionError(f"{path.name}: fault-tree naturalcase should include one nested intermediate event")
+    if basic_count < 4:
+        raise AssertionError(f"{path.name}: fault-tree naturalcase should include several basic event leaves")
 
 
 if __name__ == "__main__":
