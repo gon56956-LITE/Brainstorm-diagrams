@@ -1715,12 +1715,32 @@ def verify_diagram_builder_load_file_ui(index_html: str) -> None:
         'id="fileInput"',
         "/api/parse-file",
         "loadSelectedFile",
+        'id="recentSelect"',
+        'id="loadRecentBtn"',
+        "rememberRecent",
+        "loadRecent",
+        'id="saveAsBtn"',
+        'id="saveAsDialog"',
+        'id="saveAsJsonBtn"',
+        'id="saveAsMarkdownBtn"',
+        "openSaveAsDialog",
+        "saveAsSource",
+        "showSaveFilePicker",
+        "sourceTextForFormat",
+        "modelToMarkdown",
+        'id="formErrors"',
+        "collectValidationErrors",
+        "updateValidation",
     ]
     missing = [text for text in required if text not in index_html]
     if missing:
         raise AssertionError(f"diagram builder Load File UI is missing: {missing}")
     if "Load Saved" in index_html or "loadSaved" in index_html:
         raise AssertionError("diagram builder should expose Load File instead of Load Saved")
+    forbidden = ["Load Template", "Open Work Folder", "Download JSON", "Download MD", 'id="downloadJsonBtn"', 'id="downloadMdBtn"']
+    hits = [text for text in forbidden if text in index_html]
+    if hits:
+        raise AssertionError(f"diagram builder toolbar should use compact Save As actions, found: {hits}")
 
 
 def verify_diagram_builder_preview_zoom_ui(index_html: str) -> None:

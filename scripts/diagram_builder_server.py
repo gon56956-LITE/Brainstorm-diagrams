@@ -464,6 +464,73 @@ INDEX_HTML = r"""<!doctype html>
       opacity: .45;
       cursor: not-allowed;
     }
+    .recent-row {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      margin: 0 0 14px;
+    }
+    .form-errors {
+      display: none;
+      margin: 8px 0 12px;
+      padding: 10px 12px;
+      border: 1px solid #f0b4ae;
+      border-radius: 6px;
+      background: #fff7f6;
+      color: var(--danger);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .form-errors.has-errors {
+      display: block;
+    }
+    .form-errors ul {
+      margin: 4px 0 0 18px;
+      padding: 0;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(10, 30, 55, .32);
+      z-index: 20;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal {
+      width: min(420px, 100%);
+      padding: 18px;
+      border-radius: 8px;
+      border: 1px solid #b8cbe1;
+      background: #fff;
+      box-shadow: 0 18px 45px rgba(17, 45, 78, .25);
+    }
+    .modal h2 {
+      margin-bottom: 8px;
+    }
+    .modal p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .modal-actions button {
+      min-height: 42px;
+    }
+    .modal-cancel {
+      margin-top: 10px;
+      width: 100%;
+    }
     .section {
       border-top: 1px solid var(--line);
       padding-top: 14px;
@@ -604,15 +671,22 @@ INDEX_HTML = r"""<!doctype html>
         <input id="diagramName" value="my-analysis" pattern="[a-z0-9][a-z0-9_-]{0,63}">
       </div>
       <div class="toolbar">
-        <button id="newBtn">Load Template</button>
-        <button id="loadBtn">Load File</button>
-        <button id="saveBtn">Save JSON</button>
-        <button id="renderBtn" class="primary">Render SVG</button>
-        <button id="exportBtn">Export PNG</button>
-        <button id="openBtn">Open Work Folder</button>
+        <button id="newBtn" title="Start a new diagram from the selected template.">New</button>
+        <button id="loadBtn" title="Open an existing .json or .md source file from your computer.">Load File</button>
+        <button id="saveBtn" title="Save the editable JSON source into this skill's work folder.">Save JSON</button>
+        <button id="saveAsBtn" title="Save a copy as .json or .md to a path you choose. This does not include SVG.">Save As</button>
+        <button id="renderBtn" class="primary" title="Generate the SVG preview and save it into the work folder.">Render SVG</button>
+        <button id="exportBtn" title="Export PNG from the latest rendered work-folder SVG.">Export PNG</button>
+        <button id="openBtn" title="Open the work folder for the selected diagram type.">Work Folder</button>
+      </div>
+      <div class="recent-row">
+        <label for="recentSelect">Recent</label>
+        <select id="recentSelect"></select>
+        <button id="loadRecentBtn">Load Recent</button>
       </div>
       <input id="fileInput" type="file" accept=".json,.md,.markdown,application/json,text/markdown,text/plain" hidden>
       <div id="status" class="status"></div>
+      <div id="formErrors" class="form-errors"></div>
       <div id="formRoot"></div>
     </section>
     <section class="panel preview">
@@ -620,7 +694,7 @@ INDEX_HTML = r"""<!doctype html>
         <strong>SVG Preview</strong>
         <div class="preview-actions">
           <div class="zoom-controls" aria-label="Preview zoom controls">
-            <button id="zoomOutBtn" type="button" title="Zoom out">−</button>
+            <button id="zoomOutBtn" type="button" title="Zoom out">-</button>
             <span id="zoomLabel">100%</span>
             <button id="zoomInBtn" type="button" title="Zoom in">+</button>
             <button id="zoomFitBtn" type="button" title="Fit to width">Fit</button>
@@ -631,12 +705,25 @@ INDEX_HTML = r"""<!doctype html>
       <div id="previewBox"><div class="empty">Click Render SVG to preview the diagram.</div></div>
     </section>
   </main>
+  <div id="saveAsDialog" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="saveAsTitle">
+    <div class="modal">
+      <h2 id="saveAsTitle">Save As</h2>
+      <p>Choose the source file format first. The save dialog will use the matching file extension automatically.</p>
+      <div class="modal-actions">
+        <button id="saveAsJsonBtn" type="button" title="Save an editable JSON source file.">JSON Source</button>
+        <button id="saveAsMarkdownBtn" type="button" title="Save an editable Markdown source file.">Markdown Source</button>
+      </div>
+      <button id="saveAsCancelBtn" class="modal-cancel" type="button" title="Close without saving.">Cancel</button>
+    </div>
+  </div>
   <script>
     const LIMITS = {
       fishbone: { categories: 8, minCategories: 4, entries: 5, children: 3 },
       fault_tree: { first: 5, children: 4, nestedChildren: 4 },
       exclusion_tree: { checks: 6, minChecks: 3 }
     };
+    const RECENT_KEY = "brainstormDiagramBuilderRecent";
+    const NAME_PATTERN = /^[a-z0-9][a-z0-9_-]{0,63}$/;
     let model = {};
     let previewZoom = 1;
 
@@ -645,10 +732,13 @@ INDEX_HTML = r"""<!doctype html>
     const nameEl = $("diagramName");
     const formRoot = $("formRoot");
     const statusEl = $("status");
+    const formErrors = $("formErrors");
     const previewBox = $("previewBox");
     const previewMeta = $("previewMeta");
     const fileInput = $("fileInput");
+    const recentSelect = $("recentSelect");
     const zoomLabel = $("zoomLabel");
+    const saveAsDialog = $("saveAsDialog");
 
     function setStatus(message, kind = "") {
       statusEl.textContent = message || "";
@@ -661,6 +751,72 @@ INDEX_HTML = r"""<!doctype html>
 
     function currentType() {
       return typeEl.value;
+    }
+
+    function diagramTypeLabel(diagramType) {
+      if (diagramType === "fault_tree") return "Fault Tree";
+      if (diagramType === "exclusion_tree") return "Exclusion Tree";
+      return "Fishbone";
+    }
+
+    function validateName(value) {
+      return NAME_PATTERN.test(value || "");
+    }
+
+    function readRecent() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_error) {
+        return [];
+      }
+    }
+
+    function writeRecent(entries) {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(entries.slice(0, 12)));
+    }
+
+    function rememberRecent() {
+      const name = safeName();
+      if (!validateName(name)) return;
+      const diagramType = currentType();
+      const key = `${diagramType}:${name}`;
+      const entries = readRecent().filter(item => item.key !== key);
+      entries.unshift({ key, diagram_type: diagramType, name, saved_at: new Date().toISOString() });
+      writeRecent(entries);
+      refreshRecent();
+    }
+
+    function refreshRecent() {
+      const entries = readRecent();
+      recentSelect.innerHTML = "";
+      if (!entries.length) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No recent work files yet";
+        recentSelect.appendChild(option);
+        $("loadRecentBtn").disabled = true;
+        return;
+      }
+      $("loadRecentBtn").disabled = false;
+      for (const entry of entries) {
+        const option = document.createElement("option");
+        option.value = JSON.stringify(entry);
+        option.textContent = `[${diagramTypeLabel(entry.diagram_type)}] ${entry.name}`;
+        recentSelect.appendChild(option);
+      }
+    }
+
+    async function loadRecent() {
+      if (!recentSelect.value) return;
+      const entry = JSON.parse(recentSelect.value);
+      typeEl.value = entry.diagram_type;
+      nameEl.value = entry.name;
+      const data = await api(`/api/load?diagram_type=${encodeURIComponent(entry.diagram_type)}&name=${encodeURIComponent(entry.name)}`);
+      model = data.data;
+      renderForm();
+      await loadSvgIfExists();
+      setStatus(`Loaded recent ${entry.name}.`, "ok");
     }
 
     function setPreviewZoom(value) {
@@ -680,6 +836,95 @@ INDEX_HTML = r"""<!doctype html>
     function setPreviewSvg(svgText) {
       previewBox.innerHTML = svgText;
       applyPreviewZoom();
+    }
+
+    function requireText(errors, label, value) {
+      if (!String(value || "").trim()) errors.push(label + " is required.");
+    }
+
+    function collectValidationErrors() {
+      const errors = [];
+      if (!validateName(safeName())) {
+        errors.push("Diagram name must use lowercase letters, numbers, hyphen, or underscore; max 64 characters.");
+      }
+      if (currentType() === "fishbone") {
+        requireText(errors, "Topic", model.topic);
+        const categories = Array.isArray(model.categories) ? model.categories : [];
+        if (categories.length > LIMITS.fishbone.categories) errors.push(`Fishbone supports up to ${LIMITS.fishbone.categories} categories.`);
+        categories.forEach((category, categoryIndex) => {
+          requireText(errors, `Category ${categoryIndex + 1} name`, category.name_en || category.name);
+          const items = Array.isArray(category.items) ? category.items : [];
+          if (items.length > LIMITS.fishbone.entries) errors.push(`Category ${categoryIndex + 1} has more than ${LIMITS.fishbone.entries} primary entries.`);
+          items.forEach((item, itemIndex) => {
+            if (typeof item === "string") {
+              requireText(errors, `Category ${categoryIndex + 1} cause ${itemIndex + 1}`, item);
+            } else {
+              requireText(errors, `Category ${categoryIndex + 1} subcategory ${itemIndex + 1}`, item.subcategory);
+              const children = Array.isArray(item.items) ? item.items : [];
+              if (children.length > LIMITS.fishbone.children) errors.push(`Subcategory ${item.subcategory || itemIndex + 1} has more than ${LIMITS.fishbone.children} child causes.`);
+              children.forEach((child, childIndex) => requireText(errors, `Subcategory ${itemIndex + 1} child ${childIndex + 1}`, child));
+            }
+          });
+        });
+      } else if (currentType() === "fault_tree") {
+        requireText(errors, "Top Event", model.top_event && model.top_event.label);
+        const tree = model.tree || {};
+        if (!["OR", "AND"].includes(String(tree.gate || "OR").toUpperCase())) errors.push("Root Gate must be OR or AND.");
+        const children = Array.isArray(tree.children) ? tree.children : [];
+        if (children.length > LIMITS.fault_tree.first) errors.push(`Fault tree supports up to ${LIMITS.fault_tree.first} first-level events.`);
+        children.forEach((event, index) => validateFaultEvent(errors, event, `First-level event ${index + 1}`, true));
+      } else {
+        requireText(errors, "Problem", oneLanguageValue(model.problem, "text"));
+        const checks = Array.isArray(model.checks) ? model.checks : [];
+        if (checks.length > LIMITS.exclusion_tree.checks) errors.push(`Exclusion tree supports up to ${LIMITS.exclusion_tree.checks} check points.`);
+        checks.forEach((check, index) => {
+          requireText(errors, `Check Point ${index + 1} question`, oneLanguageValue(check, "text"));
+          requireText(errors, `Check Point ${index + 1} fail cause`, oneLanguageValue(check.fail_conclusion, "text"));
+        });
+        requireText(errors, "Final Pass Conclusion", oneLanguageValue(model.final_pass_conclusion, "text"));
+      }
+      return errors;
+    }
+
+    function validateFaultEvent(errors, event, label, firstLevel) {
+      requireText(errors, label, event && event.label);
+      if (!["OR", "AND"].includes(String((event && event.gate) || "OR").toUpperCase())) errors.push(`${label} gate must be OR or AND.`);
+      const children = Array.isArray(event && event.children) ? event.children : [];
+      const limit = firstLevel ? LIMITS.fault_tree.children : LIMITS.fault_tree.nestedChildren;
+      if (children.length > limit) errors.push(`${label} has more than ${limit} child events.`);
+      children.forEach((child, index) => {
+        if (child.type === "intermediate_event") validateFaultEvent(errors, child, `${label} nested event ${index + 1}`, false);
+        else requireText(errors, `${label} basic event ${index + 1}`, child.label);
+      });
+    }
+
+    function updateValidation() {
+      const errors = collectValidationErrors();
+      if (!errors.length) {
+        formErrors.className = "form-errors";
+        formErrors.innerHTML = "";
+        return true;
+      }
+      formErrors.className = "form-errors has-errors";
+      formErrors.innerHTML = "<strong>Please fix before saving or rendering:</strong><ul>" +
+        errors.map(error => `<li>${escapeHtml(error)}</li>`).join("") +
+        "</ul>";
+      return false;
+    }
+
+    function ensureValidForAction() {
+      syncDiagramType();
+      if (updateValidation()) return true;
+      setStatus("Fix the highlighted form issues first.", "error");
+      return false;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     }
 
     async function api(path, options = {}) {
@@ -728,22 +973,64 @@ INDEX_HTML = r"""<!doctype html>
     }
 
     async function saveJson() {
-      syncDiagramType();
+      if (!ensureValidForAction()) return;
       const result = await api("/api/save", {
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType(), name: safeName(), data: model })
       });
+      rememberRecent();
       setStatus(result.message, "ok");
     }
 
+    function openSaveAsDialog() {
+      if (!ensureValidForAction()) return;
+      saveAsDialog.classList.add("open");
+    }
+
+    function closeSaveAsDialog() {
+      saveAsDialog.classList.remove("open");
+    }
+
+    async function saveAsSource(format) {
+      if (!ensureValidForAction()) return;
+      closeSaveAsDialog();
+      const extension = format === "markdown" ? ".md" : ".json";
+      const mimeType = format === "markdown" ? "text/markdown" : "application/json";
+      const text = sourceTextForFormat(format);
+      const filename = safeName() + extension;
+      if (!window.showSaveFilePicker) {
+        downloadText(filename, text, mimeType);
+        setStatus("Browser save dialog unavailable; source file downloaded instead.", "ok");
+        return;
+      }
+      try {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: filename,
+          types: [{
+            description: format === "markdown" ? "Markdown source" : "JSON source",
+            accept: { [mimeType]: format === "markdown" ? [".md", ".markdown"] : [".json"] },
+          }],
+          excludeAcceptAllOption: true,
+        });
+        const writable = await handle.createWritable();
+        await writable.write(new Blob([text], { type: mimeType + ";charset=utf-8" }));
+        await writable.close();
+        setStatus(`Saved ${handle.name}.`, "ok");
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+        throw error;
+      }
+    }
+
     async function renderSvg() {
-      syncDiagramType();
+      if (!ensureValidForAction()) return;
       const result = await api("/api/render", {
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType(), name: safeName(), data: model })
       });
       setPreviewSvg(result.svg);
       previewMeta.textContent = safeName() + ".svg";
+      rememberRecent();
       setStatus(result.message, "ok");
     }
 
@@ -761,6 +1048,106 @@ INDEX_HTML = r"""<!doctype html>
         body: JSON.stringify({ diagram_type: currentType() })
       });
       setStatus(result.message, "ok");
+    }
+
+    function downloadText(filename, text, mimeType) {
+      const blob = new Blob([text], { type: mimeType + ";charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function sourceTextForFormat(format) {
+      if (format === "markdown") return modelToMarkdown();
+      return JSON.stringify(model, null, 2) + "\n";
+    }
+
+    function modelToMarkdown() {
+      if (currentType() === "fishbone") return fishboneToMarkdown();
+      if (currentType() === "fault_tree") return faultTreeToMarkdown();
+      return exclusionTreeToMarkdown();
+    }
+
+    function yamlHeader(lines) {
+      return "---\n" + lines.join("\n") + "\n---\n\n";
+    }
+
+    function mdLine(value) {
+      return String(value || "").replace(/\r?\n+/g, " ").trim();
+    }
+
+    function fishboneToMarkdown() {
+      const lines = [yamlHeader(["diagram_type: fishbone"]), `# ${mdLine(model.topic) || "Problem / Topic"}`, ""];
+      for (const category of model.categories || []) {
+        lines.push(`## ${mdLine(category.name_en || category.name) || "Category"}`);
+        for (const item of category.items || []) {
+          if (typeof item === "string") {
+            lines.push(`- ${mdLine(item) || "Cause"}`);
+          } else {
+            lines.push(`- ${mdLine(item.subcategory) || "Subcategory"}`);
+            for (const child of item.items || []) lines.push(`  - ${mdLine(child) || "Child cause"}`);
+          }
+        }
+        lines.push("");
+      }
+      return lines.join("\n").replace(/\n{3,}/g, "\n\n");
+    }
+
+    function faultTreeToMarkdown() {
+      const header = [
+        "diagram_type: fault_tree",
+        `title: ${mdLine(model.title) || "Fault Tree Analysis"}`,
+        `subtitle: ${mdLine(model.subtitle) || "Top Event"}`,
+        "show_legend: true",
+      ];
+      const lines = [yamlHeader(header), `# ${mdLine(model.top_event && model.top_event.label) || "Top Event"}`, `Gate: ${mdLine(model.tree && model.tree.gate).toUpperCase() || "OR"}`, ""];
+      const detail = model.event_detail || {};
+      if (mdLine(detail.text) || (Array.isArray(detail.bullets) && detail.bullets.length)) {
+        lines.push("Event Detail:");
+        if (mdLine(detail.text)) lines.push(mdLine(detail.text));
+        for (const bullet of detail.bullets || []) lines.push(`- ${mdLine(bullet)}`);
+        lines.push("");
+      }
+      for (const event of (model.tree && model.tree.children) || []) writeFaultMarkdownEvent(lines, event, 2);
+      return lines.join("\n").replace(/\n{3,}/g, "\n\n");
+    }
+
+    function writeFaultMarkdownEvent(lines, event, level) {
+      const heading = "#".repeat(level);
+      lines.push(`${heading} ${mdLine(event.label) || "Intermediate Event"}`);
+      lines.push(`Gate: ${mdLine(event.gate).toUpperCase() || "OR"}`);
+      for (const child of event.children || []) {
+        if (child.type === "intermediate_event") writeFaultMarkdownEvent(lines, child, Math.min(level + 1, 3));
+        else lines.push(`- ${mdLine(child.label) || "Basic Event"}`);
+      }
+      lines.push("");
+    }
+
+    function exclusionTreeToMarkdown() {
+      const lines = [
+        yamlHeader(["diagram_type: exclusion_tree", "show_legend: true", "show_how_to_use: true"]),
+        `# ${mdLine(oneLanguageValue(model.problem, "text")) || "Target Problem"}`,
+        "",
+      ];
+      const detail = model.event_detail || {};
+      lines.push(`Event Detail Title: ${mdLine(detail.title) || "Event Detail"}`);
+      if (mdLine(detail.text)) lines.push(`Event Detail: ${mdLine(detail.text)}`);
+      for (const bullet of detail.bullets || []) lines.push(`- ${mdLine(bullet)}`);
+      lines.push("");
+      for (const check of model.checks || []) {
+        lines.push(`## ${mdLine(oneLanguageValue(check, "text")) || "Check OK?"}`);
+        lines.push(`Fail Conclusion: ${mdLine(oneLanguageValue(check.fail_conclusion, "text")) || "Likely Cause"}`);
+        const detailText = mdLine(oneLanguageValue(check.fail_conclusion, "detail"));
+        if (detailText) lines.push(`Fail Detail: ${detailText}`);
+        lines.push("");
+      }
+      lines.push(`Final Pass Conclusion: ${mdLine(oneLanguageValue(model.final_pass_conclusion, "text")) || "No issue found in this path. Consider other rare causes or deeper analysis."}`);
+      return lines.join("\n").replace(/\n{3,}/g, "\n\n") + "\n";
     }
 
     async function loadSvgIfExists() {
@@ -783,14 +1170,20 @@ INDEX_HTML = r"""<!doctype html>
       const el = document.createElement("input");
       el.value = value || "";
       el.placeholder = placeholder;
-      el.addEventListener("input", () => onInput(el.value));
+      el.addEventListener("input", () => {
+        onInput(el.value);
+        updateValidation();
+      });
       return el;
     }
 
     function textarea(value, onInput) {
       const el = document.createElement("textarea");
       el.value = value || "";
-      el.addEventListener("input", () => onInput(el.value));
+      el.addEventListener("input", () => {
+        onInput(el.value);
+        updateValidation();
+      });
       return el;
     }
 
@@ -803,7 +1196,10 @@ INDEX_HTML = r"""<!doctype html>
         el.appendChild(item);
       }
       el.value = value || options[0];
-      el.addEventListener("change", () => onChange(el.value));
+      el.addEventListener("change", () => {
+        onChange(el.value);
+        updateValidation();
+      });
       return el;
     }
 
@@ -848,6 +1244,7 @@ INDEX_HTML = r"""<!doctype html>
       if (currentType() === "fishbone") renderFishboneForm();
       else if (currentType() === "fault_tree") renderFaultTreeForm();
       else renderExclusionTreeForm();
+      updateValidation();
     }
 
     function renderFishboneForm() {
@@ -1169,7 +1566,15 @@ INDEX_HTML = r"""<!doctype html>
     $("newBtn").addEventListener("click", () => loadTemplate().catch(error => setStatus(error.message, "error")));
     $("loadBtn").addEventListener("click", () => loadFile());
     fileInput.addEventListener("change", () => loadSelectedFile(fileInput.files[0]).catch(error => setStatus(error.message, "error")));
+    $("loadRecentBtn").addEventListener("click", () => loadRecent().catch(error => setStatus(error.message, "error")));
     $("saveBtn").addEventListener("click", () => saveJson().catch(error => setStatus(error.message, "error")));
+    $("saveAsBtn").addEventListener("click", () => openSaveAsDialog());
+    $("saveAsJsonBtn").addEventListener("click", () => saveAsSource("json").catch(error => setStatus(error.message, "error")));
+    $("saveAsMarkdownBtn").addEventListener("click", () => saveAsSource("markdown").catch(error => setStatus(error.message, "error")));
+    $("saveAsCancelBtn").addEventListener("click", () => closeSaveAsDialog());
+    saveAsDialog.addEventListener("click", event => {
+      if (event.target === saveAsDialog) closeSaveAsDialog();
+    });
     $("renderBtn").addEventListener("click", () => renderSvg().catch(error => setStatus(error.message, "error")));
     $("exportBtn").addEventListener("click", () => exportPng().catch(error => setStatus(error.message, "error")));
     $("openBtn").addEventListener("click", () => openFolder().catch(error => setStatus(error.message, "error")));
@@ -1180,7 +1585,9 @@ INDEX_HTML = r"""<!doctype html>
       nameEl.value = currentType() === "fishbone" ? "my-analysis" : currentType() === "fault_tree" ? "startup-failure" : "startup-checks";
       loadTemplate().catch(error => setStatus(error.message, "error"));
     });
+    nameEl.addEventListener("input", () => updateValidation());
 
+    refreshRecent();
     loadTemplate().catch(error => setStatus(error.message, "error"));
   </script>
 </body>
