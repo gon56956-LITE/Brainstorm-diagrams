@@ -2,7 +2,7 @@
 
 `brainstorm-diagrams` is a Codex skill for generating clean, PPT-ready structured brainstorming diagrams.
 
-Version `0.3.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, and exclusion tree troubleshooting diagrams.
+Version `0.3.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, and sequential exclusion-tree troubleshooting diagrams.
 
 ## What This Is
 
@@ -10,7 +10,7 @@ Version `0.3.0` implements deterministic SVG renderers for business-simple fishb
 
 From Codex's perspective, it is a skill: `SKILL.md` and the reference files define when to use it, how inputs should be interpreted, what visual rules to follow, and how output should be verified.
 
-From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone and fault-tree SVG files without writing Python code.
+From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, and exclusion-tree SVG files without writing Python code.
 
 In short:
 
@@ -28,8 +28,8 @@ tools = the local scripts and double-click launchers that perform the work
 - Structured Markdown input
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
 - Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
-- Exclusion tree target problems, sequential checkpoints, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
-- Codex-assisted natural-language fishbone drafting into editable Markdown
+- Sequential exclusion-tree target problems, one main checkpoint path, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
+- Codex-assisted natural-language fishbone, fault-tree, and exclusion-tree drafting into editable Markdown
 - SVG output
 - PNG export from generated work SVG files
 - Automatic canvas expansion for dense fishbone and nested fault-tree content while keeping fonts, cards, and line widths fixed
@@ -41,7 +41,7 @@ tools = the local scripts and double-click launchers that perform the work
 - Redrawing from existing fishbone files
 - Redrawing from whiteboard photos
 - Probability calculation, Boolean simplification, and dynamic fault tree semantics
-- Complex nested exclusion-tree decision logic beyond the linear Yes/No troubleshooting path
+- Parallel exclusion-tree lanes and complex nested decision logic beyond the linear Yes/No troubleshooting path
 
 ## Non-Technical User Workflow
 
@@ -129,7 +129,7 @@ The `work/` folder is for your own diagrams, grouped by diagram type such as `wo
 
 Fault tree usage is the same pattern: double-click `故障树工具.cmd`, create a named diagram, edit the generated file in `work/fault-tree/`, then regenerate the SVG from the same menu.
 
-Exclusion tree usage is also the same pattern: double-click `排除树工具.cmd`, create a named diagram, edit the generated file in `work/exclusion-tree/`, then regenerate the SVG from the same menu.
+Sequential exclusion-tree usage is also the same pattern: double-click `排除树工具.cmd`, create a named diagram, edit the generated file in `work/exclusion-tree/`, then regenerate the SVG from the same menu.
 
 Browser-builder usage is similar: double-click `图表编辑器.cmd`, choose a diagram type, edit the form, save JSON, render SVG, and export PNG from the browser page.
 
@@ -137,7 +137,9 @@ Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, or `wor
 
 ## Natural-Language Drafting
 
-Codex can turn raw customer feedback or workshop notes into a structured fishbone Markdown draft before rendering. This is a skill workflow, not a local `.cmd` menu feature: Codex performs the semantic extraction, then the existing local tools render the resulting Markdown.
+Codex can turn raw customer feedback, workshop notes, failure notes, or troubleshooting notes into a structured Markdown draft before rendering. This is a skill workflow, not a local `.cmd` menu feature: Codex performs the semantic extraction, then the existing local tools render the resulting Markdown.
+
+Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, and sequential exclusion tree for one-path troubleshooting or cause-elimination checks.
 
 Example prompt:
 
@@ -154,10 +156,10 @@ Expected output:
 - `work/fishbone/customer-complaints.svg`
 - Optional `work/fishbone/customer-complaints.png`
 
-Natural-language drafts should use categories found in the source text, not default categories. See `references/natural_language_extraction.md`.
+Natural-language drafts should use structures found in the source text, not default categories, generic fault branches, or generic troubleshooting steps. See `references/natural_language_extraction.md`.
 For a reusable Codex prompt shape, see `references/natural_language_prompt_template.md`.
 Use `references/natural_language_review_checklist.md` to review whether the generated draft stayed faithful to the source text.
-See `naturalcases/fishbone/` for source text and expected Markdown examples.
+See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, and `naturalcases/exclusion-tree/` for source text and expected Markdown examples.
 
 ## Badge Library
 
@@ -370,16 +372,18 @@ Nested intermediate events may use their own `gate`, allowing one first-level ev
 - `templates/fishbone.template.json`
 - `templates/fault-tree.template.md`
 - `templates/fault-tree.template.json`
+- `templates/exclusion-tree.template.md`
+- `templates/exclusion-tree.template.json`
 
 Copy a template, edit the content, then render it with `scripts/generate_diagram.py`.
 
 ## Work Files
 
-`scripts/new_fishbone.py` creates user-owned inputs and SVGs in `work/fishbone/`. This directory is for local authoring output, separate from `testcases/fishbone/` regression files.
+`scripts/new_fishbone.py`, `scripts/new_fault_tree.py`, and `scripts/new_exclusion_tree.py` create user-owned inputs and SVGs in their matching `work/<diagram-type>/` folders. These directories are for local authoring output, separate from maintained regression files.
 
 ## Stresscases
 
-`stresscases/fishbone/` and `stresscases/fault-tree/` contain intentionally dense diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
+`stresscases/fishbone/`, `stresscases/fault-tree/`, and `stresscases/exclusion-tree/` contain intentionally dense diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
 
 `scripts/verify_stresscases.py` protects this area from structural drift: it checks that the full-density SVG expands beyond the base canvas, keeps the topic block on the right, preserves the expected category and brace counts, and does not render `README.md` as an SVG.
 
@@ -388,13 +392,16 @@ Use `references/visual_review_checklist.md` when inspecting the generated stress
 - `stresscases/fishbone/full-stress.md` -> `stresscases/fishbone/full-stress.svg`
 - `stresscases/fault-tree/full-stress.json` -> `stresscases/fault-tree/full-stress.svg`
 - `stresscases/fault-tree/nested-gates.json` -> `stresscases/fault-tree/nested-gates.svg`
+- `stresscases/exclusion-tree/full-stress.json` -> `stresscases/exclusion-tree/full-stress.svg`
 
 ## Naturalcases
 
-`naturalcases/fishbone/` contains source text and expected structured Markdown examples for Codex-assisted natural-language fishbone drafting. It does not store generated SVG or PNG outputs.
+`naturalcases/` contains source text and expected structured Markdown examples for Codex-assisted natural-language drafting. It does not store generated SVG or PNG outputs.
 
 - `naturalcases/fishbone/reliability-power-drop.source.txt` -> `naturalcases/fishbone/reliability-power-drop.expected.md`
 - `naturalcases/fishbone/optical-module-stability.source.txt` -> `naturalcases/fishbone/optical-module-stability.expected.md`
+- `naturalcases/fault-tree/startup-intermittent-failure.source.txt` -> `naturalcases/fault-tree/startup-intermittent-failure.expected.md`
+- `naturalcases/exclusion-tree/field-link-dropout.source.txt` -> `naturalcases/exclusion-tree/field-link-dropout.expected.md`
 
 The optical-module case covers an English product design / manufacturing / application scenario and protects confirmed Lucide badge mappings for technical categories.
 

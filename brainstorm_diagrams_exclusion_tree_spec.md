@@ -4,7 +4,7 @@
 
 This document specifies the `exclusion_tree` diagram type for the `brainstorm-diagrams` skill.
 
-`exclusion_tree` is a PPT-ready troubleshooting and root-cause elimination diagram. It is used after brainstorming, fishbone analysis, or fault tree analysis to guide users through a sequence of checks that progressively eliminate impossible causes and narrow the issue down to the most likely root cause.
+`exclusion_tree` is a PPT-ready sequential troubleshooting and root-cause elimination diagram. It is used after brainstorming, fishbone analysis, or fault tree analysis to guide users through one main sequence of checks that progressively eliminate impossible causes and narrow the issue down to the most likely root cause.
 
 The first implementation of `brainstorm-diagrams` may still focus on `fishbone`. This document defines a future or next-version extension that should share the same visual language as the existing `fishbone` and `fault_tree` templates.
 
@@ -63,7 +63,7 @@ Typical scenarios:
 
 ## 4. Conceptual Definition
 
-An exclusion tree is a decision-tree-like diagram that starts from a top event or target problem, then walks through a sequence of test or check points.
+A sequential exclusion tree is a decision-tree-like diagram that starts from a top event or target problem, then walks through one main sequence of test or check points.
 
 Each checkpoint asks whether a specific condition is normal or abnormal.
 
@@ -84,7 +84,7 @@ Check Point 1: Is condition A OK?
 Compared with `fault_tree`:
 
 - `fault_tree` explains what combinations of causes may lead to a failure.
-- `exclusion_tree` tells users what to check first, second, and third to eliminate causes efficiently.
+- `exclusion_tree` tells users what to check first, second, and third on a single troubleshooting path to eliminate causes efficiently.
 
 ## 5. Visual Style
 
@@ -447,7 +447,7 @@ Recommended schema:
 ```json
 {
   "diagram_type": "exclusion_tree",
-  "title": "Exclusion Tree / 排除树",
+  "title": "Sequential Exclusion Tree",
   "problem": {
     "text_en": "System Fails to Start",
     "text_zh": "系统无法启动"
@@ -632,7 +632,7 @@ brainstorm-diagrams/
 ```json
 {
   "diagram_type": "exclusion_tree",
-  "title": "Exclusion Tree / 排除树",
+  "title": "Sequential Exclusion Tree",
   "problem": {
     "text_en": "System Fails to Start",
     "text_zh": "系统无法启动"
@@ -731,7 +731,7 @@ Use the following prompt to implement the extension:
 ```text
 Extend the `brainstorm-diagrams` skill with a new diagram type named `exclusion_tree`.
 
-The template should generate a PPT-ready business-simple exclusion tree / troubleshooting decision tree as SVG.
+The template should generate a PPT-ready business-simple sequential exclusion tree / troubleshooting decision path as SVG.
 
 The diagram must start with a top event at the top, then show a sequence of testable checkpoints. Each checkpoint has a Yes/Pass branch that continues to the next check and a No/Fail branch that leads to a root-cause or likely-cause conclusion card. The final pass path should end in a green no-issue-found card.
 
@@ -765,4 +765,3 @@ v0.5 process_flow / swimlane
 ## 22. References for Skill Packaging
 
 Codex skills are packaged as reusable workflow folders. Codex initially sees the skill metadata and loads the full `SKILL.md` only when it decides the skill is relevant. Keep the skill description concise and make each diagram type discoverable through clear keywords in the metadata and instructions.
-

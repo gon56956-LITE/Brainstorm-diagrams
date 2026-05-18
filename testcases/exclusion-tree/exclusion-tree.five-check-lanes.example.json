@@ -1,0 +1,68 @@
+{
+  "diagram_type": "exclusion_tree",
+  "title": "Sequential Exclusion Tree",
+  "problem": {
+    "text_en": "Optical Module Output Power Stability Fails After Aging"
+  },
+  "event_detail": {
+    "title": "Event Detail",
+    "text": "Single-path diagnostic exclusion tree for an optical module that fails output power stability after high-temperature aging.",
+    "bullets": [
+      "Use one main path and stop at the first failed exclusion check",
+      "Long conclusion cards should remain readable without connector collisions",
+      "Final pass card must not be crossed by later No branches"
+    ]
+  },
+  "checks": [
+    {
+      "id": "1",
+      "text_en": "Independent calibrated station still fails?",
+      "icon": "document",
+      "fail_conclusion": {
+        "text_en": "Original Test System Likely Cause",
+        "detail_en": "Units pass on a different calibrated station with a different power meter, fixture, and verified software version."
+      }
+    },
+    {
+      "id": "2",
+      "text_en": "Electrical drive parameters stable within specification?",
+      "icon": "chip",
+      "fail_conclusion": {
+        "text_en": "Electrical Drive Abnormality",
+        "detail_en": "Investigate driver circuit instability, current limit setting error, solder joint degradation, or firmware control issue."
+      }
+    },
+    {
+      "id": "3",
+      "text_en": "Thermal data shows sufficient margin?",
+      "icon": "thermometer",
+      "fail_conclusion": {
+        "text_en": "Thermal Overstress",
+        "detail_en": "Investigate poor thermal interface contact, excessive power dissipation, heat sink design margin, or package thermal resistance."
+      }
+    },
+    {
+      "id": "4",
+      "text_en": "No visible contamination or optical damage?",
+      "icon": "signal",
+      "fail_conclusion": {
+        "text_en": "Gross Optical Damage or Contamination",
+        "detail_en": "Investigate cleaning, handling, material control, coating damage, fiber end-face damage, or visible foreign material."
+      }
+    },
+    {
+      "id": "5",
+      "text_en": "Alignment stable after high-temperature aging?",
+      "icon": "thermometer",
+      "fail_conclusion": {
+        "text_en": "Package-Induced Mechanical Alignment Shift",
+        "detail_en": "Suspected causes include adhesive creep, CTE mismatch, insufficient mechanical fixation, curing shrinkage stress, or fiber routing force."
+      }
+    }
+  ],
+  "final_pass_conclusion": {
+    "text_en": "Failure remains inconclusive. Define additional verification such as cross-section analysis, material characterization, extended aging, or controlled failure reproduction."
+  },
+  "show_legend": true,
+  "show_how_to_use": true
+}

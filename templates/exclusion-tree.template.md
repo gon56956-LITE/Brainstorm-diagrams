@@ -1,11 +1,13 @@
 ---
 diagram_type: exclusion_tree
+title: Sequential Exclusion Tree
 show_legend: true
 show_how_to_use: true
 ---
 
 <!--
-Exclusion trees are for sequential troubleshooting: check one condition, exclude one unlikely path, and stop when a failed check identifies a likely root cause.
+Sequential exclusion trees are for single-path troubleshooting: check one condition, exclude one unlikely path, and stop when a failed check identifies a likely root cause.
+For parallel cause branches, first use a fault tree, then create one sequential exclusion tree for each priority branch.
 
 Recommended limits:
 - Top Event / Target Problem: 1

@@ -86,6 +86,7 @@ EXCLUSION_TREE_TESTCASE_PAIRS = [
     ("exclusion-tree.input.example.json", "exclusion-tree.output.example.svg"),
     ("exclusion-tree.input.example.md", "exclusion-tree.output.md.svg"),
     ("exclusion-tree.long-text.example.json", "exclusion-tree.long-text.output.svg"),
+    ("exclusion-tree.five-check-lanes.example.json", "exclusion-tree.five-check-lanes.output.svg"),
 ]
 
 FORBIDDEN_WORDS = [
@@ -288,6 +289,8 @@ def verify_exclusion_tree_svg_basics(path: Path) -> None:
     verify_exclusion_legend_alignment(root, path.name)
     verify_exclusion_cause_card_layout(root, path.name)
     verify_exclusion_content_cards(root, path.name)
+    verify_exclusion_final_alignment(root, path.name)
+    verify_exclusion_rects_within_canvas(root, path.name)
     verify_exclusion_auxiliary_layout(root, path.name)
     drop_connectors = [
         element
@@ -300,6 +303,13 @@ def verify_exclusion_tree_svg_basics(path: Path) -> None:
         path_data = connector_path.attrib.get("d", "")
         if path_data.count("L") < 2:
             raise AssertionError(f"{path.name}: fail drop connector should include horizontal and vertical segments")
+        numbers = parse_path_numbers(path_data)
+        if len(numbers) >= 6:
+            entry_y = numbers[5]
+            if not any(rect_y + 8 <= entry_y <= rect_y + 20 for _, rect_y, _, _ in exclusion_rects(root, "exclusion-fail-conclusion")):
+                raise AssertionError(f"{path.name}: fail connector arrow should enter inside the target card edge")
+    verify_exclusion_fail_drop_lanes(drop_connectors, path.name)
+    verify_exclusion_fail_connectors_avoid_cards(root, drop_connectors, path.name)
     fail_chip_connectors = [
         element
         for element in root.iter()
@@ -352,6 +362,11 @@ def verify_exclusion_text_boxes(root: ET.Element, label: str) -> None:
         rect = rects[0]
         rect_y = float(rect.attrib.get("y", "0"))
         rect_h = float(rect.attrib.get("height", "0"))
+        text_ys = [float(text.attrib.get("y", "0")) for text in texts]
+        top_gap = min(text_ys) - rect_y
+        bottom_gap = rect_y + rect_h - max(text_ys)
+        if abs(top_gap - bottom_gap) > 10:
+            raise AssertionError(f"{label}: top/checkpoint text should be vertically balanced")
         for text in texts:
             text_y = float(text.attrib.get("y", "0"))
             if text_y < rect_y + 20 or text_y > rect_y + rect_h - 12:
@@ -436,9 +451,11 @@ def verify_exclusion_cause_card_layout(root: ET.Element, label: str) -> None:
 def verify_exclusion_content_cards(root: ET.Element, label: str) -> None:
     final_heights = []
     final_rects: list[tuple[float, float, float, float]] = []
+    fail_rects: list[tuple[float, float, float, float]] = []
     fail_heights = []
     detail_heights = []
     final_text_lines: list[str] = []
+    bottom_gaps: list[tuple[str, float]] = []
     for group in root.iter():
         class_name = group.attrib.get("class", "")
         group_id = group.attrib.get("id", "")
@@ -448,6 +465,15 @@ def verify_exclusion_content_cards(root: ET.Element, label: str) -> None:
         if not rects:
             continue
         height = float(rects[0].attrib.get("height", "0"))
+        texts = [child for child in list(group) if child.tag.endswith("text")]
+        if texts and (
+            "exclusion-final-pass" in class_name
+            or "exclusion-fail-conclusion" in class_name
+            or (group_id == "exclusion-event-detail-panel" and height > 220)
+        ):
+            rect_y = float(rects[0].attrib.get("y", "0"))
+            last_text_y = max(float(child.attrib.get("y", "0")) for child in texts)
+            bottom_gaps.append((class_name or group_id, rect_y + float(rects[0].attrib.get("height", "0")) - last_text_y))
         if "exclusion-final-pass" in class_name:
             final_heights.append(height)
             final_rects.append(
@@ -461,19 +487,38 @@ def verify_exclusion_content_cards(root: ET.Element, label: str) -> None:
             final_text_lines.extend((child.text or "") for child in list(group) if child.tag.endswith("text"))
         elif "exclusion-fail-conclusion" in class_name:
             fail_heights.append(height)
+            fail_width = float(rects[0].attrib.get("width", "0"))
+            fail_rects.append(
+                (
+                    float(rects[0].attrib.get("x", "0")),
+                    float(rects[0].attrib.get("y", "0")),
+                    fail_width,
+                    height,
+                )
+            )
+            if fail_width < 360:
+                raise AssertionError(f"{label}: fail conclusion cards should be wide enough for readable details")
         elif group_id == "exclusion-event-detail-panel":
             detail_heights.append(height)
-    if not final_heights or final_heights[0] < 118:
+    if not final_heights or final_heights[0] < 96:
         raise AssertionError(f"{label}: final pass card should keep enough height for its content")
-    if final_rects and final_rects[0][2] < 360:
+    if final_rects and final_rects[0][2] < 460:
         raise AssertionError(f"{label}: final pass card should be wider than cause cards")
-    if fail_heights and min(fail_heights) < 118:
+    if fail_heights and min(fail_heights) < 96:
         raise AssertionError(f"{label}: fail conclusion cards should keep enough height for their content")
     if detail_heights and detail_heights[0] < 220:
         raise AssertionError(f"{label}: event detail panel should preserve the minimum content height")
-    long_final_lines = [line for line in final_text_lines if visual_len(line) > 30]
-    if long_final_lines:
-        raise AssertionError(f"{label}: final pass card text should wrap within the card: {long_final_lines[:2]}")
+    large_bottom_gaps = [(name, gap) for name, gap in bottom_gaps if gap > 36]
+    if large_bottom_gaps:
+        raise AssertionError(f"{label}: content card bottom padding should stay compact: {large_bottom_gaps[:2]}")
+    if final_rects:
+        for fail_rect in fail_rects:
+            if rects_overlap(final_rects[0], fail_rect, 24):
+                raise AssertionError(f"{label}: final pass card should not collide with fail conclusion cards")
+        final_line_limit = int((final_rects[0][2] - 106) / 7) + 2
+        long_final_lines = [line for line in final_text_lines if visual_len(line) > final_line_limit]
+        if long_final_lines:
+            raise AssertionError(f"{label}: final pass card text should wrap within the card: {long_final_lines[:2]}")
 
     final_connectors = [
         element
@@ -500,6 +545,132 @@ def verify_exclusion_content_cards(root: ET.Element, label: str) -> None:
                 fail_bottoms.append(float(rects[0].attrib.get("y", "0")) + float(rects[0].attrib.get("height", "0")))
         if fail_bottoms and final_y > max(fail_bottoms) + 20:
             raise AssertionError(f"{label}: final pass card should not be pushed below unrelated fail cards")
+
+
+def verify_exclusion_final_alignment(root: ET.Element, label: str) -> None:
+    checkpoint_rects = exclusion_rects(root, "exclusion-checkpoint")
+    fail_rects = exclusion_rects(root, "exclusion-fail-conclusion")
+    final_rects = exclusion_rects(root, "exclusion-final-pass")
+    if not checkpoint_rects or not fail_rects or not final_rects:
+        return
+    last_checkpoint = checkpoint_rects[-1]
+    last_fail = fail_rects[-1]
+    final_rect = final_rects[0]
+    if abs(final_rect[0] - last_checkpoint[0]) > 1.0:
+        raise AssertionError(f"{label}: final pass card should align with the last checkpoint left edge")
+    corridor = last_fail[0] - (final_rect[0] + final_rect[2])
+    if corridor < 24:
+        raise AssertionError(f"{label}: final pass card should preserve a corridor before the last fail card")
+
+
+def verify_exclusion_rects_within_canvas(root: ET.Element, label: str) -> None:
+    canvas_width = float(root.attrib["width"])
+    canvas_height = float(root.attrib["height"])
+    for rect in root.iter():
+        if not rect.tag.endswith("rect"):
+            continue
+        attrs = rect.attrib
+        if not {"x", "y", "width", "height"} <= set(attrs):
+            continue
+        x = float(attrs["x"])
+        y = float(attrs["y"])
+        width = float(attrs["width"])
+        height = float(attrs["height"])
+        if x < -0.1 or y < -0.1 or x + width > canvas_width + 0.1 or y + height > canvas_height + 0.1:
+            raise AssertionError(
+                f"{label}: exclusion-tree rect outside canvas: x={x}, y={y}, w={width}, h={height}, canvas={canvas_width}x{canvas_height}"
+            )
+
+
+def verify_exclusion_fail_drop_lanes(drop_connectors: list[ET.Element], label: str) -> None:
+    vertical_segments: list[tuple[float, float, float]] = []
+    for connector_path in drop_connectors:
+        numbers = parse_path_numbers(connector_path.attrib.get("d", ""))
+        if len(numbers) < 6:
+            continue
+        drop_x = numbers[4]
+        y1 = min(numbers[3], numbers[5])
+        y2 = max(numbers[3], numbers[5])
+        vertical_segments.append((drop_x, y1, y2))
+
+    for index, previous in enumerate(vertical_segments):
+        for current in vertical_segments[index + 1 :]:
+            same_lane = abs(previous[0] - current[0]) <= 0.1
+            overlap = min(previous[2], current[2]) - max(previous[1], current[1])
+            if same_lane and overlap > 1:
+                raise AssertionError(f"{label}: fail drop connectors should not overlap in the same vertical lane")
+
+
+def verify_exclusion_fail_connectors_avoid_cards(root: ET.Element, drop_connectors: list[ET.Element], label: str) -> None:
+    clearance = 24.0
+    fail_rects = exclusion_rects(root, "exclusion-fail-conclusion")
+    final_rects = exclusion_rects(root, "exclusion-final-pass")
+    for index, connector_path in enumerate(drop_connectors):
+        segments = orthogonal_segments(connector_path.attrib.get("d", ""))
+        obstacles = [rect for rect_index, rect in enumerate(fail_rects) if rect_index != index]
+        obstacles.extend(final_rects)
+        for segment in segments:
+            for rect in obstacles:
+                if segment_hits_rect(segment, rect, clearance):
+                    raise AssertionError(f"{label}: fail connector {index + 1} intersects a content card")
+
+
+def exclusion_rects(root: ET.Element, class_name: str) -> list[tuple[float, float, float, float]]:
+    rects: list[tuple[float, float, float, float]] = []
+    for group in root.iter():
+        if not group.tag.endswith("g") or class_name not in group.attrib.get("class", ""):
+            continue
+        child_rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if child_rects:
+            rect = child_rects[0]
+            rects.append(
+                (
+                    float(rect.attrib.get("x", "0")),
+                    float(rect.attrib.get("y", "0")),
+                    float(rect.attrib.get("width", "0")),
+                    float(rect.attrib.get("height", "0")),
+                )
+            )
+    return rects
+
+
+def orthogonal_segments(path_data: str) -> list[tuple[float, float, float, float]]:
+    numbers = parse_path_numbers(path_data)
+    points = list(zip(numbers[0::2], numbers[1::2]))
+    return [
+        (x1, y1, x2, y2)
+        for (x1, y1), (x2, y2) in zip(points, points[1:])
+        if abs(x1 - x2) < 0.1 or abs(y1 - y2) < 0.1
+    ]
+
+
+def segment_hits_rect(segment: tuple[float, float, float, float], rect: tuple[float, float, float, float], margin: float) -> bool:
+    x1, y1, x2, y2 = segment
+    rect_x, rect_y, rect_w, rect_h = rect
+    left = rect_x - margin
+    right = rect_x + rect_w + margin
+    top = rect_y - margin
+    bottom = rect_y + rect_h + margin
+    if abs(y1 - y2) < 0.1:
+        seg_left = min(x1, x2)
+        seg_right = max(x1, x2)
+        return top < y1 < bottom and seg_left < right and seg_right > left
+    if abs(x1 - x2) < 0.1:
+        seg_top = min(y1, y2)
+        seg_bottom = max(y1, y2)
+        return left < x1 < right and seg_top < bottom and seg_bottom > top
+    return False
+
+
+def rects_overlap(first: tuple[float, float, float, float], second: tuple[float, float, float, float], margin: float) -> bool:
+    first_x, first_y, first_w, first_h = first
+    second_x, second_y, second_w, second_h = second
+    return (
+        first_x < second_x + second_w + margin
+        and first_x + first_w > second_x - margin
+        and first_y < second_y + second_h + margin
+        and first_y + first_h > second_y - margin
+    )
 
 
 def visual_len(text: str) -> int:

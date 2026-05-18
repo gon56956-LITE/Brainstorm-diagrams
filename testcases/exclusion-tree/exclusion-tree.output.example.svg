@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1238" viewBox="0 0 1920 1238" role="img" aria-label="Exclusion tree diagram">
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1164" viewBox="0 0 1920 1164" role="img" aria-label="Exclusion tree diagram">
 <defs>
   <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
     <feDropShadow dx="6" dy="8" stdDeviation="6" flood-color="#0B2E63" flood-opacity="0.10"/>
@@ -10,64 +10,62 @@
     <path d="M 0 0 L 10 5 L 0 10 z" fill="#0B3A75"/>
   </marker>
 </defs>
-<rect width="1920" height="1238" fill="#FFFFFF"/>
+<rect width="1920" height="1164" fill="#FFFFFF"/>
 <g id="exclusion-event-detail-panel">
-<rect x="48" y="46" width="500" height="250.0" rx="14" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8" filter="url(#subtleShadow)"/>
+<rect x="48" y="46" width="500" height="220.0" rx="14" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8" filter="url(#subtleShadow)"/>
 <text x="76" y="90" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B2E63">Event Detail</text>
 <line x1="76" y1="110" x2="520" y2="110" stroke="#CBD5E1" stroke-width="1.5"/>
-<text x="76" y="142" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">The system does not complete startup after</text>
-<text x="76" y="169" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">power is applied.</text>
-<text x="76" y="196" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Observed during validation after</text>
-<text x="76" y="220" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">  overnight storage</text>
-<text x="76" y="244" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Use the checks below in sequence</text>
+<text x="76" y="142" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">The system does not complete startup after power is</text>
+<text x="76" y="169" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">applied.</text>
+<text x="76" y="196" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Observed during validation after overnight storage</text>
+<text x="76" y="220" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Use the checks below in sequence</text>
 </g>
 <g class="exclusion-top-event">
 <rect id="exclusion-top-event-block" x="610.0" y="72.0" width="300" height="96.0" rx="14" fill="#0B2E63" filter="url(#softShadow)"/>
 <text x="760.0" y="105.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">System Fails to</text>
 <text x="760.0" y="135.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">Start</text>
 </g>
-<line x1="760.0" y1="168.0" x2="760.0" y2="360.0" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<line x1="760.0" y1="168.0" x2="760.0" y2="330.0" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
 <g class="exclusion-checkpoint" data-check-id="1">
-<rect x="580.0" y="360.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
-<g class="lucide-icon" transform="translate(607.0 386.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></g>
-<text x="672.0" y="403.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">1. Power Input OK?</text>
+<rect x="580.0" y="330.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
+<g class="lucide-icon" transform="translate(607.0 356.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></g>
+<text x="672.0" y="373.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">1. Power Input OK?</text>
 </g>
-<line x1="898.0" y1="446.0" x2="898.0" y2="460.0" stroke="#0B3A75" stroke-width="2"/>
-<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 934.0 479.0 L 1124.0 479.0 L 1124.0 490.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-fail-chip"><rect x="862.0" y="460.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="898.0" y="485.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
+<line x1="898.0" y1="416.0" x2="898.0" y2="430.0" stroke="#0B3A75" stroke-width="2"/>
+<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 934.0 449.0 L 1200.0 449.0 L 1200.0 472.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-fail-chip"><rect x="862.0" y="430.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="898.0" y="455.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
 <g class="exclusion-fail-conclusion">
-<rect x="1088.0" y="490.0" width="300" height="170.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
-<g><circle cx="1126.0" cy="533" r="17" fill="#C62828"/><line x1="1118.0" y1="525" x2="1134.0" y2="541" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="1134.0" y1="525" x2="1118.0" y2="541" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
-<text x="1164.0" y="532.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
-<text x="1164.0" y="556.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">No Power Input</text>
-<text x="1164.0" y="582.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14" fill="#5B677A">Check power cable</text>
-<text x="1164.0" y="602.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14" fill="#5B677A">and outlet.</text>
+<rect x="1120.0" y="460.0" width="420" height="116.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
+<g><circle cx="1158" cy="503" r="17" fill="#C62828"/><line x1="1150" y1="495" x2="1166" y2="511" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="1166" y1="495" x2="1150" y2="511" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
+<text x="1196.0" y="502.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
+<text x="1196.0" y="526.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">No Power Input</text>
+<text x="1196.0" y="552.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14" fill="#5B677A">Check power cable and outlet.</text>
 </g>
-<path class="exclusion-pass-connector" d="M 664.0 446.0 L 664.0 479.0 L 595.0 479.0 L 595.0 510.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-pass-chip"><rect x="628.0" y="460.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="664.0" y="485.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
+<path class="exclusion-pass-connector" d="M 664.0 416.0 L 664.0 449.0 L 499.0 449.0 L 499.0 480.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-pass-chip"><rect x="628.0" y="430.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="664.0" y="455.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
 <g class="exclusion-checkpoint" data-check-id="2">
-<rect x="415.0" y="510.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
-<g class="lucide-icon" transform="translate(442.0 536.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z" />
+<rect x="415.0" y="480.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
+<g class="lucide-icon" transform="translate(442.0 506.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z" />
   <path d="M2.297 11.293a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0z" />
   <path d="M8.916 17.912a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0z" />
   <path d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z" /></g>
-<text x="507.0" y="540.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">2. Power Module Output</text>
-<text x="507.0" y="567.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">OK?</text>
+<text x="507.0" y="510.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">2. Power Module Output</text>
+<text x="507.0" y="537.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">OK?</text>
 </g>
-<line x1="733.0" y1="596.0" x2="733.0" y2="610.0" stroke="#0B3A75" stroke-width="2"/>
-<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 769.0 629.0 L 959.0 629.0 L 959.0 684.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-fail-chip"><rect x="697.0" y="610.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="733.0" y="635.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
+<line x1="733.0" y1="566.0" x2="733.0" y2="580.0" stroke="#0B3A75" stroke-width="2"/>
+<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 769.0 599.0 L 1050.0 599.0 L 1050.0 622.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-fail-chip"><rect x="697.0" y="580.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="733.0" y="605.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
 <g class="exclusion-fail-conclusion">
-<rect x="923.0" y="684.0" width="300" height="118.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
-<g><circle cx="961.0" cy="727" r="17" fill="#C62828"/><line x1="953.0" y1="719" x2="969.0" y2="735" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="969.0" y1="719" x2="953.0" y2="735" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
-<text x="999.0" y="726.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
-<text x="999.0" y="750.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Power Module Fault</text>
+<rect x="970.0" y="610.0" width="420" height="96.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
+<g><circle cx="1008" cy="653" r="17" fill="#C62828"/><line x1="1000" y1="645" x2="1016" y2="661" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="1016" y1="645" x2="1000" y2="661" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
+<text x="1046.0" y="652.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
+<text x="1046.0" y="676.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Power Module Fault</text>
 </g>
-<path class="exclusion-pass-connector" d="M 499.0 596.0 L 499.0 629.0 L 430.0 629.0 L 430.0 660.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-pass-chip"><rect x="463.0" y="610.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="499.0" y="635.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
+<path class="exclusion-pass-connector" d="M 499.0 566.0 L 499.0 599.0 L 334.0 599.0 L 334.0 630.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-pass-chip"><rect x="463.0" y="580.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="499.0" y="605.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
 <g class="exclusion-checkpoint" data-check-id="3">
-<rect x="250.0" y="660.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
-<g class="lucide-icon" transform="translate(277.0 686.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2" />
+<rect x="250.0" y="630.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
+<g class="lucide-icon" transform="translate(277.0 656.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2" />
   <path d="M12 2v2" />
   <path d="M17 20v2" />
   <path d="M17 2v2" />
@@ -81,45 +79,43 @@
   <path d="M7 2v2" />
   <rect x="4" y="4" width="16" height="16" rx="2" />
   <rect x="8" y="8" width="8" height="8" rx="1" /></g>
-<text x="342.0" y="703.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">3. Control Board OK?</text>
+<text x="342.0" y="673.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">3. Control Board OK?</text>
 </g>
-<line x1="568.0" y1="746.0" x2="568.0" y2="760.0" stroke="#0B3A75" stroke-width="2"/>
-<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 604.0 779.0 L 794.0 779.0 L 794.0 826.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-fail-chip"><rect x="532.0" y="760.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="568.0" y="785.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
+<line x1="568.0" y1="716.0" x2="568.0" y2="730.0" stroke="#0B3A75" stroke-width="2"/>
+<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 604.0 749.0 L 900.0 749.0 L 900.0 772.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-fail-chip"><rect x="532.0" y="730.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="568.0" y="755.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
 <g class="exclusion-fail-conclusion">
-<rect x="758.0" y="826.0" width="300" height="134.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
-<g><circle cx="796.0" cy="869" r="17" fill="#C62828"/><line x1="788.0" y1="861" x2="804.0" y2="877" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="804.0" y1="861" x2="788.0" y2="877" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
-<text x="834.0" y="868.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
-<text x="834.0" y="892.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Control Board</text>
-<text x="834.0" y="916.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Fault</text>
+<rect x="820.0" y="760.0" width="420" height="96.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
+<g><circle cx="858" cy="803" r="17" fill="#C62828"/><line x1="850" y1="795" x2="866" y2="811" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="866" y1="795" x2="850" y2="811" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
+<text x="896.0" y="802.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
+<text x="896.0" y="826.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Control Board Fault</text>
 </g>
-<path class="exclusion-pass-connector" d="M 334.0 746.0 L 334.0 779.0 L 265.0 779.0 L 265.0 810.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-pass-chip"><rect x="298.0" y="760.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="334.0" y="785.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
+<path class="exclusion-pass-connector" d="M 334.0 716.0 L 334.0 749.0 L 169.0 749.0 L 169.0 780.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-pass-chip"><rect x="298.0" y="730.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="334.0" y="755.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
 <g class="exclusion-checkpoint" data-check-id="4">
-<rect x="85.0" y="810.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
-<g class="lucide-icon" transform="translate(112.0 836.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21v-6" />
+<rect x="85.0" y="780.0" width="360" height="86.0" rx="11" fill="#EAF3FF" stroke="#0B3A75" stroke-width="2"/>
+<g class="lucide-icon" transform="translate(112.0 806.0) scale(1.42)" fill="none" stroke="#0B3A75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21v-6" />
   <path d="M12 21V9" />
   <path d="M19 21V3" /></g>
-<text x="177.0" y="853.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">4. Start Signal OK?</text>
+<text x="177.0" y="823.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#0B2E63">4. Start Signal OK?</text>
 </g>
-<line x1="403.0" y1="896.0" x2="403.0" y2="910.0" stroke="#0B3A75" stroke-width="2"/>
-<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 439.0 929.0 L 629.0 929.0 L 629.0 984.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-fail-chip"><rect x="367.0" y="910.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="403.0" y="935.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
+<line x1="403.0" y1="866.0" x2="403.0" y2="880.0" stroke="#0B3A75" stroke-width="2"/>
+<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M 439.0 899.0 L 750.0 899.0 L 750.0 922.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-fail-chip"><rect x="367.0" y="880.0" width="72.0" height="38" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/><text x="403.0" y="905.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#C62828">No</text></g>
 <g class="exclusion-fail-conclusion">
-<rect x="593.0" y="984.0" width="300" height="118.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
-<g><circle cx="631.0" cy="1027" r="17" fill="#C62828"/><line x1="623.0" y1="1019" x2="639.0" y2="1035" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="639.0" y1="1019" x2="623.0" y2="1035" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
-<text x="669.0" y="1026.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
-<text x="669.0" y="1050.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Start Signal Issue</text>
+<rect x="670.0" y="910.0" width="420" height="96.0" rx="13" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.5" filter="url(#subtleShadow)"/>
+<g><circle cx="708" cy="953" r="17" fill="#C62828"/><line x1="700" y1="945" x2="716" y2="961" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/><line x1="716" y1="945" x2="700" y2="961" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/></g>
+<text x="746.0" y="952.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">Root Cause:</text>
+<text x="746.0" y="976.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Start Signal Issue</text>
 </g>
-<path class="exclusion-final-pass-connector" d="M 163.0 896.0 L 163.0 929.0 L 163.0 1000.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
-<g class="exclusion-pass-chip"><rect x="127.0" y="910.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="163.0" y="935.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
+<path class="exclusion-final-pass-connector" d="M 163.0 866.0 L 163.0 899.0 L 163.0 970.0" fill="none" stroke="#0B3A75" stroke-width="2" marker-end="url(#arrowNavy)"/>
+<g class="exclusion-pass-chip"><rect x="127.0" y="880.0" width="72.0" height="38" rx="7" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5"/><text x="163.0" y="905.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">Yes</text></g>
 <g class="exclusion-final-pass">
-<rect x="121.0" y="1000.0" width="380" height="158.0" rx="13" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5" filter="url(#subtleShadow)"/>
-<g><circle cx="159.0" cy="1043" r="17" fill="#2E7D32"/><path d="M 150.0 1043 L 157.0 1051 L 171.0 1034" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
-<text x="197.0" y="1042.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">No Issue Found</text>
-<text x="197.0" y="1066.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">No issue found in this</text>
-<text x="197.0" y="1090.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">path. Consider other rare</text>
-<text x="197.0" y="1114.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">causes or deeper analysis.</text>
+<rect x="85.0" y="970.0" width="500" height="114.0" rx="13" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1.5" filter="url(#subtleShadow)"/>
+<g><circle cx="123.0" cy="1013" r="17" fill="#2E7D32"/><path d="M 114.0 1013 L 121.0 1021 L 135.0 1004" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="161.0" y="1012.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#0B2E63">No Issue Found</text>
+<text x="161.0" y="1036.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">No issue found in this path. Consider other rare</text>
+<text x="161.0" y="1060.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">causes or deeper analysis.</text>
 </g>
 <g id="exclusion-tree-legend">
 <rect x="1530" y="38" width="340" height="462" rx="12" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.6" stroke-dasharray="7 6"/>
@@ -136,23 +132,23 @@
 <text x="1642" y="436" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">No Issue Found</text>
 </g>
 <g id="exclusion-how-to-use">
-<rect x="1270" y="696" width="620" height="286" rx="12" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.6" stroke-dasharray="7 6"/>
-<text x="1294" y="738" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#0B2E63">How to Use</text>
-<rect x="1294" y="754" width="28" height="28" rx="4" fill="#0B2E63"/>
-<text x="1308" y="774" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">1</text>
-<rect x="1332" y="748" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1352" y="776" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">Start from the top event and run each check in order.</text>
-<rect x="1294" y="802" width="28" height="28" rx="4" fill="#0B2E63"/>
-<text x="1308" y="822" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">2</text>
-<rect x="1332" y="796" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1352" y="824" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">Follow the Yes/No result downward along the arrows.</text>
-<rect x="1294" y="850" width="28" height="28" rx="4" fill="#0B2E63"/>
-<text x="1308" y="870" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">3</text>
-<rect x="1332" y="844" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1352" y="872" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">When a check fails, treat the side card as the priority cause to verify.</text>
-<rect x="1294" y="898" width="28" height="28" rx="4" fill="#0B2E63"/>
-<text x="1308" y="918" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">4</text>
-<rect x="1332" y="892" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-<text x="1352" y="920" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">If all checks pass, investigate other paths or deeper causes.</text>
+<rect x="1270" y="742" width="620" height="286" rx="12" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.6" stroke-dasharray="7 6"/>
+<text x="1294" y="784" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#0B2E63">How to Use</text>
+<rect x="1294" y="800" width="28" height="28" rx="4" fill="#0B2E63"/>
+<text x="1308" y="820" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">1</text>
+<rect x="1332" y="794" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1352" y="822" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">Start from the top event and run each check in order.</text>
+<rect x="1294" y="848" width="28" height="28" rx="4" fill="#0B2E63"/>
+<text x="1308" y="868" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">2</text>
+<rect x="1332" y="842" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1352" y="870" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">Follow the Yes/No result downward along the arrows.</text>
+<rect x="1294" y="896" width="28" height="28" rx="4" fill="#0B2E63"/>
+<text x="1308" y="916" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">3</text>
+<rect x="1332" y="890" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1352" y="918" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">When a check fails, treat the side card as the priority cause to verify.</text>
+<rect x="1294" y="944" width="28" height="28" rx="4" fill="#0B2E63"/>
+<text x="1308" y="964" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">4</text>
+<rect x="1332" y="938" width="532" height="46" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="1352" y="966" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" fill="#5B677A">If all checks pass, investigate other paths or deeper causes.</text>
 </g>
 </svg>

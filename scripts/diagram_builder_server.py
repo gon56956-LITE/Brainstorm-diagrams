@@ -43,7 +43,7 @@ DIAGRAMS = {
         "export": EXPORT_FAULT_TREE,
     },
     "exclusion_tree": {
-        "label": "Exclusion Tree",
+        "label": "Sequential Exclusion Tree",
         "work": ROOT / "work" / "exclusion-tree",
         "template": TEMPLATES / "exclusion-tree.template.json",
         "export": EXPORT_EXCLUSION_TREE,
@@ -702,7 +702,7 @@ INDEX_HTML = r"""<!doctype html>
         <select id="diagramType">
           <option value="fishbone">Fishbone</option>
           <option value="fault_tree">Fault Tree</option>
-          <option value="exclusion_tree">Exclusion Tree</option>
+          <option value="exclusion_tree">Sequential Exclusion Tree</option>
         </select>
       </div>
       <div class="row">
@@ -784,7 +784,7 @@ INDEX_HTML = r"""<!doctype html>
         <ul>
           <li>Fishbone: recommended 4-8 categories, up to 5 primary entries per category, up to 3 child causes per subcategory.</li>
           <li>Fault Tree: 1 top event, recommended 3-5 first-level intermediate events, up to 8 first-level intermediate events, up to 4 children per intermediate event, currently supports second-level intermediate events.</li>
-          <li>Exclusion Tree: 1 target problem, recommended 3-6 sequential check points, each check has one Yes path and one No cause card.</li>
+          <li>Sequential Exclusion Tree: 1 target problem, recommended 3-6 check points on one main path, each check has one Yes path and one No cause card.</li>
           <li>Drafts below the recommended count can still render after confirmation, but may not be useful for review.</li>
         </ul>
       </div>
@@ -831,7 +831,7 @@ INDEX_HTML = r"""<!doctype html>
 
     function diagramTypeLabel(diagramType) {
       if (diagramType === "fault_tree") return "Fault Tree";
-      if (diagramType === "exclusion_tree") return "Exclusion Tree";
+      if (diagramType === "exclusion_tree") return "Sequential Exclusion Tree";
       return "Fishbone";
     }
 
@@ -1657,7 +1657,7 @@ INDEX_HTML = r"""<!doctype html>
       formRoot.appendChild(detail);
 
       const limits = LIMITS.exclusion_tree;
-      const checks = section("Check Points", `Use ${limits.minChecks}-${limits.checks} sequential checks. Each check has one Yes/Pass path and one No/Fail conclusion.`);
+      const checks = section("Check Points", `Use ${limits.minChecks}-${limits.checks} checks on one sequential path. Each check has one Yes/Pass path and one No/Fail conclusion.`);
       checks.querySelector(".section-title").appendChild(button("Add Check", () => {
         if (model.checks.length < limits.checks) {
           model.checks.push({

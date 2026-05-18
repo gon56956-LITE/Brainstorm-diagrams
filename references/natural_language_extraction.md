@@ -42,6 +42,27 @@ Gate: OR
 - Basic event
 ```
 
+Choose `exclusion_tree` when the source asks for sequential troubleshooting, step-by-step cause elimination, verification checks, root-cause screening, or a practical diagnostic path:
+
+```markdown
+---
+diagram_type: exclusion_tree
+show_legend: true
+show_how_to_use: true
+---
+
+# Target Problem
+
+Event Detail: Observed context and review goal
+- Supporting observation
+
+## Checkable Condition OK?
+Fail Conclusion: Likely Cause if Check Fails
+Fail Detail: Source-supported evidence or next verification note
+
+Final Pass Conclusion: No issue found in this path. Consider other causes or deeper analysis.
+```
+
 ## Extraction Rules
 
 ### Fishbone
@@ -71,10 +92,25 @@ Gate: OR
 - Keep the draft within the current renderer scope: one top event, recommended 3-5 first-level intermediate events, up to eight first-level intermediate events when the source needs it, up to four children per intermediate event, and optional second-level intermediate events.
 - If the source is too thin to support at least two meaningful cause branches, ask for more context instead of inventing branches.
 
+### Sequential Exclusion Tree
+
+- Extract one target problem from the source issue or investigation question.
+- Extract an `Event Detail:` panel from observed symptoms, scope, operating conditions, affected units, excluded facts, and review goal.
+- Extract 3-6 sequential checkpoints when the source supports at least three practical checks.
+- Phrase every checkpoint as a testable Yes/No question, such as "Power Rail Within Tolerance?" or "Connector Dry and Sealed?"
+- Order checkpoints by practical troubleshooting flow from broad, easy, or safety-critical checks toward narrower checks when the source implies an order; otherwise preserve the source order.
+- Use each `Fail Conclusion:` for the likely cause or priority investigation result if that check fails.
+- Use `Fail Detail:` for source-supported evidence, observed clues, or the verification note behind the conclusion.
+- Use `Final Pass Conclusion:` for the result when all checks pass, usually to consider less common causes or deeper analysis.
+- Do not use AND/OR gates, probability, Boolean logic, or fault-tree intermediate events in a sequential exclusion tree.
+- Do not present suspected causes as proven root causes unless the source says a failed check has confirmed them.
+- Keep the draft within the current renderer scope: one target problem, event detail, 3-6 checkpoints, one No/Fail conclusion per checkpoint, and one final pass conclusion.
+- If the source is too thin to support a target problem and at least three meaningful check directions, ask for more context instead of generating a generic troubleshooting flow.
+
 ## Workflow
 
 1. Read the user's natural-language source.
-2. Choose `fishbone` or `fault_tree` based on the source and the user's wording.
+2. Choose `fishbone`, `fault_tree`, or `exclusion_tree` based on the source and the user's wording.
 3. Extract the diagram structure using the rules above.
 4. Write structured Markdown to `work/<diagram-type>/<safe-name>.md`.
 5. Render the SVG with the matching work renderer or `scripts/generate_diagram.py`.
@@ -122,3 +158,29 @@ Expected behavior:
 - Use OR for independent branches such as power path, controller boot, and start signal path.
 - Use AND only for explicitly combined conditions such as power-good stability plus controller boot completion.
 - Render `work/fault-tree/startup-intermittent-failure.svg`.
+
+## Sequential Exclusion Tree Prompt Example
+
+```text
+Create a sequential exclusion tree troubleshooting draft from the source text below.
+
+Output name: field-link-dropout
+
+The remote sensor link intermittently drops offline after installation at customer sites.
+The outage usually appears after rain or washdown and sometimes clears after the cabinet is opened and reseated.
+Two returned units had moisture marks near the outdoor connector.
+Field logs show receive signal level below the normal threshold during several outages.
+One site had a loose shield termination on the cable harness.
+Bench replay with the same firmware did not reproduce the disconnect.
+The power rail remained within tolerance during the captured outage window.
+The goal is to guide technicians through checks that can exclude likely causes in a practical order.
+```
+
+Expected behavior:
+
+- Create `work/exclusion-tree/field-link-dropout.md`.
+- Use the target problem "Remote Sensor Link Drops Offline After Field Installation" or equivalent.
+- Use event detail for observed context, excluded facts, and review goal.
+- Use sequential checks such as connector sealing, receive signal threshold, shield termination, and firmware reproduction.
+- Use No/Fail conclusions only for source-supported likely causes.
+- Render `work/exclusion-tree/field-link-dropout.svg`.

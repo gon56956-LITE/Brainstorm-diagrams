@@ -5,6 +5,7 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 ## Source Fidelity
 
 - The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition.
+- Exclusion tree is used only for sequential troubleshooting, practical verification checks, or cause-elimination workflows.
 - The topic or top event preserves the source's central problem, failure mode, design challenge, or analysis question.
 - Labels come from the source domain, not from generic defaults unless the source explicitly asks for them.
 - Causes, branches, and leaves are traceable to the source text.
@@ -31,6 +32,20 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - Nested `###` intermediate events are used only when mixed logic or second-level decomposition is needed.
 - The draft does not imply a proven root cause unless the source states it.
 
+## Sequential Exclusion Tree Structure
+
+- The draft uses `diagram_type: exclusion_tree`.
+- The target problem is one specific issue to troubleshoot, not a broad project title.
+- `Event Detail:` captures observations, scope, conditions, excluded facts, or review focus from the source.
+- The draft uses 3-6 checkpoints.
+- Each checkpoint is phrased as a testable Yes/No question.
+- The checkpoint order follows the source order or a practical troubleshooting path from broad/easy checks toward narrower checks.
+- Each checkpoint has a source-traceable `Fail Conclusion:`.
+- `Fail Detail:` is used only for source-supported evidence or verification notes.
+- The draft has one `Final Pass Conclusion:` for the all-checks-pass path.
+- The draft does not use AND/OR gates or fault-tree intermediate events.
+- The draft does not imply a proven root cause unless the source states that a failed check confirms it.
+
 ## File Outputs
 
 - The editable draft is saved as `work/<diagram-type>/<safe-name>.md`.
@@ -46,3 +61,4 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - Are important source phrases missing from the draft?
 - For fishbone, does the resulting diagram invite useful brainstorming rather than imply a final proven root cause?
 - For fault tree, does the diagram show logical failure decomposition without overstating proof?
+- For sequential exclusion tree, would a technician know what to check next without mistaking suspected causes for confirmed root causes?

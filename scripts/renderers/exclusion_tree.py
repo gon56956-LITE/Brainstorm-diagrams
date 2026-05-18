@@ -37,13 +37,13 @@ TOP_W = 300
 TOP_H = 96
 CHECK_W = 360
 CHECK_H = 86
-FAIL_W = 300
+FAIL_W = 420
 FAIL_H = 150
-FINAL_W = 380
+FINAL_W = 500
 FINAL_H = 160
 CAUSE_CARD_BASE_X = 1120
-CAUSE_CARD_STEP_X = 130
-CAUSE_CARD_MIN_X = 520
+CAUSE_CARD_STEP_X = 150
+CAUSE_CARD_MIN_X = 540
 CAUSE_CARD_TOP_GAP = 44
 CAUSE_CARD_MIN_GAP = 24
 CARD_PAD_TOP = 34
@@ -52,6 +52,29 @@ CARD_TITLE_GAP = 24
 CARD_DETAIL_GAP = 20
 CARD_TITLE_LINE_H = 24
 CARD_DETAIL_LINE_H = 20
+CARD_TEXT_X_OFFSET = 76
+CARD_TEXT_RIGHT_PAD = 30
+CARD_TITLE_CHAR_PX = 8.2
+CARD_DETAIL_CHAR_PX = 6.6
+CARD_HEADING_BASELINE_Y = 42
+CARD_TITLE_BASELINE_Y = 66
+CARD_DETAIL_BASELINE_GAP = 2
+CARD_BOTTOM_AFTER_TEXT = 24
+DETAIL_TEXT_X_OFFSET = 28
+DETAIL_TEXT_RIGHT_PAD = 28
+DETAIL_TITLE_BASELINE_Y = 44
+DETAIL_RULE_Y = 64
+DETAIL_BODY_BASELINE_Y = 96
+DETAIL_BODY_LINE_H = 27
+DETAIL_BULLET_LINE_H = 24
+DETAIL_BOTTOM_AFTER_TEXT = 30
+MAIN_PATH_STEP_X = 165
+MAIN_PATH_TAIL_STEP_X = 70
+CONNECTOR_CLEARANCE = 32
+FAIL_LANE_MIN_OFFSET = 36
+FAIL_LANE_PREFERRED_OFFSET = 80
+FAIL_LANE_MAX_OFFSET = 160
+FAIL_ARROW_INSET_Y = 12
 
 PALETTE = {
     "background": "#FFFFFF",
@@ -170,6 +193,24 @@ class TextBoxLayout:
     height: float
 
 
+@dataclass
+class LayoutRect:
+    x: float
+    y: float
+    w: float
+    h: float
+    kind: str
+    index: int
+
+    @property
+    def right(self) -> float:
+        return self.x + self.w
+
+    @property
+    def bottom(self) -> float:
+        return self.y + self.h
+
+
 def render_exclusion_tree_to_file(data: dict[str, Any], output_path: Path) -> dict[str, Any]:
     normalized = normalize_input(data)
     svg = render_exclusion_tree(normalized)
@@ -223,7 +264,7 @@ def normalize_input(data: dict[str, Any]) -> dict[str, Any]:
 
     return {
         "diagram_type": "exclusion_tree",
-        "title": clean_text(data.get("title", "Exclusion Tree / æŽ’é™¤æ ‘")) or "Exclusion Tree / æŽ’é™¤æ ‘",
+        "title": clean_text(data.get("title", "Sequential Exclusion Tree")) or "Sequential Exclusion Tree",
         "subtitle": clean_text(data.get("subtitle", "")),
         "problem_en": problem_en,
         "problem_zh": problem_zh,
@@ -312,18 +353,21 @@ def normalize_event_detail(raw_detail: Any, data: dict[str, Any], problem_raw: d
 
 def render_exclusion_tree(data: dict[str, Any]) -> str:
     checks: list[CheckPoint] = data["checks"]
+    path_shift_x = main_path_shift_x(len(checks))
     top_layout = measure_top_event(data)
     check_layouts = [measure_checkpoint(check, index + 1, data["language"]) for index, check in enumerate(checks)]
     event_detail_height = measure_event_detail_panel(data["event_detail"])
     first_check_y = max(TOP_Y + top_layout.height + 62, DETAIL_Y + event_detail_height + 64)
-    fail_layouts = [measure_conclusion_card(check.fail_conclusion, FAIL_W, data["language"]) for check in checks]
-    final_layout = measure_conclusion_card(data["final_pass_conclusion"], FINAL_W, data["language"])
+    fail_w = FAIL_W
+    final_w = FINAL_W
+    fail_layouts = [measure_conclusion_card(check.fail_conclusion, fail_w, data["language"]) for check in checks]
+    final_layout = measure_conclusion_card(data["final_pass_conclusion"], final_w, data["language"])
     positions: list[dict[str, float]] = []
     previous_fail_bottom = first_check_y
     previous_check_y = first_check_y
     previous_check_height = 0.0
     for index, layout in enumerate(fail_layouts):
-        check_x = MAIN_X - min(index, 3) * 165
+        check_x = checkpoint_x(index, path_shift_x)
         if index == 0:
             check_y = first_check_y
         else:
@@ -339,25 +383,60 @@ def render_exclusion_tree(data: dict[str, Any]) -> str:
     last_check_y = positions[-1]["check_y"]
     last_check_height = positions[-1]["check_height"]
     final_y = last_check_y + last_check_height + 104
-    how_to_use_x = WIDTH - 650
+    fail_rects = [
+        LayoutRect(position["card_x"], position["card_y"], fail_w, layout.height, "fail", index)
+        for index, (position, layout) in enumerate(zip(positions, fail_layouts))
+    ]
+    checkpoint_rects = [
+        LayoutRect(
+            position["check_x"] - CHECK_W / 2,
+            position["check_y"],
+            CHECK_W,
+            check_layouts[index].height,
+            "checkpoint",
+            index,
+        )
+        for index, position in enumerate(positions)
+    ]
+    fail_right = max(rect.right for rect in fail_rects)
+    canvas_width = max(WIDTH, int(max(fail_right + 80, WIDTH)))
+    last_check_x = positions[-1]["check_x"]
+    final_card_x = final_card_left(last_check_x, final_w, canvas_width)
+    final_rect = LayoutRect(final_card_x, final_y, final_w, final_layout.height, "final", 0)
+    adjust_fail_positions_for_final(positions, fail_layouts, fail_w, final_rect)
+    fail_rects = [
+        LayoutRect(position["card_x"], position["card_y"], fail_w, layout.height, "fail", index)
+        for index, (position, layout) in enumerate(zip(positions, fail_layouts))
+    ]
+    route_obstacles = fail_rects + checkpoint_rects + [final_rect]
+    fail_lanes = [
+        choose_fail_lane(checks[index], data["language"], position, fail_rects[index], index, route_obstacles)
+        for index, position in enumerate(positions)
+    ]
+    how_to_use_x = canvas_width - 650
     how_to_use_y = compute_how_to_use_y(how_to_use_x, positions, fail_layouts, data["show_legend"])
+    fail_bottom = max(
+        position["card_y"] + layout.height
+        for position, layout in zip(positions, fail_layouts)
+    )
     canvas_height = max(
         HEIGHT,
         DETAIL_Y + event_detail_height + BOTTOM_MARGIN,
+        fail_bottom + BOTTOM_MARGIN,
         final_y + final_layout.height + BOTTOM_MARGIN,
         how_to_use_y + HOW_TO_USE_H + BOTTOM_MARGIN,
     )
 
     parts = [
-        svg_header(WIDTH, canvas_height),
+        svg_header(canvas_width, canvas_height),
         defs(),
-        f'<rect width="{WIDTH}" height="{canvas_height}" fill="{PALETTE["background"]}"/>',
+        f'<rect width="{canvas_width}" height="{canvas_height}" fill="{PALETTE["background"]}"/>',
         render_event_detail_panel(data["event_detail"], event_detail_height),
-        render_top_event(data, MAIN_X, TOP_Y, top_layout),
+        render_top_event(data, MAIN_X + path_shift_x, TOP_Y, top_layout),
     ]
 
     top_bottom = TOP_Y + top_layout.height
-    parts.append(connector(MAIN_X, top_bottom, MAIN_X, first_check_y, arrow=True))
+    parts.append(connector(MAIN_X + path_shift_x, top_bottom, MAIN_X + path_shift_x, first_check_y, arrow=True))
 
     check_positions: list[tuple[CheckPoint, float, float]] = []
     for index, check in enumerate(checks):
@@ -377,20 +456,22 @@ def render_exclusion_tree(data: dict[str, Any]) -> str:
                 position["card_y"],
                 fail_layouts[index],
                 data["language"],
+                fail_w,
+                fail_lanes[index],
             )
         )
 
         if index < len(checks) - 1:
-            next_x = MAIN_X - min(index + 1, 3) * 165
+            next_x = checkpoint_x(index + 1, path_shift_x)
             next_y = positions[index + 1]["check_y"]
             parts.append(render_pass_branch(check, x, y, check_height, next_x, next_y, data["language"]))
 
     if check_positions:
         last_check, last_x, last_y = check_positions[-1]
-        parts.append(render_final_pass_branch(data["final_pass_conclusion"], last_check, last_x, last_y, last_check_height, final_y, final_layout, data["language"]))
+        parts.append(render_final_pass_branch(data["final_pass_conclusion"], last_check, last_x, last_y, last_check_height, final_y, final_layout, data["language"], final_w, final_card_x))
 
     if data["show_legend"]:
-        parts.append(render_legend(WIDTH - 390, 38))
+        parts.append(render_legend(canvas_width - 390, 38))
     if data["show_how_to_use"]:
         parts.append(render_how_to_use(how_to_use_x, how_to_use_y))
 
@@ -402,18 +483,19 @@ def render_event_detail_panel(detail: EventDetail, height: float) -> str:
     chunks = [
         f'<g id="exclusion-event-detail-panel">',
         f'<rect x="{DETAIL_X}" y="{DETAIL_Y}" width="{DETAIL_W}" height="{height:.1f}" rx="14" fill="#FFFFFF" stroke="{PALETTE["line_blue"]}" stroke-width="1.8" filter="url(#subtleShadow)"/>',
-        f'<text x="{DETAIL_X + 28}" y="{DETAIL_Y + 44}" font-family="{FONT_STACK}" font-size="26" font-weight="700" fill="{PALETTE["navy"]}">{escape(detail.title)}</text>',
-        f'<line x1="{DETAIL_X + 28}" y1="{DETAIL_Y + 64}" x2="{DETAIL_X + DETAIL_W - 28}" y2="{DETAIL_Y + 64}" stroke="{PALETTE["gray_line"]}" stroke-width="1.5"/>',
+        f'<text x="{DETAIL_X + DETAIL_TEXT_X_OFFSET}" y="{DETAIL_Y + DETAIL_TITLE_BASELINE_Y}" font-family="{FONT_STACK}" font-size="26" font-weight="700" fill="{PALETTE["navy"]}">{escape(detail.title)}</text>',
+        f'<line x1="{DETAIL_X + DETAIL_TEXT_X_OFFSET}" y1="{DETAIL_Y + DETAIL_RULE_Y}" x2="{DETAIL_X + DETAIL_W - DETAIL_TEXT_RIGHT_PAD}" y2="{DETAIL_Y + DETAIL_RULE_Y}" stroke="{PALETTE["gray_line"]}" stroke-width="1.5"/>',
     ]
-    current_y = DETAIL_Y + 96
-    for line in wrap_text(detail.text, 42, max_lines=None):
-        chunks.append(f'<text x="{DETAIL_X + 28}" y="{current_y}" font-family="{FONT_STACK}" font-size="18" fill="{PALETTE["gray_text"]}">{escape(line)}</text>')
-        current_y += 27
+    body_chars, bullet_chars = detail_text_chars()
+    current_y = DETAIL_Y + DETAIL_BODY_BASELINE_Y
+    for line in wrap_text(detail.text, body_chars, max_lines=None):
+        chunks.append(f'<text x="{DETAIL_X + DETAIL_TEXT_X_OFFSET}" y="{current_y}" font-family="{FONT_STACK}" font-size="18" fill="{PALETTE["gray_text"]}">{escape(line)}</text>')
+        current_y += DETAIL_BODY_LINE_H
     for bullet in detail.bullets:
-        for index, line in enumerate(wrap_text(bullet, 39, max_lines=None)):
+        for index, line in enumerate(wrap_text(bullet, bullet_chars, max_lines=None)):
             prefix = "- " if index == 0 else "  "
-            chunks.append(f'<text x="{DETAIL_X + 28}" y="{current_y}" font-family="{FONT_STACK}" font-size="17" fill="{PALETTE["gray_text"]}">{escape(prefix + line)}</text>')
-            current_y += 24
+            chunks.append(f'<text x="{DETAIL_X + DETAIL_TEXT_X_OFFSET}" y="{current_y}" font-family="{FONT_STACK}" font-size="17" fill="{PALETTE["gray_text"]}">{escape(prefix + line)}</text>')
+            current_y += DETAIL_BULLET_LINE_H
     chunks.append("</g>")
     return "\n".join(chunks)
 
@@ -451,18 +533,26 @@ def render_pass_branch(check: CheckPoint, x: float, y: float, check_height: floa
     sx = x - CHECK_W / 2 + 84
     sy = y + check_height
     mid_y = chip_center_y(y, check_height)
-    tx = next_x
+    tx = sx if abs(next_x - x) < 0.1 else next_x - CHECK_W / 2 + 84
     ty = next_y
     label = display_text(check.pass_label_zh, check.pass_label_en, language)
     return "\n".join(
         [
-            f'<path class="exclusion-pass-connector" d="M {sx:.1f} {sy:.1f} L {sx:.1f} {mid_y:.1f} L {tx:.1f} {mid_y:.1f} L {tx:.1f} {ty:.1f}" fill="none" stroke="{PALETTE["navy_2"]}" stroke-width="2" marker-end="url(#arrowNavy)"/>',
+            pass_connector_path(sx, sy, mid_y, tx, ty),
             render_chip(label, sx, chip_top_y(y, check_height), "pass"),
         ]
     )
 
 
-def render_fail_branch(check: CheckPoint, x: float, y: float, check_height: float, fail_x: float, fail_y: float, layout: CardLayout, language: str) -> str:
+def pass_connector_path(sx: float, sy: float, mid_y: float, tx: float, ty: float) -> str:
+    if abs(sx - tx) < 0.1:
+        path = f"M {sx:.1f} {sy:.1f} L {sx:.1f} {ty:.1f}"
+    else:
+        path = f"M {sx:.1f} {sy:.1f} L {sx:.1f} {mid_y:.1f} L {tx:.1f} {mid_y:.1f} L {tx:.1f} {ty:.1f}"
+    return f'<path class="exclusion-pass-connector" d="{path}" fill="none" stroke="{PALETTE["navy_2"]}" stroke-width="2" marker-end="url(#arrowNavy)"/>'
+
+
+def render_fail_branch(check: CheckPoint, x: float, y: float, check_height: float, fail_x: float, fail_y: float, layout: CardLayout, language: str, fail_w: float, lane_x: float) -> str:
     cx = x + CHECK_W / 2 - 42
     mid_y = chip_center_y(y, check_height)
     label = display_text(check.fail_label_zh, check.fail_label_en, language)
@@ -470,29 +560,28 @@ def render_fail_branch(check: CheckPoint, x: float, y: float, check_height: floa
     sx = cx + chip_w / 2
     card_x = fail_x
     card_y = fail_y
-    entry_x = card_x + 36
-    entry_y = card_y
+    entry_x = lane_x
+    entry_y = card_y + FAIL_ARROW_INSET_Y
     return "\n".join(
         [
             connector(cx, y + check_height, cx, chip_top_y(y, check_height), arrow=False),
             f'<path class="exclusion-fail-connector exclusion-fail-drop-connector" d="M {sx:.1f} {mid_y:.1f} L {entry_x:.1f} {mid_y:.1f} L {entry_x:.1f} {entry_y:.1f}" fill="none" stroke="{PALETTE["navy_2"]}" stroke-width="2" marker-end="url(#arrowNavy)"/>',
             render_chip(label, cx, chip_top_y(y, check_height), "fail"),
-            render_conclusion_card(check.fail_conclusion, card_x, card_y, FAIL_W, layout, "fail", language),
+            render_conclusion_card(check.fail_conclusion, card_x, card_y, fail_w, layout, "fail", language),
         ]
     )
 
 
-def render_final_pass_branch(conclusion: Conclusion, check: CheckPoint, x: float, y: float, check_height: float, final_y: float, layout: CardLayout, language: str) -> str:
+def render_final_pass_branch(conclusion: Conclusion, check: CheckPoint, x: float, y: float, check_height: float, final_y: float, layout: CardLayout, language: str, final_w: float, card_x: float) -> str:
     sx = x - CHECK_W / 2 + 78
     sy = y + check_height
-    card_x = max(TREE_LEFT_MARGIN + 18, min(sx - 42, WIDTH - FINAL_W - 36))
     label = display_text(check.pass_label_zh, check.pass_label_en, language)
     mid_y = chip_center_y(y, check_height)
     return "\n".join(
         [
             f'<path class="exclusion-final-pass-connector" d="M {sx:.1f} {sy:.1f} L {sx:.1f} {mid_y:.1f} L {sx:.1f} {final_y:.1f}" fill="none" stroke="{PALETTE["navy_2"]}" stroke-width="2" marker-end="url(#arrowNavy)"/>',
             render_chip(label, sx, chip_top_y(y, check_height), "pass"),
-            render_conclusion_card(conclusion, card_x, final_y, FINAL_W, layout, "final", language),
+            render_conclusion_card(conclusion, card_x, final_y, final_w, layout, "final", language),
         ]
     )
 
@@ -523,9 +612,118 @@ def chip_center_y(check_y: float, check_height: float = CHECK_H) -> float:
 
 def cause_card_x(check_x: float, index: int) -> float:
     fail_label_center = check_x + CHECK_W / 2 - 42
-    local_x = fail_label_center + 190
+    local_x = fail_label_center + 210
     stepped_x = CAUSE_CARD_BASE_X - index * CAUSE_CARD_STEP_X
-    return max(min(local_x, stepped_x), CAUSE_CARD_MIN_X)
+    return max(local_x, stepped_x, CAUSE_CARD_MIN_X)
+
+
+def final_card_left(last_check_x: float, final_w: float, canvas_width: float) -> float:
+    checkpoint_left = last_check_x - CHECK_W / 2
+    return max(0, min(checkpoint_left, canvas_width - final_w - 36))
+
+
+def adjust_fail_positions_for_final(
+    positions: list[dict[str, float]],
+    fail_layouts: list[CardLayout],
+    fail_w: float,
+    final_rect: LayoutRect,
+) -> None:
+    for index, (position, layout) in enumerate(zip(positions, fail_layouts)):
+        if index > 0:
+            previous = positions[index - 1]
+            previous_bottom = previous["card_y"] + fail_layouts[index - 1].height
+            position["card_y"] = max(position["card_y"], previous_bottom + CAUSE_CARD_MIN_GAP)
+        rect = LayoutRect(position["card_x"], position["card_y"], fail_w, layout.height, "fail", index)
+        if rects_overlap(rect, final_rect, 24):
+            min_y = final_rect.bottom + 32
+            if index > 0:
+                previous = positions[index - 1]
+                previous_bottom = previous["card_y"] + fail_layouts[index - 1].height
+                min_y = max(min_y, previous_bottom + CAUSE_CARD_MIN_GAP)
+            if position["card_y"] < min_y:
+                position["card_y"] = min_y
+
+
+def rects_overlap(first: LayoutRect, second: LayoutRect, margin: float = 0.0) -> bool:
+    return (
+        first.x < second.right + margin
+        and first.right > second.x - margin
+        and first.y < second.bottom + margin
+        and first.bottom > second.y - margin
+    )
+
+
+def choose_fail_lane(check: CheckPoint, language: str, position: dict[str, float], target: LayoutRect, index: int, obstacles: list[LayoutRect]) -> float:
+    chip_center_x = position["check_x"] + CHECK_W / 2 - 42
+    label = display_text(check.fail_label_zh, check.fail_label_en, language)
+    sx = chip_center_x + chip_width(label) / 2
+    mid_y = chip_center_y(position["check_y"], position["check_height"])
+    lane_min = target.x + FAIL_LANE_MIN_OFFSET
+    lane_max = min(target.right - 54, target.x + FAIL_LANE_MAX_OFFSET)
+    preferred = max(lane_min, min(target.x + FAIL_LANE_PREFERRED_OFFSET, lane_max))
+    candidates = lane_candidates(preferred, lane_min, lane_max)
+    route_obstacles = [
+        rect
+        for rect in obstacles
+        if not (rect.kind == "fail" and rect.index == index)
+        and not (rect.kind == "checkpoint" and rect.index == index)
+    ]
+    for candidate in candidates:
+        if connector_segments_clear(sx, mid_y, candidate, target.y, route_obstacles):
+            return candidate
+
+    lane_max = target.right - 54
+    candidates = lane_candidates(preferred, lane_min, lane_max)
+    for candidate in candidates:
+        if connector_segments_clear(sx, mid_y, candidate, target.y, route_obstacles):
+            return candidate
+    return preferred
+
+
+def lane_candidates(preferred: float, lane_min: float, lane_max: float) -> list[float]:
+    values = {round(lane_min, 1), round(lane_max, 1), round(preferred, 1)}
+    step = 4
+    distance = 0
+    while distance <= int(max(preferred - lane_min, lane_max - preferred)) + step:
+        values.add(round(max(lane_min, preferred - distance), 1))
+        values.add(round(min(lane_max, preferred + distance), 1))
+        distance += step
+    return sorted(values, key=lambda value: (abs(value - preferred), value))
+
+
+def connector_segments_clear(sx: float, y: float, lane_x: float, target_y: float, obstacles: list[LayoutRect]) -> bool:
+    for obstacle in obstacles:
+        if horizontal_segment_hits_rect(sx, lane_x, y, obstacle, CONNECTOR_CLEARANCE):
+            return False
+        if vertical_segment_hits_rect(lane_x, y, target_y, obstacle, CONNECTOR_CLEARANCE):
+            return False
+    return True
+
+
+def horizontal_segment_hits_rect(x1: float, x2: float, y: float, rect: LayoutRect, margin: float) -> bool:
+    left = min(x1, x2)
+    right = max(x1, x2)
+    return rect.y - margin < y < rect.bottom + margin and left < rect.right + margin and right > rect.x - margin
+
+
+def vertical_segment_hits_rect(x: float, y1: float, y2: float, rect: LayoutRect, margin: float) -> bool:
+    top = min(y1, y2)
+    bottom = max(y1, y2)
+    return rect.x - margin < x < rect.right + margin and top < rect.bottom + margin and bottom > rect.y - margin
+
+
+def main_path_shift_x(check_count: int) -> float:
+    if check_count < MAX_CHECKS:
+        return 0.0
+    last_x = checkpoint_x(check_count - 1)
+    left_edge = last_x - CHECK_W / 2
+    return max(0.0, TREE_LEFT_MARGIN - left_edge)
+
+
+def checkpoint_x(index: int, shift_x: float = 0.0) -> float:
+    base_steps = min(index, 3) * MAIN_PATH_STEP_X
+    tail_steps = max(0, index - 3) * MAIN_PATH_TAIL_STEP_X
+    return MAIN_X + shift_x - base_steps - tail_steps
 
 
 def compute_how_to_use_y(panel_x: float, positions: list[dict[str, float]], fail_layouts: list[CardLayout], show_legend: bool) -> float:
@@ -557,27 +755,50 @@ def measure_checkpoint(check: CheckPoint, index: int, language: str) -> TextBoxL
 def measure_conclusion_card(conclusion: Conclusion, width: float, language: str) -> CardLayout:
     title = display_text(conclusion.text_zh, conclusion.text_en, language)
     detail = display_text(conclusion.detail_zh, conclusion.detail_en, language)
-    title_chars = max(18, int((width - 118) / 10))
-    detail_chars = max(20, int((width - 118) / 9))
+    title_chars = card_text_chars(width, CARD_TITLE_CHAR_PX, 20)
+    detail_chars = card_text_chars(width, CARD_DETAIL_CHAR_PX, 24)
     title_lines = wrap_text(title, title_chars, max_lines=None)
     detail_lines = wrap_text(detail, detail_chars, max_lines=None)
-    height = CARD_PAD_TOP + CARD_TITLE_GAP + len(title_lines) * CARD_TITLE_LINE_H + CARD_PAD_BOTTOM
+    last_baseline = CARD_HEADING_BASELINE_Y
+    if title_lines:
+        last_baseline = CARD_TITLE_BASELINE_Y + (len(title_lines) - 1) * CARD_TITLE_LINE_H
     if detail_lines:
-        height += CARD_DETAIL_GAP + len(detail_lines) * CARD_DETAIL_LINE_H
+        first_detail_y = CARD_TITLE_BASELINE_Y + len(title_lines) * CARD_TITLE_LINE_H + CARD_DETAIL_BASELINE_GAP
+        last_baseline = first_detail_y + (len(detail_lines) - 1) * CARD_DETAIL_LINE_H
+    height = last_baseline + CARD_BOTTOM_AFTER_TEXT
     return CardLayout(
         title_lines=title_lines,
         detail_lines=detail_lines,
-        height=max(118, height),
+        height=max(96, height),
     )
 
 
 def measure_event_detail_panel(detail: EventDetail) -> float:
-    text_lines = wrap_text(detail.text, 42, max_lines=None)
+    body_chars, bullet_chars = detail_text_chars()
+    text_lines = wrap_text(detail.text, body_chars, max_lines=None)
     bullet_lines: list[str] = []
     for bullet in detail.bullets:
-        bullet_lines.extend(wrap_text(bullet, 39, max_lines=None))
-    height = 96 + len(text_lines) * 27 + len(bullet_lines) * 24 + 28
+        bullet_lines.extend(wrap_text(bullet, bullet_chars, max_lines=None))
+    last_baseline = DETAIL_TITLE_BASELINE_Y
+    if text_lines:
+        last_baseline = DETAIL_BODY_BASELINE_Y + (len(text_lines) - 1) * DETAIL_BODY_LINE_H
+    if bullet_lines:
+        bullet_start_y = DETAIL_BODY_BASELINE_Y + len(text_lines) * DETAIL_BODY_LINE_H
+        last_baseline = bullet_start_y + (len(bullet_lines) - 1) * DETAIL_BULLET_LINE_H
+    height = last_baseline + DETAIL_BOTTOM_AFTER_TEXT
     return max(DETAIL_H, height)
+
+
+def card_text_chars(width: float, char_px: float, minimum: int) -> int:
+    text_width = max(120, width - CARD_TEXT_X_OFFSET - CARD_TEXT_RIGHT_PAD)
+    return max(minimum, int(text_width / char_px))
+
+
+def detail_text_chars() -> tuple[int, int]:
+    text_width = max(120, DETAIL_W - DETAIL_TEXT_X_OFFSET - DETAIL_TEXT_RIGHT_PAD)
+    body_chars = max(34, int(text_width / 8.0))
+    bullet_chars = max(32, int((text_width - 14) / 8.0))
+    return body_chars, bullet_chars
 
 
 def render_conclusion_card(conclusion: Conclusion, x: float, y: float, w: float, layout: CardLayout, kind: str, language: str) -> str:
@@ -586,20 +807,20 @@ def render_conclusion_card(conclusion: Conclusion, x: float, y: float, w: float,
     stroke = PALETTE["green"] if is_final else PALETTE["border_gray"]
     icon_color = PALETTE["green"] if is_final else PALETTE["red"]
     cls = "exclusion-final-pass" if is_final else "exclusion-fail-conclusion"
-    text_x = x + 76
+    text_x = x + CARD_TEXT_X_OFFSET
     chunks = [
         f'<g class="{cls}">',
         f'<rect x="{x:.1f}" y="{y:.1f}" width="{w}" height="{layout.height:.1f}" rx="13" fill="{fill}" stroke="{stroke}" stroke-width="1.5" filter="url(#subtleShadow)"/>',
         status_icon(x + 38, y + 43, icon_color, is_final),
     ]
     heading = "No Issue Found" if is_final else "Root Cause:"
-    chunks.append(f'<text x="{text_x:.1f}" y="{y + 42:.1f}" font-family="{FONT_STACK}" font-size="17" font-weight="700" fill="{PALETTE["navy"]}">{heading}</text>')
-    current_y = y + 66
+    chunks.append(f'<text x="{text_x:.1f}" y="{y + CARD_HEADING_BASELINE_Y:.1f}" font-family="{FONT_STACK}" font-size="17" font-weight="700" fill="{PALETTE["navy"]}">{heading}</text>')
+    current_y = y + CARD_TITLE_BASELINE_Y
     for line in layout.title_lines:
         chunks.append(f'<text x="{text_x:.1f}" y="{current_y:.1f}" font-family="{FONT_STACK}" font-size="16" font-weight="700" fill="{PALETTE["navy"]}">{escape(line)}</text>')
         current_y += CARD_TITLE_LINE_H
     if layout.detail_lines:
-        current_y += 2
+        current_y += CARD_DETAIL_BASELINE_GAP
         for line in layout.detail_lines:
             chunks.append(f'<text x="{text_x:.1f}" y="{current_y:.1f}" font-family="{FONT_STACK}" font-size="14" fill="{PALETTE["gray_text"]}">{escape(line)}</text>')
             current_y += CARD_DETAIL_LINE_H
@@ -789,7 +1010,7 @@ def parse_exclusion_tree_markdown(text: str) -> dict[str, Any]:
 
     return {
         "diagram_type": "exclusion_tree",
-        "title": metadata.get("title", "Exclusion Tree / æŽ’é™¤æ ‘"),
+        "title": metadata.get("title", "Sequential Exclusion Tree"),
         "subtitle": metadata.get("subtitle", ""),
         "problem": {"text_en": metadata.get("problem", problem or "Target Problem")},
         "event_detail": event_detail,

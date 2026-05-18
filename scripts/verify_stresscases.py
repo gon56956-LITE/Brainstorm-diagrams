@@ -341,8 +341,8 @@ def verify_exclusion_tree_full_stress() -> None:
 
     width = int(float(root.attrib["width"]))
     height = int(float(root.attrib["height"]))
-    if width != 1920 or height < 1080:
-        raise AssertionError(f"exclusion-tree full-stress.svg should keep 1920px width and at least 1080px height, got {width}x{height}")
+    if width < 1920 or height < 1080:
+        raise AssertionError(f"exclusion-tree full-stress.svg should keep at least 1920x1080 canvas, got {width}x{height}")
     if height <= 1080:
         raise AssertionError(f"exclusion-tree full-stress.svg should expand vertically for 6 checks, got {width}x{height}")
 
@@ -399,17 +399,22 @@ def verify_exclusion_tree_full_stress() -> None:
     ]
     if bilingual_lines:
         raise AssertionError(f"exclusion-tree full-stress.svg should not auto-render bilingual labels: {bilingual_lines[:2]}")
-    for group in checkpoints:
+    for group in checkpoints + top_events:
         rects = [child for child in list(group) if child.tag.endswith("rect")]
         texts = [child for child in list(group) if child.tag.endswith("text")]
         if not rects:
-            raise AssertionError("exclusion-tree full-stress.svg checkpoint missing rect")
+            raise AssertionError("exclusion-tree full-stress.svg blue card missing rect")
         rect_y = float(rects[0].attrib.get("y", "0"))
         rect_h = float(rects[0].attrib.get("height", "0"))
+        text_ys = [float(text.attrib.get("y", "0")) for text in texts]
+        top_gap = min(text_ys) - rect_y
+        bottom_gap = rect_y + rect_h - max(text_ys)
+        if abs(top_gap - bottom_gap) > 10:
+            raise AssertionError("exclusion-tree full-stress.svg blue card text should be vertically balanced")
         for text in texts:
             text_y = float(text.attrib.get("y", "0"))
             if text_y < rect_y + 20 or text_y > rect_y + rect_h - 12:
-                raise AssertionError("exclusion-tree full-stress.svg checkpoint text should stay inside its card")
+                raise AssertionError("exclusion-tree full-stress.svg blue card text should stay inside its card")
     fail_card_rects = []
     for group in fail_cards:
         rects = [child for child in list(group) if child.tag.endswith("rect")]
@@ -436,6 +441,16 @@ def verify_exclusion_tree_full_stress() -> None:
             raise AssertionError("exclusion-tree full-stress.svg fail cards should not vertically collide")
     if max(fail_card_heights) <= 150:
         raise AssertionError("exclusion-tree full-stress.svg should content-size fail conclusion card heights")
+    for group in fail_cards + final_cards_for_language:
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        texts = [child for child in list(group) if child.tag.endswith("text")]
+        if not rects or not texts:
+            continue
+        rect_y = float(rects[0].attrib.get("y", "0"))
+        rect_h = float(rects[0].attrib.get("height", "0"))
+        last_text_y = max(float(child.attrib.get("y", "0")) for child in texts)
+        if rect_y + rect_h - last_text_y > 36:
+            raise AssertionError("exclusion-tree full-stress.svg conclusion cards should keep compact bottom padding")
     drop_connectors = [
         element
         for element in root.iter()
@@ -474,8 +489,33 @@ def verify_exclusion_tree_full_stress() -> None:
     final_rect = final_rects[0]
     final_width = float(final_rect.attrib.get("width", "0"))
     final_y = float(final_rect.attrib.get("y", "0"))
-    if final_width < 360:
+    final_tuple = (
+        float(final_rect.attrib.get("x", "0")),
+        final_y,
+        final_width,
+        float(final_rect.attrib.get("height", "0")),
+    )
+    checkpoint_rects = []
+    for group in checkpoints:
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if rects:
+            checkpoint_rects.append(
+                (
+                    float(rects[0].attrib.get("x", "0")),
+                    float(rects[0].attrib.get("y", "0")),
+                    float(rects[0].attrib.get("width", "0")),
+                    float(rects[0].attrib.get("height", "0")),
+                )
+            )
+    if final_width < 460:
         raise AssertionError("exclusion-tree full-stress.svg final pass card should be wider than cause cards")
+    if checkpoint_rects and abs(final_tuple[0] - checkpoint_rects[-1][0]) > 1.0:
+        raise AssertionError("exclusion-tree full-stress.svg final pass card should align with the last checkpoint left edge")
+    if fail_card_rects and fail_card_rects[-1][0] - (final_tuple[0] + final_tuple[2]) < 24:
+        raise AssertionError("exclusion-tree full-stress.svg final pass card should preserve a corridor before the last fail card")
+    for fail_rect in fail_card_rects:
+        if rects_overlap(final_tuple, fail_rect, 24):
+            raise AssertionError("exclusion-tree full-stress.svg final pass card should not collide with fail conclusion cards")
     if fail_card_rects and final_y > max(rect[1] + rect[3] for rect in fail_card_rects) + 20:
         raise AssertionError("exclusion-tree full-stress.svg final pass card should not be pushed below unrelated fail cards")
 
@@ -504,6 +544,36 @@ def verify_exclusion_tree_full_stress() -> None:
             required_y = max(required_y, y + h + 36)
     if abs(how_y - required_y) > 1.0:
         raise AssertionError("exclusion-tree full-stress.svg how-to-use panel should sit at the highest non-colliding right-side position")
+
+    for x, y, w, h in fail_card_rects:
+        if x < -0.1 or y < -0.1 or x + w > width + 0.1 or y + h > height + 0.1:
+            raise AssertionError("exclusion-tree full-stress.svg fail card should stay within canvas")
+    for group in content_groups:
+        rects = [child for child in list(group) if child.tag.endswith("rect")]
+        if not rects:
+            continue
+        rect = rects[0]
+        x = float(rect.attrib.get("x", "0"))
+        y = float(rect.attrib.get("y", "0"))
+        w = float(rect.attrib.get("width", "0"))
+        h = float(rect.attrib.get("height", "0"))
+        if x < -0.1 or y < -0.1 or x + w > width + 0.1 or y + h > height + 0.1:
+            raise AssertionError("exclusion-tree full-stress.svg content card should stay within canvas")
+
+    vertical_segments = []
+    for connector_path in drop_connectors:
+        numbers = parse_path_numbers(connector_path.attrib.get("d", ""))
+        if len(numbers) >= 6:
+            entry_y = numbers[5]
+            if not any(rect_y + 8 <= entry_y <= rect_y + 20 for _, rect_y, _, _ in fail_card_rects):
+                raise AssertionError("exclusion-tree full-stress.svg fail connector arrow should enter inside the target card edge")
+            vertical_segments.append((numbers[4], min(numbers[3], numbers[5]), max(numbers[3], numbers[5])))
+    for index, previous in enumerate(vertical_segments):
+        for current in vertical_segments[index + 1 :]:
+            same_lane = abs(previous[0] - current[0]) <= 0.1
+            overlap = min(previous[2], current[2]) - max(previous[1], current[1])
+            if same_lane and overlap > 1:
+                raise AssertionError("exclusion-tree full-stress.svg fail drop connectors should not overlap in the same vertical lane")
 
 
 def verify_fault_event_rects_within_canvas(root: ET.Element, label: str) -> None:
@@ -609,6 +679,17 @@ def verify_fault_tree_branch_connectors(root: ET.Element, label: str, *, min_tru
 
 def parse_path_numbers(path_data: str) -> list[float]:
     return [float(value) for value in re.findall(r"-?\d+\.\d+", path_data)]
+
+
+def rects_overlap(first: tuple[float, float, float, float], second: tuple[float, float, float, float], margin: float) -> bool:
+    first_x, first_y, first_w, first_h = first
+    second_x, second_y, second_w, second_h = second
+    return (
+        first_x < second_x + second_w + margin
+        and first_x + first_w > second_x - margin
+        and first_y < second_y + second_h + margin
+        and first_y + first_h > second_y - margin
+    )
 
 
 if __name__ == "__main__":

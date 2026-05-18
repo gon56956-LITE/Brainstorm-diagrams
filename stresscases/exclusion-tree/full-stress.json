@@ -65,7 +65,8 @@
       "icon": "thermometer",
       "fail_conclusion": {
         "text_en": "Thermal Test Method Deviation",
-        "text_zh": "温度测试方法偏离"
+        "text_zh": "温度测试方法偏离",
+        "detail_en": "Review chamber profile, soak timing, thermocouple placement, fixture thermal mass, and release procedure evidence before continuing the diagnostic path."
       }
     },
     {

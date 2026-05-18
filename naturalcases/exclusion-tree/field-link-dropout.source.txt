@@ -1,0 +1,12 @@
+Create a sequential exclusion tree troubleshooting draft for a field engineering review.
+
+Observed issue: a remote sensor link intermittently drops offline after installation at customer sites. The outage usually appears after rain or washdown and sometimes clears after the cabinet is opened and reseated. The same firmware build works on the lab bench.
+
+Evidence so far:
+- Two returned units had moisture marks near the outdoor connector.
+- Field logs show receive signal level below the normal threshold during several outages.
+- One site had a loose shield termination on the cable harness.
+- A bench replay with the same firmware did not reproduce the disconnect.
+- The power rail remained within tolerance during the captured outage window.
+
+The review goal is to guide technicians through checks that can exclude likely causes in a practical order. Do not present any root cause as proven until a failed check confirms it.

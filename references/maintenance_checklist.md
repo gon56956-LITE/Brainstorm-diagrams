@@ -25,6 +25,7 @@ Use this checklist before finishing changes to `brainstorm-diagrams`.
 - Update `references/natural_language_review_checklist.md` for review criteria.
 - Add or update `naturalcases/fishbone/*.source.txt` and `naturalcases/fishbone/*.expected.md` when changing expected extraction behavior.
 - Add or update `naturalcases/fault-tree/*.source.txt` and `naturalcases/fault-tree/*.expected.md` when changing fault-tree extraction behavior.
+- Add or update `naturalcases/exclusion-tree/*.source.txt` and `naturalcases/exclusion-tree/*.expected.md` when changing exclusion-tree extraction behavior.
 - Run `scripts/verify_naturalcases.py`.
 
 ## Templates, Testcases, And User Tools

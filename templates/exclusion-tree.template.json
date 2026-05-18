@@ -1,5 +1,6 @@
 {
   "diagram_type": "exclusion_tree",
+  "title": "Sequential Exclusion Tree",
   "problem": {
     "text_en": "System Fails to Start"
   },
