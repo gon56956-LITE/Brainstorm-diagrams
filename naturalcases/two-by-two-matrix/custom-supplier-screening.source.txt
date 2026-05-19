@@ -1,0 +1,11 @@
+Create a two-by-two matrix for supplier screening.
+Use integration complexity as the horizontal dimension and strategic fit as the vertical dimension.
+Do not use bilingual labels.
+
+Options:
+- Supplier Alpha has strong strategic fit and low integration complexity because its API is already compatible.
+- Supplier Beta has strong strategic fit but high integration complexity due to a custom data model.
+- Supplier Gamma has moderate fit and low complexity.
+- Supplier Delta has low fit and high complexity.
+- Supplier Epsilon has high fit and medium complexity.
+- Supplier Zeta has low fit but low complexity.

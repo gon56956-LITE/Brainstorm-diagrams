@@ -64,7 +64,9 @@ Two-by-two matrix rules:
 - Keep the diagram single-language. Use `language: auto` unless the user explicitly requests `en` or `zh`; do not create English/Chinese paired labels by default.
 - Extract items/options from the source and score each item on both axes from 1-5 using only source-supported wording.
 - Use the horizontal score as `X` and the vertical score as `Y`.
-- Include at least 4 scored items when the source supports them.
+- Include 4-20 scored items. If the source has more than 20 options, ask the user to split the matrix or summarize before rendering.
+- Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
+- Do not add an item-level `Notes` column. Use top-level `notes:` only when the user asks for a visible note or the source includes a short note that should appear on the diagram.
 - Do not turn the matrix into a precise scatter plot; items are grouped into quadrant lists.
 
 Execution:
@@ -158,14 +160,14 @@ show_legend: true
 
 # Matrix Title
 
-Subtitle: Optional source-supported subtitle
+notes: Optional visible note supported by the source
 
 ## Items
 
-| ID | Item | X | Y | Notes |
-|---|---|---:|---:|---|
-| A1 | Option name | 2 | 5 | Source-supported note |
-| A2 | Option name | 5 | 4 | Source-supported note |
+| ID | Item | X | Y |
+|---|---|---:|---:|
+| A1 | Option name | 2 | 5 |
+| A2 | Option name | 5 | 4 |
 ```
 
 ## Quality Gate Before Rendering
@@ -184,6 +186,7 @@ Subtitle: Optional source-supported subtitle
 - Exclusion-tree draft has 3-6 checkpoints and a final pass conclusion.
 - Two-by-two matrix preset and axes match the source comparison dimensions.
 - Two-by-two matrix uses one language only unless the user explicitly provides or requests bilingual labels.
+- Two-by-two matrix includes 4-20 items and does not use a subtitle or item-level notes unless explicitly requested.
 - Two-by-two matrix items have source-traceable 1-5 scores on both axes.
 - Similar causes are grouped rather than duplicated.
 - The draft stays within renderer limits for the selected diagram type.

@@ -76,13 +76,13 @@ show_legend: true
 
 # Matrix Title
 
-Subtitle: Compare options by impact and effort
+notes: Optional visible note supported by the source
 
 ## Items
 
-| ID | Item | X | Y | Notes |
-|---|---|---:|---:|---|
-| A1 | Option name | 2 | 5 | Source-supported note |
+| ID | Item | X | Y |
+|---|---|---:|---:|
+| A1 | Option name | 2 | 5 |
 ```
 
 ## Extraction Rules
@@ -135,9 +135,11 @@ Subtitle: Compare options by impact and effort
 - Choose the closest preset: `action_priority`, `risk_benefit`, `evidence_impact`, `value_feasibility`, or `urgency_importance`; use `custom` only when the source gives a different axis pair.
 - Use `language: auto` unless the user explicitly requests `en` or `zh`.
 - Keep diagram labels single-language. Do not render English/Chinese pairs by default.
+- Extract 4-20 scored items. If the source has more than 20 items, ask the user to split the matrix or summarize before rendering.
 - Extract each item or option as one row with `X` and `Y` scores from 1-5.
 - Use `X` for the horizontal dimension and `Y` for the vertical dimension.
-- Keep notes short and source-traceable.
+- Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
+- Do not add an item-level `Notes` column. Use top-level `notes:` only when the user asks for a visible note or the source includes a short note that should appear on the diagram.
 - Do not invent precise quantitative scores when the source is vague; use conservative ordinal scoring from the described strength of each dimension.
 - Do not model this as precise scatter/bubble placement. The current renderer uses scores to classify items into quadrant lists and a side summary table.
 

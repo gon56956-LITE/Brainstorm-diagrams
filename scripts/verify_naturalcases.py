@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import re
 from pathlib import Path
 
 
@@ -77,6 +78,9 @@ def verify_prompt_template() -> None:
         "Extract 4-8 domain-specific categories",
         "Extract one specific top event",
         "Extract one target problem",
+        "Include 4-20 scored items",
+        "Do not add `Subtitle:` unless the user explicitly asks for a subtitle",
+        "Do not add an item-level `Notes` column",
         "Use `Gate: AND` only when the source states that child conditions must occur together",
         "If the source is too thin",
         "Write structured Markdown to `work/<diagram-type>/<safe-name>.md`",
@@ -278,6 +282,12 @@ def verify_two_by_two_expected_structure(path: Path) -> None:
     sys.path.insert(0, str(ROOT / "scripts"))
     from generate_diagram import parse_input
 
+    text = path.read_text(encoding="utf-8")
+    if re.search(r"^Subtitle\s*:", text, flags=re.M):
+        raise AssertionError(f"{path.name}: two-by-two naturalcase should not include Subtitle unless explicitly requested")
+    if re.search(r"\|\s*Notes\s*\|", text, flags=re.I):
+        raise AssertionError(f"{path.name}: two-by-two naturalcase should not include item-level Notes column")
+
     data = parse_input(path)
     if data.get("diagram_type") != "two_by_two_matrix":
         raise AssertionError(f"{path.name}: expected diagram_type=two_by_two_matrix")
@@ -293,6 +303,8 @@ def verify_two_by_two_expected_structure(path: Path) -> None:
     items = data.get("items", [])
     if not isinstance(items, list) or len(items) < 4:
         raise AssertionError(f"{path.name}: two-by-two naturalcase should include at least four scored items")
+    if len(items) > 20:
+        raise AssertionError(f"{path.name}: two-by-two naturalcase must not exceed 20 items")
 
     quadrants: set[tuple[bool, bool]] = set()
     for index, item in enumerate(items, start=1):
@@ -300,6 +312,8 @@ def verify_two_by_two_expected_structure(path: Path) -> None:
             raise AssertionError(f"{path.name}: item {index} must be an object")
         if not str(item.get("name") or item.get("label") or "").strip():
             raise AssertionError(f"{path.name}: item {index} must include a name")
+        if str(item.get("notes", "")).strip():
+            raise AssertionError(f"{path.name}: item {index} should not include non-rendered item-level notes")
         try:
             x_score = float(item.get("x_score"))
             y_score = float(item.get("y_score"))
