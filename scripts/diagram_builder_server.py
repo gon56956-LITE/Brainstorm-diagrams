@@ -26,6 +26,7 @@ GENERATE = ROOT / "scripts" / "generate_diagram.py"
 EXPORT_FISHBONE = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE = ROOT / "scripts" / "export_fault_tree_png.py"
 EXPORT_EXCLUSION_TREE = ROOT / "scripts" / "export_exclusion_tree_png.py"
+EXPORT_TWO_BY_TWO = ROOT / "scripts" / "export_two_by_two_matrix_png.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
@@ -47,6 +48,12 @@ DIAGRAMS = {
         "work": ROOT / "work" / "exclusion-tree",
         "template": TEMPLATES / "exclusion-tree.template.json",
         "export": EXPORT_EXCLUSION_TREE,
+    },
+    "two_by_two_matrix": {
+        "label": "Two-by-Two Matrix",
+        "work": ROOT / "work" / "two-by-two-matrix",
+        "template": TEMPLATES / "two-by-two-matrix.template.json",
+        "export": EXPORT_TWO_BY_TWO,
     },
 }
 
@@ -205,7 +212,7 @@ def request_model(payload: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
 def canonical_diagram_type(value: Any) -> str:
     diagram_type = str(value).strip().lower().replace("-", "_").replace(" ", "_")
     if diagram_type not in DIAGRAMS:
-        raise ValueError("diagram_type must be fishbone, fault_tree, or exclusion_tree.")
+        raise ValueError("diagram_type must be fishbone, fault_tree, exclusion_tree, or two_by_two_matrix.")
     return diagram_type
 
 
@@ -624,6 +631,26 @@ INDEX_HTML = r"""<!doctype html>
       gap: 8px;
       margin: 8px 0;
     }
+    .matrix-item-row {
+      display: grid;
+      grid-template-columns: 64px minmax(160px, 1fr) 58px 58px auto;
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    .matrix-item-row input {
+      min-width: 0;
+    }
+    .matrix-item-row .score-input {
+      text-align: center;
+      font-weight: 700;
+    }
+    .matrix-item-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
     .nested {
       margin-left: 18px;
       padding-left: 12px;
@@ -692,7 +719,7 @@ INDEX_HTML = r"""<!doctype html>
   <header>
     <div>
       <h1>Brainstorm Diagram Builder</h1>
-      <span>Edit JSON-backed fishbone, fault-tree, and exclusion-tree diagrams without touching Markdown.</span>
+      <span>Edit JSON-backed fishbone, fault-tree, exclusion-tree, and two-by-two matrix diagrams without touching Markdown.</span>
     </div>
   </header>
   <main>
@@ -703,6 +730,7 @@ INDEX_HTML = r"""<!doctype html>
           <option value="fishbone">Fishbone</option>
           <option value="fault_tree">Fault Tree</option>
           <option value="exclusion_tree">Sequential Exclusion Tree</option>
+          <option value="two_by_two_matrix">Two-by-Two Matrix</option>
         </select>
       </div>
       <div class="row">
@@ -785,6 +813,7 @@ INDEX_HTML = r"""<!doctype html>
           <li>Fishbone: recommended 4-8 categories, up to 5 primary entries per category, up to 3 child causes per subcategory.</li>
           <li>Fault Tree: 1 top event, recommended 3-5 first-level intermediate events, up to 8 first-level intermediate events, up to 4 children per intermediate event, currently supports second-level intermediate events.</li>
           <li>Sequential Exclusion Tree: 1 target problem, recommended 3-6 check points on one main path, each check has one Yes path and one No cause card.</li>
+          <li>Two-by-Two Matrix: one preset or custom axis pair, recommended 4-20 scored items, maximum 20. X and Y scores must be 1-5, and the Decision Table shows every item.</li>
           <li>Drafts below the recommended count can still render after confirmation, but may not be useful for review.</li>
         </ul>
       </div>
@@ -795,7 +824,67 @@ INDEX_HTML = r"""<!doctype html>
     const LIMITS = {
       fishbone: { categories: 8, minCategories: 4, entries: 5, children: 3 },
       fault_tree: { first: 8, recommendedFirst: 5, minFirst: 3, children: 4, nestedChildren: 4 },
-      exclusion_tree: { checks: 6, minChecks: 3 }
+      exclusion_tree: { checks: 6, minChecks: 3 },
+      two_by_two_matrix: { items: 20, minItems: 4 }
+    };
+    const TWO_BY_TWO_PRESET_TEMPLATES = {
+      action_priority: {
+        title: "Action Priority Matrix",
+        items: [
+          { id: "A1", name: "Automate weekly report", x_score: 2, y_score: 5 },
+          { id: "A2", name: "Redesign approval workflow", x_score: 5, y_score: 5 },
+          { id: "A3", name: "Standardize checklist", x_score: 1, y_score: 3 },
+          { id: "A4", name: "Build custom dashboard", x_score: 5, y_score: 2 },
+          { id: "A5", name: "Update training material", x_score: 2, y_score: 3 }
+        ]
+      },
+      risk_benefit: {
+        title: "Risk-Benefit Matrix",
+        items: [
+          { id: "O1", name: "Switch supplier", x_score: 4, y_score: 5 },
+          { id: "O2", name: "Minor process update", x_score: 1, y_score: 2 },
+          { id: "O3", name: "Add automated inspection", x_score: 3, y_score: 4 },
+          { id: "O4", name: "Skip incoming validation", x_score: 5, y_score: 1 }
+        ]
+      },
+      evidence_impact: {
+        title: "Cause Screening Matrix",
+        items: [
+          { id: "C1", name: "Power module fault", x_score: 4, y_score: 5 },
+          { id: "C2", name: "Firmware timing issue", x_score: 2, y_score: 5 },
+          { id: "C3", name: "Connector contamination", x_score: 3, y_score: 4 },
+          { id: "C4", name: "Operator handling variation", x_score: 4, y_score: 2 }
+        ]
+      },
+      value_feasibility: {
+        title: "Feature Screening Matrix",
+        items: [
+          { id: "F1", name: "Auto calibration", x_score: 4, y_score: 5 },
+          { id: "F2", name: "AI optimization mode", x_score: 2, y_score: 5 },
+          { id: "F3", name: "New color theme", x_score: 5, y_score: 2 },
+          { id: "F4", name: "Legacy protocol support", x_score: 1, y_score: 1 }
+        ]
+      },
+      urgency_importance: {
+        title: "Urgency-Importance Matrix",
+        items: [
+          { id: "T1", name: "Prepare customer review", x_score: 5, y_score: 5 },
+          { id: "T2", name: "Update template library", x_score: 2, y_score: 3 },
+          { id: "T3", name: "Answer routine request", x_score: 4, y_score: 2 },
+          { id: "T4", name: "Clean obsolete notes", x_score: 1, y_score: 1 }
+        ]
+      },
+      custom: {
+        title: "Custom Two-by-Two Matrix",
+        x_axis: "X Dimension",
+        y_axis: "Y Dimension",
+        items: [
+          { id: "I1", name: "Item one", x_score: 2, y_score: 5 },
+          { id: "I2", name: "Item two", x_score: 5, y_score: 5 },
+          { id: "I3", name: "Item three", x_score: 2, y_score: 2 },
+          { id: "I4", name: "Item four", x_score: 5, y_score: 2 }
+        ]
+      }
     };
     const RECENT_KEY = "brainstormDiagramBuilderRecent";
     const NAME_PATTERN = /^[a-z0-9][a-z0-9_-]{0,63}$/;
@@ -832,6 +921,7 @@ INDEX_HTML = r"""<!doctype html>
     function diagramTypeLabel(diagramType) {
       if (diagramType === "fault_tree") return "Fault Tree";
       if (diagramType === "exclusion_tree") return "Sequential Exclusion Tree";
+      if (diagramType === "two_by_two_matrix") return "Two-by-Two Matrix";
       return "Fishbone";
     }
 
@@ -950,7 +1040,7 @@ INDEX_HTML = r"""<!doctype html>
         const children = Array.isArray(tree.children) ? tree.children : [];
         if (children.length > LIMITS.fault_tree.first) errors.push(`Fault tree supports up to ${LIMITS.fault_tree.first} first-level events.`);
         children.forEach((event, index) => validateFaultEvent(errors, event, `First-level event ${index + 1}`, true));
-      } else {
+      } else if (currentType() === "exclusion_tree") {
         requireText(errors, "Problem", oneLanguageValue(model.problem, "text"));
         const checks = Array.isArray(model.checks) ? model.checks : [];
         if (checks.length < 1) errors.push("Exclusion tree needs at least 1 check point.");
@@ -960,6 +1050,18 @@ INDEX_HTML = r"""<!doctype html>
           requireText(errors, `Check Point ${index + 1} fail cause`, oneLanguageValue(check.fail_conclusion, "text"));
         });
         requireText(errors, "Final Pass Conclusion", oneLanguageValue(model.final_pass_conclusion, "text"));
+      } else {
+        requireText(errors, "Title", model.title);
+        const items = Array.isArray(model.items) ? model.items : [];
+        if (items.length < 1) errors.push("Two-by-two matrix needs at least 1 item.");
+        if (items.length > LIMITS.two_by_two_matrix.items) errors.push(`Two-by-two matrix supports up to ${LIMITS.two_by_two_matrix.items} items.`);
+        items.forEach((item, index) => {
+          requireText(errors, `Item ${index + 1} name`, item.name || item.label);
+          const x = Number(item.x_score);
+          const y = Number(item.y_score);
+          if (!Number.isFinite(x) || x < 1 || x > 5) errors.push(`Item ${index + 1} x_score must be 1-5.`);
+          if (!Number.isFinite(y) || y < 1 || y > 5) errors.push(`Item ${index + 1} y_score must be 1-5.`);
+        });
       }
       return errors;
     }
@@ -982,6 +1084,11 @@ INDEX_HTML = r"""<!doctype html>
         const checks = Array.isArray(model.checks) ? model.checks : [];
         if (checks.length > 0 && checks.length < LIMITS.exclusion_tree.minChecks) {
           warnings.push(`Exclusion tree works best with ${LIMITS.exclusion_tree.minChecks}-${LIMITS.exclusion_tree.checks} check points.`);
+        }
+      } else if (currentType() === "two_by_two_matrix") {
+        const items = Array.isArray(model.items) ? model.items : [];
+        if (items.length > 0 && items.length < LIMITS.two_by_two_matrix.minItems) {
+          warnings.push(`Two-by-two matrix works best with at least ${LIMITS.two_by_two_matrix.minItems} scored items.`);
         }
       }
       return warnings;
@@ -1203,6 +1310,7 @@ INDEX_HTML = r"""<!doctype html>
     function modelToMarkdown() {
       if (currentType() === "fishbone") return fishboneToMarkdown();
       if (currentType() === "fault_tree") return faultTreeToMarkdown();
+      if (currentType() === "two_by_two_matrix") return twoByTwoToMarkdown();
       return exclusionTreeToMarkdown();
     }
 
@@ -1281,6 +1389,21 @@ INDEX_HTML = r"""<!doctype html>
       }
       lines.push(`Final Pass Conclusion: ${mdLine(oneLanguageValue(model.final_pass_conclusion, "text")) || "No issue found in this path. Consider other rare causes or deeper analysis."}`);
       return lines.join("\n").replace(/\n{3,}/g, "\n\n") + "\n";
+    }
+
+    function twoByTwoToMarkdown() {
+      const header = [
+        "diagram_type: two_by_two_matrix",
+        `preset: ${mdLine(model.preset) || "action_priority"}`,
+        `language: ${mdLine(model.language) || "auto"}`,
+        `title: ${mdLine(model.title) || "Two-by-Two Matrix"}`,
+      ];
+      if (mdLine(model.notes)) header.push(`notes: ${mdLine(model.notes)}`);
+      const lines = [yamlHeader(header), "| Item | X Score | Y Score |", "| --- | ---: | ---: |"];
+      for (const item of model.items || []) {
+        lines.push(`| ${mdLine(item.name || item.label) || "Item"} | ${mdLine(item.x_score) || "3"} | ${mdLine(item.y_score) || "3"} |`);
+      }
+      return lines.join("\n") + "\n";
     }
 
     async function loadSvgIfExists() {
@@ -1376,7 +1499,8 @@ INDEX_HTML = r"""<!doctype html>
       formRoot.innerHTML = "";
       if (currentType() === "fishbone") renderFishboneForm();
       else if (currentType() === "fault_tree") renderFaultTreeForm();
-      else renderExclusionTreeForm();
+      else if (currentType() === "exclusion_tree") renderExclusionTreeForm();
+      else renderTwoByTwoForm();
       updateValidation();
     }
 
@@ -1696,6 +1820,105 @@ INDEX_HTML = r"""<!doctype html>
       formRoot.appendChild(final);
     }
 
+    function renderTwoByTwoForm() {
+      model.diagram_type = "two_by_two_matrix";
+      model.preset = model.preset || "action_priority";
+      model.language = model.language || "auto";
+      model.items = Array.isArray(model.items) ? model.items : [];
+      formRoot.appendChild(row("Title", input(model.title, value => model.title = value, "Two-by-Two Matrix")));
+      formRoot.appendChild(row("Preset", select(model.preset, [
+        "action_priority",
+        "risk_benefit",
+        "evidence_impact",
+        "value_feasibility",
+        "urgency_importance",
+        "custom"
+      ], value => applyTwoByTwoPreset(value))));
+      formRoot.appendChild(row("Notes", input(model.notes || "", value => model.notes = value, "Optional visible note")));
+
+      const limits = LIMITS.two_by_two_matrix;
+      const items = section("Matrix Items", `Use ${limits.minItems}-${limits.items} scored items. Maximum ${limits.items}. Scores are 1-5; the Decision Table shows every item.`);
+      items.querySelector(".section-title").appendChild(button("Add Item", () => {
+        if (model.items.length < limits.items) {
+          model.items.push({ id: nextTwoByTwoItemId(), name: "New item", x_score: 3, y_score: 3 });
+          renderForm();
+        }
+      }, model.items.length >= limits.items));
+      model.items.forEach((item, index) => {
+        const box = document.createElement("div");
+        box.className = "item";
+        const line = document.createElement("div");
+        line.className = "matrix-item-row";
+        const label = document.createElement("span");
+        label.className = "matrix-item-label";
+        label.textContent = `Item ${index + 1}`;
+        const nameInput = input(item.name || item.label, value => {
+          item.name = value;
+          delete item.label;
+        }, "Item name");
+        const xInput = input(item.x_score, value => item.x_score = Number(value), "X");
+        xInput.className = "score-input";
+        xInput.inputMode = "numeric";
+        xInput.title = "X score 1-5";
+        const yInput = input(item.y_score, value => item.y_score = Number(value), "Y");
+        yInput.className = "score-input";
+        yInput.inputMode = "numeric";
+        yInput.title = "Y score 1-5";
+        line.append(
+          label,
+          nameInput,
+          xInput,
+          yInput,
+          button("Remove", () => {
+            model.items.splice(index, 1);
+            renderForm();
+          })
+        );
+        box.appendChild(line);
+        items.appendChild(box);
+      });
+      formRoot.appendChild(items);
+    }
+
+    function nextTwoByTwoItemId() {
+      const nextNumber = (Array.isArray(model.items) ? model.items.length : 0) + 1;
+      const existingPrefix = [...(model.items || [])]
+        .reverse()
+        .map(item => String(item.id || "").match(/^([A-Za-z]+)/))
+        .find(Boolean);
+      if (existingPrefix) return `${existingPrefix[1]}${nextNumber}`;
+      const prefixes = {
+        action_priority: "A",
+        risk_benefit: "O",
+        evidence_impact: "C",
+        value_feasibility: "F",
+        urgency_importance: "T",
+        custom: "I"
+      };
+      return `${prefixes[model.preset] || "I"}${nextNumber}`;
+    }
+
+    function applyTwoByTwoPreset(preset) {
+      const template = TWO_BY_TWO_PRESET_TEMPLATES[preset] || TWO_BY_TWO_PRESET_TEMPLATES.action_priority;
+      const notes = model.notes || "";
+      model = {
+        diagram_type: "two_by_two_matrix",
+        preset,
+        title: template.title,
+        language: "auto",
+        notes,
+        theme: "business_simple",
+        score_scale: { min: 1, max: 5 },
+        show_side_table: true,
+        show_legend: true,
+        output: "svg",
+        items: template.items.map(item => ({ ...item }))
+      };
+      if (template.x_axis) model.x_axis = template.x_axis;
+      if (template.y_axis) model.y_axis = template.y_axis;
+      renderForm();
+    }
+
     $("newBtn").addEventListener("click", () => loadTemplate().catch(error => setStatus(error.message, "error")));
     $("loadBtn").addEventListener("click", () => loadFile());
     fileInput.addEventListener("change", () => loadSelectedFile(fileInput.files[0]).catch(error => setStatus(error.message, "error")));
@@ -1726,7 +1949,13 @@ INDEX_HTML = r"""<!doctype html>
     $("zoomInBtn").addEventListener("click", () => setPreviewZoom(previewZoom + 0.1));
     $("zoomFitBtn").addEventListener("click", () => setPreviewZoom(1));
     typeEl.addEventListener("change", () => {
-      nameEl.value = currentType() === "fishbone" ? "my-analysis" : currentType() === "fault_tree" ? "startup-failure" : "startup-checks";
+      nameEl.value = currentType() === "fishbone"
+        ? "my-analysis"
+        : currentType() === "fault_tree"
+          ? "startup-failure"
+          : currentType() === "exclusion_tree"
+            ? "startup-checks"
+            : "priority-matrix";
       loadTemplate().catch(error => setStatus(error.message, "error"));
     });
     nameEl.addEventListener("input", () => updateValidation());

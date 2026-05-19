@@ -10,6 +10,7 @@ from generate_diagram import parse_input
 from renderers.exclusion_tree import render_exclusion_tree_to_file
 from renderers.fishbone import render_fishbone_to_file
 from renderers.fault_tree import render_fault_tree_to_file
+from renderers.two_by_two_matrix import render_two_by_two_matrix_to_file
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,8 @@ def main() -> int:
             diagram_type = str(data.get("diagram_type", "fishbone")).strip().lower().replace("-", "_")
             if diagram_type == "exclusion_tree":
                 result = render_exclusion_tree_to_file(data, output_path)
+            elif diagram_type == "two_by_two_matrix":
+                result = render_two_by_two_matrix_to_file(data, output_path)
             elif diagram_type == "fault_tree":
                 result = render_fault_tree_to_file(data, output_path)
             elif diagram_type == "fishbone":

@@ -15,6 +15,7 @@ STRESSCASES_ROOT = ROOT / "stresscases"
 FISHBONE_STRESSCASES = STRESSCASES_ROOT / "fishbone"
 FAULT_TREE_STRESSCASES = STRESSCASES_ROOT / "fault-tree"
 EXCLUSION_TREE_STRESSCASES = STRESSCASES_ROOT / "exclusion-tree"
+TWO_BY_TWO_STRESSCASES = STRESSCASES_ROOT / "two-by-two-matrix"
 RENDER_STRESSCASES = ROOT / "scripts" / "render_stresscases.py"
 PYTHON = Path(sys.executable)
 
@@ -34,6 +35,8 @@ def main() -> int:
     verify_fault_tree_nested_gates_stress()
     verify_fault_tree_eight_branches_stress()
     verify_exclusion_tree_full_stress()
+    verify_two_by_two_matrix_full_stress()
+    verify_two_by_two_matrix_single_quadrant_overload()
     print("Stresscase verification passed")
     return 0
 
@@ -41,7 +44,7 @@ def main() -> int:
 def verify_directory() -> None:
     if not STRESSCASES_ROOT.exists():
         raise AssertionError("Missing stresscases directory")
-    for required_dir in [FISHBONE_STRESSCASES, FAULT_TREE_STRESSCASES, EXCLUSION_TREE_STRESSCASES]:
+    for required_dir in [FISHBONE_STRESSCASES, FAULT_TREE_STRESSCASES, EXCLUSION_TREE_STRESSCASES, TWO_BY_TWO_STRESSCASES]:
         if not required_dir.exists():
             raise AssertionError(f"Missing stresscases directory: {required_dir.relative_to(ROOT)}")
 
@@ -574,6 +577,142 @@ def verify_exclusion_tree_full_stress() -> None:
             overlap = min(previous[2], current[2]) - max(previous[1], current[1])
             if same_lane and overlap > 1:
                 raise AssertionError("exclusion-tree full-stress.svg fail drop connectors should not overlap in the same vertical lane")
+
+
+def verify_two_by_two_matrix_full_stress() -> None:
+    input_path = TWO_BY_TWO_STRESSCASES / "full-stress.json"
+    output_path = TWO_BY_TWO_STRESSCASES / "full-stress.svg"
+    if not input_path.exists():
+        raise AssertionError("Missing two-by-two-matrix/full-stress.json")
+    if not output_path.exists():
+        raise AssertionError("Missing two-by-two-matrix/full-stress.svg")
+
+    root = ET.parse(output_path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError("two-by-two-matrix full-stress.svg root is not svg")
+
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width != 1920 or height != 1080:
+        raise AssertionError(f"two-by-two-matrix full-stress.svg should use fixed 1920x1080 canvas, got {width}x{height}")
+
+    classes = " ".join(element.attrib.get("class", "") for element in root.iter())
+    for required_class in ["matrix-quadrant", "matrix-item", "matrix-table-row"]:
+        if required_class not in classes:
+            raise AssertionError(f"two-by-two-matrix full-stress.svg missing {required_class}")
+
+    quadrants = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "matrix-quadrant" in element.attrib.get("class", "")
+    ]
+    if len(quadrants) != 4:
+        raise AssertionError(f"Expected 4 matrix quadrants, got {len(quadrants)}")
+
+    item_markers = [
+        element
+        for element in root.iter()
+        if "matrix-item-marker" in element.attrib.get("class", "")
+    ]
+    if not 12 <= len(item_markers) <= 20:
+        raise AssertionError(f"Expected 12-20 rendered matrix items in stresscase, got {len(item_markers)}")
+
+    table_rows = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "matrix-table-row" in element.attrib.get("class", "")
+    ]
+    if len(table_rows) != 20:
+        raise AssertionError(f"Expected side table to show all 20 rows, got {len(table_rows)}")
+
+    ids = {element.attrib.get("id") for element in root.iter()}
+    for required_id in ["two-by-two-matrix", "matrix-side-table", "matrix-legend"]:
+        if required_id not in ids:
+            raise AssertionError(f"two-by-two-matrix full-stress.svg missing {required_id}")
+    if "matrix-usage-note" in ids:
+        raise AssertionError("two-by-two-matrix full-stress.svg should not render the old default Best for note")
+    if "matrix-notes" in ids:
+        raise AssertionError("two-by-two-matrix full-stress.svg should not render Notes without explicit notes")
+    legend_rect = find_group_rect(root, "matrix-legend")
+    if legend_rect is None or float(legend_rect.attrib.get("width", "0")) > 1000:
+        raise AssertionError("two-by-two-matrix legend should stay within the left matrix column")
+    if "more in table" in "".join(element.text or "" for element in root.iter() if element.tag.endswith("text")):
+        raise AssertionError("two-by-two-matrix should not use the old '+N more in table' summary")
+
+    icons = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "lucide-icon" in element.attrib.get("class", "")
+    ]
+    if len(icons) < 4:
+        raise AssertionError("two-by-two-matrix full-stress.svg should render Lucide quadrant badges")
+    body_grid_lines = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and "matrix-table-body-grid" in element.attrib.get("class", "")
+    ]
+    if not body_grid_lines:
+        raise AssertionError("two-by-two-matrix full-stress.svg should render row-aware table body grid lines")
+    if not any(element.attrib.get("stroke") == "#C5D3E4" for element in body_grid_lines):
+        raise AssertionError("two-by-two-matrix full-stress.svg zebra rows should use higher-contrast body grid lines")
+    row_separators = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and "matrix-table-row-separator" in element.attrib.get("class", "")
+    ]
+    if not row_separators:
+        raise AssertionError("two-by-two-matrix full-stress.svg should render visible table row separators")
+    if not all(element.attrib.get("stroke") == "#C5D3E4" for element in row_separators):
+        raise AssertionError("two-by-two-matrix full-stress.svg table row separators should stay visible on zebra rows")
+
+    bilingual_lines = [
+        element.text or ""
+        for element in root.iter()
+        if element.tag.endswith("text") and " / " in (element.text or "") and re.search(r"[\u4e00-\u9fff]", element.text or "")
+    ]
+    if bilingual_lines:
+        raise AssertionError(f"two-by-two-matrix full-stress.svg should not auto-render bilingual labels: {bilingual_lines[:2]}")
+
+
+def verify_two_by_two_matrix_single_quadrant_overload() -> None:
+    output_path = TWO_BY_TWO_STRESSCASES / "single-quadrant-overload.svg"
+    if not output_path.exists():
+        raise AssertionError("Missing two-by-two-matrix/single-quadrant-overload.svg")
+
+    root = ET.parse(output_path).getroot()
+    table_rows = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "matrix-table-row" in element.attrib.get("class", "")
+    ]
+    if len(table_rows) != 20:
+        raise AssertionError(f"single-quadrant overload table should show all 20 rows, got {len(table_rows)}")
+
+    marker_count = sum(1 for element in root.iter() if "matrix-item-marker" in element.attrib.get("class", ""))
+    if marker_count != 4:
+        raise AssertionError(f"single-quadrant overload should render four named item markers, got {marker_count}")
+
+    texts = "\n".join(element.text or "" for element in root.iter() if element.tag.endswith("text"))
+    if "More IDs: A5" not in texts or "A20" not in texts:
+        raise AssertionError("single-quadrant overload should summarize hidden item IDs in the matrix body")
+    if "more in table" in texts:
+        raise AssertionError("single-quadrant overload should not use the old '+N more in table' copy")
+    ids = {element.attrib.get("id") for element in root.iter()}
+    if "matrix-notes" not in ids:
+        raise AssertionError("single-quadrant overload should render explicit top-level notes")
+    notes_group = next((element for element in root.iter() if element.attrib.get("id") == "matrix-notes"), None)
+    if notes_group is None or not any(child.tag.endswith("rect") for child in list(notes_group)):
+        raise AssertionError("single-quadrant overload notes should render as a visible card inside the guide")
+
+
+def find_group_rect(root: ET.Element, group_id: str) -> ET.Element | None:
+    for group in root.iter():
+        if group.attrib.get("id") != group_id:
+            continue
+        for child in list(group):
+            if child.tag.endswith("rect"):
+                return child
+    return None
 
 
 def verify_fault_event_rects_within_canvas(root: ET.Element, label: str) -> None:

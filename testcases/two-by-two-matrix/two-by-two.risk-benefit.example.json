@@ -1,0 +1,12 @@
+{
+  "diagram_type": "two_by_two_matrix",
+  "preset": "risk_benefit",
+  "title": "Risk-Benefit Matrix",
+  "language": "en",
+  "items": [
+    {"id": "O1", "name": "Switch supplier", "x_score": 4, "y_score": 5, "risk_mitigation": "Dual source during transition"},
+    {"id": "O2", "name": "Minor process update", "x_score": 1, "y_score": 2},
+    {"id": "O3", "name": "Add automated inspection", "x_score": 3, "y_score": 4},
+    {"id": "O4", "name": "Skip incoming validation", "x_score": 5, "y_score": 1}
+  ]
+}

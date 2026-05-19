@@ -1,0 +1,425 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+  <marker id="arrowNavy" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0B3A75"/>
+  </marker>
+</defs>
+<rect width="1920" height="1080" fill="#FFFFFF"/>
+<text x="70" y="74" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="800" fill="#0B2E63">Single Quadrant Overload Matrix</text>
+<g id="two-by-two-matrix">
+<line x1="154" y1="806" x2="1076" y2="806" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
+<line x1="154" y1="806" x2="154" y2="150" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
+<text x="610.0" y="864" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Effort</text>
+<text transform="rotate(-90 78 477.0)" x="78" y="477.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Impact</text>
+<text x="154" y="840" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
+<text x="1026" y="840" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">High</text>
+<text x="112" y="802" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
+<text x="112" y="194" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">High</text>
+<g class="matrix-quadrant matrix-top_left" data-quadrant="top_left">
+<rect x="174.0" y="174.0" width="427.0" height="294.0" rx="14" fill="#EAF7F0" stroke="#B9DCC7" stroke-width="1.6"/>
+<circle cx="228.0" cy="228.0" r="28" fill="#2E8B57"/>
+<g class="lucide-icon lucide-star" transform="translate(214.0 214.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+</g>
+<text x="268.0" y="223.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Quick Wins</text>
+<text x="268.0" y="254.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">High Impact / Low Effort</text>
+<circle class="matrix-item-marker" cx="228.0" cy="294.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="299.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">A1</text>
+<text class="matrix-item-label" x="253.0" y="300.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Automate weekly report</text>
+<circle class="matrix-item-marker" cx="228.0" cy="332.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="337.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">A2</text>
+<text class="matrix-item-label" x="253.0" y="338.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Standardize release checklist</text>
+<circle class="matrix-item-marker" cx="228.0" cy="370.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="375.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">A3</text>
+<text class="matrix-item-label" x="253.0" y="376.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Improve supplier intake form</text>
+<circle class="matrix-item-marker" cx="228.0" cy="408.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="413.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">A4</text>
+<text class="matrix-item-label" x="253.0" y="414.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Add calibration reminder workflow</text>
+<text class="matrix-item-summary" x="222.0" y="454.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#5B677A">More IDs: A5...A20</text>
+</g>
+<g class="matrix-quadrant matrix-top_right" data-quadrant="top_right">
+<rect x="619.0" y="174.0" width="427.0" height="294.0" rx="14" fill="#EAF3FF" stroke="#BCD5F6" stroke-width="1.6"/>
+<circle cx="673.0" cy="228.0" r="28" fill="#2F6CCF"/>
+<g class="lucide-icon lucide-target" transform="translate(659.0 214.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" />
+</g>
+<text x="713.0" y="223.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Major Projects</text>
+<text x="713.0" y="254.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">High Impact / High Effort</text>
+</g>
+<g class="matrix-quadrant matrix-bottom_left" data-quadrant="bottom_left">
+<rect x="174.0" y="486.0" width="427.0" height="294.0" rx="14" fill="#FFF6E3" stroke="#F1D7A5" stroke-width="1.6"/>
+<circle cx="228.0" cy="540.0" r="28" fill="#D99A12"/>
+<g class="lucide-icon lucide-lightbulb" transform="translate(214.0 526.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" />
+</g>
+<text x="268.0" y="535.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Fill-ins</text>
+<text x="268.0" y="566.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">Low Impact / Low Effort</text>
+</g>
+<g class="matrix-quadrant matrix-bottom_right" data-quadrant="bottom_right">
+<rect x="619.0" y="486.0" width="427.0" height="294.0" rx="14" fill="#FFF0F0" stroke="#F0B8B8" stroke-width="1.6"/>
+<circle cx="673.0" cy="540.0" r="28" fill="#C94040"/>
+<g class="lucide-icon lucide-triangle-alert" transform="translate(659.0 526.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</g>
+<text x="713.0" y="535.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Time Sinks</text>
+<text x="713.0" y="566.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">Low Impact / High Effort</text>
+</g>
+</g>
+<g id="matrix-side-table">
+<text x="1086" y="140" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="800" fill="#0B2E63">Decision Table</text>
+<rect x="1086" y="158" width="770" height="840.0" rx="10" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.3"/>
+<rect x="1086" y="158" width="770" height="58" rx="10" fill="#0B2E63"/>
+<rect x="1086" y="187" width="770" height="29" fill="#0B2E63"/>
+<text x="1112.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">ID</text>
+<text x="1268.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Action Item</text>
+<line x1="1138.0" y1="158" x2="1138.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1433.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Impact</text>
+<line x1="1398.0" y1="158" x2="1398.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1503.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Effort</text>
+<line x1="1468.0" y1="158" x2="1468.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1607.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Quadrant</text>
+<line x1="1538.0" y1="158" x2="1538.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1766.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Recommended Action</text>
+<line x1="1676.0" y1="158" x2="1676.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<line x1="1086" y1="216" x2="1856" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<g class="matrix-table-row" data-item-id="A1">
+<line class="matrix-table-body-grid" x1="1138.0" y1="216.0" x2="1138.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="216.0" x2="1398.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="216.0" x2="1468.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="216.0" x2="1538.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="216.0" x2="1676.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A1</text>
+<text x="1268.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Automate weekly report</text>
+<text x="1433.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A2">
+<rect x="1086" y="255.1" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="255.1" x2="1138.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="255.1" x2="1398.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="255.1" x2="1468.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="255.1" x2="1538.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="255.1" x2="1676.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A2</text>
+<text x="1268.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Standardize release checklist</text>
+<text x="1433.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A3">
+<line class="matrix-table-body-grid" x1="1138.0" y1="294.2" x2="1138.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="294.2" x2="1398.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="294.2" x2="1468.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="294.2" x2="1538.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="294.2" x2="1676.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A3</text>
+<text x="1268.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Improve supplier intake form</text>
+<text x="1433.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A4">
+<rect x="1086" y="333.3" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="333.3" x2="1138.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="333.3" x2="1398.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="333.3" x2="1468.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="333.3" x2="1538.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="333.3" x2="1676.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A4</text>
+<text x="1268.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Add calibration reminder workflow</text>
+<text x="1433.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A5">
+<line class="matrix-table-body-grid" x1="1138.0" y1="372.4" x2="1138.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="372.4" x2="1398.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="372.4" x2="1468.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="372.4" x2="1538.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="372.4" x2="1676.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A5</text>
+<text x="1268.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Clean dashboard ownership labels</text>
+<text x="1433.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A6">
+<rect x="1086" y="411.5" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="411.5" x2="1138.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="411.5" x2="1398.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="411.5" x2="1468.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="411.5" x2="1538.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="411.5" x2="1676.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A6</text>
+<text x="1268.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Create review meeting template</text>
+<text x="1433.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A7">
+<line class="matrix-table-body-grid" x1="1138.0" y1="450.6" x2="1138.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="450.6" x2="1398.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="450.6" x2="1468.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="450.6" x2="1538.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="450.6" x2="1676.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A7</text>
+<text x="1268.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Add automatic overdue reminders</text>
+<text x="1433.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A8">
+<rect x="1086" y="489.7" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="489.7" x2="1138.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="489.7" x2="1398.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="489.7" x2="1468.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="489.7" x2="1538.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="489.7" x2="1676.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A8</text>
+<text x="1268.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Publish field issue checklist</text>
+<text x="1433.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A9">
+<line class="matrix-table-body-grid" x1="1138.0" y1="528.8" x2="1138.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="528.8" x2="1398.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="528.8" x2="1468.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="528.8" x2="1538.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="528.8" x2="1676.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A9</text>
+<text x="1268.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Simplify status report categories</text>
+<text x="1433.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A10">
+<rect x="1086" y="567.9" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="567.9" x2="1138.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="567.9" x2="1398.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="567.9" x2="1468.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="567.9" x2="1538.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="567.9" x2="1676.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A10</text>
+<text x="1268.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Tag legacy documents for archive</text>
+<text x="1433.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A11">
+<line class="matrix-table-body-grid" x1="1138.0" y1="607.0" x2="1138.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="607.0" x2="1398.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="607.0" x2="1468.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="607.0" x2="1538.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="607.0" x2="1676.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A11</text>
+<text x="1268.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Add validation script shortcut</text>
+<text x="1433.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A12">
+<rect x="1086" y="646.1" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="646.1" x2="1138.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="646.1" x2="1398.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="646.1" x2="1468.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="646.1" x2="1538.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="646.1" x2="1676.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A12</text>
+<text x="1268.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Normalize release note headings</text>
+<text x="1433.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A13">
+<line class="matrix-table-body-grid" x1="1138.0" y1="685.2" x2="1138.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="685.2" x2="1398.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="685.2" x2="1468.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="685.2" x2="1538.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="685.2" x2="1676.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A13</text>
+<text x="1268.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Create supplier follow-up queue</text>
+<text x="1433.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A14">
+<rect x="1086" y="724.3" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="724.3" x2="1138.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="724.3" x2="1398.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="724.3" x2="1468.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="724.3" x2="1538.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="724.3" x2="1676.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A14</text>
+<text x="1268.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Refresh training intake survey</text>
+<text x="1433.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A15">
+<line class="matrix-table-body-grid" x1="1138.0" y1="763.4" x2="1138.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="763.4" x2="1398.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="763.4" x2="1468.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="763.4" x2="1538.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="763.4" x2="1676.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A15</text>
+<text x="1268.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Add missing owner field</text>
+<text x="1433.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A16">
+<rect x="1086" y="802.5" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="802.5" x2="1138.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="802.5" x2="1398.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="802.5" x2="1468.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="802.5" x2="1538.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="802.5" x2="1676.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A16</text>
+<text x="1268.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Automate sample label reminder</text>
+<text x="1433.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A17">
+<line class="matrix-table-body-grid" x1="1138.0" y1="841.6" x2="1138.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="841.6" x2="1398.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="841.6" x2="1468.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="841.6" x2="1538.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="841.6" x2="1676.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A17</text>
+<text x="1268.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Consolidate daily triage notes</text>
+<text x="1433.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A18">
+<rect x="1086" y="880.7" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="880.7" x2="1138.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="880.7" x2="1398.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="880.7" x2="1468.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="880.7" x2="1538.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="880.7" x2="1676.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A18</text>
+<text x="1268.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Add defect taxonomy helper</text>
+<text x="1433.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A19">
+<line class="matrix-table-body-grid" x1="1138.0" y1="919.8" x2="1138.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="919.8" x2="1398.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="919.8" x2="1468.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="919.8" x2="1538.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="919.8" x2="1676.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A19</text>
+<text x="1268.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Create escalation path card</text>
+<text x="1433.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<g class="matrix-table-row" data-item-id="A20">
+<rect x="1086" y="958.9" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="958.9" x2="1138.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="958.9" x2="1398.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="958.9" x2="1468.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="958.9" x2="1538.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="958.9" x2="1676.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">A20</text>
+<text x="1268.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Draft checklist review cadence</text>
+<text x="1433.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Quick Wins</text>
+<text x="1766.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Do first</text>
+</g>
+<line class="matrix-table-row-separator" x1="1086" y1="255.1" x2="1856" y2="255.1" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="294.2" x2="1856" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="333.3" x2="1856" y2="333.3" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="372.4" x2="1856" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="411.5" x2="1856" y2="411.5" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="450.6" x2="1856" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="489.7" x2="1856" y2="489.7" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="528.8" x2="1856" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="567.9" x2="1856" y2="567.9" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="607.0" x2="1856" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="646.1" x2="1856" y2="646.1" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="685.2" x2="1856" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="724.3" x2="1856" y2="724.3" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="763.4" x2="1856" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="802.5" x2="1856" y2="802.5" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="841.6" x2="1856" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="880.7" x2="1856" y2="880.7" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="919.8" x2="1856" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="958.9" x2="1856" y2="958.9" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="998.0" x2="1856" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<rect x="1086" y="158" width="770" height="840.0" rx="10" fill="none" stroke="#9AA9BD" stroke-width="1.3"/>
+</g>
+<g id="matrix-legend">
+<rect x="84" y="910" width="960" height="88" rx="12" fill="#F7FAFD" stroke="#9AA9BD" stroke-width="1.3"/>
+<text x="108" y="946" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="800" fill="#0B2E63">Priority Guide</text>
+<circle cx="524" cy="937" r="11" fill="#2E8B57"/>
+<g class="lucide-icon lucide-star" transform="translate(518.0 931.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+</g>
+<text x="544" y="933" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Quick Wins</text>
+<text x="544" y="951" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Do first</text>
+<circle cx="774" cy="937" r="11" fill="#2F6CCF"/>
+<g class="lucide-icon lucide-target" transform="translate(768.0 931.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" />
+</g>
+<text x="794" y="933" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Major Projects</text>
+<text x="794" y="951" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Plan and phase</text>
+<circle cx="524" cy="972" r="11" fill="#D99A12"/>
+<g class="lucide-icon lucide-lightbulb" transform="translate(518.0 966.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" />
+</g>
+<text x="544" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Fill-ins</text>
+<text x="544" y="986" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Do when possible</text>
+<circle cx="774" cy="972" r="11" fill="#C94040"/>
+<g class="lucide-icon lucide-triangle-alert" transform="translate(768.0 966.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</g>
+<text x="794" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Time Sinks</text>
+<text x="794" y="986" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Defer or drop</text>
+</g>
+<g id="matrix-notes">
+<rect x="102" y="954" width="380" height="34" rx="8" fill="#FFFFFF" stroke="#BCD5F6" stroke-width="1.2"/>
+<circle cx="120" cy="971" r="10" fill="#EAF3FF" stroke="#2F6FB6" stroke-width="1.5"/>
+<text x="120" y="976" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14" font-weight="800" fill="#2F6FB6">i</text>
+<text x="138" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Notes</text>
+<text x="184" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Stresscase verifies that a dense quadrant</text>
+<text x="184" y="982" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">summarizes IDs while the decision table lists</text>
+</g>
+</svg>

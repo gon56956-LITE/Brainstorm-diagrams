@@ -4,7 +4,7 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 
 ## Source Fidelity
 
-- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition.
+- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition, two-by-two matrix for two-axis option comparison.
 - Exclusion tree is used only for sequential troubleshooting, practical verification checks, or cause-elimination workflows.
 - The topic or top event preserves the source's central problem, failure mode, design challenge, or analysis question.
 - Labels come from the source domain, not from generic defaults unless the source explicitly asks for them.
@@ -46,6 +46,16 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - The draft does not use AND/OR gates or fault-tree intermediate events.
 - The draft does not imply a proven root cause unless the source states that a failed check confirms it.
 
+## Two-by-Two Matrix Structure
+
+- The draft uses `diagram_type: two_by_two_matrix`.
+- The preset or custom axis pair matches the source's comparison dimensions.
+- The diagram is single-language unless the user explicitly requests bilingual content.
+- Each item has a clear name and source-traceable `X` and `Y` scores from 1-5.
+- The horizontal and vertical dimensions are not swapped.
+- Notes are short and supported by the source.
+- The draft does not imply exact quantitative precision when the source only supports ordinal ranking.
+
 ## File Outputs
 
 - The editable draft is saved as `work/<diagram-type>/<safe-name>.md`.
@@ -62,3 +72,4 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - For fishbone, does the resulting diagram invite useful brainstorming rather than imply a final proven root cause?
 - For fault tree, does the diagram show logical failure decomposition without overstating proof?
 - For sequential exclusion tree, would a technician know what to check next without mistaking suspected causes for confirmed root causes?
+- For two-by-two matrix, would a reviewer agree that each option lands in a reasonable quadrant based on the source?

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 - 2026-05-18
+
+### Two-By-Two Matrix
+
+- Added `two_by_two_matrix` SVG rendering with action-priority, risk-benefit, evidence-impact, value-feasibility, urgency-importance, and custom presets.
+- Added JSON and Markdown templates, work creation/render/export scripts, maintained testcases, stresscases, and natural-language examples.
+- Added browser-builder support and documentation for two-axis prioritization and comparison matrices.
+- Kept language output single-language by default with `language: auto | en | zh`; diagrams do not auto-render English/Chinese pairs.
+
 ## 0.1.4 - 2026-05-13
 
 ### Multi-Diagram Structure

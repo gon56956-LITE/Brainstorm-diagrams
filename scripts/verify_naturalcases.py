@@ -13,6 +13,7 @@ NATURALCASES_ROOT = ROOT / "naturalcases"
 FISHBONE_NATURALCASES = NATURALCASES_ROOT / "fishbone"
 FAULT_TREE_NATURALCASES = NATURALCASES_ROOT / "fault-tree"
 EXCLUSION_TREE_NATURALCASES = NATURALCASES_ROOT / "exclusion-tree"
+TWO_BY_TWO_NATURALCASES = NATURALCASES_ROOT / "two-by-two-matrix"
 PROMPT_TEMPLATE = ROOT / "references" / "natural_language_prompt_template.md"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
@@ -42,14 +43,14 @@ def verify_directory() -> None:
     if not NATURALCASES_ROOT.exists():
         raise AssertionError("Missing naturalcases directory")
 
-    allowed_dirs = {"fishbone", "fault-tree", "exclusion-tree"}
+    allowed_dirs = {"fishbone", "fault-tree", "exclusion-tree", "two-by-two-matrix"}
     for path in NATURALCASES_ROOT.iterdir():
         if path.name == "README.md":
             continue
         if not path.is_dir() or path.name not in allowed_dirs:
             raise AssertionError(f"Unexpected entry in naturalcases: {path.name}")
 
-    for directory in [FISHBONE_NATURALCASES, FAULT_TREE_NATURALCASES, EXCLUSION_TREE_NATURALCASES]:
+    for directory in [FISHBONE_NATURALCASES, FAULT_TREE_NATURALCASES, EXCLUSION_TREE_NATURALCASES, TWO_BY_TWO_NATURALCASES]:
         if not directory.exists():
             raise AssertionError(f"Missing naturalcase directory: {directory.name}")
         for path in directory.iterdir():
@@ -71,6 +72,7 @@ def verify_prompt_template() -> None:
         "Choose `fishbone` when the source asks for broad cause brainstorming",
         "Choose `fault_tree` when the source asks for logical failure decomposition",
         "Choose `exclusion_tree` when the source asks for sequential troubleshooting",
+        "Choose `two_by_two_matrix` when the source asks to compare or prioritize options across two scoring dimensions",
         "do not start from default fishbone categories",
         "Extract 4-8 domain-specific categories",
         "Extract one specific top event",
@@ -89,6 +91,7 @@ def verify_case_pairs() -> None:
     verify_fishbone_case_pairs()
     verify_fault_tree_case_pairs()
     verify_exclusion_tree_case_pairs()
+    verify_two_by_two_case_pairs()
 
 
 def verify_fishbone_case_pairs() -> None:
@@ -128,6 +131,19 @@ def verify_exclusion_tree_case_pairs() -> None:
         verify_source_expected_pair(source_path, expected_path)
         verify_expected_markdown_renders(expected_path)
         verify_exclusion_tree_expected_structure(expected_path)
+
+
+def verify_two_by_two_case_pairs() -> None:
+    sources = sorted(TWO_BY_TWO_NATURALCASES.glob("*.source.txt"))
+    if not sources:
+        raise AssertionError("No two-by-two naturalcase sources found")
+
+    for source_path in sources:
+        stem = source_path.name.removesuffix(".source.txt")
+        expected_path = TWO_BY_TWO_NATURALCASES / f"{stem}.expected.md"
+        verify_source_expected_pair(source_path, expected_path)
+        verify_expected_markdown_renders(expected_path)
+        verify_two_by_two_expected_structure(expected_path)
 
 
 def verify_source_expected_pair(source_path: Path, expected_path: Path) -> None:
@@ -256,6 +272,45 @@ def verify_exclusion_tree_expected_structure(path: Path) -> None:
     final_pass = data.get("final_pass_conclusion", {})
     if not isinstance(final_pass, dict) or not str(final_pass.get("text_en") or final_pass.get("text_zh") or "").strip():
         raise AssertionError(f"{path.name}: exclusion-tree naturalcase must include final_pass_conclusion")
+
+
+def verify_two_by_two_expected_structure(path: Path) -> None:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from generate_diagram import parse_input
+
+    data = parse_input(path)
+    if data.get("diagram_type") != "two_by_two_matrix":
+        raise AssertionError(f"{path.name}: expected diagram_type=two_by_two_matrix")
+
+    preset = str(data.get("preset", "")).strip()
+    if preset not in {"action_priority", "risk_benefit", "evidence_impact", "value_feasibility", "urgency_importance", "custom"}:
+        raise AssertionError(f"{path.name}: unexpected matrix preset: {preset}")
+
+    language = str(data.get("language", "auto")).strip()
+    if language not in {"auto", "en", "zh"}:
+        raise AssertionError(f"{path.name}: language must be auto, en, or zh")
+
+    items = data.get("items", [])
+    if not isinstance(items, list) or len(items) < 4:
+        raise AssertionError(f"{path.name}: two-by-two naturalcase should include at least four scored items")
+
+    quadrants: set[tuple[bool, bool]] = set()
+    for index, item in enumerate(items, start=1):
+        if not isinstance(item, dict):
+            raise AssertionError(f"{path.name}: item {index} must be an object")
+        if not str(item.get("name") or item.get("label") or "").strip():
+            raise AssertionError(f"{path.name}: item {index} must include a name")
+        try:
+            x_score = float(item.get("x_score"))
+            y_score = float(item.get("y_score"))
+        except (TypeError, ValueError) as exc:
+            raise AssertionError(f"{path.name}: item {index} must include numeric x_score and y_score") from exc
+        if not (1 <= x_score <= 5 and 1 <= y_score <= 5):
+            raise AssertionError(f"{path.name}: item {index} scores must be 1-5")
+        quadrants.add((x_score >= 3, y_score >= 3))
+
+    if len(quadrants) < 3:
+        raise AssertionError(f"{path.name}: two-by-two naturalcase should exercise at least three quadrants")
 
 
 if __name__ == "__main__":

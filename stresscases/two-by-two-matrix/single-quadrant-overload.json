@@ -1,0 +1,31 @@
+{
+  "diagram_type": "two_by_two_matrix",
+  "preset": "action_priority",
+  "title": "Single Quadrant Overload Matrix",
+  "language": "en",
+  "notes": "Stresscase verifies that a dense quadrant summarizes IDs while the decision table lists every item.",
+  "items": [
+    {"id": "A1", "name": "Automate weekly report", "x_score": 1, "y_score": 5},
+    {"id": "A2", "name": "Standardize release checklist", "x_score": 1, "y_score": 5},
+    {"id": "A3", "name": "Improve supplier intake form", "x_score": 1, "y_score": 5},
+    {"id": "A4", "name": "Add calibration reminder workflow", "x_score": 1, "y_score": 5},
+    {"id": "A5", "name": "Clean dashboard ownership labels", "x_score": 1, "y_score": 5},
+    {"id": "A6", "name": "Create review meeting template", "x_score": 1, "y_score": 5},
+    {"id": "A7", "name": "Add automatic overdue reminders", "x_score": 1, "y_score": 5},
+    {"id": "A8", "name": "Publish field issue checklist", "x_score": 1, "y_score": 5},
+    {"id": "A9", "name": "Simplify status report categories", "x_score": 1, "y_score": 5},
+    {"id": "A10", "name": "Tag legacy documents for archive", "x_score": 1, "y_score": 5},
+    {"id": "A11", "name": "Add validation script shortcut", "x_score": 1, "y_score": 5},
+    {"id": "A12", "name": "Normalize release note headings", "x_score": 1, "y_score": 5},
+    {"id": "A13", "name": "Create supplier follow-up queue", "x_score": 1, "y_score": 5},
+    {"id": "A14", "name": "Refresh training intake survey", "x_score": 1, "y_score": 5},
+    {"id": "A15", "name": "Add missing owner field", "x_score": 1, "y_score": 5},
+    {"id": "A16", "name": "Automate sample label reminder", "x_score": 1, "y_score": 5},
+    {"id": "A17", "name": "Consolidate daily triage notes", "x_score": 1, "y_score": 5},
+    {"id": "A18", "name": "Add defect taxonomy helper", "x_score": 1, "y_score": 5},
+    {"id": "A19", "name": "Create escalation path card", "x_score": 1, "y_score": 5},
+    {"id": "A20", "name": "Draft checklist review cadence", "x_score": 1, "y_score": 5}
+  ],
+  "show_side_table": true,
+  "show_legend": true
+}

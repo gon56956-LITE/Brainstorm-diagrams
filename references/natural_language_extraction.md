@@ -63,6 +63,28 @@ Fail Detail: Source-supported evidence or next verification note
 Final Pass Conclusion: No issue found in this path. Consider other causes or deeper analysis.
 ```
 
+Choose `two_by_two_matrix` when the source asks to compare, rank, or prioritize options across two scoring dimensions:
+
+```markdown
+---
+diagram_type: two_by_two_matrix
+preset: action_priority
+language: auto
+show_side_table: true
+show_legend: true
+---
+
+# Matrix Title
+
+Subtitle: Compare options by impact and effort
+
+## Items
+
+| ID | Item | X | Y | Notes |
+|---|---|---:|---:|---|
+| A1 | Option name | 2 | 5 | Source-supported note |
+```
+
 ## Extraction Rules
 
 ### Fishbone
@@ -107,10 +129,22 @@ Final Pass Conclusion: No issue found in this path. Consider other causes or dee
 - Keep the draft within the current renderer scope: one target problem, event detail, 3-6 checkpoints, one No/Fail conclusion per checkpoint, and one final pass conclusion.
 - If the source is too thin to support a target problem and at least three meaningful check directions, ask for more context instead of generating a generic troubleshooting flow.
 
+### Two-by-Two Matrix
+
+- Extract the two comparison dimensions from the source.
+- Choose the closest preset: `action_priority`, `risk_benefit`, `evidence_impact`, `value_feasibility`, or `urgency_importance`; use `custom` only when the source gives a different axis pair.
+- Use `language: auto` unless the user explicitly requests `en` or `zh`.
+- Keep diagram labels single-language. Do not render English/Chinese pairs by default.
+- Extract each item or option as one row with `X` and `Y` scores from 1-5.
+- Use `X` for the horizontal dimension and `Y` for the vertical dimension.
+- Keep notes short and source-traceable.
+- Do not invent precise quantitative scores when the source is vague; use conservative ordinal scoring from the described strength of each dimension.
+- Do not model this as precise scatter/bubble placement. The current renderer uses scores to classify items into quadrant lists and a side summary table.
+
 ## Workflow
 
 1. Read the user's natural-language source.
-2. Choose `fishbone`, `fault_tree`, or `exclusion_tree` based on the source and the user's wording.
+2. Choose `fishbone`, `fault_tree`, `exclusion_tree`, or `two_by_two_matrix` based on the source and the user's wording.
 3. Extract the diagram structure using the rules above.
 4. Write structured Markdown to `work/<diagram-type>/<safe-name>.md`.
 5. Render the SVG with the matching work renderer or `scripts/generate_diagram.py`.

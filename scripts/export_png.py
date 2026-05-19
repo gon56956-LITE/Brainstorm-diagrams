@@ -19,6 +19,7 @@ NUMBER_RE = re.compile(r"-?(?:\d+(?:\.\d+)?|\.\d+)")
 PATH_TOKEN_RE = re.compile(r"[MLHVCSQTAZmlhvcsqtaz]|-?(?:\d+(?:\.\d+)?|\.\d+)")
 STYLE_ATTRS = ("fill", "stroke", "stroke-width")
 Transform = tuple[float, float, float]
+ANTIALIAS_FACTOR = 2
 
 SOLID_PAINTS = {
     "url(#topCardGradient)": "#174B86",
@@ -77,15 +78,20 @@ def export_svg_to_png(svg_path: Path, png_path: Path, *, scale: float) -> None:
     root = ET.parse(svg_path).getroot()
     width = int(float(root.attrib["width"]))
     height = int(float(root.attrib["height"]))
-    image = Image.new("RGB", (round(width * scale), round(height * scale)), "#FFFFFF")
+    render_scale = scale * ANTIALIAS_FACTOR
+    target_size = (round(width * scale), round(height * scale))
+    image = Image.new("RGB", (round(width * render_scale), round(height * render_scale)), "#FFFFFF")
     draw = ImageDraw.Draw(image)
-    render_children(draw, root, scale)
+    render_children(draw, image, root, render_scale)
+    if ANTIALIAS_FACTOR > 1:
+        image = image.resize(target_size, Image.Resampling.LANCZOS)
     png_path.parent.mkdir(parents=True, exist_ok=True)
     image.save(png_path)
 
 
 def render_children(
     draw: ImageDraw.ImageDraw,
+    image: Image.Image,
     element: ET.Element,
     scale: float,
     inherited_style: dict[str, str] | None = None,
@@ -97,12 +103,13 @@ def render_children(
         tag = local_name(child.tag)
         if tag in {"defs", "linearGradient", "stop", "filter", "feDropShadow"}:
             continue
-        render_element(draw, child, scale, style, transform)
-        render_children(draw, child, scale, style, transform)
+        render_element(draw, image, child, scale, style, transform)
+        render_children(draw, image, child, scale, style, transform)
 
 
 def render_element(
     draw: ImageDraw.ImageDraw,
+    image: Image.Image,
     element: ET.Element,
     scale: float,
     inherited_style: dict[str, str],
@@ -124,7 +131,7 @@ def render_element(
     elif tag == "path":
         draw_path(draw, element, scale, style, transform)
     elif tag == "text":
-        draw_text(draw, element, scale, style, transform)
+        draw_text(draw, image, element, scale, style, transform)
 
 
 def draw_rect(draw: ImageDraw.ImageDraw, element: ET.Element, scale: float, style: dict[str, str], transform: Transform) -> None:
@@ -187,24 +194,26 @@ def draw_path(draw: ImageDraw.ImageDraw, element: ET.Element, scale: float, styl
         draw.line(points, fill=stroke, width=width)
 
 
-def draw_text(draw: ImageDraw.ImageDraw, element: ET.Element, scale: float, style: dict[str, str], transform: Transform) -> None:
+def draw_text(draw: ImageDraw.ImageDraw, image: Image.Image, element: ET.Element, scale: float, style: dict[str, str], transform: Transform) -> None:
     text = element.text or ""
     if not text:
         return
     x, y = transform_point(number_attr(element, "x"), number_attr(element, "y"), scale, transform)
     font_size = int(number_attr(element, "font-size", 16) * scale)
-    bold = element.attrib.get("font-weight") in {"700", "bold"}
+    bold = is_bold_weight(element.attrib.get("font-weight", ""))
     font = load_font(font_size, bold=bold)
     fill = paint(style.get("fill")) or "#000000"
-    anchor = element.attrib.get("text-anchor", "start")
-    bbox = draw.textbbox((0, 0), text, font=font)
-    text_w = bbox[2] - bbox[0]
-    text_h = bbox[3] - bbox[1]
-    if anchor == "middle":
-        x -= text_w / 2
-    elif anchor == "end":
-        x -= text_w
-    draw.text((x, y - text_h), text, font=font, fill=fill)
+    text_anchor = baseline_anchor(element.attrib.get("text-anchor", "start"))
+    rotation = parse_rotate(element.attrib.get("transform", ""))
+    if rotation is None:
+        draw_text_with_baseline(draw, (x, y), text, font=font, fill=fill, anchor=text_anchor)
+        return
+    angle, cx, cy = rotation
+    overlay = Image.new("RGBA", image.size, (255, 255, 255, 0))
+    overlay_draw = ImageDraw.Draw(overlay)
+    draw_text_with_baseline(overlay_draw, (x, y), text, font=font, fill=fill, anchor=text_anchor)
+    rotated = overlay.rotate(angle, center=(cx * scale, cy * scale), resample=Image.Resampling.BICUBIC)
+    image.paste(Image.alpha_composite(image.convert("RGBA"), rotated).convert("RGB"))
 
 
 def path_points(path_data: str, scale: float, transform: Transform = (1.0, 0.0, 0.0)) -> list[tuple[float, float]]:
@@ -371,6 +380,19 @@ def parse_transform(value: str) -> Transform:
     return factor, tx, ty
 
 
+def parse_rotate(value: str) -> tuple[float, float, float] | None:
+    match = re.search(r"rotate\(([^)]*)\)", value)
+    if not match:
+        return None
+    numbers = [float(item) for item in NUMBER_RE.findall(match.group(1))]
+    if not numbers:
+        return None
+    angle = numbers[0]
+    cx = numbers[1] if len(numbers) > 2 else 0.0
+    cy = numbers[2] if len(numbers) > 2 else 0.0
+    return angle, cx, cy
+
+
 def combine_transform(parent: Transform, child: Transform) -> Transform:
     parent_factor, parent_tx, parent_ty = parent
     child_factor, child_tx, child_ty = child
@@ -403,6 +425,47 @@ def load_font(size: int, *, bold: bool) -> ImageFont.FreeTypeFont | ImageFont.Im
             if path.exists():
                 return ImageFont.truetype(str(path), size=size)
     return ImageFont.load_default()
+
+
+def baseline_anchor(text_anchor: str) -> str:
+    if text_anchor == "middle":
+        return "ms"
+    if text_anchor == "end":
+        return "rs"
+    return "ls"
+
+
+def draw_text_with_baseline(
+    draw: ImageDraw.ImageDraw,
+    xy: tuple[float, float],
+    text: str,
+    *,
+    font: ImageFont.FreeTypeFont | ImageFont.ImageFont,
+    fill: str,
+    anchor: str,
+) -> None:
+    try:
+        draw.text(xy, text, font=font, fill=fill, anchor=anchor)
+    except (TypeError, ValueError):
+        bbox = draw.textbbox((0, 0), text, font=font)
+        text_w = bbox[2] - bbox[0]
+        text_h = bbox[3] - bbox[1]
+        x, y = xy
+        if anchor == "ms":
+            x -= text_w / 2
+        elif anchor == "rs":
+            x -= text_w
+        draw.text((x, y - text_h), text, font=font, fill=fill)
+
+
+def is_bold_weight(value: str) -> bool:
+    normalized = value.strip().lower()
+    if normalized in {"bold", "bolder"}:
+        return True
+    try:
+        return int(float(normalized)) >= 600
+    except ValueError:
+        return False
 
 
 def local_name(tag: str) -> str:

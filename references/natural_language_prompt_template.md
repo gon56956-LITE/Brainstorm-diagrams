@@ -16,6 +16,7 @@ Diagram choice:
 - Choose `fishbone` when the source asks for broad cause brainstorming, category-based decomposition, or Ishikawa-style exploration.
 - Choose `fault_tree` when the source asks for logical failure decomposition, FTA, top-event breakdown, AND/OR relationships, or causal logic.
 - Choose `exclusion_tree` when the source asks for sequential troubleshooting, step-by-step cause elimination, verification checks, or a practical diagnostic path.
+- Choose `two_by_two_matrix` when the source asks to compare or prioritize options across two scoring dimensions, such as impact/effort, risk/benefit, evidence/impact, value/feasibility, or urgency/importance.
 
 Rules:
 - Read the source text first; do not start from default fishbone categories, generic fault-tree branches, or generic troubleshooting steps.
@@ -57,6 +58,14 @@ Exclusion-tree rules:
 - Add `Final Pass Conclusion:` for the result when all checks pass.
 - Do not use AND/OR gates, probability, Boolean logic, or fault-tree intermediate events.
 - If the source is too thin to support a target problem and at least three meaningful check directions, ask for more context instead of generating a generic troubleshooting flow.
+
+Two-by-two matrix rules:
+- Choose the closest preset: `action_priority`, `risk_benefit`, `evidence_impact`, `value_feasibility`, or `urgency_importance`; use `custom` only when the source gives its own axis names.
+- Keep the diagram single-language. Use `language: auto` unless the user explicitly requests `en` or `zh`; do not create English/Chinese paired labels by default.
+- Extract items/options from the source and score each item on both axes from 1-5 using only source-supported wording.
+- Use the horizontal score as `X` and the vertical score as `Y`.
+- Include at least 4 scored items when the source supports them.
+- Do not turn the matrix into a precise scatter plot; items are grouped into quadrant lists.
 
 Execution:
 1. Write structured Markdown to `work/<diagram-type>/<safe-name>.md`.
@@ -136,6 +145,29 @@ Fail Conclusion: Next Likely Cause if Check Fails
 Final Pass Conclusion: No issue found in this path. Consider other causes or deeper analysis.
 ```
 
+## Two-by-Two Matrix Markdown Output Shape
+
+```markdown
+---
+diagram_type: two_by_two_matrix
+preset: action_priority
+language: auto
+show_side_table: true
+show_legend: true
+---
+
+# Matrix Title
+
+Subtitle: Optional source-supported subtitle
+
+## Items
+
+| ID | Item | X | Y | Notes |
+|---|---|---:|---:|---|
+| A1 | Option name | 2 | 5 | Source-supported note |
+| A2 | Option name | 5 | 4 | Source-supported note |
+```
+
 ## Quality Gate Before Rendering
 
 - The chosen diagram type matches the user's intent.
@@ -150,6 +182,9 @@ Final Pass Conclusion: No issue found in this path. Consider other causes or dee
 - Exclusion-tree checkpoints are testable Yes/No questions and source-traceable.
 - Exclusion-tree fail conclusions do not overstate suspected causes as proven.
 - Exclusion-tree draft has 3-6 checkpoints and a final pass conclusion.
+- Two-by-two matrix preset and axes match the source comparison dimensions.
+- Two-by-two matrix uses one language only unless the user explicitly provides or requests bilingual labels.
+- Two-by-two matrix items have source-traceable 1-5 scores on both axes.
 - Similar causes are grouped rather than duplicated.
 - The draft stays within renderer limits for the selected diagram type.
 - The file name is a safe stem: lowercase letters, numbers, hyphen, or underscore.

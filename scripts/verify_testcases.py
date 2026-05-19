@@ -15,21 +15,26 @@ ROOT = Path(__file__).resolve().parents[1]
 TESTCASES = ROOT / "testcases" / "fishbone"
 FAULT_TREE_TESTCASES = ROOT / "testcases" / "fault-tree"
 EXCLUSION_TREE_TESTCASES = ROOT / "testcases" / "exclusion-tree"
+TWO_BY_TWO_TESTCASES = ROOT / "testcases" / "two-by-two-matrix"
 TEMPLATES = ROOT / "templates"
 WORK = ROOT / "work" / "fishbone"
 FAULT_TREE_WORK = ROOT / "work" / "fault-tree"
 EXCLUSION_TREE_WORK = ROOT / "work" / "exclusion-tree"
+TWO_BY_TWO_WORK = ROOT / "work" / "two-by-two-matrix"
 LUCIDE_CANDIDATES = ROOT / "assets" / "lucide-candidates"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 NEW_FISHBONE = ROOT / "scripts" / "new_fishbone.py"
 NEW_FAULT_TREE = ROOT / "scripts" / "new_fault_tree.py"
 NEW_EXCLUSION_TREE = ROOT / "scripts" / "new_exclusion_tree.py"
+NEW_TWO_BY_TWO = ROOT / "scripts" / "new_two_by_two_matrix.py"
 RENDER_WORK = ROOT / "scripts" / "render_work.py"
 RENDER_FAULT_TREE_WORK = ROOT / "scripts" / "render_fault_tree_work.py"
 RENDER_EXCLUSION_TREE_WORK = ROOT / "scripts" / "render_exclusion_tree_work.py"
+RENDER_TWO_BY_TWO_WORK = ROOT / "scripts" / "render_two_by_two_matrix_work.py"
 EXPORT_PNG = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE_PNG = ROOT / "scripts" / "export_fault_tree_png.py"
 EXPORT_EXCLUSION_TREE_PNG = ROOT / "scripts" / "export_exclusion_tree_png.py"
+EXPORT_TWO_BY_TWO_PNG = ROOT / "scripts" / "export_two_by_two_matrix_png.py"
 DIAGRAM_BUILDER_SERVER = ROOT / "scripts" / "diagram_builder_server.py"
 PYTHON = Path(sys.executable)
 
@@ -89,6 +94,25 @@ EXCLUSION_TREE_TESTCASE_PAIRS = [
     ("exclusion-tree.five-check-lanes.example.json", "exclusion-tree.five-check-lanes.output.svg"),
 ]
 
+TWO_BY_TWO_TESTCASE_PAIRS = [
+    ("two-by-two.action-priority.example.json", "two-by-two.action-priority.output.svg"),
+    ("two-by-two.risk-benefit.example.json", "two-by-two.risk-benefit.output.svg"),
+    ("two-by-two.evidence-impact.example.json", "two-by-two.evidence-impact.output.svg"),
+    ("two-by-two.value-feasibility.example.json", "two-by-two.value-feasibility.output.svg"),
+    ("two-by-two.urgency-importance.example.json", "two-by-two.urgency-importance.output.svg"),
+    ("two-by-two.custom.example.json", "two-by-two.custom.output.svg"),
+    ("two-by-two.markdown.example.md", "two-by-two.markdown.output.svg"),
+]
+
+TWO_BY_TWO_TEMPLATE_PRESETS = [
+    "action_priority",
+    "risk_benefit",
+    "evidence_impact",
+    "value_feasibility",
+    "urgency_importance",
+    "custom",
+]
+
 FORBIDDEN_WORDS = [
     "fish head",
     "fish tail",
@@ -112,6 +136,9 @@ def main() -> int:
     for input_name, output_name in EXCLUSION_TREE_TESTCASE_PAIRS:
         run_generate(EXCLUSION_TREE_TESTCASES / input_name, EXCLUSION_TREE_TESTCASES / output_name)
 
+    for input_name, output_name in TWO_BY_TWO_TESTCASE_PAIRS:
+        run_generate(TWO_BY_TWO_TESTCASES / input_name, TWO_BY_TWO_TESTCASES / output_name)
+
     for _, output_name in TESTCASE_PAIRS:
         verify_svg_basics(TESTCASES / output_name)
 
@@ -124,6 +151,10 @@ def main() -> int:
     for _, output_name in EXCLUSION_TREE_TESTCASE_PAIRS:
         verify_exclusion_tree_svg_basics(EXCLUSION_TREE_TESTCASES / output_name)
 
+    for _, output_name in TWO_BY_TWO_TESTCASE_PAIRS:
+        verify_two_by_two_svg_basics(TWO_BY_TWO_TESTCASES / output_name)
+    verify_two_by_two_item_limit()
+
     verify_canvas_dimensions()
     verify_subcategory_braces(TESTCASES / "fishbone.subcategory.output.md.svg")
     verify_primary_cause_connectors(TESTCASES / "fishbone.five-primary.output.svg")
@@ -135,21 +166,27 @@ def main() -> int:
     verify_new_fishbone_entrypoint()
     verify_new_fault_tree_entrypoint()
     verify_new_exclusion_tree_entrypoint()
+    verify_new_two_by_two_entrypoint()
     verify_render_work_entrypoint()
     verify_render_fault_tree_work_entrypoint()
     verify_render_exclusion_tree_work_entrypoint()
+    verify_render_two_by_two_work_entrypoint()
     verify_export_png_entrypoint()
     verify_export_fault_tree_png_entrypoint()
     verify_export_exclusion_tree_png_entrypoint()
+    verify_export_two_by_two_png_entrypoint()
+    verify_cmd_launchers()
     verify_diagram_builder_service()
     verify_work_name_validation()
     verify_no_tmp_files(TESTCASES)
     verify_no_tmp_files(FAULT_TREE_TESTCASES)
     verify_no_tmp_files(EXCLUSION_TREE_TESTCASES)
+    verify_no_tmp_files(TWO_BY_TWO_TESTCASES)
     verify_no_tmp_files(TEMPLATES)
     verify_no_tmp_files(WORK)
     verify_no_tmp_files(FAULT_TREE_WORK)
     verify_no_tmp_files(EXCLUSION_TREE_WORK)
+    verify_no_tmp_files(TWO_BY_TWO_WORK)
 
     print("Verification passed")
     return 0
@@ -165,6 +202,38 @@ def run_generate(input_path: Path, output_path: Path) -> None:
     )
     if result.returncode != 0:
         raise AssertionError(f"Failed to generate {output_path.name}:\n{result.stderr}")
+
+
+def verify_two_by_two_item_limit() -> None:
+    stem = f"verify-two-by-two-limit-{os.getpid()}"
+    input_path = TWO_BY_TWO_WORK / f"{stem}.json"
+    output_path = TWO_BY_TWO_WORK / f"{stem}.svg"
+    try:
+        TWO_BY_TWO_WORK.mkdir(parents=True, exist_ok=True)
+        data = {
+            "diagram_type": "two_by_two_matrix",
+            "preset": "action_priority",
+            "title": "Too Many Items",
+            "items": [
+                {"id": f"I{index}", "name": f"Item {index}", "x_score": 3, "y_score": 3}
+                for index in range(1, 22)
+            ],
+        }
+        input_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        result = subprocess.run(
+            [str(PYTHON), str(GENERATE), str(input_path), str(output_path)],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode == 0:
+            raise AssertionError("two-by-two renderer accepted more than 20 items")
+        if "supports up to 20 items" not in result.stderr:
+            raise AssertionError(f"two-by-two item limit error should be clear, got:\n{result.stderr}")
+    finally:
+        input_path.unlink(missing_ok=True)
+        output_path.unlink(missing_ok=True)
 
 
 def verify_svg_basics(path: Path) -> None:
@@ -322,6 +391,140 @@ def verify_exclusion_tree_svg_basics(path: Path) -> None:
     hits = [word for word in FORBIDDEN_WORDS if word in text]
     if hits:
         raise AssertionError(f"{path.name}: forbidden words found: {hits}")
+
+
+def verify_two_by_two_svg_basics(path: Path) -> None:
+    root = ET.parse(path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError(f"{path.name}: root is not svg")
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if (width, height) != (1920, 1080):
+        raise AssertionError(f"{path.name}: two-by-two matrix should keep 1920x1080 canvas, got {width}x{height}")
+
+    groups_by_id = {element.attrib.get("id"): element for element in root.iter() if element.tag.endswith("g")}
+    for required_id in ["two-by-two-matrix", "matrix-side-table", "matrix-legend"]:
+        if required_id not in groups_by_id:
+            raise AssertionError(f"{path.name}: missing {required_id}")
+    if "matrix-usage-note" in groups_by_id:
+        raise AssertionError(f"{path.name}: two-by-two matrix should not render the old default Best for note")
+
+    quadrants = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "matrix-quadrant" in element.attrib.get("class", "")
+    ]
+    if len(quadrants) != 4:
+        raise AssertionError(f"{path.name}: expected four matrix quadrants, got {len(quadrants)}")
+    quadrant_keys = {group.attrib.get("data-quadrant") for group in quadrants}
+    if quadrant_keys != {"top_left", "top_right", "bottom_left", "bottom_right"}:
+        raise AssertionError(f"{path.name}: unexpected quadrant keys: {quadrant_keys}")
+
+    markers = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("circle") and "matrix-item-marker" in element.attrib.get("class", "")
+    ]
+    if not markers:
+        raise AssertionError(f"{path.name}: expected matrix item markers")
+    if len(markers) > 20:
+        raise AssertionError(f"{path.name}: matrix body should not show too many item markers")
+
+    texts = [element.text or "" for element in root.iter() if element.tag.endswith("text")]
+    joined = "\n".join(texts)
+    bilingual_lines = [text for text in texts if " / " in text and re.search(r"[\u4e00-\u9fff]", text)]
+    if bilingual_lines:
+        raise AssertionError(f"{path.name}: two-by-two matrix should not auto-render bilingual labels: {bilingual_lines[:2]}")
+    verify_two_by_two_axis_endpoint_labels(root, path.name)
+    icons = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "lucide-icon" in element.attrib.get("class", "")
+    ]
+    if len(icons) < 4:
+        raise AssertionError(f"{path.name}: expected Lucide badge icons in the quadrant headers")
+    body_grid_lines = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and "matrix-table-body-grid" in element.attrib.get("class", "")
+    ]
+    if not body_grid_lines:
+        raise AssertionError(f"{path.name}: expected row-aware table body grid lines")
+    if not any(element.attrib.get("stroke") == "#C5D3E4" for element in body_grid_lines):
+        raise AssertionError(f"{path.name}: zebra table rows should use higher-contrast body grid lines")
+    row_separators = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and "matrix-table-row-separator" in element.attrib.get("class", "")
+    ]
+    if not row_separators:
+        raise AssertionError(f"{path.name}: expected table row separators above zebra backgrounds")
+    if not all(element.attrib.get("stroke") == "#C5D3E4" for element in row_separators):
+        raise AssertionError(f"{path.name}: table row separators should stay visible on white and zebra rows")
+    table_rows = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "matrix-table-row" in element.attrib.get("class", "")
+    ]
+    if len(table_rows) > 20:
+        raise AssertionError(f"{path.name}: decision table should never render more than 20 rows")
+    if "more in table" in joined:
+        raise AssertionError(f"{path.name}: matrix body should not use old '+N more in table' copy")
+    legend = groups_by_id.get("matrix-legend")
+    if legend is not None:
+        rects = [child for child in list(legend) if child.tag.endswith("rect")]
+        if rects and float(rects[0].attrib.get("width", "0")) > 1000:
+            raise AssertionError(f"{path.name}: priority guide should not cover the right-side table column")
+    if path.name == "two-by-two.action-priority.output.svg":
+        for required_text in ["Quick Wins", "Major Projects", "Fill-ins", "Time Sinks", "Effort", "Impact"]:
+            if required_text not in joined:
+                raise AssertionError(f"{path.name}: missing expected action-priority text: {required_text}")
+    if path.name == "two-by-two.evidence-impact.output.svg":
+        for required_text in ["Priority Causes", "Critical Hypotheses", "Evidence", "Impact"]:
+            if required_text not in joined:
+                raise AssertionError(f"{path.name}: missing expected evidence-impact text: {required_text}")
+    if path.name == "two-by-two.value-feasibility.output.svg":
+        if "High Feasibility" not in joined or "Build Now" not in joined:
+            raise AssertionError(f"{path.name}: feasibility preset should keep the high-feasibility direction")
+
+    verify_two_by_two_rects_within_canvas(root, path.name)
+
+
+def verify_two_by_two_axis_endpoint_labels(root: ET.Element, label: str) -> None:
+    endpoint_texts = []
+    for element in root.iter():
+        if not element.tag.endswith("text"):
+            continue
+        text = element.text or ""
+        x = float(element.attrib.get("x", "-1"))
+        y = float(element.attrib.get("y", "-1"))
+        if abs(y - 840) <= 1 or (abs(x - 112) <= 1 and (abs(y - 802) <= 1 or abs(y - 194) <= 1)):
+            endpoint_texts.append(text)
+    if len(endpoint_texts) != 4:
+        raise AssertionError(f"{label}: expected four axis endpoint labels, got {endpoint_texts}")
+    allowed = {"Low", "High", "低", "高"}
+    invalid = [text for text in endpoint_texts if text not in allowed]
+    if invalid:
+        raise AssertionError(f"{label}: axis endpoints should be generic Low/High labels, got {invalid}")
+
+
+def verify_two_by_two_rects_within_canvas(root: ET.Element, label: str) -> None:
+    canvas_width = float(root.attrib["width"])
+    canvas_height = float(root.attrib["height"])
+    for rect in root.iter():
+        if not rect.tag.endswith("rect"):
+            continue
+        attrs = rect.attrib
+        if not {"x", "y", "width", "height"} <= set(attrs):
+            continue
+        x = float(attrs["x"])
+        y = float(attrs["y"])
+        width = float(attrs["width"])
+        height = float(attrs["height"])
+        if x < -0.1 or y < -0.1 or x + width > canvas_width + 0.1 or y + height > canvas_height + 0.1:
+            raise AssertionError(
+                f"{label}: two-by-two rect outside canvas: x={x}, y={y}, w={width}, h={height}, canvas={canvas_width}x{canvas_height}"
+            )
 
 
 def verify_exclusion_chip_alignment(root: ET.Element, label: str) -> None:
@@ -1249,6 +1452,20 @@ def dense_category(name: str) -> dict[str, object]:
     }
 
 
+def two_by_two_template_paths() -> list[Path]:
+    paths = [
+        TEMPLATES / "two-by-two-matrix.template.md",
+        TEMPLATES / "two-by-two-matrix.template.json",
+    ]
+    for preset in TWO_BY_TWO_TEMPLATE_PRESETS:
+        if preset == "action_priority":
+            continue
+        slug = preset.replace("_", "-")
+        paths.append(TEMPLATES / f"two-by-two-matrix.{slug}.template.md")
+        paths.append(TEMPLATES / f"two-by-two-matrix.{slug}.template.json")
+    return paths
+
+
 def verify_templates() -> None:
     md_template = TEMPLATES / "fishbone.template.md"
     json_template = TEMPLATES / "fishbone.template.json"
@@ -1256,6 +1473,9 @@ def verify_templates() -> None:
     fault_tree_json_template = TEMPLATES / "fault-tree.template.json"
     exclusion_tree_md_template = TEMPLATES / "exclusion-tree.template.md"
     exclusion_tree_json_template = TEMPLATES / "exclusion-tree.template.json"
+    two_by_two_templates = two_by_two_template_paths()
+    two_by_two_md_template = TEMPLATES / "two-by-two-matrix.template.md"
+    two_by_two_json_template = TEMPLATES / "two-by-two-matrix.template.json"
     for path in [
         md_template,
         json_template,
@@ -1263,6 +1483,7 @@ def verify_templates() -> None:
         fault_tree_json_template,
         exclusion_tree_md_template,
         exclusion_tree_json_template,
+        *two_by_two_templates,
     ]:
         if not path.exists():
             raise AssertionError(f"Missing template: {path.name}")
@@ -1296,6 +1517,16 @@ def verify_templates() -> None:
         raise AssertionError(f"{exclusion_tree_json_template.name}: JSON template must be an object")
     verify_exclusion_tree_template_structure(exclusion_json_data, exclusion_tree_json_template.name)
 
+    for template_path in two_by_two_templates:
+        if template_path.suffix == ".md":
+            two_by_two_data = parse_input(template_path)
+        else:
+            two_by_two_data = json.loads(template_path.read_text(encoding="utf-8"))
+            if not isinstance(two_by_two_data, dict):
+                raise AssertionError(f"{template_path.name}: JSON template must be an object")
+        verify_two_by_two_template_structure(two_by_two_data, template_path.name)
+        verify_two_by_two_template_guidance(template_path, two_by_two_data)
+
     pid = os.getpid()
     template_outputs = [
         TEMPLATES / f"fishbone.template.md.{pid}.tmp.svg",
@@ -1304,6 +1535,7 @@ def verify_templates() -> None:
         TEMPLATES / f"fault-tree.template.json.{pid}.tmp.svg",
         TEMPLATES / f"exclusion-tree.template.md.{pid}.tmp.svg",
         TEMPLATES / f"exclusion-tree.template.json.{pid}.tmp.svg",
+        *[TEMPLATES / f"{path.name}.{pid}.tmp.svg" for path in two_by_two_templates],
     ]
     try:
         run_generate(md_template, template_outputs[0])
@@ -1312,15 +1544,41 @@ def verify_templates() -> None:
         run_generate(fault_tree_json_template, template_outputs[3])
         run_generate(exclusion_tree_md_template, template_outputs[4])
         run_generate(exclusion_tree_json_template, template_outputs[5])
+        for template_path, output_path in zip(two_by_two_templates, template_outputs[6:]):
+            run_generate(template_path, output_path)
         verify_svg_basics(template_outputs[0])
         verify_svg_basics(template_outputs[1])
         verify_fault_tree_svg_basics(template_outputs[2])
         verify_fault_tree_svg_basics(template_outputs[3])
         verify_exclusion_tree_svg_basics(template_outputs[4])
         verify_exclusion_tree_svg_basics(template_outputs[5])
+        for output_path in template_outputs[6:]:
+            verify_two_by_two_svg_basics(output_path)
     finally:
         for output_path in template_outputs:
             output_path.unlink(missing_ok=True)
+
+
+def verify_cmd_launchers() -> None:
+    launchers = {
+        "fishbone_tool.cmd": "scripts\\new_fishbone.py",
+        "鱼骨图工具.cmd": "fishbone_tool.cmd",
+        "fault_tree_tool.cmd": "scripts\\new_fault_tree.py",
+        "故障树工具.cmd": "fault_tree_tool.cmd",
+        "exclusion_tree_tool.cmd": "scripts\\new_exclusion_tree.py",
+        "排除树工具.cmd": "exclusion_tree_tool.cmd",
+        "two_by_two_matrix_tool.cmd": "scripts\\new_two_by_two_matrix.py",
+        "二乘二矩阵工具.cmd": "two_by_two_matrix_tool.cmd",
+        "diagram_builder.cmd": "scripts\\diagram_builder_server.py",
+        "图表编辑器.cmd": "diagram_builder.cmd",
+    }
+    for name, expected_text in launchers.items():
+        path = ROOT / name
+        if not path.exists():
+            raise AssertionError(f"Missing launcher: {name}")
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if expected_text not in text:
+            raise AssertionError(f"{name}: launcher does not reference {expected_text}")
 
 
 def verify_template_structure(data: dict[str, object], label: str) -> None:
@@ -1449,6 +1707,44 @@ def verify_exclusion_tree_template_structure(data: dict[str, object], label: str
         raise AssertionError(f"{label}: template must include final_pass_conclusion")
 
 
+def verify_two_by_two_template_structure(data: dict[str, object], label: str) -> None:
+    if str(data.get("diagram_type", "")).replace("-", "_") != "two_by_two_matrix":
+        raise AssertionError(f"{label}: template must use diagram_type=two_by_two_matrix")
+    preset = str(data.get("preset", "")).strip()
+    if not preset:
+        raise AssertionError(f"{label}: template must include a preset")
+    if preset not in TWO_BY_TWO_TEMPLATE_PRESETS:
+        raise AssertionError(f"{label}: template uses unsupported preset: {preset}")
+    if str(data.get("subtitle", "")).strip() or data.get("show_subtitle"):
+        raise AssertionError(f"{label}: two-by-two templates should not include hidden subtitle metadata")
+    items = data.get("items")
+    if not isinstance(items, list) or len(items) < 4:
+        raise AssertionError(f"{label}: template must include at least four items")
+    for index, item in enumerate(items, start=1):
+        if not isinstance(item, dict):
+            raise AssertionError(f"{label}: item {index} must be an object")
+        if not str(item.get("id", "")).strip() or not str(item.get("name", "")).strip():
+            raise AssertionError(f"{label}: item {index} must include id and name")
+        if str(item.get("notes", item.get("note", ""))).strip():
+            raise AssertionError(f"{label}: template item {index} should not include non-rendered item-level notes")
+
+
+def verify_two_by_two_template_guidance(path: Path, data: dict[str, object]) -> None:
+    text = path.read_text(encoding="utf-8")
+    for required in ["4-20", "Maximum supported item count is 20", "1 to 5"]:
+        if required not in text:
+            raise AssertionError(f"{path.name}: template guidance should mention {required!r}")
+    if path.suffix == ".json":
+        guidance = data.get("_template_guidance")
+        if not isinstance(guidance, dict):
+            raise AssertionError(f"{path.name}: JSON template must include _template_guidance")
+        for key in ["item_limit", "score_range", "axis_mapping", "visible_notes"]:
+            if not str(guidance.get(key, "")).strip():
+                raise AssertionError(f"{path.name}: _template_guidance missing {key}")
+    if path.suffix == ".md" and "| Notes |" in text:
+        raise AssertionError(f"{path.name}: Markdown template should not include item-level Notes column")
+
+
 def verify_no_tmp_files(path: Path) -> None:
     if not path.exists():
         return
@@ -1558,6 +1854,56 @@ def verify_new_exclusion_tree_entrypoint() -> None:
     finally:
         input_path.unlink(missing_ok=True)
         output_path.unlink(missing_ok=True)
+
+
+def verify_new_two_by_two_entrypoint() -> None:
+    stem = f"verify-new-two-by-two-{os.getpid()}"
+    input_path = TWO_BY_TWO_WORK / f"{stem}.md"
+    preset_input_path = TWO_BY_TWO_WORK / f"{stem}-preset.md"
+    output_path = TWO_BY_TWO_WORK / f"{stem}.svg"
+    preset_output_path = TWO_BY_TWO_WORK / f"{stem}-preset.svg"
+    try:
+        TWO_BY_TWO_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [input_path, preset_input_path, output_path, preset_output_path]:
+            path.unlink(missing_ok=True)
+        result = subprocess.run(
+            [str(PYTHON), str(NEW_TWO_BY_TWO), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise AssertionError(f"new_two_by_two_matrix.py failed:\n{result.stderr}")
+        if not input_path.exists() or not output_path.exists():
+            raise AssertionError("new_two_by_two_matrix.py did not create expected work files")
+        verify_two_by_two_svg_basics(output_path)
+
+        preset_result = subprocess.run(
+            [str(PYTHON), str(NEW_TWO_BY_TWO), f"{stem}-preset", "--format", "md", "--preset", "value_feasibility"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if preset_result.returncode != 0:
+            raise AssertionError(f"new_two_by_two_matrix.py failed with --preset:\n{preset_result.stderr}")
+        if "preset: value_feasibility" not in preset_input_path.read_text(encoding="utf-8"):
+            raise AssertionError("new_two_by_two_matrix.py --preset did not copy the requested preset template")
+        verify_two_by_two_svg_basics(preset_output_path)
+
+        overwrite_result = subprocess.run(
+            [str(PYTHON), str(NEW_TWO_BY_TWO), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if overwrite_result.returncode == 0:
+            raise AssertionError("new_two_by_two_matrix.py should refuse to overwrite existing work files without --force")
+    finally:
+        for path in [input_path, preset_input_path, output_path, preset_output_path]:
+            path.unlink(missing_ok=True)
 
 
 def verify_render_work_entrypoint() -> None:
@@ -1739,6 +2085,66 @@ def verify_render_exclusion_tree_work_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_render_two_by_two_work_entrypoint() -> None:
+    stem = f"verify-render-two-by-two-{os.getpid()}"
+    md_input_path = TWO_BY_TWO_WORK / f"{stem}.md"
+    json_input_path = TWO_BY_TWO_WORK / f"{stem}.json"
+    output_path = TWO_BY_TWO_WORK / f"{stem}.svg"
+    try:
+        TWO_BY_TWO_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_TWO_BY_TWO), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_two_by_two_matrix.py failed during render_two_by_two verification:\n{create_result.stderr}")
+
+        output_path.unlink(missing_ok=True)
+        render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_TWO_BY_TWO_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if render_result.returncode != 0:
+            raise AssertionError(f"render_two_by_two_matrix_work.py failed:\n{render_result.stderr}")
+        if not output_path.exists():
+            raise AssertionError("render_two_by_two_matrix_work.py did not create the expected SVG")
+        verify_two_by_two_svg_basics(output_path)
+
+        json_input_path.write_text((TEMPLATES / "two-by-two-matrix.template.json").read_text(encoding="utf-8"), encoding="utf-8")
+        ambiguous_result = subprocess.run(
+            [str(PYTHON), str(RENDER_TWO_BY_TWO_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if ambiguous_result.returncode == 0:
+            raise AssertionError("render_two_by_two_matrix_work.py should require --format when md and json inputs both exist")
+
+        format_result = subprocess.run(
+            [str(PYTHON), str(RENDER_TWO_BY_TWO_WORK), stem, "--format", "json"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if format_result.returncode != 0:
+            raise AssertionError(f"render_two_by_two_matrix_work.py --format json failed:\n{format_result.stderr}")
+        verify_two_by_two_svg_basics(output_path)
+    finally:
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_export_png_entrypoint() -> None:
     from PIL import Image
 
@@ -1895,12 +2301,66 @@ def verify_export_exclusion_tree_png_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_export_two_by_two_png_entrypoint() -> None:
+    from PIL import Image
+
+    stem = f"verify-export-two-by-two-png-{os.getpid()}"
+    input_path = TWO_BY_TWO_WORK / f"{stem}.md"
+    svg_path = TWO_BY_TWO_WORK / f"{stem}.svg"
+    png_path = TWO_BY_TWO_WORK / f"{stem}.png"
+    try:
+        TWO_BY_TWO_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_TWO_BY_TWO), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_two_by_two_matrix.py failed during PNG export verification:\n{create_result.stderr}")
+
+        export_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_TWO_BY_TWO_PNG), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if export_result.returncode != 0:
+            raise AssertionError(f"export_two_by_two_matrix_png.py failed:\n{export_result.stderr}")
+        if not png_path.exists():
+            raise AssertionError("export_two_by_two_matrix_png.py did not create the expected PNG")
+
+        svg_size = svg_dimensions(svg_path)
+        with Image.open(png_path) as image:
+            if image.size != svg_size:
+                raise AssertionError(f"Two-by-two PNG dimensions {image.size} do not match SVG dimensions {svg_size}")
+
+        unsafe_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_TWO_BY_TWO_PNG), "../outside"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if unsafe_result.returncode == 0:
+            raise AssertionError("export_two_by_two_matrix_png.py accepted an unsafe name")
+    finally:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_diagram_builder_service() -> None:
     from PIL import Image
 
     sys.path.insert(0, str(ROOT / "scripts"))
     import diagram_builder_server
     verify_diagram_builder_exclusion_language_ui(diagram_builder_server.INDEX_HTML)
+    verify_diagram_builder_two_by_two_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_load_file_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_preview_zoom_ui(diagram_builder_server.INDEX_HTML)
 
@@ -1908,6 +2368,7 @@ def verify_diagram_builder_service() -> None:
         "fishbone": f"verify-builder-fishbone-{os.getpid()}",
         "fault_tree": f"verify-builder-fault-tree-{os.getpid()}",
         "exclusion_tree": f"verify-builder-exclusion-tree-{os.getpid()}",
+        "two_by_two_matrix": f"verify-builder-two-by-two-{os.getpid()}",
     }
     paths: list[Path] = []
     try:
@@ -1920,6 +2381,11 @@ def verify_diagram_builder_service() -> None:
         loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-exclusion.md", exclusion_md)
         if loaded_type != "exclusion_tree" or loaded_data.get("diagram_type") != "exclusion_tree":
             raise AssertionError("diagram_builder_server failed to parse a loaded exclusion-tree Markdown file")
+
+        two_by_two_md = (TEMPLATES / "two-by-two-matrix.template.md").read_text(encoding="utf-8")
+        loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-two-by-two.md", two_by_two_md)
+        if loaded_type != "two_by_two_matrix" or loaded_data.get("diagram_type") != "two_by_two_matrix":
+            raise AssertionError("diagram_builder_server failed to parse a loaded two-by-two Markdown file")
 
         for diagram_type, stem in stems.items():
             data = diagram_builder_server.load_template(diagram_type)
@@ -1953,7 +2419,9 @@ def verify_diagram_builder_service() -> None:
 
 def verify_diagram_builder_exclusion_language_ui(index_html: str) -> None:
     start = index_html.find("function renderExclusionTreeForm()")
-    end = index_html.find('$("newBtn")', start)
+    end = index_html.find("function renderTwoByTwoForm()", start)
+    if end < 0:
+        end = index_html.find('$("newBtn")', start)
     exclusion_html = index_html[start:end] if start >= 0 and end > start else index_html
     forbidden = [
         "Problem EN",
@@ -1980,6 +2448,47 @@ def verify_diagram_builder_exclusion_language_ui(index_html: str) -> None:
     hits = [text for text in forbidden if text in exclusion_html]
     if hits:
         raise AssertionError(f"diagram builder exclusion-tree UI should use single-language fields, found: {hits}")
+
+
+def verify_diagram_builder_two_by_two_ui(index_html: str) -> None:
+    start = index_html.find("function renderTwoByTwoForm()")
+    end = index_html.find('$("newBtn")', start)
+    two_by_two_html = index_html[start:end] if start >= 0 and end > start else index_html
+    if 'row("Subtitle"' in two_by_two_html:
+        raise AssertionError("diagram builder two-by-two UI should not expose hidden subtitle controls")
+    if "Short note" in two_by_two_html or "item.note" in two_by_two_html:
+        raise AssertionError("diagram builder two-by-two UI should not expose non-rendered item-level note controls")
+    if "matrix-item-row" not in two_by_two_html or "score-input" not in two_by_two_html:
+        raise AssertionError("diagram builder two-by-two UI should use compact one-line item rows")
+    if 'row("Name"' in two_by_two_html:
+        raise AssertionError("diagram builder two-by-two UI should not put item name on a separate row")
+    if "nextTwoByTwoItemId" not in two_by_two_html or "model.items.push({ id: nextTwoByTwoItemId()" not in two_by_two_html:
+        raise AssertionError("diagram builder two-by-two Add Item should preserve preset/id letter prefixes")
+    if "applyTwoByTwoPreset(value)" not in two_by_two_html or "TWO_BY_TWO_PRESET_TEMPLATES" not in index_html:
+        raise AssertionError("diagram builder two-by-two preset changes should reload preset-specific template items")
+    for expected_mapping in ['action_priority: "A"', 'evidence_impact: "C"', 'value_feasibility: "F"']:
+        if expected_mapping not in index_html:
+            raise AssertionError(f"diagram builder two-by-two ID prefix helper missing {expected_mapping}")
+    for expected_template in ['id: "A1"', 'id: "C1"', 'id: "F1"', 'id: "T1"', 'id: "I1"']:
+        if expected_template not in index_html:
+            raise AssertionError(f"diagram builder two-by-two preset template missing {expected_template}")
+    if 'row("Language"' in two_by_two_html:
+        raise AssertionError("diagram builder two-by-two UI should rely on auto language detection, not expose Language")
+    for required in ['row("Title"', 'row("Preset"', 'row("Notes"', "Add Item"]:
+        if required not in two_by_two_html:
+            raise AssertionError(f"diagram builder two-by-two UI missing expected control: {required}")
+    for required_text in ["Maximum", "Scores are 1-5", "Decision Table shows every item"]:
+        if required_text not in two_by_two_html:
+            raise AssertionError(f"diagram builder two-by-two UI missing limit guidance: {required_text}")
+    markdown_start = index_html.find("function twoByTwoToMarkdown()")
+    markdown_end = index_html.find("async function loadSvgIfExists()", markdown_start)
+    markdown_html = index_html[markdown_start:markdown_end] if markdown_start >= 0 and markdown_end > markdown_start else index_html
+    if "subtitle:" in markdown_html:
+        raise AssertionError("diagram builder two-by-two Markdown export should not write hidden subtitle metadata")
+    if "notes:" not in markdown_html:
+        raise AssertionError("diagram builder two-by-two Markdown export should preserve visible Notes")
+    if "| Note |" in markdown_html or "item.note" in markdown_html:
+        raise AssertionError("diagram builder two-by-two Markdown export should not write non-rendered item-level notes")
 
 
 def verify_diagram_builder_load_file_ui(index_html: str) -> None:
@@ -2125,6 +2634,26 @@ def verify_work_name_validation() -> None:
         )
         if exclusion_render_result.returncode == 0:
             raise AssertionError(f"render_exclusion_tree_work.py accepted unsafe name: {unsafe_name}")
+
+        two_by_two_create_result = subprocess.run(
+            [str(PYTHON), str(NEW_TWO_BY_TWO), unsafe_name, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if two_by_two_create_result.returncode == 0:
+            raise AssertionError(f"new_two_by_two_matrix.py accepted unsafe name: {unsafe_name}")
+
+        two_by_two_render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_TWO_BY_TWO_WORK), unsafe_name],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if two_by_two_render_result.returncode == 0:
+            raise AssertionError(f"render_two_by_two_matrix_work.py accepted unsafe name: {unsafe_name}")
 
 
 def parse_path_numbers(path_data: str) -> list[float]:

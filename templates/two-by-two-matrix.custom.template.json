@@ -1,0 +1,25 @@
+{
+  "diagram_type": "two_by_two_matrix",
+  "preset": "custom",
+  "title": "Custom Two-by-Two Matrix",
+  "language": "auto",
+  "theme": "business_simple",
+  "x_axis": "X Dimension",
+  "y_axis": "Y Dimension",
+  "score_scale": {"min": 1, "max": 5},
+  "_template_guidance": {
+    "item_limit": "Use 4-20 items. Maximum supported item count is 20.",
+    "score_range": "x_score and y_score must be numbers from 1 to 5. 1 means Low, 5 means High; scores 3-5 are placed on the High side.",
+    "axis_mapping": "For custom, edit x_axis and y_axis to define what X and Y mean.",
+    "visible_notes": "Use top-level notes only when you want a visible Notes area. Do not add item-level notes."
+  },
+  "items": [
+    {"id": "I1", "name": "Item one", "x_score": 2, "y_score": 5},
+    {"id": "I2", "name": "Item two", "x_score": 5, "y_score": 5},
+    {"id": "I3", "name": "Item three", "x_score": 2, "y_score": 2},
+    {"id": "I4", "name": "Item four", "x_score": 5, "y_score": 2}
+  ],
+  "show_side_table": true,
+  "show_legend": true,
+  "output": "svg"
+}

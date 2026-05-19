@@ -1,0 +1,12 @@
+The operations team wants a two-by-two action priority matrix for the next improvement workshop.
+Use impact as the vertical dimension and effort as the horizontal dimension.
+The candidate actions are:
+
+- Automate weekly report formatting. It has high impact because it removes repeated analyst work, and effort is low because the data already exists.
+- Redesign the approval workflow. It has high impact but effort is high because several teams must agree on the new process.
+- Standardize checklist wording. Impact is moderate and effort is low.
+- Build a standalone analytics system. Impact is low in the near term and effort is high.
+- Update training material. Impact is moderate and effort is low to medium.
+- Replace the approval platform. Impact could be high, but effort is very high.
+
+The diagram should be in English only, not bilingual.

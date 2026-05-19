@@ -2,7 +2,7 @@
 
 `brainstorm-diagrams` is a Codex skill for generating clean, PPT-ready structured brainstorming diagrams.
 
-Version `0.3.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, and sequential exclusion-tree troubleshooting diagrams.
+Version `0.4.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, sequential exclusion-tree troubleshooting diagrams, and two-by-two prioritization matrices.
 
 ## What This Is
 
@@ -10,7 +10,7 @@ Version `0.3.0` implements deterministic SVG renderers for business-simple fishb
 
 From Codex's perspective, it is a skill: `SKILL.md` and the reference files define when to use it, how inputs should be interpreted, what visual rules to follow, and how output should be verified.
 
-From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, and exclusion-tree SVG files without writing Python code.
+From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, exclusion-tree, and two-by-two matrix SVG files without writing Python code.
 
 In short:
 
@@ -24,12 +24,13 @@ tools = the local scripts and double-click launchers that perform the work
 - `diagram_type="fishbone"`
 - `diagram_type="fault_tree"`
 - `diagram_type="exclusion_tree"`
+- `diagram_type="two_by_two_matrix"`
 - JSON input
 - Structured Markdown input
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
 - Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
 - Sequential exclusion-tree target problems, one main checkpoint path, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
-- Codex-assisted natural-language fishbone, fault-tree, and exclusion-tree drafting into editable Markdown
+- Codex-assisted natural-language fishbone, fault-tree, exclusion-tree, and two-by-two matrix drafting into editable Markdown
 - SVG output
 - PNG export from generated work SVG files
 - Automatic canvas expansion for dense fishbone and nested fault-tree content while keeping fonts, cards, and line widths fixed
@@ -81,6 +82,18 @@ English fallback:
 exclusion_tree_tool.cmd
 ```
 
+Two-by-two matrix has its own non-technical launcher:
+
+```text
+二乘二矩阵工具.cmd
+```
+
+English fallback:
+
+```text
+two_by_two_matrix_tool.cmd
+```
+
 For a browser-based editor, use the unified local builder:
 
 ```text
@@ -93,7 +106,7 @@ English fallback:
 diagram_builder.cmd
 ```
 
-The fishbone, fault-tree, and exclusion-tree menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON through a local HTML form, saves into `work/fishbone/`, `work/fault-tree/`, or `work/exclusion-tree/`, and reuses the same SVG/PNG renderers.
+The fishbone, fault-tree, exclusion-tree, and two-by-two matrix menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON through a local HTML form, saves into `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, or `work/two-by-two-matrix/`, and reuses the same SVG/PNG renderers.
 
 Menu options:
 
@@ -131,15 +144,19 @@ Fault tree usage is the same pattern: double-click `故障树工具.cmd`, create
 
 Sequential exclusion-tree usage is also the same pattern: double-click `排除树工具.cmd`, create a named diagram, edit the generated file in `work/exclusion-tree/`, then regenerate the SVG from the same menu.
 
+Two-by-two matrix usage is the same pattern: double-click `二乘二矩阵工具.cmd`, create a named matrix, edit the generated file in `work/two-by-two-matrix/`, then regenerate the SVG or export PNG from the same menu.
+
 Browser-builder usage is similar: double-click `图表编辑器.cmd`, choose a diagram type, edit the form, save JSON, render SVG, and export PNG from the browser page.
 
-Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, or `work/exclusion-tree/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
+Two-by-two matrix usage is also available through the browser builder and command-line scripts: create with `scripts/new_two_by_two_matrix.py <name> --format md --preset action_priority`, edit in `work/two-by-two-matrix/`, then regenerate with `scripts/render_two_by_two_matrix_work.py`. Supported presets are `action_priority`, `risk_benefit`, `evidence_impact`, `value_feasibility`, `urgency_importance`, and `custom`. Use 4-20 items with X/Y scores from 1 to 5; the Decision Table shows every item.
+
+Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, or `work/two-by-two-matrix/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, `priority-matrix`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
 ## Natural-Language Drafting
 
 Codex can turn raw customer feedback, workshop notes, failure notes, or troubleshooting notes into a structured Markdown draft before rendering. This is a skill workflow, not a local `.cmd` menu feature: Codex performs the semantic extraction, then the existing local tools render the resulting Markdown.
 
-Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, and sequential exclusion tree for one-path troubleshooting or cause-elimination checks.
+Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, sequential exclusion tree for one-path troubleshooting or cause-elimination checks, and two-by-two matrix for option comparison or prioritization across two scoring dimensions.
 
 Example prompt:
 
@@ -159,7 +176,7 @@ Expected output:
 Natural-language drafts should use structures found in the source text, not default categories, generic fault branches, or generic troubleshooting steps. See `references/natural_language_extraction.md`.
 For a reusable Codex prompt shape, see `references/natural_language_prompt_template.md`.
 Use `references/natural_language_review_checklist.md` to review whether the generated draft stayed faithful to the source text.
-See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, and `naturalcases/exclusion-tree/` for source text and expected Markdown examples.
+See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, `naturalcases/exclusion-tree/`, and `naturalcases/two-by-two-matrix/` for source text and expected Markdown examples.
 
 ## Badge Library
 
@@ -205,6 +222,7 @@ Export an existing work SVG to PNG:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_png.py my-analysis
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fault_tree_png.py startup-failure
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_two_by_two_matrix_png.py priority-matrix
 ```
 
 SVG remains the primary editable output. PNG is a convenience format for quick sharing.
@@ -402,6 +420,7 @@ Use `references/visual_review_checklist.md` when inspecting the generated stress
 - `naturalcases/fishbone/optical-module-stability.source.txt` -> `naturalcases/fishbone/optical-module-stability.expected.md`
 - `naturalcases/fault-tree/startup-intermittent-failure.source.txt` -> `naturalcases/fault-tree/startup-intermittent-failure.expected.md`
 - `naturalcases/exclusion-tree/field-link-dropout.source.txt` -> `naturalcases/exclusion-tree/field-link-dropout.expected.md`
+- `naturalcases/two-by-two-matrix/priority-options.source.txt` -> `naturalcases/two-by-two-matrix/priority-options.expected.md`
 
 The optical-module case covers an English product design / manufacturing / application scenario and protects confirmed Lucide badge mappings for technical categories.
 

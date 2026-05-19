@@ -1,0 +1,12 @@
+{
+  "diagram_type": "two_by_two_matrix",
+  "preset": "urgency_importance",
+  "title": "Urgency-Importance Matrix",
+  "language": "en",
+  "items": [
+    {"id": "T1", "name": "Prepare customer review", "x_score": 5, "y_score": 5, "owner": "Team lead"},
+    {"id": "T2", "name": "Update template library", "x_score": 2, "y_score": 3, "owner": "Ops"},
+    {"id": "T3", "name": "Answer routine request", "x_score": 4, "y_score": 2, "owner": "Support"},
+    {"id": "T4", "name": "Clean obsolete notes", "x_score": 1, "y_score": 1, "owner": "Ops"}
+  ]
+}

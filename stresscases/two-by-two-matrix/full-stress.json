@@ -1,0 +1,31 @@
+{
+  "diagram_type": "two_by_two_matrix",
+  "preset": "evidence_impact",
+  "title": "Dense Cause Screening Matrix",
+  "subtitle": "Stresscase with many possible causes and long labels",
+  "language": "en",
+  "items": [
+    {"id": "C1", "name": "Laser driver current drift after high-temperature aging", "x_score": 5, "y_score": 5},
+    {"id": "C2", "name": "Monitor photodiode calibration offset", "x_score": 4, "y_score": 5},
+    {"id": "C3", "name": "Thermal interface contact degradation", "x_score": 3, "y_score": 5},
+    {"id": "C4", "name": "Package mechanical alignment shift", "x_score": 4, "y_score": 4},
+    {"id": "C5", "name": "Lens adhesive creep under load", "x_score": 3, "y_score": 4},
+    {"id": "C6", "name": "Firmware compensation limit reached", "x_score": 2, "y_score": 5},
+    {"id": "C7", "name": "Fiber routing force after assembly", "x_score": 2, "y_score": 4},
+    {"id": "C8", "name": "Insufficient chamber airflow margin", "x_score": 2, "y_score": 3},
+    {"id": "C9", "name": "Optical surface contamination", "x_score": 5, "y_score": 2},
+    {"id": "C10", "name": "Connector handling variation", "x_score": 4, "y_score": 2},
+    {"id": "C11", "name": "Inspection record gap", "x_score": 1, "y_score": 2},
+    {"id": "C12", "name": "Operator training update needed", "x_score": 2, "y_score": 2},
+    {"id": "C13", "name": "Supplier lot label mismatch", "x_score": 1, "y_score": 1},
+    {"id": "C14", "name": "Ambient lab temperature variation", "x_score": 2, "y_score": 1},
+    {"id": "C15", "name": "Old fixture screw torque variation", "x_score": 3, "y_score": 2},
+    {"id": "C16", "name": "Rare coating discoloration", "x_score": 4, "y_score": 1},
+    {"id": "C17", "name": "Unverified material storage condition", "x_score": 1, "y_score": 4},
+    {"id": "C18", "name": "Unconfirmed cleaning chemistry residue", "x_score": 2, "y_score": 5},
+    {"id": "C19", "name": "Weak lot-level traceability signal", "x_score": 3, "y_score": 1},
+    {"id": "C20", "name": "Early supplier process drift indicator", "x_score": 5, "y_score": 4}
+  ],
+  "show_side_table": true,
+  "show_legend": true
+}

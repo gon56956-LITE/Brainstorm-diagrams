@@ -1,0 +1,481 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+  <marker id="arrowNavy" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0B3A75"/>
+  </marker>
+</defs>
+<rect width="1920" height="1080" fill="#FFFFFF"/>
+<text x="70" y="74" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="800" fill="#0B2E63">Dense Cause Screening Matrix</text>
+<g id="two-by-two-matrix">
+<line x1="154" y1="806" x2="1076" y2="806" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
+<line x1="154" y1="806" x2="154" y2="150" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
+<text x="610.0" y="864" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Evidence</text>
+<text transform="rotate(-90 78 477.0)" x="78" y="477.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Impact</text>
+<text x="154" y="840" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
+<text x="1026" y="840" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">High</text>
+<text x="112" y="802" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
+<text x="112" y="194" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">High</text>
+<g class="matrix-quadrant matrix-top_left" data-quadrant="top_left">
+<rect x="174.0" y="174.0" width="427.0" height="294.0" rx="14" fill="#EAF7F0" stroke="#B9DCC7" stroke-width="1.6"/>
+<circle cx="228.0" cy="228.0" r="28" fill="#2E8B57"/>
+<g class="lucide-icon lucide-circle-help" transform="translate(214.0 214.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" />
+</g>
+<text x="268.0" y="223.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Critical Hypotheses</text>
+<text x="268.0" y="254.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">High Impact / Weak Evidence</text>
+<circle class="matrix-item-marker" cx="228.0" cy="294.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="299.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C6</text>
+<text class="matrix-item-label" x="253.0" y="300.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Firmware compensation limit reached</text>
+<circle class="matrix-item-marker" cx="228.0" cy="332.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="337.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C7</text>
+<text class="matrix-item-label" x="253.0" y="338.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Fiber routing force after assembly</text>
+<circle class="matrix-item-marker" cx="228.0" cy="370.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="375.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C8</text>
+<text class="matrix-item-label" x="253.0" y="376.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Insufficient chamber airflow margin</text>
+<circle class="matrix-item-marker" cx="228.0" cy="408.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="413.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C17</text>
+<text class="matrix-item-label" x="253.0" y="414.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Unverified material storage condition</text>
+<circle class="matrix-item-marker" cx="228.0" cy="446.0" r="13" fill="#2E8B57"/>
+<text x="228.0" y="451.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C18</text>
+<text class="matrix-item-label" x="253.0" y="452.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Unconfirmed cleaning chemistry residue</text>
+</g>
+<g class="matrix-quadrant matrix-top_right" data-quadrant="top_right">
+<rect x="619.0" y="174.0" width="427.0" height="294.0" rx="14" fill="#EAF3FF" stroke="#BCD5F6" stroke-width="1.6"/>
+<circle cx="673.0" cy="228.0" r="28" fill="#2F6CCF"/>
+<g class="lucide-icon lucide-target" transform="translate(659.0 214.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" />
+</g>
+<text x="713.0" y="223.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Priority Causes</text>
+<text x="713.0" y="254.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">High Impact / Strong Evidence</text>
+<circle class="matrix-item-marker" cx="673.0" cy="294.0" r="13" fill="#2F6CCF"/>
+<text x="673.0" y="299.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C1</text>
+<text class="matrix-item-label" x="698.0" y="300.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Laser driver current drift after</text>
+<circle class="matrix-item-marker" cx="673.0" cy="332.0" r="13" fill="#2F6CCF"/>
+<text x="673.0" y="337.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C2</text>
+<text class="matrix-item-label" x="698.0" y="338.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Monitor photodiode calibration offset</text>
+<circle class="matrix-item-marker" cx="673.0" cy="370.0" r="13" fill="#2F6CCF"/>
+<text x="673.0" y="375.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C3</text>
+<text class="matrix-item-label" x="698.0" y="376.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Thermal interface contact degradation</text>
+<circle class="matrix-item-marker" cx="673.0" cy="408.0" r="13" fill="#2F6CCF"/>
+<text x="673.0" y="413.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C4</text>
+<text class="matrix-item-label" x="698.0" y="414.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Package mechanical alignment shift</text>
+<text class="matrix-item-summary" x="667.0" y="454.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#5B677A">More: C5, C20</text>
+</g>
+<g class="matrix-quadrant matrix-bottom_left" data-quadrant="bottom_left">
+<rect x="174.0" y="486.0" width="427.0" height="294.0" rx="14" fill="#FFF6E3" stroke="#F1D7A5" stroke-width="1.6"/>
+<circle cx="228.0" cy="540.0" r="28" fill="#D99A12"/>
+<g class="lucide-icon lucide-circle-pause" transform="translate(214.0 526.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="10" x2="10" y1="15" y2="9" />
+  <line x1="14" x2="14" y1="15" y2="9" />
+</g>
+<text x="268.0" y="535.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Low Priority</text>
+<text x="268.0" y="566.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">Low Impact / Weak Evidence</text>
+<circle class="matrix-item-marker" cx="228.0" cy="606.0" r="13" fill="#D99A12"/>
+<text x="228.0" y="611.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C11</text>
+<text class="matrix-item-label" x="253.0" y="612.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Inspection record gap</text>
+<circle class="matrix-item-marker" cx="228.0" cy="644.0" r="13" fill="#D99A12"/>
+<text x="228.0" y="649.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C12</text>
+<text class="matrix-item-label" x="253.0" y="650.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Operator training update needed</text>
+<circle class="matrix-item-marker" cx="228.0" cy="682.0" r="13" fill="#D99A12"/>
+<text x="228.0" y="687.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C13</text>
+<text class="matrix-item-label" x="253.0" y="688.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Supplier lot label mismatch</text>
+<circle class="matrix-item-marker" cx="228.0" cy="720.0" r="13" fill="#D99A12"/>
+<text x="228.0" y="725.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C14</text>
+<text class="matrix-item-label" x="253.0" y="726.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Ambient lab temperature variation</text>
+</g>
+<g class="matrix-quadrant matrix-bottom_right" data-quadrant="bottom_right">
+<rect x="619.0" y="486.0" width="427.0" height="294.0" rx="14" fill="#FFF0F0" stroke="#F0B8B8" stroke-width="1.6"/>
+<circle cx="673.0" cy="540.0" r="28" fill="#C94040"/>
+<g class="lucide-icon lucide-circle-alert" transform="translate(659.0 526.0) scale(1.167)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="12" x2="12" y1="8" y2="12" />
+  <line x1="12" x2="12.01" y1="16" y2="16" />
+</g>
+<text x="713.0" y="535.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Known Minor Causes</text>
+<text x="713.0" y="566.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">Low Impact / Strong Evidence</text>
+<circle class="matrix-item-marker" cx="673.0" cy="606.0" r="13" fill="#C94040"/>
+<text x="673.0" y="611.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C9</text>
+<text class="matrix-item-label" x="698.0" y="612.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Optical surface contamination</text>
+<circle class="matrix-item-marker" cx="673.0" cy="644.0" r="13" fill="#C94040"/>
+<text x="673.0" y="649.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C10</text>
+<text class="matrix-item-label" x="698.0" y="650.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Connector handling variation</text>
+<circle class="matrix-item-marker" cx="673.0" cy="682.0" r="13" fill="#C94040"/>
+<text x="673.0" y="687.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C15</text>
+<text class="matrix-item-label" x="698.0" y="688.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Old fixture screw torque variation</text>
+<circle class="matrix-item-marker" cx="673.0" cy="720.0" r="13" fill="#C94040"/>
+<text x="673.0" y="725.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C16</text>
+<text class="matrix-item-label" x="698.0" y="726.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Rare coating discoloration</text>
+<circle class="matrix-item-marker" cx="673.0" cy="758.0" r="13" fill="#C94040"/>
+<text x="673.0" y="763.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">C19</text>
+<text class="matrix-item-label" x="698.0" y="764.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Weak lot-level traceability signal</text>
+</g>
+</g>
+<g id="matrix-side-table">
+<text x="1086" y="140" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="800" fill="#0B2E63">Decision Table</text>
+<rect x="1086" y="158" width="770" height="840.0" rx="10" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.3"/>
+<rect x="1086" y="158" width="770" height="58" rx="10" fill="#0B2E63"/>
+<rect x="1086" y="187" width="770" height="29" fill="#0B2E63"/>
+<text x="1112.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">ID</text>
+<text x="1268.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Possible Cause</text>
+<line x1="1138.0" y1="158" x2="1138.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1433.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Impact</text>
+<line x1="1398.0" y1="158" x2="1398.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1503.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Evidence</text>
+<line x1="1468.0" y1="158" x2="1468.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1607.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Quadrant</text>
+<line x1="1538.0" y1="158" x2="1538.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1766.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Next Action</text>
+<line x1="1676.0" y1="158" x2="1676.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<line x1="1086" y1="216" x2="1856" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<g class="matrix-table-row" data-item-id="C1">
+<line class="matrix-table-body-grid" x1="1138.0" y1="216.0" x2="1138.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="216.0" x2="1398.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="216.0" x2="1468.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="216.0" x2="1538.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="216.0" x2="1676.0" y2="255.1" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C1</text>
+<text x="1268.0" y="232.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Laser driver current drift after</text>
+<text x="1268.0" y="249.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">high-temperature aging</text>
+<text x="1433.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1607.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Priority Causes</text>
+<text x="1766.0" y="240.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Verify first</text>
+</g>
+<g class="matrix-table-row" data-item-id="C2">
+<rect x="1086" y="255.1" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="255.1" x2="1138.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="255.1" x2="1398.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="255.1" x2="1468.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="255.1" x2="1538.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="255.1" x2="1676.0" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C2</text>
+<text x="1268.0" y="271.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Monitor photodiode calibration</text>
+<text x="1268.0" y="288.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">offset</text>
+<text x="1433.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1607.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Priority Causes</text>
+<text x="1766.0" y="279.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Verify first</text>
+</g>
+<g class="matrix-table-row" data-item-id="C3">
+<line class="matrix-table-body-grid" x1="1138.0" y1="294.2" x2="1138.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="294.2" x2="1398.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="294.2" x2="1468.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="294.2" x2="1538.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="294.2" x2="1676.0" y2="333.3" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C3</text>
+<text x="1268.0" y="310.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Thermal interface contact</text>
+<text x="1268.0" y="327.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">degradation</text>
+<text x="1433.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">3</text>
+<text x="1607.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Priority Causes</text>
+<text x="1766.0" y="318.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Verify first</text>
+</g>
+<g class="matrix-table-row" data-item-id="C4">
+<rect x="1086" y="333.3" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="333.3" x2="1138.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="333.3" x2="1398.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="333.3" x2="1468.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="333.3" x2="1538.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="333.3" x2="1676.0" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C4</text>
+<text x="1268.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Package mechanical alignment shift</text>
+<text x="1433.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1503.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1607.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Priority Causes</text>
+<text x="1766.0" y="357.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Verify first</text>
+</g>
+<g class="matrix-table-row" data-item-id="C5">
+<line class="matrix-table-body-grid" x1="1138.0" y1="372.4" x2="1138.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="372.4" x2="1398.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="372.4" x2="1468.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="372.4" x2="1538.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="372.4" x2="1676.0" y2="411.5" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C5</text>
+<text x="1268.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Lens adhesive creep under load</text>
+<text x="1433.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1503.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">3</text>
+<text x="1607.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Priority Causes</text>
+<text x="1766.0" y="396.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Verify first</text>
+</g>
+<g class="matrix-table-row" data-item-id="C6">
+<rect x="1086" y="411.5" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="411.5" x2="1138.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="411.5" x2="1398.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="411.5" x2="1468.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="411.5" x2="1538.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="411.5" x2="1676.0" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C6</text>
+<text x="1268.0" y="427.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Firmware compensation limit</text>
+<text x="1268.0" y="444.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">reached</text>
+<text x="1433.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="427.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Critical</text>
+<text x="1607.0" y="444.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Hypotheses</text>
+<text x="1766.0" y="436.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Get data</text>
+</g>
+<g class="matrix-table-row" data-item-id="C7">
+<line class="matrix-table-body-grid" x1="1138.0" y1="450.6" x2="1138.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="450.6" x2="1398.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="450.6" x2="1468.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="450.6" x2="1538.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="450.6" x2="1676.0" y2="489.7" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C7</text>
+<text x="1268.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Fiber routing force after assembly</text>
+<text x="1433.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1503.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="466.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Critical</text>
+<text x="1607.0" y="483.7" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Hypotheses</text>
+<text x="1766.0" y="475.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Get data</text>
+</g>
+<g class="matrix-table-row" data-item-id="C8">
+<rect x="1086" y="489.7" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="489.7" x2="1138.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="489.7" x2="1398.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="489.7" x2="1468.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="489.7" x2="1538.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="489.7" x2="1676.0" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C8</text>
+<text x="1268.0" y="505.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Insufficient chamber airflow</text>
+<text x="1268.0" y="522.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">margin</text>
+<text x="1433.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">3</text>
+<text x="1503.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="505.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Critical</text>
+<text x="1607.0" y="522.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Hypotheses</text>
+<text x="1766.0" y="514.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Get data</text>
+</g>
+<g class="matrix-table-row" data-item-id="C9">
+<line class="matrix-table-body-grid" x1="1138.0" y1="528.8" x2="1138.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="528.8" x2="1398.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="528.8" x2="1468.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="528.8" x2="1538.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="528.8" x2="1676.0" y2="567.9" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C9</text>
+<text x="1268.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Optical surface contamination</text>
+<text x="1433.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1607.0" y="544.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Known Minor</text>
+<text x="1607.0" y="561.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Causes</text>
+<text x="1766.0" y="553.3" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Monitor</text>
+</g>
+<g class="matrix-table-row" data-item-id="C10">
+<rect x="1086" y="567.9" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="567.9" x2="1138.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="567.9" x2="1398.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="567.9" x2="1468.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="567.9" x2="1538.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="567.9" x2="1676.0" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C10</text>
+<text x="1268.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Connector handling variation</text>
+<text x="1433.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1607.0" y="584.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Known Minor</text>
+<text x="1607.0" y="601.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Causes</text>
+<text x="1766.0" y="592.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Monitor</text>
+</g>
+<g class="matrix-table-row" data-item-id="C11">
+<line class="matrix-table-body-grid" x1="1138.0" y1="607.0" x2="1138.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="607.0" x2="1398.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="607.0" x2="1468.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="607.0" x2="1538.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="607.0" x2="1676.0" y2="646.1" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C11</text>
+<text x="1268.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Inspection record gap</text>
+<text x="1433.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Low Priority</text>
+<text x="1766.0" y="631.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Defer or exclude</text>
+</g>
+<g class="matrix-table-row" data-item-id="C12">
+<rect x="1086" y="646.1" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="646.1" x2="1138.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="646.1" x2="1398.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="646.1" x2="1468.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="646.1" x2="1538.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="646.1" x2="1676.0" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C12</text>
+<text x="1268.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Operator training update needed</text>
+<text x="1433.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Low Priority</text>
+<text x="1766.0" y="670.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Defer or exclude</text>
+</g>
+<g class="matrix-table-row" data-item-id="C13">
+<line class="matrix-table-body-grid" x1="1138.0" y1="685.2" x2="1138.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="685.2" x2="1398.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="685.2" x2="1468.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="685.2" x2="1538.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="685.2" x2="1676.0" y2="724.3" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C13</text>
+<text x="1268.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Supplier lot label mismatch</text>
+<text x="1433.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1503.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Low Priority</text>
+<text x="1766.0" y="709.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Defer or exclude</text>
+</g>
+<g class="matrix-table-row" data-item-id="C14">
+<rect x="1086" y="724.3" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="724.3" x2="1138.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="724.3" x2="1398.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="724.3" x2="1468.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="724.3" x2="1538.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="724.3" x2="1676.0" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C14</text>
+<text x="1268.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Ambient lab temperature variation</text>
+<text x="1433.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1503.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Low Priority</text>
+<text x="1766.0" y="748.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Defer or exclude</text>
+</g>
+<g class="matrix-table-row" data-item-id="C15">
+<line class="matrix-table-body-grid" x1="1138.0" y1="763.4" x2="1138.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="763.4" x2="1398.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="763.4" x2="1468.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="763.4" x2="1538.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="763.4" x2="1676.0" y2="802.5" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C15</text>
+<text x="1268.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Old fixture screw torque variation</text>
+<text x="1433.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">3</text>
+<text x="1607.0" y="779.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Known Minor</text>
+<text x="1607.0" y="796.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Causes</text>
+<text x="1766.0" y="787.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Monitor</text>
+</g>
+<g class="matrix-table-row" data-item-id="C16">
+<rect x="1086" y="802.5" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="802.5" x2="1138.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="802.5" x2="1398.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="802.5" x2="1468.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="802.5" x2="1538.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="802.5" x2="1676.0" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C16</text>
+<text x="1268.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Rare coating discoloration</text>
+<text x="1433.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1503.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1607.0" y="818.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Known Minor</text>
+<text x="1607.0" y="835.5" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Causes</text>
+<text x="1766.0" y="827.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Monitor</text>
+</g>
+<g class="matrix-table-row" data-item-id="C17">
+<line class="matrix-table-body-grid" x1="1138.0" y1="841.6" x2="1138.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="841.6" x2="1398.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="841.6" x2="1468.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="841.6" x2="1538.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="841.6" x2="1676.0" y2="880.7" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C17</text>
+<text x="1268.0" y="857.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Unverified material storage</text>
+<text x="1268.0" y="874.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">condition</text>
+<text x="1433.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1503.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="857.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Critical</text>
+<text x="1607.0" y="874.6" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Hypotheses</text>
+<text x="1766.0" y="866.1" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Get data</text>
+</g>
+<g class="matrix-table-row" data-item-id="C18">
+<rect x="1086" y="880.7" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="880.7" x2="1138.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="880.7" x2="1398.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="880.7" x2="1468.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="880.7" x2="1538.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="880.7" x2="1676.0" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C18</text>
+<text x="1268.0" y="896.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Unconfirmed cleaning chemistry</text>
+<text x="1268.0" y="913.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">residue</text>
+<text x="1433.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="896.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Critical</text>
+<text x="1607.0" y="913.8" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Hypotheses</text>
+<text x="1766.0" y="905.2" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Get data</text>
+</g>
+<g class="matrix-table-row" data-item-id="C19">
+<line class="matrix-table-body-grid" x1="1138.0" y1="919.8" x2="1138.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="919.8" x2="1398.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="919.8" x2="1468.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="919.8" x2="1538.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="919.8" x2="1676.0" y2="958.9" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C19</text>
+<text x="1268.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Weak lot-level traceability signal</text>
+<text x="1433.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1503.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">3</text>
+<text x="1607.0" y="935.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Known Minor</text>
+<text x="1607.0" y="952.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Causes</text>
+<text x="1766.0" y="944.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Monitor</text>
+</g>
+<g class="matrix-table-row" data-item-id="C20">
+<rect x="1086" y="958.9" width="770" height="39.1" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="958.9" x2="1138.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="958.9" x2="1398.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="958.9" x2="1468.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="958.9" x2="1538.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="958.9" x2="1676.0" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">C20</text>
+<text x="1268.0" y="974.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Early supplier process drift</text>
+<text x="1268.0" y="991.9" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">indicator</text>
+<text x="1433.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1503.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1607.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Priority Causes</text>
+<text x="1766.0" y="983.4" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Verify first</text>
+</g>
+<line class="matrix-table-row-separator" x1="1086" y1="255.1" x2="1856" y2="255.1" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="294.2" x2="1856" y2="294.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="333.3" x2="1856" y2="333.3" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="372.4" x2="1856" y2="372.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="411.5" x2="1856" y2="411.5" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="450.6" x2="1856" y2="450.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="489.7" x2="1856" y2="489.7" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="528.8" x2="1856" y2="528.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="567.9" x2="1856" y2="567.9" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="607.0" x2="1856" y2="607.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="646.1" x2="1856" y2="646.1" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="685.2" x2="1856" y2="685.2" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="724.3" x2="1856" y2="724.3" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="763.4" x2="1856" y2="763.4" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="802.5" x2="1856" y2="802.5" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="841.6" x2="1856" y2="841.6" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="880.7" x2="1856" y2="880.7" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="919.8" x2="1856" y2="919.8" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="958.9" x2="1856" y2="958.9" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-row-separator" x1="1086" y1="998.0" x2="1856" y2="998.0" stroke="#C5D3E4" stroke-width="1"/>
+<rect x="1086" y="158" width="770" height="840.0" rx="10" fill="none" stroke="#9AA9BD" stroke-width="1.3"/>
+</g>
+<g id="matrix-legend">
+<rect x="84" y="910" width="960" height="88" rx="12" fill="#F7FAFD" stroke="#9AA9BD" stroke-width="1.3"/>
+<text x="108" y="946" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="800" fill="#0B2E63">Priority Guide</text>
+<circle cx="524" cy="937" r="11" fill="#2E8B57"/>
+<g class="lucide-icon lucide-circle-help" transform="translate(518.0 931.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" />
+</g>
+<text x="544" y="933" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Critical Hypotheses</text>
+<text x="544" y="951" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Get data</text>
+<circle cx="774" cy="937" r="11" fill="#2F6CCF"/>
+<g class="lucide-icon lucide-target" transform="translate(768.0 931.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" />
+</g>
+<text x="794" y="933" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Priority Causes</text>
+<text x="794" y="951" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Verify first</text>
+<circle cx="524" cy="972" r="11" fill="#D99A12"/>
+<g class="lucide-icon lucide-circle-pause" transform="translate(518.0 966.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="10" x2="10" y1="15" y2="9" />
+  <line x1="14" x2="14" y1="15" y2="9" />
+</g>
+<text x="544" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Low Priority</text>
+<text x="544" y="986" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Defer or exclude</text>
+<circle cx="774" cy="972" r="11" fill="#C94040"/>
+<g class="lucide-icon lucide-circle-alert" transform="translate(768.0 966.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="12" x2="12" y1="8" y2="12" />
+  <line x1="12" x2="12.01" y1="16" y2="16" />
+</g>
+<text x="794" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Known Minor Causes</text>
+<text x="794" y="986" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Monitor</text>
+</g>
+</svg>

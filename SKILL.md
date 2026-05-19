@@ -1,13 +1,13 @@
 ---
 name: brainstorm-diagrams
-description: Generate clean, PPT-ready structured brainstorming and analysis diagrams for product design, process design, failure analysis, root-cause analysis, cause-and-effect mapping, solution exploration, fishbone / Ishikawa diagrams, fault tree analysis, and exclusion tree troubleshooting. Supports business-simple fishbone, fault_tree, and exclusion_tree SVG diagrams from JSON or structured Markdown.
+description: Generate clean, PPT-ready structured brainstorming and analysis diagrams for product design, process design, failure analysis, root-cause analysis, cause-and-effect mapping, solution exploration, fishbone / Ishikawa diagrams, fault tree analysis, exclusion tree troubleshooting, and two-by-two prioritization matrices. Supports business-simple fishbone, fault_tree, exclusion_tree, and two_by_two_matrix SVG diagrams from JSON or structured Markdown.
 ---
 
 # Brainstorm Diagrams
 
 Use this skill to create structured thinking diagrams for brainstorming, root-cause analysis, product design, process design, and solution exploration.
 
-Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, and `diagram_type="exclusion_tree"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, and exclusion tree. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
+Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, and `diagram_type="two_by_two_matrix"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, and two-by-two matrix. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
 
 ```text
 鱼骨图工具.cmd
@@ -43,6 +43,18 @@ English fallback:
 exclusion_tree_tool.cmd
 ```
 
+For non-technical two-by-two matrix users, use the dedicated launcher:
+
+```text
+二乘二矩阵工具.cmd
+```
+
+English fallback:
+
+```text
+two_by_two_matrix_tool.cmd
+```
+
 For a browser-based local editor that supports all diagram types, use:
 
 ```text
@@ -61,10 +73,11 @@ Command-line usage is also available:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fishbone.py my-analysis --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_exclusion_tree.py startup-checks --format md
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_two_by_two_matrix.py priority-matrix --format md --preset action_priority
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\diagram_builder_server.py
 ```
 
-This creates a user-owned input and initial SVG under `work/fishbone/`, `work/fault-tree/`, or `work/exclusion-tree/`. To render an existing input directly, use `scripts/generate_diagram.py`.
+This creates a user-owned input and initial SVG under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, or `work/two-by-two-matrix/`. To render an existing input directly, use `scripts/generate_diagram.py`.
 Work names must be safe file stems: lowercase letters, numbers, hyphen, and underscore only, such as `my-analysis` or `customer_complaints_v1`.
 
 ## Supported Diagram Types
@@ -72,6 +85,7 @@ Work names must be safe file stems: lowercase letters, numbers, hyphen, and unde
 - `fishbone`: divergent cause brainstorming and category-based problem decomposition.
 - `fault_tree`: logical failure decomposition with a top event, event detail panel, AND/OR gates, intermediate events, and basic event leaves.
 - `exclusion_tree`: sequential exclusion tree troubleshooting and root-cause elimination with one main checkpoint path, Yes/Pass continuation, No/Fail conclusion cards, and a final no-issue-found outcome.
+- `two_by_two_matrix`: two-axis option comparison and prioritization using quadrant item summaries and a complete side decision table; supports 4-20 scored items with 1-5 X/Y scores, and default language is auto-detected, not bilingual.
 
 After editing a `work/fishbone/` input, regenerate it with:
 
@@ -91,12 +105,19 @@ After editing a `work/exclusion-tree/` input, regenerate it with:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_exclusion_tree_work.py startup-checks
 ```
 
+After editing a `work/two-by-two-matrix/` input, regenerate it with:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_two_by_two_matrix_work.py priority-matrix
+```
+
 Export a generated work SVG to PNG with:
 
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_png.py my-analysis
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fault_tree_png.py startup-failure
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_two_by_two_matrix_png.py priority-matrix
 ```
 
 PNG export is intended for SVGs generated by this tool, not arbitrary third-party SVG files.
@@ -137,10 +158,11 @@ To protect natural-language extraction examples:
 
 Prefer JSON for automation and structured Markdown for user-authored briefs.
 
-- JSON: use `diagram_type` to select `fishbone`, `fault_tree`, or `exclusion_tree`; fishbone follows `references/input_contract.md`, fault tree follows `brainstorm_diagrams_fault_tree_spec.md`, and exclusion tree follows `brainstorm_diagrams_exclusion_tree_spec.md`.
+- JSON: use `diagram_type` to select `fishbone`, `fault_tree`, `exclusion_tree`, or `two_by_two_matrix`; fishbone follows `references/input_contract.md`, fault tree follows `brainstorm_diagrams_fault_tree_spec.md`, exclusion tree follows `brainstorm_diagrams_exclusion_tree_spec.md`, and two-by-two matrix follows `brainstorm_diagrams_two_by_two_matrix_spec.md`.
 - Markdown fishbone: use `#` for the topic, `##` for categories, and bullet lists for cause items.
 - Markdown fault tree: include `diagram_type: fault_tree` front matter, use `#` for the top event, optional `Event Detail:` bullets for the left-side detail panel, `Gate: OR` or `Gate: AND` for logic gates, `##` for intermediate events, and bullets for basic event leaves.
 - Markdown exclusion tree: include `diagram_type: exclusion_tree` front matter, use `#` for the target problem, `##` for checkpoints, and recognized key-value lines such as `Icon:`, `Pass:`, `Fail:`, `Fail Conclusion:`, `Fail Detail:`, and `Final Pass Conclusion:`.
+- Markdown two-by-two matrix: include `diagram_type: two_by_two_matrix` front matter, a `preset`, optional `language`, a `#` title, and an items table with `Item`, `X`, and `Y` columns. Use 4-20 items; X/Y scores must be 1-5. Use top-level `notes:` only when the user wants a visible notes area; do not add item-level notes or a subtitle unless explicitly requested.
 - Markdown subcategories: a primary bullet with indented bullets becomes a subcategory with child causes.
 - Starting templates live in `templates/`; copy them before authoring a new diagram.
 - Browser editor: `scripts/diagram_builder_server.py` edits the existing JSON contracts through a local HTML UI and saves into the appropriate `work/<diagram-type>/` folder; it is not a new input schema.
@@ -151,10 +173,10 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 
 1. For structured Markdown/JSON, normalize the user input into the selected diagram data model.
 2. For natural-language source text, first choose the diagram type, then extract the appropriate structured Markdown using `references/natural_language_extraction.md`; use `references/natural_language_prompt_template.md` as the execution template when drafting from raw text.
-3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md`, `scripts/new_fault_tree.py <name> --format md`, or `scripts/new_exclusion_tree.py <name> --format md`; use `--format json` when needed.
-4. For a Codex-assisted natural-language fishbone, fault-tree, or exclusion-tree draft, write the extracted Markdown to `work/<diagram-type>/<name>.md`; use safe file stems only.
-5. Render a fishbone work input with `scripts/render_work.py <name>`, a fault-tree work input with `scripts/render_fault_tree_work.py <name>`, or an exclusion-tree work input with `scripts/render_exclusion_tree_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
-6. Optionally run `scripts/export_png.py <name>` for fishbone, `scripts/export_fault_tree_png.py <name>` for fault tree, or `scripts/export_exclusion_tree_png.py <name>` for exclusion tree when the user needs a PNG for quick sharing.
+3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md`, `scripts/new_fault_tree.py <name> --format md`, `scripts/new_exclusion_tree.py <name> --format md`, or `scripts/new_two_by_two_matrix.py <name> --format md --preset action_priority`; use `--format json` when needed.
+4. For a Codex-assisted natural-language draft, write the extracted Markdown to `work/<diagram-type>/<name>.md`; use safe file stems only.
+5. Render a fishbone work input with `scripts/render_work.py <name>`, a fault-tree work input with `scripts/render_fault_tree_work.py <name>`, an exclusion-tree work input with `scripts/render_exclusion_tree_work.py <name>`, or a two-by-two work input with `scripts/render_two_by_two_matrix_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
+6. Optionally run the matching PNG export script when the user needs a PNG for quick sharing.
 7. For non-technical editing, run `diagram_builder.cmd` or `scripts/diagram_builder_server.py`; the browser UI should save JSON, render SVG, and export PNG using the same work folders and renderers.
 8. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
 9. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
