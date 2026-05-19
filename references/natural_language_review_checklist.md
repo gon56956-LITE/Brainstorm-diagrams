@@ -55,7 +55,7 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - Each item has a clear name and source-traceable `X` and `Y` scores from 1-5.
 - The horizontal and vertical dimensions are not swapped.
 - There is no `Subtitle:` or item-level `Notes` column unless explicitly requested.
-- Top-level `notes:` is used only for a short visible note supported by the source.
+- Top-level `notes:` is used only for a short visible note supported by the source, roughly 70 English characters or 30 Chinese characters.
 - The draft does not imply exact quantitative precision when the source only supports ordinal ranking.
 
 ## File Outputs

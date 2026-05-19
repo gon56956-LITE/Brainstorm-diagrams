@@ -154,6 +154,7 @@ def main() -> int:
     for _, output_name in TWO_BY_TWO_TESTCASE_PAIRS:
         verify_two_by_two_svg_basics(TWO_BY_TWO_TESTCASES / output_name)
     verify_two_by_two_item_limit()
+    verify_two_by_two_notes_length_guard()
 
     verify_canvas_dimensions()
     verify_subcategory_braces(TESTCASES / "fishbone.subcategory.output.md.svg")
@@ -231,6 +232,48 @@ def verify_two_by_two_item_limit() -> None:
             raise AssertionError("two-by-two renderer accepted more than 20 items")
         if "supports up to 20 items" not in result.stderr:
             raise AssertionError(f"two-by-two item limit error should be clear, got:\n{result.stderr}")
+    finally:
+        input_path.unlink(missing_ok=True)
+        output_path.unlink(missing_ok=True)
+
+
+def verify_two_by_two_notes_length_guard() -> None:
+    stem = f"verify-two-by-two-notes-{os.getpid()}"
+    input_path = TWO_BY_TWO_WORK / f"{stem}.json"
+    output_path = TWO_BY_TWO_WORK / f"{stem}.svg"
+    try:
+        TWO_BY_TWO_WORK.mkdir(parents=True, exist_ok=True)
+        data = {
+            "diagram_type": "two_by_two_matrix",
+            "preset": "action_priority",
+            "title": "Notes Length Guard",
+            "language": "zh",
+            "notes": "优先执行高影响低工作量行动；为重大行动指定负责人、时间节点和验证标准；低优先事项资源允许时处理；高工作量低影响事项暂缓。",
+            "items": [
+                {"id": "A1", "name": "收集现场日志", "x_score": 1, "y_score": 5},
+                {"id": "A2", "name": "分析固件状态", "x_score": 4, "y_score": 5},
+                {"id": "A3", "name": "整理会议模板", "x_score": 1, "y_score": 1},
+                {"id": "A4", "name": "重建历史数据库", "x_score": 5, "y_score": 1},
+            ],
+        }
+        input_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        result = subprocess.run(
+            [str(PYTHON), str(GENERATE), str(input_path), str(output_path)],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise AssertionError(f"two-by-two long notes testcase failed:\n{result.stderr}")
+        if "Notes exceeded the visible two-line area" not in result.stdout:
+            raise AssertionError("two-by-two long notes should emit a shortening diagnostic")
+        texts = [element.text or "" for element in ET.parse(output_path).getroot().iter() if element.tag.endswith("text")]
+        note_lines = [text for text in texts if "优先执行" in text or text.endswith("...")]
+        if not note_lines or not any(text.endswith("...") for text in note_lines):
+            raise AssertionError("two-by-two long notes should render a visible shortened note ending with ...")
+        if any(visual_len(text) > 48 for text in note_lines):
+            raise AssertionError(f"two-by-two note lines should fit the visible note area: {note_lines}")
     finally:
         input_path.unlink(missing_ok=True)
         output_path.unlink(missing_ok=True)

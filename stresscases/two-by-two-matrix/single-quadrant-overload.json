@@ -3,7 +3,7 @@
   "preset": "action_priority",
   "title": "Single Quadrant Overload Matrix",
   "language": "en",
-  "notes": "Stresscase verifies that a dense quadrant summarizes IDs while the decision table lists every item.",
+  "notes": "Dense quadrant uses ID summary; table keeps every item.",
   "items": [
     {"id": "A1", "name": "Automate weekly report", "x_score": 1, "y_score": 5},
     {"id": "A2", "name": "Standardize release checklist", "x_score": 1, "y_score": 5},

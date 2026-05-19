@@ -1,0 +1,13 @@
+The evidence-impact diagram is created for the event: "a batch of optical modules shows unexpected power drift during long-duration reliability testing." The purpose is to prioritize investigation clues by comparing evidence strength against potential impact on the failure mechanism and corrective action.
+
+The horizontal axis represents evidence strength, moving from weak evidence on the left to strong evidence on the right. The vertical axis represents failure impact, moving from low impact at the bottom to high impact at the top.
+
+High-impact and strong-evidence findings include a clear correlation between failed units and one adhesive batch, repeated power drift observed only on units cured in a specific oven, before-and-after optical coupling data showing measurable alignment loss, and thermal resistance measurements showing higher values on failed units than on passing units.
+
+High-impact and weak-evidence hypotheses include possible adhesive creep during high-temperature exposure, possible package stress caused by coefficient-of-thermal-expansion mismatch, possible slow contamination growth on optical surfaces, and possible firmware compensation behavior under long-duration thermal stress.
+
+Low-impact and strong-evidence observations include minor cosmetic discoloration on some labels after aging, a small shift in non-critical monitoring parameters, a confirmed difference in operator sequence that does not correlate with failed units, and a small variation in test start time between chambers.
+
+Low-impact and weak-evidence items include unverified comments about packaging appearance, anecdotal reports of minor handling differences, speculation about shipping vibration without supporting logistics records, and broad assumptions about supplier quality without batch-level correlation.
+
+Recommended decision: focus immediate engineering resources on high-impact and strong-evidence findings, design verification tests for high-impact but weak-evidence hypotheses, document low-impact but strong-evidence findings as secondary observations, and deprioritize low-impact and weak-evidence items unless later data changes their position.

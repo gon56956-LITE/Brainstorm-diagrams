@@ -1,0 +1,13 @@
+The urgency-importance diagram is created for the event: "a key customer reports intermittent link failure during the final validation stage before product release." The purpose is to prioritize the team's response actions by comparing time urgency against business and technical importance.
+
+The horizontal axis represents urgency, moving from low urgency on the left to high urgency on the right. The vertical axis represents importance, moving from low importance at the bottom to high importance at the top.
+
+High-importance and high-urgency actions include acknowledging the customer issue within the agreed response window, collecting failure logs and link event timestamps from the customer system, identifying whether the issue blocks the release decision, assigning a cross-functional owner, and starting quick replication tests using the same firmware version, host configuration, temperature condition, and optical link setup.
+
+High-importance and low-urgency actions include performing a deeper firmware state-machine review, improving long-term link recovery robustness, updating the product validation coverage for intermittent failures, strengthening design guidelines for host compatibility, and preparing a formal lessons-learned document for future programs.
+
+Low-importance and high-urgency actions include preparing a daily slide update for every stakeholder, reformatting historical test data for presentation, responding to non-critical internal status requests, and updating the project dashboard before new technical evidence is available.
+
+Low-importance and low-urgency actions include reorganizing archived project folders, redesigning the internal report template, refreshing training material unrelated to link stability, and analyzing unrelated cosmetic feedback from early samples.
+
+Recommended priority: execute high-importance and high-urgency actions first, schedule high-importance and low-urgency actions into a controlled improvement plan, delegate or limit low-importance and high-urgency actions, and defer low-importance and low-urgency actions until the release-critical issue is resolved.

@@ -67,6 +67,7 @@ Two-by-two matrix rules:
 - Include 4-20 scored items. If the source has more than 20 options, ask the user to split the matrix or summarize before rendering.
 - Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
 - Do not add an item-level `Notes` column. Use top-level `notes:` only when the user asks for a visible note or the source includes a short note that should appear on the diagram.
+- Keep top-level `notes:` short enough for a two-line guide card: roughly 70 English characters or 30 Chinese characters. Use a decision-summary phrase, not a full recommendation paragraph.
 - Do not turn the matrix into a precise scatter plot; items are grouped into quadrant lists.
 
 Execution:

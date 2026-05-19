@@ -1,0 +1,13 @@
+The risk-benefit diagram is created for the event: "the engineering team is considering whether to introduce a new automated optical alignment process for the next-generation optical module." The purpose is to compare expected benefits against potential risks before making a process development and investment decision.
+
+The horizontal axis represents risk level, moving from low risk on the left to high risk on the right. The vertical axis represents benefit level, moving from low benefit at the bottom to high benefit at the top.
+
+High-benefit and low-risk items include using the automated alignment system first on engineering prototype builds, applying the process only to product variants with stable mechanical design, collecting baseline alignment repeatability data, and using the new system in parallel with the existing manual process during the initial trial phase.
+
+High-benefit and high-risk items include fully replacing the manual alignment process before completing process qualification, using the automated system for high-volume production without enough operator training, relying on a single equipment supplier, and modifying the optical package design to maximize automation compatibility.
+
+Low-benefit and low-risk items include adding extra trend charts to the alignment report, creating a separate training slide deck for each product variant, and using the automated system only for non-critical data collection during early experiments.
+
+Low-benefit and high-risk items include transferring all active production lines to the new alignment process in one step, disabling the existing manual backup process, skipping correlation studies between manual and automated alignment results, and purchasing multiple systems before the first tool has demonstrated stable performance.
+
+Recommended decision: proceed with controlled pilot implementation, prioritize high-benefit and low-risk actions, manage high-benefit and high-risk items through qualification gates, keep low-benefit and low-risk items as optional support activities, and avoid low-benefit and high-risk actions unless new evidence changes their value.

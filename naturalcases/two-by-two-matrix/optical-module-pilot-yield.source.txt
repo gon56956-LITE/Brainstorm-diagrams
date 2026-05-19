@@ -1,0 +1,13 @@
+The action priority diagram is created for the event: "a pilot production build of a new optical module shows lower-than-expected first-pass yield." The purpose is to prioritize corrective and improvement actions based on expected impact on pilot yield recovery and implementation effort.
+
+The horizontal axis represents implementation effort, from low effort on the left to high effort on the right. The vertical axis represents yield recovery impact, from low impact at the bottom to high impact at the top.
+
+Quick Wins include reviewing the top three defect codes from the pilot build, verifying whether inspection criteria were applied consistently, checking whether all operators used the latest work instruction, confirming that the test software version matches the approved release, and adding a short start-of-shift checklist for critical assembly parameters.
+
+Major Actions include redesigning the optical alignment fixture to improve repeatability, optimizing the adhesive dispensing and curing process, revising the package tolerance stack-up, conducting a focused DOE on coupling efficiency loss, and qualifying an alternative supplier for a component suspected of dimensional variation.
+
+Low-Priority Fill-Ins include reorganizing the pilot build data folder, improving the meeting minutes template, adding visual labels to non-critical material bins, and updating the dashboard format for easier reading.
+
+Avoid or Defer items include rebuilding the full production database interface, creating a customized report format for every engineering subgroup, changing the external cosmetic design of the module, and reformatting all historical development data from previous projects.
+
+Recommended decision: execute Quick Wins within the current pilot review cycle, assign owners and milestones for Major Actions, schedule Fill-Ins only after critical yield issues are addressed, and formally defer Avoid or Defer items until stronger evidence links them to yield recovery.

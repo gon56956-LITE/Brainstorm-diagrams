@@ -140,6 +140,7 @@ notes: Optional visible note supported by the source
 - Use `X` for the horizontal dimension and `Y` for the vertical dimension.
 - Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
 - Do not add an item-level `Notes` column. Use top-level `notes:` only when the user asks for a visible note or the source includes a short note that should appear on the diagram.
+- Keep top-level `notes:` short enough for a two-line guide card: roughly 70 English characters or 30 Chinese characters. Use a decision-summary phrase, not a full recommendation paragraph.
 - Do not invent precise quantitative scores when the source is vague; use conservative ordinal scoring from the described strength of each dimension.
 - Do not model this as precise scatter/bubble placement. The current renderer uses scores to classify items into quadrant lists and a side summary table.
 

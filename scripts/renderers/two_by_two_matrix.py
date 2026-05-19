@@ -20,6 +20,8 @@ MAX_ITEMS_IN_QUADRANT = 5
 MAX_ITEMS = 20
 DEFAULT_SCALE_MIN = 1.0
 DEFAULT_SCALE_MAX = 5.0
+NOTES_MAX_LINES = 2
+NOTES_LINE_VISUAL_CHARS = 48
 
 MATRIX_X = 84
 MATRIX_Y = 158
@@ -280,7 +282,7 @@ def normalize_input(data: dict[str, Any]) -> dict[str, Any]:
     title = clean_text(data.get("title", "")) or localized(preset["title"], language)
     subtitle = clean_text(data.get("subtitle", ""))
     show_subtitle = as_bool(data.get("show_subtitle", False)) and bool(subtitle)
-    notes = clean_text(data.get("notes", data.get("note", "")))
+    notes = fit_visible_notes(clean_text(data.get("notes", data.get("note", ""))), diagnostics)
 
     items = [
         normalize_item(raw, index + 1, preset, scale, language, diagnostics)
@@ -518,7 +520,7 @@ def render_notes(data: dict[str, Any]) -> str:
         f'<text x="{note_x + 18}" y="{note_y + 22}" text-anchor="middle" font-family="{FONT_STACK}" font-size="14" font-weight="800" fill="{PALETTE["blue"]}">i</text>',
         f'<text x="{note_x + 36}" y="{note_y + 14}" font-family="{FONT_STACK}" font-size="12" font-weight="800" fill="{PALETTE["navy"]}">{escape(localized({"en": "Notes", "zh": "备注"}, language))}</text>',
     ]
-    for line_index, line in enumerate(wrap_text(note, 48, max_lines=2)):
+    for line_index, line in enumerate(wrap_text(note, NOTES_LINE_VISUAL_CHARS, max_lines=NOTES_MAX_LINES)):
         chunks.append(f'<text x="{note_x + 82}" y="{note_y + 14 + line_index * 14}" font-family="{FONT_STACK}" font-size="11" font-weight="600" fill="{PALETTE["gray_text"]}">{escape(line)}</text>')
     chunks.append("</g>")
     return "\n".join(chunks)
@@ -742,6 +744,18 @@ def default_items(preset_name: str) -> list[dict[str, Any]]:
     ]
 
 
+def fit_visible_notes(note: str, diagnostics: list[str]) -> str:
+    if not note:
+        return ""
+    lines = wrap_text(note, NOTES_LINE_VISUAL_CHARS)
+    if len(lines) <= NOTES_MAX_LINES and all(visual_len(line) <= NOTES_LINE_VISUAL_CHARS for line in lines):
+        return note
+    visible = lines[:NOTES_MAX_LINES]
+    visible[-1] = trim_to_visual_len(visible[-1], NOTES_LINE_VISUAL_CHARS - 3).rstrip() + "..."
+    diagnostics.append("Notes exceeded the visible two-line area and were shortened for display.")
+    return " ".join(visible)
+
+
 def parse_two_by_two_matrix_markdown(text: str) -> dict[str, Any]:
     metadata, body = split_markdown_front_matter(text)
     data: dict[str, Any] = {
@@ -902,15 +916,18 @@ def wrap_text(text: str, max_chars: int, max_lines: int | None = None) -> list[s
     clean = clean_text(text)
     if not clean:
         return [""]
+    has_cjk = contains_cjk(clean)
     words = clean.split()
     lines: list[str] = []
     current = ""
-    if len(words) == 1:
-        units = list(clean) if contains_cjk(clean) else [clean]
+    if has_cjk:
+        units = list(clean)
+    elif len(words) == 1:
+        units = [clean]
     else:
         units = words
     for unit in units:
-        sep = "" if contains_cjk(clean) and len(words) == 1 else " "
+        sep = "" if has_cjk else " "
         candidate = unit if not current else current + sep + unit
         if visual_len(candidate) <= max_chars:
             current = candidate
@@ -923,6 +940,19 @@ def wrap_text(text: str, max_chars: int, max_lines: int | None = None) -> list[s
     if max_lines is not None:
         return lines[:max_lines] or [clean[:max_chars]]
     return lines or [clean]
+
+
+def trim_to_visual_len(text: str, max_chars: int) -> str:
+    clean = clean_text(text)
+    output = ""
+    length = 0
+    for char in clean:
+        char_len = 2 if ord(char) > 127 else 1
+        if length + char_len > max_chars:
+            break
+        output += char
+        length += char_len
+    return output
 
 
 def svg_header() -> str:

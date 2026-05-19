@@ -300,6 +300,12 @@ def verify_two_by_two_expected_structure(path: Path) -> None:
     if language not in {"auto", "en", "zh"}:
         raise AssertionError(f"{path.name}: language must be auto, en, or zh")
 
+    notes = str(data.get("notes", "")).strip()
+    if language == "zh" and visual_len(notes) > 60:
+        raise AssertionError(f"{path.name}: Chinese notes should fit the two-line guide card")
+    if language != "zh" and visual_len(notes) > 70:
+        raise AssertionError(f"{path.name}: English notes should fit the two-line guide card")
+
     items = data.get("items", [])
     if not isinstance(items, list) or len(items) < 4:
         raise AssertionError(f"{path.name}: two-by-two naturalcase should include at least four scored items")
@@ -325,6 +331,10 @@ def verify_two_by_two_expected_structure(path: Path) -> None:
 
     if len(quadrants) < 3:
         raise AssertionError(f"{path.name}: two-by-two naturalcase should exercise at least three quadrants")
+
+
+def visual_len(text: str) -> int:
+    return sum(2 if ord(char) > 127 else 1 for char in text)
 
 
 if __name__ == "__main__":
