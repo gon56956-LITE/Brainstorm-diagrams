@@ -1,0 +1,38 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "swimlane_roadmap",
+  "lane_type": "theme",
+  "title": "Roadmap / Timeline",
+  "goal": "Deliver value through coordinated roadmap execution.",
+  "language": "en",
+  "time_granularity": "quarter",
+  "time_periods": [
+    {"id": "2025Q2", "label": "2025 Q2", "subtitle": "Apr - Jun", "start": "2025-04-01", "end": "2025-06-30"},
+    {"id": "2025Q3", "label": "2025 Q3", "subtitle": "Jul - Sep", "start": "2025-07-01", "end": "2025-09-30"},
+    {"id": "2025Q4", "label": "2025 Q4", "subtitle": "Oct - Dec", "start": "2025-10-01", "end": "2025-12-31"},
+    {"id": "2026Q1", "label": "2026 Q1", "subtitle": "Jan - Mar", "start": "2026-01-01", "end": "2026-03-31"}
+  ],
+  "lanes": [
+    {"id": "customer", "name": "Customer Value", "color": "blue"},
+    {"id": "platform", "name": "Platform & Tech", "color": "teal"},
+    {"id": "operations", "name": "Operational Excellence", "color": "purple"}
+  ],
+  "initiatives": [
+    {"id": "R1", "lane_id": "customer", "name": "Improve Core Experience", "start": "2025-04-15", "end": "2025-06-30", "owner": "Product", "status": "in_progress"},
+    {"id": "R2", "lane_id": "customer", "name": "New Personalization", "start": "2025-10-15", "end": "2026-02-28", "owner": "Data & AI", "status": "planned"},
+    {"id": "R3", "lane_id": "platform", "name": "Cloud Migration", "start": "2025-05-01", "end": "2025-08-31", "owner": "Platform", "status": "in_progress"},
+    {"id": "R4", "lane_id": "platform", "name": "Data Platform v1", "start": "2025-10-01", "end": "2026-02-15", "owner": "Data", "status": "planned"},
+    {"id": "R5", "lane_id": "operations", "name": "Process Automation", "start": "2025-04-15", "end": "2025-08-15", "owner": "Operations", "status": "in_progress"},
+    {"id": "R6", "lane_id": "operations", "name": "Lean Initiative", "start": "2025-10-15", "end": "2026-01-31", "owner": "Operations", "status": "planned"}
+  ],
+  "milestones": [
+    {"id": "M1", "lane_id": "customer", "name": "App 2.0 Launch", "date": "2025-11-01", "type": "launch"},
+    {"id": "M2", "lane_id": "platform", "name": "Architecture Review", "date": "2025-09-15", "type": "key_milestone"}
+  ],
+  "decision_points": [
+    {"id": "D1", "lane_id": "platform", "name": "Go / No-Go", "date": "2025-09-15", "type": "decision"}
+  ],
+  "notes": ["Timeline is subject to change based on dependencies and resource availability."],
+  "show_table": true,
+  "show_summary_panel": true
+}

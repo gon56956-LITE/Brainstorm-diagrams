@@ -1,13 +1,13 @@
 ---
 name: brainstorm-diagrams
-description: Generate clean, PPT-ready structured brainstorming and analysis diagrams for product design, process design, failure analysis, root-cause analysis, cause-and-effect mapping, solution exploration, fishbone / Ishikawa diagrams, fault tree analysis, exclusion tree troubleshooting, and two-by-two prioritization matrices. Supports business-simple fishbone, fault_tree, exclusion_tree, and two_by_two_matrix SVG diagrams from JSON or structured Markdown.
+description: Generate clean, PPT-ready structured brainstorming and analysis diagrams for product design, process design, failure analysis, root-cause analysis, cause-and-effect mapping, solution exploration, fishbone / Ishikawa diagrams, fault tree analysis, exclusion tree troubleshooting, two-by-two prioritization matrices, and roadmap timelines. Supports business-simple fishbone, fault_tree, exclusion_tree, two_by_two_matrix, and roadmap_timeline SVG diagrams from JSON or structured Markdown.
 ---
 
 # Brainstorm Diagrams
 
 Use this skill to create structured thinking diagrams for brainstorming, root-cause analysis, product design, process design, and solution exploration.
 
-Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, and `diagram_type="two_by_two_matrix"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, and two-by-two matrix. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
+Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, `diagram_type="two_by_two_matrix"`, and `diagram_type="roadmap_timeline"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, and two-by-two matrix. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
 
 ```text
 鱼骨图工具.cmd
@@ -55,7 +55,19 @@ English fallback:
 two_by_two_matrix_tool.cmd
 ```
 
-For a browser-based local editor that supports all diagram types, use:
+For non-technical roadmap timeline users, use the dedicated launcher:
+
+```text
+路线图时间线工具.cmd
+```
+
+English fallback:
+
+```text
+roadmap_timeline_tool.cmd
+```
+
+For a browser-based local editor that supports fishbone, fault tree, exclusion tree, two-by-two matrix, and roadmap timeline, use:
 
 ```text
 图表编辑器.cmd
@@ -74,10 +86,11 @@ Command-line usage is also available:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_exclusion_tree.py startup-checks --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_two_by_two_matrix.py priority-matrix --format md --preset action_priority
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_roadmap_timeline.py product-roadmap --format md --preset swimlane_roadmap
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\diagram_builder_server.py
 ```
 
-This creates a user-owned input and initial SVG under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, or `work/two-by-two-matrix/`. To render an existing input directly, use `scripts/generate_diagram.py`.
+This creates a user-owned input and initial SVG under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, `work/two-by-two-matrix/`, or `work/roadmap-timeline/`. To render an existing input directly, use `scripts/generate_diagram.py`.
 Work names must be safe file stems: lowercase letters, numbers, hyphen, and underscore only, such as `my-analysis` or `customer_complaints_v1`.
 
 ## Supported Diagram Types
@@ -86,6 +99,7 @@ Work names must be safe file stems: lowercase letters, numbers, hyphen, and unde
 - `fault_tree`: logical failure decomposition with a top event, event detail panel, AND/OR gates, intermediate events, and basic event leaves.
 - `exclusion_tree`: sequential exclusion tree troubleshooting and root-cause elimination with one main checkpoint path, Yes/Pass continuation, No/Fail conclusion cards, and a final no-issue-found outcome.
 - `two_by_two_matrix`: two-axis option comparison and prioritization using quadrant item summaries and a complete side decision table; supports 4-20 scored items with 1-5 X/Y scores, and default language is auto-detected, not bilingual.
+- `roadmap_timeline`: roadmap or milestone timeline planning with `swimlane_roadmap` and `milestone_timeline` presets, periods, phases, lane initiatives, milestones, decision points, and optional summary/table panels.
 
 After editing a `work/fishbone/` input, regenerate it with:
 
@@ -111,6 +125,12 @@ After editing a `work/two-by-two-matrix/` input, regenerate it with:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_two_by_two_matrix_work.py priority-matrix
 ```
 
+After editing a `work/roadmap-timeline/` input, regenerate it with:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_roadmap_timeline_work.py product-roadmap
+```
+
 Export a generated work SVG to PNG with:
 
 ```powershell
@@ -118,6 +138,7 @@ Export a generated work SVG to PNG with:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fault_tree_png.py startup-failure
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_two_by_two_matrix_png.py priority-matrix
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_roadmap_timeline_png.py product-roadmap
 ```
 
 PNG export is intended for SVGs generated by this tool, not arbitrary third-party SVG files.
@@ -158,11 +179,12 @@ To protect natural-language extraction examples:
 
 Prefer JSON for automation and structured Markdown for user-authored briefs.
 
-- JSON: use `diagram_type` to select `fishbone`, `fault_tree`, `exclusion_tree`, or `two_by_two_matrix`; fishbone follows `references/input_contract.md`, fault tree follows `brainstorm_diagrams_fault_tree_spec.md`, exclusion tree follows `brainstorm_diagrams_exclusion_tree_spec.md`, and two-by-two matrix follows `brainstorm_diagrams_two_by_two_matrix_spec.md`.
+- JSON: use `diagram_type` to select `fishbone`, `fault_tree`, `exclusion_tree`, `two_by_two_matrix`, or `roadmap_timeline`; fishbone follows `references/input_contract.md`, fault tree follows `brainstorm_diagrams_fault_tree_spec.md`, exclusion tree follows `brainstorm_diagrams_exclusion_tree_spec.md`, two-by-two matrix follows `brainstorm_diagrams_two_by_two_matrix_spec.md`, and roadmap timeline follows `brainstorm_diagrams_roadmap_timeline_spec.md`.
 - Markdown fishbone: use `#` for the topic, `##` for categories, and bullet lists for cause items.
 - Markdown fault tree: include `diagram_type: fault_tree` front matter, use `#` for the top event, optional `Event Detail:` bullets for the left-side detail panel, `Gate: OR` or `Gate: AND` for logic gates, `##` for intermediate events, and bullets for basic event leaves.
 - Markdown exclusion tree: include `diagram_type: exclusion_tree` front matter, use `#` for the target problem, `##` for checkpoints, and recognized key-value lines such as `Icon:`, `Pass:`, `Fail:`, `Fail Conclusion:`, `Fail Detail:`, and `Final Pass Conclusion:`.
 - Markdown two-by-two matrix: include `diagram_type: two_by_two_matrix` front matter, a `preset`, optional `language`, a `#` title, and an items table with `Item`, `X`, and `Y` columns. Use 4-20 items; X/Y scores must be 1-5. Use top-level `notes:` only when the user wants a visible notes area; do not add item-level notes or a subtitle unless explicitly requested.
+- Markdown roadmap timeline: include `diagram_type: roadmap_timeline` front matter, a `preset` (`swimlane_roadmap` or `milestone_timeline`), optional `language`, a `#` title, and tables for `Periods`, plus either `Lanes`/`Initiatives` or `Milestones`.
 - Markdown subcategories: a primary bullet with indented bullets becomes a subcategory with child causes.
 - Starting templates live in `templates/`; copy them before authoring a new diagram.
 - Browser editor: `scripts/diagram_builder_server.py` edits the existing JSON contracts through a local HTML UI and saves into the appropriate `work/<diagram-type>/` folder; it is not a new input schema.
@@ -173,9 +195,9 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 
 1. For structured Markdown/JSON, normalize the user input into the selected diagram data model.
 2. For natural-language source text, first choose the diagram type, then extract the appropriate structured Markdown using `references/natural_language_extraction.md`; use `references/natural_language_prompt_template.md` as the execution template when drafting from raw text.
-3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md`, `scripts/new_fault_tree.py <name> --format md`, `scripts/new_exclusion_tree.py <name> --format md`, or `scripts/new_two_by_two_matrix.py <name> --format md --preset action_priority`; use `--format json` when needed.
+3. For a new blank/template diagram, run `scripts/new_fishbone.py <name> --format md`, `scripts/new_fault_tree.py <name> --format md`, `scripts/new_exclusion_tree.py <name> --format md`, `scripts/new_two_by_two_matrix.py <name> --format md --preset action_priority`, or `scripts/new_roadmap_timeline.py <name> --format md --preset swimlane_roadmap`; use `--format json` when needed.
 4. For a Codex-assisted natural-language draft, write the extracted Markdown to `work/<diagram-type>/<name>.md`; use safe file stems only.
-5. Render a fishbone work input with `scripts/render_work.py <name>`, a fault-tree work input with `scripts/render_fault_tree_work.py <name>`, an exclusion-tree work input with `scripts/render_exclusion_tree_work.py <name>`, or a two-by-two work input with `scripts/render_two_by_two_matrix_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
+5. Render a fishbone work input with `scripts/render_work.py <name>`, a fault-tree work input with `scripts/render_fault_tree_work.py <name>`, an exclusion-tree work input with `scripts/render_exclusion_tree_work.py <name>`, a two-by-two work input with `scripts/render_two_by_two_matrix_work.py <name>`, or a roadmap work input with `scripts/render_roadmap_timeline_work.py <name>`; if both Markdown and JSON inputs exist for the same name, pass `--format md` or `--format json`.
 6. Optionally run the matching PNG export script when the user needs a PNG for quick sharing.
 7. For non-technical editing, run `diagram_builder.cmd` or `scripts/diagram_builder_server.py`; the browser UI should save JSON, render SVG, and export PNG using the same work folders and renderers.
 8. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
@@ -220,11 +242,12 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Use `testcases/fishbone/fishbone.five-primary.*` and `testcases/fishbone/fishbone.five-subcategories.*` as stress tests for the densest supported category content.
 - Use `stresscases/fishbone/full-stress.*` as an optional manual visual stresscase; it is deliberately denser than normal regression testcases.
 - Use `naturalcases/fishbone/*.source.txt`, `naturalcases/fishbone/*.expected.md`, `naturalcases/fault-tree/*.source.txt`, `naturalcases/fault-tree/*.expected.md`, `naturalcases/exclusion-tree/*.source.txt`, and `naturalcases/exclusion-tree/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
-- Keep `templates/fishbone.template.*`, `templates/fault-tree.template.*`, and `templates/exclusion-tree.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
+- Keep `templates/fishbone.template.*`, `templates/fault-tree.template.*`, `templates/exclusion-tree.template.*`, `templates/two-by-two-matrix*.template.*`, and `templates/roadmap-timeline*.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
 - Keep `assets/lucide-candidates/` as the reusable Lucide badge library. `scripts/verify_testcases.py` protects required mapped icons and verifies the candidate catalog can still render.
 - Keep user-authored fishbone files in `work/fishbone/`; do not mix them into `testcases/fishbone/`, `templates/`, `stresscases/fishbone/`, or `naturalcases/fishbone/`.
 - Keep user-authored fault-tree files in `work/fault-tree/`; do not mix them into `testcases/fault-tree/`, `templates/`, or `stresscases/fault-tree/`.
 - Keep user-authored exclusion-tree files in `work/exclusion-tree/`; do not mix them into `testcases/exclusion-tree/`, `templates/`, or `stresscases/exclusion-tree/`.
+- Keep user-authored roadmap timeline files in `work/roadmap-timeline/`; do not mix them into `testcases/roadmap-timeline/`, `templates/`, or `stresscases/roadmap-timeline/`.
 
 ## Fault Tree Layout Rules
 
@@ -256,11 +279,23 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Use only simple inline SVG icons listed in `templates/exclusion-tree.template.*`; do not depend on external icon fonts or network assets.
 - Use `testcases/exclusion-tree/*` and `stresscases/exclusion-tree/full-stress.*` after exclusion-tree layout changes.
 
+## Roadmap Timeline Layout Rules
+
+- Keep the root SVG group as `id="roadmap-timeline"`.
+- Use `preset="swimlane_roadmap"` for lane-based roadmap planning and `preset="milestone_timeline"` for event/milestone sequences.
+- Render single-language labels by default. Only use bilingual label pairs when `language: bilingual` or paired source fields explicitly request it.
+- Keep base canvas at least 1920x1080, and expand width or height for dense timelines rather than shrinking fonts or clipping labels.
+- In swimlane roadmaps, reserve the extra milestone/decision marker band only for lanes that actually contain markers; marker-free lanes should stay compact.
+- Preserve stable SVG identifiers and classes for validation: `roadmap-grid`, `roadmap-lane`, `roadmap-initiative`, `roadmap-milestone`, `roadmap-table`, `roadmap-summary-panel`, and `roadmap-legend`.
+- Use `testcases/roadmap-timeline/*` and `stresscases/roadmap-timeline/*` after roadmap renderer changes.
+
 ## Current Limits
 
-- Implemented diagram types: `fishbone`, `fault_tree`, `exclusion_tree`.
+- Implemented diagram types: `fishbone`, `fault_tree`, `exclusion_tree`, `two_by_two_matrix`, `roadmap_timeline`.
 - Each main category renders up to five primary entries; each subcategory renders up to three child causes.
 - Fault tree MVP supports a top event, event detail panel, AND/OR gates, up to 8 first-level intermediate events, second-level intermediate events, and basic event leaves. It does not calculate probabilities, simplify Boolean logic, or support dynamic fault tree semantics.
 - Exclusion tree MVP supports a target problem, 3-6 sequential checkpoints on one main path, Yes/Pass continuation, No/Fail conclusion cards, a final pass conclusion, legend, and how-to-use panel. It does not support parallel troubleshooting lanes, complex nested decision trees, or multi-condition branching.
+- Two-by-two matrix supports 4-20 scored items with X/Y scores from 1 to 5; the matrix body may summarize crowded quadrants, while the side decision table renders every item.
+- Roadmap timeline MVP supports swimlane roadmap and milestone timeline presets with periods, optional phases, initiatives, milestones, decision points, summary/table panels, browser-builder UI support, and PNG export.
 - Natural-language extraction is a Codex skill workflow, not an offline local script or `.cmd` menu feature.
 - Redrawing existing fishbone files or whiteboard photos is planned but not implemented.

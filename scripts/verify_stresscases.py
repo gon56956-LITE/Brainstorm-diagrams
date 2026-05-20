@@ -16,6 +16,7 @@ FISHBONE_STRESSCASES = STRESSCASES_ROOT / "fishbone"
 FAULT_TREE_STRESSCASES = STRESSCASES_ROOT / "fault-tree"
 EXCLUSION_TREE_STRESSCASES = STRESSCASES_ROOT / "exclusion-tree"
 TWO_BY_TWO_STRESSCASES = STRESSCASES_ROOT / "two-by-two-matrix"
+ROADMAP_STRESSCASES = STRESSCASES_ROOT / "roadmap-timeline"
 RENDER_STRESSCASES = ROOT / "scripts" / "render_stresscases.py"
 PYTHON = Path(sys.executable)
 
@@ -37,6 +38,8 @@ def main() -> int:
     verify_exclusion_tree_full_stress()
     verify_two_by_two_matrix_full_stress()
     verify_two_by_two_matrix_single_quadrant_overload()
+    verify_roadmap_timeline_full_stress()
+    verify_roadmap_timeline_milestone_dense()
     print("Stresscase verification passed")
     return 0
 
@@ -44,7 +47,13 @@ def main() -> int:
 def verify_directory() -> None:
     if not STRESSCASES_ROOT.exists():
         raise AssertionError("Missing stresscases directory")
-    for required_dir in [FISHBONE_STRESSCASES, FAULT_TREE_STRESSCASES, EXCLUSION_TREE_STRESSCASES, TWO_BY_TWO_STRESSCASES]:
+    for required_dir in [
+        FISHBONE_STRESSCASES,
+        FAULT_TREE_STRESSCASES,
+        EXCLUSION_TREE_STRESSCASES,
+        TWO_BY_TWO_STRESSCASES,
+        ROADMAP_STRESSCASES,
+    ]:
         if not required_dir.exists():
             raise AssertionError(f"Missing stresscases directory: {required_dir.relative_to(ROOT)}")
 
@@ -703,6 +712,112 @@ def verify_two_by_two_matrix_single_quadrant_overload() -> None:
     notes_group = next((element for element in root.iter() if element.attrib.get("id") == "matrix-notes"), None)
     if notes_group is None or not any(child.tag.endswith("rect") for child in list(notes_group)):
         raise AssertionError("single-quadrant overload notes should render as a visible card inside the guide")
+
+
+def verify_roadmap_timeline_full_stress() -> None:
+    input_path = ROADMAP_STRESSCASES / "full-stress.json"
+    output_path = ROADMAP_STRESSCASES / "full-stress.svg"
+    if not input_path.exists():
+        raise AssertionError("Missing roadmap-timeline/full-stress.json")
+    if not output_path.exists():
+        raise AssertionError("Missing roadmap-timeline/full-stress.svg")
+
+    root = ET.parse(output_path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError("roadmap-timeline full-stress.svg root is not svg")
+
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width <= 1920 or height <= 1080:
+        raise AssertionError(f"roadmap-timeline full-stress.svg must expand beyond 1920x1080, got {width}x{height}")
+
+    classes = " ".join(element.attrib.get("class", "") for element in root.iter())
+    for required_class in ["roadmap-grid", "roadmap-lane", "roadmap-initiative", "roadmap-milestone"]:
+        if required_class not in classes:
+            raise AssertionError(f"roadmap-timeline full-stress.svg missing {required_class}")
+
+    lane_groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "roadmap-lane" in element.attrib.get("class", "")
+    ]
+    initiative_groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "roadmap-initiative" in element.attrib.get("class", "")
+    ]
+    if len(lane_groups) < 6:
+        raise AssertionError(f"Expected at least 6 roadmap lanes, got {len(lane_groups)}")
+    if len(initiative_groups) < 18:
+        raise AssertionError(f"Expected at least 18 roadmap initiatives, got {len(initiative_groups)}")
+
+    ids = {element.attrib.get("id") for element in root.iter()}
+    for required_id in ["roadmap-timeline", "roadmap-table", "roadmap-summary-panel", "roadmap-legend"]:
+        if required_id not in ids:
+            raise AssertionError(f"roadmap-timeline full-stress.svg missing {required_id}")
+
+    texts = "\n".join(element.text or "" for element in root.iter() if element.tag.endswith("text"))
+    for required_text in ["Market Launch", "Decision"]:
+        if required_text not in texts:
+            raise AssertionError(f"roadmap-timeline full-stress.svg missing expected text: {required_text}")
+    verify_roadmap_rects_within_canvas(root, "roadmap-timeline full-stress.svg")
+
+
+def verify_roadmap_timeline_milestone_dense() -> None:
+    input_path = ROADMAP_STRESSCASES / "milestone-dense.json"
+    output_path = ROADMAP_STRESSCASES / "milestone-dense.svg"
+    if not input_path.exists():
+        raise AssertionError("Missing roadmap-timeline/milestone-dense.json")
+    if not output_path.exists():
+        raise AssertionError("Missing roadmap-timeline/milestone-dense.svg")
+
+    root = ET.parse(output_path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError("roadmap-timeline milestone-dense.svg root is not svg")
+
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width < 1920 or height < 1080:
+        raise AssertionError(f"roadmap-timeline milestone-dense.svg should keep at least 1920x1080 canvas, got {width}x{height}")
+
+    milestone_groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g") and "roadmap-milestone" in element.attrib.get("class", "")
+    ]
+    if len(milestone_groups) < 10:
+        raise AssertionError(f"Expected at least 10 roadmap milestones, got {len(milestone_groups)}")
+
+    ids = {element.attrib.get("id") for element in root.iter()}
+    if "roadmap-phases" not in ids:
+        raise AssertionError("roadmap-timeline milestone-dense.svg should render phase bands")
+    for required_id in ["roadmap-timeline", "roadmap-table", "roadmap-legend"]:
+        if required_id not in ids:
+            raise AssertionError(f"roadmap-timeline milestone-dense.svg missing {required_id}")
+
+    texts = "\n".join(element.text or "" for element in root.iter() if element.tag.endswith("text"))
+    if "Market Launch" not in texts or "T10" not in texts:
+        raise AssertionError("roadmap-timeline milestone-dense.svg should preserve dense milestone content")
+    verify_roadmap_rects_within_canvas(root, "roadmap-timeline milestone-dense.svg")
+
+
+def verify_roadmap_rects_within_canvas(root: ET.Element, label: str) -> None:
+    canvas_width = float(root.attrib["width"])
+    canvas_height = float(root.attrib["height"])
+    for rect in root.iter():
+        if not rect.tag.endswith("rect"):
+            continue
+        attrs = rect.attrib
+        if not {"x", "y", "width", "height"} <= set(attrs):
+            continue
+        x = float(attrs["x"])
+        y = float(attrs["y"])
+        width = float(attrs["width"])
+        height = float(attrs["height"])
+        if x < -0.1 or y < -0.1 or x + width > canvas_width + 0.1 or y + height > canvas_height + 0.1:
+            raise AssertionError(
+                f"{label}: roadmap rect outside canvas: x={x}, y={y}, w={width}, h={height}, canvas={canvas_width}x{canvas_height}"
+            )
 
 
 def find_group_rect(root: ET.Element, group_id: str) -> ET.Element | None:

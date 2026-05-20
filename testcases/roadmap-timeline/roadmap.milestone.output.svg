@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1188" viewBox="0 0 1920 1188">
+<defs>
+  <marker id="arrowNavy" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0B3A75"/>
+  </marker>
+</defs>
+<rect width="1920" height="1188" fill="#FFFFFF"/>
+<text x="36" y="72" font-family="Arial" font-size="40" font-weight="700" fill="#0B3A75">Optical Module NPI Milestone Timeline</text>
+<text x="38" y="112" font-family="Arial" font-size="18" font-weight="700" fill="#0B3A75">Goal: <tspan font-weight="500">Move the next-generation optical module from concept review to controlled customer pilot.</tspan></text>
+<g id="roadmap-legend" class="roadmap-legend">
+<rect x="1460" y="32" width="440" height="142" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.2"/>
+<text x="1478" y="60" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Legend</text>
+<circle cx="1488" cy="86" r="10" fill="#0B3A75"/>
+<text x="1512" y="91" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Milestone</text>
+<polygon points="1488.0,106.0 1490.6,112.4 1497.5,112.9 1492.3,117.4 1493.9,124.1 1488.0,120.5 1482.1,124.1 1483.7,117.4 1478.5,112.9 1485.4,112.4" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1512" y="121" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Key Milestone</text>
+<polygon points="1488,136 1498,146 1488,156 1478,146" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="1512" y="151" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Decision Point</text>
+</g>
+<g id="roadmap-timeline" class="roadmap-timeline roadmap-milestone">
+<g id="roadmap-phases" class="roadmap-phases">
+<rect x="120" y="546" width="330.4918032786885" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="130" y="562" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Concept &amp; Architecture</text>
+<rect x="456.0" y="574" width="501.2459016393443" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="466.0" y="590" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Engineering Validation</text>
+<rect x="962.7540983606557" y="602" width="495.7377049180327" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="972.7540983606557" y="618" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Design Validation</text>
+<rect x="1464.0" y="630" width="336.0" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1474.0" y="646" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Pilot &amp; Release</text>
+</g>
+<line x1="120" y1="468" x2="1800" y2="468" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
+<g id="roadmap-milestones" class="roadmap-milestones">
+<g class="roadmap-milestone" data-id="T1">
+<line x1="169.5737704918033" y1="414" x2="169.5737704918033" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<circle cx="169.5737704918033" cy="468" r="12" fill="#0B3A75"/>
+<text x="169.5737704918033" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Apr 10</text>
+<rect x="120" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="195.0" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Concept Review</text>
+<text x="195.0" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Confirm customer</text>
+<text x="195.0" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">requirements, target</text>
+<text x="195.0" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">cost, and performance</text>
+</g>
+<g class="roadmap-milestone" data-id="T2">
+<line x1="433.9672131147541" y1="414" x2="433.9672131147541" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="434.0,456.0 437.1,463.6 445.4,464.3 439.1,469.7 441.0,477.7 434.0,473.4 426.9,477.7 428.8,469.7 422.6,464.3 430.8,463.6" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="433.9672131147541" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">May 28</text>
+<rect x="358.9672131147541" y="315" width="150" height="99" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="433.9672131147541" y="335" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Architecture</text>
+<text x="433.9672131147541" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Freeze</text>
+<text x="433.9672131147541" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Lock optical engine,</text>
+<text x="433.9672131147541" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">driver architecture,</text>
+<text x="433.9672131147541" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">and package concept</text>
+</g>
+<g class="roadmap-milestone" data-id="T3">
+<line x1="714.8852459016393" y1="414" x2="714.8852459016393" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<circle cx="714.8852459016393" cy="468" r="12" fill="#0B3A75"/>
+<text x="714.8852459016393" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Jul 18</text>
+<rect x="639.8852459016393" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="714.8852459016393" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">EVT Build</text>
+<text x="714.8852459016393" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Build engineering</text>
+<text x="714.8852459016393" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">samples and close</text>
+<text x="714.8852459016393" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">first assembly issues</text>
+</g>
+<g class="roadmap-milestone" data-id="T4">
+<line x1="907.672131147541" y1="414" x2="907.672131147541" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="907.672131147541,456 919.672131147541,468 907.672131147541,480 895.672131147541,468" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="907.672131147541" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Aug 22</text>
+<rect x="832.672131147541" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="907.672131147541" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">EVT Gate</text>
+<text x="907.672131147541" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Review yield, optical</text>
+<text x="907.672131147541" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">margin, firmware</text>
+<text x="907.672131147541" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">stability, and open</text>
+</g>
+<g class="roadmap-milestone" data-id="T5">
+<line x1="1039.8688524590164" y1="297" x2="1039.8688524590164" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<circle cx="1039.8688524590164" cy="468" r="12" fill="#0B3A75"/>
+<text x="1039.8688524590164" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Sep 15</text>
+<rect x="964.8688524590164" y="213" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1039.8688524590164" y="233" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">DVT Start</text>
+<text x="1039.8688524590164" y="252" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Start reliability,</text>
+<text x="1039.8688524590164" y="268" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">thermal,</text>
+<text x="1039.8688524590164" y="284" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">signal-integrity, and</text>
+</g>
+<g class="roadmap-milestone" data-id="T6">
+<line x1="1309.7704918032787" y1="414" x2="1309.7704918032787" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="1309.7704918032787,456 1321.7704918032787,468 1309.7704918032787,480 1297.7704918032787,468" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="1309.7704918032787" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Nov 03</text>
+<rect x="1234.7704918032787" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1309.7704918032787" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Pilot Approval</text>
+<text x="1309.7704918032787" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Approve pilot</text>
+<text x="1309.7704918032787" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">quantity, containment</text>
+<text x="1309.7704918032787" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">plan, and customer</text>
+</g>
+<g class="roadmap-milestone" data-id="T7">
+<line x1="1524.5901639344263" y1="414" x2="1524.5901639344263" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="1524.6,456.0 1527.8,463.6 1536.0,464.3 1529.7,469.7 1531.6,477.7 1524.6,473.4 1517.5,477.7 1519.5,469.7 1513.2,464.3 1521.4,463.6" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1524.5901639344263" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Dec 12</text>
+<rect x="1449.5901639344263" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1524.5901639344263" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Customer Pilot</text>
+<text x="1524.5901639344263" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Ship pilot units and</text>
+<text x="1524.5901639344263" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">monitor field link</text>
+<text x="1524.5901639344263" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">stability</text>
+</g>
+<g class="roadmap-milestone" data-id="T8">
+<line x1="1794.4918032786886" y1="414" x2="1794.4918032786886" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="1794.5,456.0 1797.7,463.6 1805.9,464.3 1799.6,469.7 1801.5,477.7 1794.5,473.4 1787.4,477.7 1789.4,469.7 1783.1,464.3 1791.3,463.6" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1794.4918032786886" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Jan 30</text>
+<rect x="1650" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1725.0" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Release Decision</text>
+<text x="1725.0" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Decide controlled</text>
+<text x="1725.0" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">launch based on pilot</text>
+<text x="1725.0" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">yield and reliability</text>
+</g>
+</g>
+</g>
+<g id="roadmap-table" class="roadmap-table">
+<rect x="42" y="700" width="1420" height="294" rx="8" fill="#FFFFFF" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="700" width="1420" height="38" rx="8" fill="#0B3A75"/>
+<text x="52" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">ID</text>
+<text x="126.1981981981982" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Type</text>
+<text x="195.27927927927928" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Milestone</text>
+<text x="489.51351351351354" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Description</text>
+<text x="950.0540540540542" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Target Date</text>
+<text x="1118.918918918919" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Owner</text>
+<text x="1280.1081081081081" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Status</text>
+<text x="52" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T1</text>
+<circle cx="150.73873873873873" cy="754.0" r="7" fill="#0B3A75"/>
+<text x="195.27927927927928" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Concept Review</text>
+<text x="489.51351351351354" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Confirm customer requirements, target cost, and performanc...</text>
+<text x="950.0540540540542" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-04-10</text>
+<text x="1118.918918918919" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Product</text>
+<text x="1280.1081081081081" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Completed</text>
+<line x1="42" y1="770" x2="1462" y2="770" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="770" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T2</text>
+<polygon points="150.7,779.0 152.6,783.5 157.4,783.8 153.7,787.0 154.9,791.7 150.7,789.1 146.6,791.7 147.7,787.0 144.1,783.8 148.9,783.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="195.27927927927928" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Architecture Freeze</text>
+<text x="489.51351351351354" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Lock optical engine, driver architecture, and package concept</text>
+<text x="950.0540540540542" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-05-28</text>
+<text x="1118.918918918919" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Engineering</text>
+<text x="1280.1081081081081" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Completed</text>
+<line x1="42" y1="802" x2="1462" y2="802" stroke="#D8E1EE" stroke-width="1"/>
+<text x="52" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T3</text>
+<circle cx="150.73873873873873" cy="818.0" r="7" fill="#0B3A75"/>
+<text x="195.27927927927928" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">EVT Build</text>
+<text x="489.51351351351354" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Build engineering samples and close first assembly issues</text>
+<text x="950.0540540540542" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-07-18</text>
+<text x="1118.918918918919" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">NPI</text>
+<text x="1280.1081081081081" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">In Progress</text>
+<line x1="42" y1="834" x2="1462" y2="834" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="834" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T4</text>
+<polygon points="150.73873873873873,843.0 157.73873873873873,850.0 150.73873873873873,857.0 143.73873873873873,850.0" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="195.27927927927928" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">EVT Gate</text>
+<text x="489.51351351351354" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Review yield, optical margin, firmware stability, and open...</text>
+<text x="950.0540540540542" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-08-22</text>
+<text x="1118.918918918919" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Quality</text>
+<text x="1280.1081081081081" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="866" x2="1462" y2="866" stroke="#D8E1EE" stroke-width="1"/>
+<text x="52" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T5</text>
+<circle cx="150.73873873873873" cy="882.0" r="7" fill="#0B3A75"/>
+<text x="195.27927927927928" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">DVT Start</text>
+<text x="489.51351351351354" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Start reliability, thermal, signal-integrity, and interope...</text>
+<text x="950.0540540540542" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-09-15</text>
+<text x="1118.918918918919" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="1280.1081081081081" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="898" x2="1462" y2="898" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="898" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T6</text>
+<polygon points="150.73873873873873,907.0 157.73873873873873,914.0 150.73873873873873,921.0 143.73873873873873,914.0" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="195.27927927927928" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Pilot Approval</text>
+<text x="489.51351351351354" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Approve pilot quantity, containment plan, and customer sam...</text>
+<text x="950.0540540540542" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-11-03</text>
+<text x="1118.918918918919" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Program</text>
+<text x="1280.1081081081081" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="930" x2="1462" y2="930" stroke="#D8E1EE" stroke-width="1"/>
+<text x="52" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T7</text>
+<polygon points="150.7,939.0 152.6,943.5 157.4,943.8 153.7,947.0 154.9,951.7 150.7,949.1 146.6,951.7 147.7,947.0 144.1,943.8 148.9,943.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="195.27927927927928" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Customer Pilot</text>
+<text x="489.51351351351354" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Ship pilot units and monitor field link stability</text>
+<text x="950.0540540540542" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-12-12</text>
+<text x="1118.918918918919" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Field Apps</text>
+<text x="1280.1081081081081" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="962" x2="1462" y2="962" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="962" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">T8</text>
+<polygon points="150.7,971.0 152.6,975.5 157.4,975.8 153.7,979.0 154.9,983.7 150.7,981.1 146.6,983.7 147.7,979.0 144.1,975.8 148.9,975.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="195.27927927927928" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Release Decision</text>
+<text x="489.51351351351354" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Decide controlled launch based on pilot yield and reliabil...</text>
+<text x="950.0540540540542" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-01-30</text>
+<text x="1118.918918918919" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Leadership</text>
+<text x="1280.1081081081081" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="994" x2="1462" y2="994" stroke="#D8E1EE" stroke-width="1"/>
+</g>
+<g id="roadmap-summary-panel" class="roadmap-summary-panel roadmap-milestone-info-panel">
+<rect x="1524" y="700" width="360" height="408" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.2"/>
+<text x="1546" y="734" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Phase Plan</text>
+<text x="1548" y="764" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Concept &amp; Architecture</text>
+<text x="1548" y="782" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-04-01 - 2025-05-31</text>
+<text x="1548" y="806" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Engineering Validation</text>
+<text x="1548" y="824" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-06-01 - 2025-08-31</text>
+<text x="1548" y="848" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Design Validation</text>
+<text x="1548" y="866" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-09-01 - 2025-11-30</text>
+<text x="1548" y="890" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Pilot &amp; Release</text>
+<text x="1548" y="908" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-12-01 - 2026-01-31</text>
+<line x1="1546" y1="938" x2="1862" y2="938" stroke="#D8E1EE" stroke-width="1"/>
+<text x="1546" y="972" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Notes</text>
+<text x="1552" y="1000" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- Gate decisions should be based on yield,</text>
+<text x="1552" y="1020" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- reliability, and customer-readiness</text>
+<text x="1552" y="1040" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- Customer pilot release requires a</text>
+<text x="1552" y="1060" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- containment plan for open risks.</text>
+</g>
+</svg>

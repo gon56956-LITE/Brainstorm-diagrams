@@ -1,0 +1,58 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "swimlane_roadmap",
+  "lane_type": "workstream",
+  "title": "Dense Swimlane Roadmap Stresscase",
+  "goal": "Verify canvas expansion, lane stacking, milestones, decisions, table, and summary panel.",
+  "time_granularity": "quarter",
+  "time_periods": [
+    {"id": "2025Q1", "label": "2025 Q1", "subtitle": "Jan - Mar", "start": "2025-01-01", "end": "2025-03-31"},
+    {"id": "2025Q2", "label": "2025 Q2", "subtitle": "Apr - Jun", "start": "2025-04-01", "end": "2025-06-30"},
+    {"id": "2025Q3", "label": "2025 Q3", "subtitle": "Jul - Sep", "start": "2025-07-01", "end": "2025-09-30"},
+    {"id": "2025Q4", "label": "2025 Q4", "subtitle": "Oct - Dec", "start": "2025-10-01", "end": "2025-12-31"},
+    {"id": "2026Q1", "label": "2026 Q1", "subtitle": "Jan - Mar", "start": "2026-01-01", "end": "2026-03-31"},
+    {"id": "2026Q2", "label": "2026 Q2", "subtitle": "Apr - Jun", "start": "2026-04-01", "end": "2026-06-30"},
+    {"id": "2026Q3", "label": "2026 Q3", "subtitle": "Jul - Sep", "start": "2026-07-01", "end": "2026-09-30"},
+    {"id": "2026Q4", "label": "2026 Q4", "subtitle": "Oct - Dec", "start": "2026-10-01", "end": "2026-12-31"}
+  ],
+  "lanes": [
+    {"id": "design", "name": "Design", "color": "blue"},
+    {"id": "platform", "name": "Platform", "color": "teal"},
+    {"id": "firmware", "name": "Firmware", "color": "purple"},
+    {"id": "validation", "name": "Validation", "color": "orange"},
+    {"id": "operations", "name": "Operations", "color": "green"},
+    {"id": "launch", "name": "Launch", "color": "gray"}
+  ],
+  "initiatives": [
+    {"id": "D1", "lane_id": "design", "name": "Architecture", "start": "2025-01-01", "end": "2025-06-30", "owner": "Design", "status": "completed"},
+    {"id": "D2", "lane_id": "design", "name": "Package Design", "start": "2025-04-01", "end": "2025-09-30", "owner": "Design", "status": "in_progress"},
+    {"id": "D3", "lane_id": "design", "name": "Cost Reduction", "start": "2026-01-01", "end": "2026-06-30", "owner": "Design", "status": "planned"},
+    {"id": "P1", "lane_id": "platform", "name": "Optical Engine v1", "start": "2025-01-01", "end": "2025-09-30", "owner": "Platform", "status": "in_progress"},
+    {"id": "P2", "lane_id": "platform", "name": "Optical Engine v2", "start": "2025-10-01", "end": "2026-06-30", "owner": "Platform", "status": "planned"},
+    {"id": "P3", "lane_id": "platform", "name": "Thermal Upgrade", "start": "2026-04-01", "end": "2026-12-31", "owner": "Platform", "status": "planned"},
+    {"id": "F1", "lane_id": "firmware", "name": "Control Loop", "start": "2025-02-01", "end": "2025-07-31", "owner": "Firmware", "status": "in_progress"},
+    {"id": "F2", "lane_id": "firmware", "name": "Telemetry", "start": "2025-08-01", "end": "2026-03-31", "owner": "Firmware", "status": "planned"},
+    {"id": "F3", "lane_id": "firmware", "name": "Recovery Robustness", "start": "2026-01-01", "end": "2026-09-30", "owner": "Firmware", "status": "planned"},
+    {"id": "V1", "lane_id": "validation", "name": "EVT", "start": "2025-07-01", "end": "2025-12-31", "owner": "Validation", "status": "planned"},
+    {"id": "V2", "lane_id": "validation", "name": "DVT", "start": "2026-01-01", "end": "2026-06-30", "owner": "Validation", "status": "planned"},
+    {"id": "V3", "lane_id": "validation", "name": "Reliability", "start": "2026-04-01", "end": "2026-12-31", "owner": "Validation", "status": "at_risk"},
+    {"id": "O1", "lane_id": "operations", "name": "Pilot Line", "start": "2025-10-01", "end": "2026-03-31", "owner": "Ops", "status": "planned"},
+    {"id": "O2", "lane_id": "operations", "name": "Supplier Ramp", "start": "2026-01-01", "end": "2026-09-30", "owner": "Ops", "status": "planned"},
+    {"id": "O3", "lane_id": "operations", "name": "MP Readiness", "start": "2026-07-01", "end": "2026-12-31", "owner": "Ops", "status": "planned"},
+    {"id": "L1", "lane_id": "launch", "name": "Alpha Release", "start": "2025-10-01", "end": "2025-12-31", "owner": "Product", "status": "planned"},
+    {"id": "L2", "lane_id": "launch", "name": "Beta Release", "start": "2026-04-01", "end": "2026-06-30", "owner": "Product", "status": "planned"},
+    {"id": "L3", "lane_id": "launch", "name": "Market Launch", "start": "2026-10-01", "end": "2026-12-31", "owner": "Product", "status": "planned"}
+  ],
+  "milestones": [
+    {"id": "M1", "lane_id": "design", "name": "Architecture Freeze", "date": "2025-06-15", "type": "key_milestone"},
+    {"id": "M2", "lane_id": "validation", "name": "EVT Complete", "date": "2025-12-15", "type": "key_milestone"},
+    {"id": "M3", "lane_id": "launch", "name": "Market Launch", "date": "2026-11-15", "type": "launch"}
+  ],
+  "decision_points": [
+    {"id": "G1", "lane_id": "platform", "name": "Platform Gate", "date": "2025-09-15", "type": "decision"},
+    {"id": "G2", "lane_id": "operations", "name": "MP Gate", "date": "2026-09-15", "type": "decision"}
+  ],
+  "notes": ["Dense roadmap should expand while keeping labels readable."],
+  "show_table": true,
+  "show_summary_panel": true
+}

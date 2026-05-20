@@ -1,2 +1,2 @@
 @echo off
-call "%~dp0fishbone_tool.cmd"
+call "%~dp0fishbone_tool.cmd" %*

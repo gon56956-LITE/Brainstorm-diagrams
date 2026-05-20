@@ -1,2 +1,2 @@
 @echo off
-call "%~dp0diagram_builder.cmd"
+call "%~dp0diagram_builder.cmd" %*

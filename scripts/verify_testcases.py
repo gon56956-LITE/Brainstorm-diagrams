@@ -16,27 +16,35 @@ TESTCASES = ROOT / "testcases" / "fishbone"
 FAULT_TREE_TESTCASES = ROOT / "testcases" / "fault-tree"
 EXCLUSION_TREE_TESTCASES = ROOT / "testcases" / "exclusion-tree"
 TWO_BY_TWO_TESTCASES = ROOT / "testcases" / "two-by-two-matrix"
+ROADMAP_TESTCASES = ROOT / "testcases" / "roadmap-timeline"
 TEMPLATES = ROOT / "templates"
 WORK = ROOT / "work" / "fishbone"
 FAULT_TREE_WORK = ROOT / "work" / "fault-tree"
 EXCLUSION_TREE_WORK = ROOT / "work" / "exclusion-tree"
 TWO_BY_TWO_WORK = ROOT / "work" / "two-by-two-matrix"
+ROADMAP_WORK = ROOT / "work" / "roadmap-timeline"
 LUCIDE_CANDIDATES = ROOT / "assets" / "lucide-candidates"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 NEW_FISHBONE = ROOT / "scripts" / "new_fishbone.py"
 NEW_FAULT_TREE = ROOT / "scripts" / "new_fault_tree.py"
 NEW_EXCLUSION_TREE = ROOT / "scripts" / "new_exclusion_tree.py"
 NEW_TWO_BY_TWO = ROOT / "scripts" / "new_two_by_two_matrix.py"
+NEW_ROADMAP = ROOT / "scripts" / "new_roadmap_timeline.py"
 RENDER_WORK = ROOT / "scripts" / "render_work.py"
 RENDER_FAULT_TREE_WORK = ROOT / "scripts" / "render_fault_tree_work.py"
 RENDER_EXCLUSION_TREE_WORK = ROOT / "scripts" / "render_exclusion_tree_work.py"
 RENDER_TWO_BY_TWO_WORK = ROOT / "scripts" / "render_two_by_two_matrix_work.py"
+RENDER_ROADMAP_WORK = ROOT / "scripts" / "render_roadmap_timeline_work.py"
 EXPORT_PNG = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE_PNG = ROOT / "scripts" / "export_fault_tree_png.py"
 EXPORT_EXCLUSION_TREE_PNG = ROOT / "scripts" / "export_exclusion_tree_png.py"
 EXPORT_TWO_BY_TWO_PNG = ROOT / "scripts" / "export_two_by_two_matrix_png.py"
+EXPORT_ROADMAP_PNG = ROOT / "scripts" / "export_roadmap_timeline_png.py"
 DIAGRAM_BUILDER_SERVER = ROOT / "scripts" / "diagram_builder_server.py"
 PYTHON = Path(sys.executable)
+SWIMLANE_BASE_H = 76
+SWIMLANE_ROW_GAP = 36
+SWIMLANE_MARKER_SLOT_GAP = 28
 
 REQUIRED_LUCIDE_ICONS = [
     "workflow",
@@ -104,6 +112,12 @@ TWO_BY_TWO_TESTCASE_PAIRS = [
     ("two-by-two.markdown.example.md", "two-by-two.markdown.output.svg"),
 ]
 
+ROADMAP_TESTCASE_PAIRS = [
+    ("roadmap.swimlane.example.json", "roadmap.swimlane.output.svg"),
+    ("roadmap.milestone.example.json", "roadmap.milestone.output.svg"),
+    ("roadmap.markdown.example.md", "roadmap.markdown.output.svg"),
+]
+
 TWO_BY_TWO_TEMPLATE_PRESETS = [
     "action_priority",
     "risk_benefit",
@@ -125,6 +139,8 @@ FORBIDDEN_WORDS = [
     "marine decoration",
 ]
 
+ALLOWED_PRESENTATION_FONT_WEIGHTS = {"400", "500", "600", "700", "normal", "bold"}
+
 
 def main() -> int:
     for input_name, output_name in TESTCASE_PAIRS:
@@ -138,6 +154,9 @@ def main() -> int:
 
     for input_name, output_name in TWO_BY_TWO_TESTCASE_PAIRS:
         run_generate(TWO_BY_TWO_TESTCASES / input_name, TWO_BY_TWO_TESTCASES / output_name)
+
+    for input_name, output_name in ROADMAP_TESTCASE_PAIRS:
+        run_generate(ROADMAP_TESTCASES / input_name, ROADMAP_TESTCASES / output_name)
 
     for _, output_name in TESTCASE_PAIRS:
         verify_svg_basics(TESTCASES / output_name)
@@ -156,6 +175,9 @@ def main() -> int:
     verify_two_by_two_item_limit()
     verify_two_by_two_notes_length_guard()
 
+    for _, output_name in ROADMAP_TESTCASE_PAIRS:
+        verify_roadmap_timeline_svg_basics(ROADMAP_TESTCASES / output_name)
+
     verify_canvas_dimensions()
     verify_subcategory_braces(TESTCASES / "fishbone.subcategory.output.md.svg")
     verify_primary_cause_connectors(TESTCASES / "fishbone.five-primary.output.svg")
@@ -168,14 +190,17 @@ def main() -> int:
     verify_new_fault_tree_entrypoint()
     verify_new_exclusion_tree_entrypoint()
     verify_new_two_by_two_entrypoint()
+    verify_new_roadmap_entrypoint()
     verify_render_work_entrypoint()
     verify_render_fault_tree_work_entrypoint()
     verify_render_exclusion_tree_work_entrypoint()
     verify_render_two_by_two_work_entrypoint()
+    verify_render_roadmap_work_entrypoint()
     verify_export_png_entrypoint()
     verify_export_fault_tree_png_entrypoint()
     verify_export_exclusion_tree_png_entrypoint()
     verify_export_two_by_two_png_entrypoint()
+    verify_export_roadmap_png_entrypoint()
     verify_cmd_launchers()
     verify_diagram_builder_service()
     verify_work_name_validation()
@@ -183,11 +208,13 @@ def main() -> int:
     verify_no_tmp_files(FAULT_TREE_TESTCASES)
     verify_no_tmp_files(EXCLUSION_TREE_TESTCASES)
     verify_no_tmp_files(TWO_BY_TWO_TESTCASES)
+    verify_no_tmp_files(ROADMAP_TESTCASES)
     verify_no_tmp_files(TEMPLATES)
     verify_no_tmp_files(WORK)
     verify_no_tmp_files(FAULT_TREE_WORK)
     verify_no_tmp_files(EXCLUSION_TREE_WORK)
     verify_no_tmp_files(TWO_BY_TWO_WORK)
+    verify_no_tmp_files(ROADMAP_WORK)
 
     print("Verification passed")
     return 0
@@ -440,6 +467,7 @@ def verify_two_by_two_svg_basics(path: Path) -> None:
     root = ET.parse(path).getroot()
     if not root.tag.endswith("svg"):
         raise AssertionError(f"{path.name}: root is not svg")
+    verify_svg_font_style(root, path.name, require_arial=True)
     width = int(float(root.attrib["width"]))
     height = int(float(root.attrib["height"]))
     if (width, height) != (1920, 1080):
@@ -567,6 +595,385 @@ def verify_two_by_two_rects_within_canvas(root: ET.Element, label: str) -> None:
         if x < -0.1 or y < -0.1 or x + width > canvas_width + 0.1 or y + height > canvas_height + 0.1:
             raise AssertionError(
                 f"{label}: two-by-two rect outside canvas: x={x}, y={y}, w={width}, h={height}, canvas={canvas_width}x{canvas_height}"
+            )
+
+
+def verify_roadmap_timeline_svg_basics(path: Path) -> None:
+    root = ET.parse(path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError(f"{path.name}: root is not svg")
+    verify_svg_font_style(root, path.name, require_arial=True)
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width < 1920 or height < 1080:
+        raise AssertionError(f"{path.name}: roadmap timeline should not shrink below 1920x1080, got {width}x{height}")
+
+    groups_by_id = {element.attrib.get("id"): element for element in root.iter() if element.tag.endswith("g")}
+    if "roadmap-timeline" not in groups_by_id:
+        raise AssertionError(f"{path.name}: missing roadmap-timeline root group")
+    if "roadmap-legend" not in groups_by_id:
+        raise AssertionError(f"{path.name}: missing roadmap legend")
+
+    classes = " ".join(element.attrib.get("class", "") for element in root.iter())
+    if "roadmap-grid" in classes or "roadmap-lane" in classes:
+        for required_class in ["roadmap-grid", "roadmap-lane", "roadmap-initiative"]:
+            if required_class not in classes:
+                raise AssertionError(f"{path.name}: missing required class {required_class}")
+        for required_id in ["roadmap-lanes", "roadmap-initiatives", "roadmap-table"]:
+            if required_id not in groups_by_id:
+                raise AssertionError(f"{path.name}: missing {required_id}")
+        if "lucide-icon" not in classes:
+            raise AssertionError(f"{path.name}: swimlane roadmap lane badges should use Lucide icons")
+        verify_roadmap_legend_clear_of_swimlane_header(root, path.name)
+        verify_roadmap_lane_marker_band_sizing(root, path.name)
+        verify_roadmap_swimlane_lane_labels(root, path.name)
+        verify_roadmap_swimlane_initiative_labels(root, path.name)
+        verify_roadmap_swimlane_marker_labels(root, path.name)
+        verify_roadmap_swimlane_markers_avoid_bars(root, path.name)
+        verify_roadmap_swimlane_marker_band_consistency(root, path.name)
+        verify_roadmap_table_readable_text(root, path.name)
+        verify_roadmap_swimlane_table_milestone_links(root, path.name)
+    else:
+        for required_class in ["roadmap-milestone"]:
+            if required_class not in classes:
+                raise AssertionError(f"{path.name}: missing required class {required_class}")
+        if "roadmap-table" not in groups_by_id:
+            raise AssertionError(f"{path.name}: milestone timeline should include the milestone table")
+        verify_roadmap_milestone_timeline_layout(root, path.name)
+
+    text = "\n".join(element.text or "" for element in root.iter() if element.tag.endswith("text"))
+    bilingual_lines = [line for line in text.splitlines() if " / " in line and re.search(r"[\u4e00-\u9fff]", line)]
+    if bilingual_lines:
+        raise AssertionError(f"{path.name}: roadmap timeline should not auto-render bilingual labels: {bilingual_lines[:2]}")
+    if "Roadmap across models A, B, and C" in text:
+        raise AssertionError(f"{path.name}: roadmap title area should not render subtitle text")
+
+    verify_roadmap_legend_layout(root, path.name)
+    verify_roadmap_summary_layout(root, path.name)
+    verify_roadmap_rects_within_canvas(root, path.name)
+
+
+def verify_svg_font_style(root: ET.Element, label: str, *, require_arial: bool = False) -> None:
+    for element in root.iter():
+        weight = element.attrib.get("font-weight")
+        if weight and weight not in ALLOWED_PRESENTATION_FONT_WEIGHTS:
+            raise AssertionError(f"{label}: non-standard SVG font weight {weight} may render differently in PNG export")
+        family = element.attrib.get("font-family")
+        if require_arial and family and family != "Arial":
+            raise AssertionError(f"{label}: expected Arial SVG font family, got {family}")
+
+
+def verify_roadmap_legend_layout(root: ET.Element, label: str) -> None:
+    legend = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-legend"), None)
+    if legend is None:
+        return
+    rects = [child for child in list(legend) if child.tag.endswith("rect")]
+    if not rects:
+        raise AssertionError(f"{label}: roadmap legend missing background rect")
+    rect = rects[0]
+    bottom = float(rect.attrib.get("y", "0")) + float(rect.attrib.get("height", "0"))
+    for text in legend.iter():
+        if text.tag.endswith("text") and float(text.attrib.get("y", "0")) > bottom - 12:
+            raise AssertionError(f"{label}: roadmap legend text collides with the bottom border")
+
+
+def verify_roadmap_summary_layout(root: ET.Element, label: str) -> None:
+    summary = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-summary-panel"), None)
+    if summary is None:
+        return
+    rects = [child for child in list(summary) if child.tag.endswith("rect")]
+    if not rects:
+        raise AssertionError(f"{label}: roadmap summary panel missing background rect")
+    rect = rects[0]
+    bottom = float(rect.attrib.get("y", "0")) + float(rect.attrib.get("height", "0"))
+    for text in summary.iter():
+        if text.tag.endswith("text") and float(text.attrib.get("y", "0")) > bottom - 16:
+            raise AssertionError(f"{label}: roadmap summary text should stay inside its card")
+
+
+def verify_roadmap_legend_clear_of_swimlane_header(root: ET.Element, label: str) -> None:
+    legend = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-legend"), None)
+    header = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-time-header"), None)
+    if legend is None or header is None:
+        return
+    legend_rects = [child for child in list(legend) if child.tag.endswith("rect")]
+    header_rects = [child for child in list(header) if child.tag.endswith("rect")]
+    if not legend_rects or not header_rects:
+        return
+    legend_bottom = max(float(rect.attrib.get("y", "0")) + float(rect.attrib.get("height", "0")) for rect in legend_rects)
+    header_top = min(float(rect.attrib.get("y", "0")) for rect in header_rects)
+    if header_top - legend_bottom < 24:
+        raise AssertionError(f"{label}: swimlane time header should stay at least 24px below the legend")
+
+
+def verify_roadmap_lane_marker_band_sizing(root: ET.Element, label: str) -> None:
+    for lane_group in root.iter():
+        if not lane_group.tag.endswith("g") or "roadmap-lane" not in lane_group.attrib.get("class", "").split():
+            continue
+        marker_band = lane_group.attrib.get("data-marker-band")
+        row_count_text = lane_group.attrib.get("data-row-count")
+        slot_count_text = lane_group.attrib.get("data-marker-slot-count")
+        height_text = lane_group.attrib.get("data-lane-height")
+        if marker_band not in {"true", "false"} or not row_count_text or slot_count_text is None or not height_text:
+            raise AssertionError(f"{label}: roadmap lanes should expose marker-band sizing metadata")
+        row_count = int(float(row_count_text))
+        slot_count = int(float(slot_count_text))
+        height = float(height_text)
+        if (slot_count > 0) != (marker_band == "true"):
+            raise AssertionError(f"{label}: roadmap marker-band metadata should match marker slot need")
+        expected = SWIMLANE_BASE_H + (row_count - 1) * SWIMLANE_ROW_GAP + slot_count * SWIMLANE_MARKER_SLOT_GAP
+        if abs(height - expected) > 0.1:
+            raise AssertionError(f"{label}: roadmap lane height should depend on marker-band need, got {height}, expected {expected}")
+
+
+def verify_roadmap_swimlane_lane_labels(root: ET.Element, label: str) -> None:
+    lanes_group = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-lanes"), None)
+    if lanes_group is None:
+        return
+    panel_rect = next((child for child in list(lanes_group) if child.tag.endswith("rect")), None)
+    if panel_rect is None:
+        return
+    panel_right = float(panel_rect.attrib.get("x", "0")) + float(panel_rect.attrib.get("width", "0"))
+    for lane_group in lanes_group.iter():
+        if not lane_group.tag.endswith("g") or "roadmap-lane" not in lane_group.attrib.get("class", "").split():
+            continue
+        text = next((child for child in list(lane_group) if child.tag.endswith("text") and child.text), None)
+        if text is None:
+            raise AssertionError(f"{label}: roadmap lane missing visible lane label")
+        x = float(text.attrib.get("x", "0"))
+        font_size = float(text.attrib.get("font-size", "15"))
+        estimated_right = x + visual_len(text.text or "") * font_size * 0.56
+        if estimated_right > panel_right - 12:
+            raise AssertionError(f"{label}: swimlane label should stay inside the lane panel")
+
+
+def verify_roadmap_swimlane_initiative_labels(root: ET.Element, label: str) -> None:
+    for group in root.iter():
+        if not group.tag.endswith("g") or "roadmap-initiative" not in group.attrib.get("class", "").split():
+            continue
+        rect = next((child for child in list(group) if child.tag.endswith("rect")), None)
+        text = next((child for child in list(group) if child.tag.endswith("text")), None)
+        if rect is None or text is None:
+            raise AssertionError(f"{label}: roadmap initiative missing bar or label")
+        rect_x = float(rect.attrib.get("x", "0"))
+        rect_w = float(rect.attrib.get("width", "0"))
+        text_x = float(text.attrib.get("x", "0"))
+        font_size = float(text.attrib.get("font-size", "13"))
+        estimated_w = visual_len(text.text or "") * font_size * 0.56
+        if text_x - estimated_w / 2 < rect_x + 4 or text_x + estimated_w / 2 > rect_x + rect_w - 4:
+            raise AssertionError(f"{label}: initiative label should stay inside its bar")
+
+
+def verify_roadmap_milestone_timeline_layout(root: ET.Element, label: str) -> None:
+    axis_lines = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("line") and element.attrib.get("marker-end") == "url(#arrowNavy)"
+    ]
+    if not axis_lines:
+        return
+    axis = axis_lines[0]
+    axis_start = float(axis.attrib.get("x1", "0"))
+    axis_y = float(axis.attrib.get("y1", "0"))
+    axis_end = float(axis.attrib.get("x2", "0"))
+    canvas_width = float(root.attrib["width"])
+    left_margin = axis_start
+    right_margin = canvas_width - axis_end
+    if abs(left_margin - right_margin) > 1:
+        raise AssertionError(f"{label}: milestone timeline axis margins should be balanced")
+
+    phase_group = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-phases"), None)
+    if phase_group is not None:
+        for rect in phase_group.iter():
+            if rect.tag.endswith("rect") and float(rect.attrib.get("y", "0")) <= axis_y:
+                raise AssertionError(f"{label}: milestone phase bands should stay below the timeline axis")
+
+    legend_rect = None
+    legend_group = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-legend"), None)
+    if legend_group is not None:
+        for rect in legend_group.iter():
+            if rect.tag.endswith("rect"):
+                legend_rect = (
+                    float(rect.attrib.get("x", "0")),
+                    float(rect.attrib.get("y", "0")),
+                    float(rect.attrib.get("width", "0")),
+                    float(rect.attrib.get("height", "0")),
+                )
+                break
+
+    milestone_group = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-milestones"), None)
+    if milestone_group is not None:
+        card_rects = []
+        for rect in milestone_group.iter():
+            if rect.tag.endswith("rect"):
+                card_rect = (
+                    float(rect.attrib.get("x", "0")),
+                    float(rect.attrib.get("y", "0")),
+                    float(rect.attrib.get("width", "0")),
+                    float(rect.attrib.get("height", "0")),
+                )
+                card_rects.append(card_rect)
+                rect_bottom = float(rect.attrib.get("y", "0")) + float(rect.attrib.get("height", "0"))
+                if rect_bottom >= axis_y:
+                    raise AssertionError(f"{label}: milestone detail cards should stay above the timeline axis")
+                if legend_rect and rects_overlap(card_rect, legend_rect, 0):
+                    raise AssertionError(f"{label}: milestone detail cards should not overlap the legend")
+        for index, first in enumerate(card_rects):
+            fx, fy, fw, fh = first
+            for second in card_rects[index + 1:]:
+                sx, sy, sw, sh = second
+                if rects_overlap(first, second, 0):
+                    raise AssertionError(f"{label}: milestone detail cards should not overlap")
+
+
+def verify_roadmap_swimlane_marker_labels(root: ET.Element, label: str) -> None:
+    header = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-time-header"), None)
+    if header is None:
+        return
+    rects = [child for child in list(header) if child.tag.endswith("rect")]
+    if not rects:
+        return
+    header_bottom = max(float(rect.attrib.get("y", "0")) + float(rect.attrib.get("height", "0")) for rect in rects)
+    marker_groups = [
+        element
+        for element in root.iter()
+        if element.tag.endswith("g")
+        and (
+            "roadmap-milestone" in element.attrib.get("class", "")
+            or "roadmap-decision" in element.attrib.get("class", "")
+        )
+    ]
+    for group in marker_groups:
+        for text in group.iter():
+            if text.tag.endswith("text") and float(text.attrib.get("y", "0")) < header_bottom + 14:
+                raise AssertionError(f"{label}: swimlane milestone labels should stay out of the time header")
+
+
+def verify_roadmap_swimlane_markers_avoid_bars(root: ET.Element, label: str) -> None:
+    initiative_rects: list[tuple[float, float, float, float]] = []
+    marker_points: list[tuple[float, float]] = []
+    for group in root.iter():
+        if not group.tag.endswith("g"):
+            continue
+        class_name = group.attrib.get("class", "")
+        if "roadmap-initiative" in class_name:
+            for rect in list(group):
+                if rect.tag.endswith("rect"):
+                    initiative_rects.append(
+                        (
+                            float(rect.attrib.get("x", "0")),
+                            float(rect.attrib.get("y", "0")),
+                            float(rect.attrib.get("width", "0")),
+                            float(rect.attrib.get("height", "0")),
+                        )
+                    )
+        if "roadmap-milestone" in class_name or "roadmap-decision" in class_name:
+            for shape in list(group):
+                if shape.tag.endswith("circle"):
+                    marker_points.append((float(shape.attrib.get("cx", "0")), float(shape.attrib.get("cy", "0"))))
+                elif shape.tag.endswith("polygon"):
+                    values = [float(value) for value in re.findall(r"-?\d+(?:\.\d+)?", shape.attrib.get("points", ""))]
+                    if values:
+                        xs = values[0::2]
+                        ys = values[1::2]
+                        marker_points.append((sum(xs) / len(xs), sum(ys) / len(ys)))
+    for marker_x, marker_y in marker_points:
+        for x, y, width, height in initiative_rects:
+            if x - 6 <= marker_x <= x + width + 6 and y - 6 <= marker_y <= y + height + 6:
+                raise AssertionError(f"{label}: swimlane milestone marker should not collide with initiative bars")
+
+
+def verify_roadmap_swimlane_marker_band_consistency(root: ET.Element, label: str) -> None:
+    marker_rects_by_lane: dict[str, list[tuple[float, float, float, float]]] = {}
+    for group in root.iter():
+        if not group.tag.endswith("g"):
+            continue
+        class_name = group.attrib.get("class", "")
+        if "roadmap-milestone" not in class_name and "roadmap-decision" not in class_name:
+            continue
+        lane_id = group.attrib.get("data-lane-id", "")
+        if not lane_id:
+            continue
+        rect = roadmap_marker_label_rect(group)
+        if rect is not None:
+            marker_rects_by_lane.setdefault(lane_id, []).append(rect)
+    for lane_id, rects in marker_rects_by_lane.items():
+        for index, first in enumerate(rects):
+            for second in rects[index + 1:]:
+                if rects_overlap(first, second, 2):
+                    raise AssertionError(f"{label}: swimlane markers and decisions in lane {lane_id} should not overlap")
+
+
+def roadmap_marker_label_rect(group: ET.Element) -> tuple[float, float, float, float] | None:
+    center: tuple[float, float] | None = None
+    label_text = ""
+    label_x = 0.0
+    label_y = 0.0
+    for child in list(group):
+        if child.tag.endswith("circle"):
+            center = (float(child.attrib.get("cx", "0")), float(child.attrib.get("cy", "0")))
+        elif child.tag.endswith("polygon"):
+            values = [float(value) for value in re.findall(r"-?\d+(?:\.\d+)?", child.attrib.get("points", ""))]
+            if values:
+                xs = values[0::2]
+                ys = values[1::2]
+                center = (sum(xs) / len(xs), sum(ys) / len(ys))
+        elif child.tag.endswith("text"):
+            label_text = child.text or ""
+            label_x = float(child.attrib.get("x", "0"))
+            label_y = float(child.attrib.get("y", "0"))
+    if center is None:
+        return None
+    cx, cy = center
+    text_right = label_x + visual_len(label_text) * 6.8
+    left = min(cx - 12, label_x)
+    top = min(cy - 12, label_y - 13)
+    right = max(cx + 12, text_right)
+    bottom = max(cy + 12, label_y + 3)
+    return (left, top, right - left, bottom - top)
+
+
+def verify_roadmap_table_readable_text(root: ET.Element, label: str) -> None:
+    table = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-table"), None)
+    if table is None:
+        return
+    font_sizes = [
+        float(element.attrib.get("font-size", "0"))
+        for element in table.iter()
+        if element.tag.endswith("text")
+    ]
+    if font_sizes and min(font_sizes) < 13:
+        raise AssertionError(f"{label}: roadmap table text should not be smaller than 13px")
+
+
+def verify_roadmap_swimlane_table_milestone_links(root: ET.Element, label: str) -> None:
+    if label != "roadmap.swimlane.output.svg":
+        return
+    table = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-table"), None)
+    if table is None:
+        raise AssertionError(f"{label}: missing roadmap table")
+    table_text = "\n".join(element.text or "" for element in table.iter() if element.tag.endswith("text"))
+    for expected in ["M1: Model A Launch", "M2: DVT Complete"]:
+        if expected not in table_text:
+            raise AssertionError(f"{label}: swimlane initiative table should link related key milestones, missing {expected}")
+
+
+def verify_roadmap_rects_within_canvas(root: ET.Element, label: str) -> None:
+    canvas_width = float(root.attrib["width"])
+    canvas_height = float(root.attrib["height"])
+    for rect in root.iter():
+        if not rect.tag.endswith("rect"):
+            continue
+        attrs = rect.attrib
+        if not {"x", "y", "width", "height"} <= set(attrs):
+            continue
+        x = float(attrs["x"])
+        y = float(attrs["y"])
+        width = float(attrs["width"])
+        height = float(attrs["height"])
+        if x < -0.1 or y < -0.1 or x + width > canvas_width + 0.1 or y + height > canvas_height + 0.1:
+            raise AssertionError(
+                f"{label}: roadmap rect outside canvas: x={x}, y={y}, w={width}, h={height}, canvas={canvas_width}x{canvas_height}"
             )
 
 
@@ -1509,6 +1916,17 @@ def two_by_two_template_paths() -> list[Path]:
     return paths
 
 
+def roadmap_template_paths() -> list[Path]:
+    return [
+        TEMPLATES / "roadmap-timeline.template.md",
+        TEMPLATES / "roadmap-timeline.template.json",
+        TEMPLATES / "roadmap-timeline.swimlane-roadmap.template.md",
+        TEMPLATES / "roadmap-timeline.swimlane-roadmap.template.json",
+        TEMPLATES / "roadmap-timeline.milestone-timeline.template.md",
+        TEMPLATES / "roadmap-timeline.milestone-timeline.template.json",
+    ]
+
+
 def verify_templates() -> None:
     md_template = TEMPLATES / "fishbone.template.md"
     json_template = TEMPLATES / "fishbone.template.json"
@@ -1517,6 +1935,7 @@ def verify_templates() -> None:
     exclusion_tree_md_template = TEMPLATES / "exclusion-tree.template.md"
     exclusion_tree_json_template = TEMPLATES / "exclusion-tree.template.json"
     two_by_two_templates = two_by_two_template_paths()
+    roadmap_templates = roadmap_template_paths()
     two_by_two_md_template = TEMPLATES / "two-by-two-matrix.template.md"
     two_by_two_json_template = TEMPLATES / "two-by-two-matrix.template.json"
     for path in [
@@ -1527,6 +1946,7 @@ def verify_templates() -> None:
         exclusion_tree_md_template,
         exclusion_tree_json_template,
         *two_by_two_templates,
+        *roadmap_templates,
     ]:
         if not path.exists():
             raise AssertionError(f"Missing template: {path.name}")
@@ -1570,6 +1990,15 @@ def verify_templates() -> None:
         verify_two_by_two_template_structure(two_by_two_data, template_path.name)
         verify_two_by_two_template_guidance(template_path, two_by_two_data)
 
+    for template_path in roadmap_templates:
+        if template_path.suffix == ".md":
+            roadmap_data = parse_input(template_path)
+        else:
+            roadmap_data = json.loads(template_path.read_text(encoding="utf-8"))
+            if not isinstance(roadmap_data, dict):
+                raise AssertionError(f"{template_path.name}: JSON template must be an object")
+        verify_roadmap_template_structure(roadmap_data, template_path.name)
+
     pid = os.getpid()
     template_outputs = [
         TEMPLATES / f"fishbone.template.md.{pid}.tmp.svg",
@@ -1579,6 +2008,7 @@ def verify_templates() -> None:
         TEMPLATES / f"exclusion-tree.template.md.{pid}.tmp.svg",
         TEMPLATES / f"exclusion-tree.template.json.{pid}.tmp.svg",
         *[TEMPLATES / f"{path.name}.{pid}.tmp.svg" for path in two_by_two_templates],
+        *[TEMPLATES / f"{path.name}.{pid}.tmp.svg" for path in roadmap_templates],
     ]
     try:
         run_generate(md_template, template_outputs[0])
@@ -1587,7 +2017,12 @@ def verify_templates() -> None:
         run_generate(fault_tree_json_template, template_outputs[3])
         run_generate(exclusion_tree_md_template, template_outputs[4])
         run_generate(exclusion_tree_json_template, template_outputs[5])
-        for template_path, output_path in zip(two_by_two_templates, template_outputs[6:]):
+        two_by_two_output_start = 6
+        two_by_two_output_end = two_by_two_output_start + len(two_by_two_templates)
+        roadmap_output_start = two_by_two_output_end
+        for template_path, output_path in zip(two_by_two_templates, template_outputs[two_by_two_output_start:two_by_two_output_end]):
+            run_generate(template_path, output_path)
+        for template_path, output_path in zip(roadmap_templates, template_outputs[roadmap_output_start:]):
             run_generate(template_path, output_path)
         verify_svg_basics(template_outputs[0])
         verify_svg_basics(template_outputs[1])
@@ -1595,8 +2030,10 @@ def verify_templates() -> None:
         verify_fault_tree_svg_basics(template_outputs[3])
         verify_exclusion_tree_svg_basics(template_outputs[4])
         verify_exclusion_tree_svg_basics(template_outputs[5])
-        for output_path in template_outputs[6:]:
+        for output_path in template_outputs[two_by_two_output_start:two_by_two_output_end]:
             verify_two_by_two_svg_basics(output_path)
+        for output_path in template_outputs[roadmap_output_start:]:
+            verify_roadmap_timeline_svg_basics(output_path)
     finally:
         for output_path in template_outputs:
             output_path.unlink(missing_ok=True)
@@ -1612,6 +2049,8 @@ def verify_cmd_launchers() -> None:
         "排除树工具.cmd": "exclusion_tree_tool.cmd",
         "two_by_two_matrix_tool.cmd": "scripts\\new_two_by_two_matrix.py",
         "二乘二矩阵工具.cmd": "two_by_two_matrix_tool.cmd",
+        "roadmap_timeline_tool.cmd": "scripts\\new_roadmap_timeline.py",
+        "路线图时间线工具.cmd": "roadmap_timeline_tool.cmd",
         "diagram_builder.cmd": "scripts\\diagram_builder_server.py",
         "图表编辑器.cmd": "diagram_builder.cmd",
     }
@@ -1619,9 +2058,14 @@ def verify_cmd_launchers() -> None:
         path = ROOT / name
         if not path.exists():
             raise AssertionError(f"Missing launcher: {name}")
-        text = path.read_text(encoding="utf-8", errors="ignore")
+        raw = path.read_bytes()
+        text = raw.decode("utf-8", errors="ignore")
         if expected_text not in text:
             raise AssertionError(f"{name}: launcher does not reference {expected_text}")
+        if b"\n" in raw.replace(b"\r\n", b""):
+            raise AssertionError(f"{name}: Windows launcher must use CRLF line endings so cmd.exe can resolve labels")
+        if expected_text.endswith(".cmd") and "%*" not in text:
+            raise AssertionError(f"{name}: wrapper launcher should forward command-line arguments with %*")
 
 
 def verify_template_structure(data: dict[str, object], label: str) -> None:
@@ -1788,6 +2232,40 @@ def verify_two_by_two_template_guidance(path: Path, data: dict[str, object]) -> 
         raise AssertionError(f"{path.name}: Markdown template should not include item-level Notes column")
 
 
+def verify_roadmap_template_structure(data: dict[str, object], label: str) -> None:
+    if str(data.get("diagram_type", "")).replace("-", "_") != "roadmap_timeline":
+        raise AssertionError(f"{label}: template must use diagram_type=roadmap_timeline")
+    if str(data.get("preset", "")).strip() not in {"swimlane_roadmap", "milestone_timeline"}:
+        raise AssertionError(f"{label}: template must use a supported roadmap preset")
+    if not str(data.get("title", "")).strip():
+        raise AssertionError(f"{label}: template must include a title")
+    if str(data.get("subtitle", "")).strip():
+        raise AssertionError(f"{label}: roadmap templates should not include title-area subtitle metadata")
+    if not str(data.get("goal", "")).strip():
+        raise AssertionError(f"{label}: roadmap templates should include a visible goal line")
+
+    preset = str(data.get("preset", "")).strip()
+    if preset == "swimlane_roadmap":
+        periods = data.get("periods", data.get("time_periods"))
+        if not isinstance(periods, list) or len(periods) < 3:
+            raise AssertionError(f"{label}: swimlane roadmap template must include at least three periods")
+        for index, period in enumerate(periods, start=1):
+            if not isinstance(period, dict) or not str(period.get("label", "")).strip():
+                raise AssertionError(f"{label}: period {index} must include a label")
+        lanes = data.get("lanes")
+        initiatives = data.get("initiatives")
+        if not isinstance(lanes, list) or len(lanes) < 2:
+            raise AssertionError(f"{label}: swimlane roadmap template must include multiple lanes")
+        if not isinstance(initiatives, list) or len(initiatives) < 2:
+            raise AssertionError(f"{label}: swimlane roadmap template must include multiple initiatives")
+    else:
+        milestones = data.get("milestones")
+        if not isinstance(milestones, list) or len(milestones) < 4:
+            raise AssertionError(f"{label}: milestone timeline template must include multiple milestones")
+        if data.get("show_table") is not True:
+            raise AssertionError(f"{label}: milestone timeline template should enable the milestone table")
+
+
 def verify_no_tmp_files(path: Path) -> None:
     if not path.exists():
         return
@@ -1944,6 +2422,56 @@ def verify_new_two_by_two_entrypoint() -> None:
         )
         if overwrite_result.returncode == 0:
             raise AssertionError("new_two_by_two_matrix.py should refuse to overwrite existing work files without --force")
+    finally:
+        for path in [input_path, preset_input_path, output_path, preset_output_path]:
+            path.unlink(missing_ok=True)
+
+
+def verify_new_roadmap_entrypoint() -> None:
+    stem = f"verify-new-roadmap-{os.getpid()}"
+    input_path = ROADMAP_WORK / f"{stem}.md"
+    preset_input_path = ROADMAP_WORK / f"{stem}-preset.md"
+    output_path = ROADMAP_WORK / f"{stem}.svg"
+    preset_output_path = ROADMAP_WORK / f"{stem}-preset.svg"
+    try:
+        ROADMAP_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [input_path, preset_input_path, output_path, preset_output_path]:
+            path.unlink(missing_ok=True)
+        result = subprocess.run(
+            [str(PYTHON), str(NEW_ROADMAP), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise AssertionError(f"new_roadmap_timeline.py failed:\n{result.stderr}")
+        if not input_path.exists() or not output_path.exists():
+            raise AssertionError("new_roadmap_timeline.py did not create expected work files")
+        verify_roadmap_timeline_svg_basics(output_path)
+
+        preset_result = subprocess.run(
+            [str(PYTHON), str(NEW_ROADMAP), f"{stem}-preset", "--format", "md", "--preset", "milestone_timeline"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if preset_result.returncode != 0:
+            raise AssertionError(f"new_roadmap_timeline.py failed with --preset:\n{preset_result.stderr}")
+        if "preset: milestone_timeline" not in preset_input_path.read_text(encoding="utf-8"):
+            raise AssertionError("new_roadmap_timeline.py --preset did not copy the requested preset template")
+        verify_roadmap_timeline_svg_basics(preset_output_path)
+
+        overwrite_result = subprocess.run(
+            [str(PYTHON), str(NEW_ROADMAP), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if overwrite_result.returncode == 0:
+            raise AssertionError("new_roadmap_timeline.py should refuse to overwrite existing work files without --force")
     finally:
         for path in [input_path, preset_input_path, output_path, preset_output_path]:
             path.unlink(missing_ok=True)
@@ -2188,6 +2716,66 @@ def verify_render_two_by_two_work_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_render_roadmap_work_entrypoint() -> None:
+    stem = f"verify-render-roadmap-{os.getpid()}"
+    md_input_path = ROADMAP_WORK / f"{stem}.md"
+    json_input_path = ROADMAP_WORK / f"{stem}.json"
+    output_path = ROADMAP_WORK / f"{stem}.svg"
+    try:
+        ROADMAP_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_ROADMAP), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_roadmap_timeline.py failed during render_roadmap verification:\n{create_result.stderr}")
+
+        output_path.unlink(missing_ok=True)
+        render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_ROADMAP_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if render_result.returncode != 0:
+            raise AssertionError(f"render_roadmap_timeline_work.py failed:\n{render_result.stderr}")
+        if not output_path.exists():
+            raise AssertionError("render_roadmap_timeline_work.py did not create the expected SVG")
+        verify_roadmap_timeline_svg_basics(output_path)
+
+        json_input_path.write_text((TEMPLATES / "roadmap-timeline.template.json").read_text(encoding="utf-8"), encoding="utf-8")
+        ambiguous_result = subprocess.run(
+            [str(PYTHON), str(RENDER_ROADMAP_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if ambiguous_result.returncode == 0:
+            raise AssertionError("render_roadmap_timeline_work.py should require --format when md and json inputs both exist")
+
+        format_result = subprocess.run(
+            [str(PYTHON), str(RENDER_ROADMAP_WORK), stem, "--format", "json"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if format_result.returncode != 0:
+            raise AssertionError(f"render_roadmap_timeline_work.py --format json failed:\n{format_result.stderr}")
+        verify_roadmap_timeline_svg_basics(output_path)
+    finally:
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_export_png_entrypoint() -> None:
     from PIL import Image
 
@@ -2397,6 +2985,59 @@ def verify_export_two_by_two_png_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_export_roadmap_png_entrypoint() -> None:
+    from PIL import Image
+
+    stem = f"verify-export-roadmap-png-{os.getpid()}"
+    input_path = ROADMAP_WORK / f"{stem}.md"
+    svg_path = ROADMAP_WORK / f"{stem}.svg"
+    png_path = ROADMAP_WORK / f"{stem}.png"
+    try:
+        ROADMAP_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_ROADMAP), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_roadmap_timeline.py failed during PNG export verification:\n{create_result.stderr}")
+
+        export_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_ROADMAP_PNG), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if export_result.returncode != 0:
+            raise AssertionError(f"export_roadmap_timeline_png.py failed:\n{export_result.stderr}")
+        if not png_path.exists():
+            raise AssertionError("export_roadmap_timeline_png.py did not create the expected PNG")
+
+        svg_size = svg_dimensions(svg_path)
+        with Image.open(png_path) as image:
+            if image.size != svg_size:
+                raise AssertionError(f"Roadmap timeline PNG dimensions {image.size} do not match SVG dimensions {svg_size}")
+
+        unsafe_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_ROADMAP_PNG), "../outside"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if unsafe_result.returncode == 0:
+            raise AssertionError("export_roadmap_timeline_png.py accepted an unsafe name")
+    finally:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_diagram_builder_service() -> None:
     from PIL import Image
 
@@ -2404,6 +3045,7 @@ def verify_diagram_builder_service() -> None:
     import diagram_builder_server
     verify_diagram_builder_exclusion_language_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_two_by_two_ui(diagram_builder_server.INDEX_HTML)
+    verify_diagram_builder_roadmap_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_load_file_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_preview_zoom_ui(diagram_builder_server.INDEX_HTML)
 
@@ -2412,6 +3054,7 @@ def verify_diagram_builder_service() -> None:
         "fault_tree": f"verify-builder-fault-tree-{os.getpid()}",
         "exclusion_tree": f"verify-builder-exclusion-tree-{os.getpid()}",
         "two_by_two_matrix": f"verify-builder-two-by-two-{os.getpid()}",
+        "roadmap_timeline": f"verify-builder-roadmap-{os.getpid()}",
     }
     paths: list[Path] = []
     try:
@@ -2430,6 +3073,11 @@ def verify_diagram_builder_service() -> None:
         if loaded_type != "two_by_two_matrix" or loaded_data.get("diagram_type") != "two_by_two_matrix":
             raise AssertionError("diagram_builder_server failed to parse a loaded two-by-two Markdown file")
 
+        roadmap_md = (TEMPLATES / "roadmap-timeline.milestone-timeline.template.md").read_text(encoding="utf-8")
+        loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-roadmap.md", roadmap_md)
+        if loaded_type != "roadmap_timeline" or loaded_data.get("diagram_type") != "roadmap_timeline":
+            raise AssertionError("diagram_builder_server failed to parse a loaded roadmap Markdown file")
+
         for diagram_type, stem in stems.items():
             data = diagram_builder_server.load_template(diagram_type)
             json_path = diagram_builder_server.save_work_json(diagram_type, stem, data)
@@ -2444,6 +3092,16 @@ def verify_diagram_builder_service() -> None:
                 raise AssertionError(f"Unexpected render message for {diagram_type}: {svg_text_message}")
             if "Exported PNG" not in png_message:
                 raise AssertionError(f"Unexpected PNG message for {diagram_type}: {png_message}")
+            if diagram_type == "fishbone":
+                verify_svg_basics(svg_path)
+            elif diagram_type == "fault_tree":
+                verify_fault_tree_svg_basics(svg_path)
+            elif diagram_type == "exclusion_tree":
+                verify_exclusion_tree_svg_basics(svg_path)
+            elif diagram_type == "two_by_two_matrix":
+                verify_two_by_two_svg_basics(svg_path)
+            elif diagram_type == "roadmap_timeline":
+                verify_roadmap_timeline_svg_basics(svg_path)
             expected_size = svg_dimensions(svg_path)
             with Image.open(png_path) as image:
                 if image.size != expected_size:
@@ -2532,6 +3190,51 @@ def verify_diagram_builder_two_by_two_ui(index_html: str) -> None:
         raise AssertionError("diagram builder two-by-two Markdown export should preserve visible Notes")
     if "| Note |" in markdown_html or "item.note" in markdown_html:
         raise AssertionError("diagram builder two-by-two Markdown export should not write non-rendered item-level notes")
+
+
+def verify_diagram_builder_roadmap_ui(index_html: str) -> None:
+    if '<option value="roadmap_timeline">Roadmap Timeline</option>' not in index_html:
+        raise AssertionError("diagram builder should expose Roadmap Timeline in the diagram type selector")
+    start = index_html.find("function renderRoadmapForm()")
+    end = index_html.find('$("newBtn")', start)
+    roadmap_html = index_html[start:end] if start >= 0 and end > start else index_html
+    if "function renderRoadmapForm()" not in roadmap_html:
+        raise AssertionError("diagram builder roadmap UI missing renderRoadmapForm")
+    if 'row("Subtitle"' in roadmap_html:
+        raise AssertionError("diagram builder roadmap UI should not expose a title-area subtitle control")
+    for required in [
+        'row("Title"',
+        'row("Goal"',
+        'row("Preset"',
+        "swimlane_roadmap",
+        "milestone_timeline",
+        "Time Periods",
+        "Lanes",
+        "Initiatives",
+        "Milestones",
+        "Decision Points",
+        "Phases",
+        "Notes",
+    ]:
+        if required not in roadmap_html:
+            raise AssertionError(f"diagram builder roadmap UI missing expected control: {required}")
+    if "ROADMAP_PRESET_TEMPLATES" not in index_html or "applyRoadmapPreset(value)" not in roadmap_html:
+        raise AssertionError("diagram builder roadmap preset changes should reload preset-specific template data")
+    if "applyRoadmapGranularity(value)" not in roadmap_html or "buildRoadmapPeriods(roadmapDateRange()" not in roadmap_html:
+        raise AssertionError("diagram builder roadmap granularity changes should rebuild generated time periods")
+    if "roadmap-period-row" not in roadmap_html or "roadmap-card-grid" not in roadmap_html:
+        raise AssertionError("diagram builder roadmap UI should use compact period rows and card-style item editors")
+    if "input(period.id" in roadmap_html or "input(period.subtitle" in roadmap_html:
+        raise AssertionError("diagram builder roadmap period UI should not expose generated id/subtitle fields")
+    if "roadmap_timeline: { minPeriods" not in index_html:
+        raise AssertionError("diagram builder roadmap UI should expose roadmap validation limits")
+    markdown_start = index_html.find("function roadmapToMarkdown()")
+    markdown_end = index_html.find("async function loadSvgIfExists()", markdown_start)
+    markdown_html = index_html[markdown_start:markdown_end] if markdown_start >= 0 and markdown_end > markdown_start else index_html
+    if "**Goal:**" not in markdown_html:
+        raise AssertionError("diagram builder roadmap Markdown export should write a visible Goal line")
+    if "subtitle:" in markdown_html:
+        raise AssertionError("diagram builder roadmap Markdown export should not write title-area subtitle metadata")
 
 
 def verify_diagram_builder_load_file_ui(index_html: str) -> None:
@@ -2697,6 +3400,26 @@ def verify_work_name_validation() -> None:
         )
         if two_by_two_render_result.returncode == 0:
             raise AssertionError(f"render_two_by_two_matrix_work.py accepted unsafe name: {unsafe_name}")
+
+        roadmap_create_result = subprocess.run(
+            [str(PYTHON), str(NEW_ROADMAP), unsafe_name, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if roadmap_create_result.returncode == 0:
+            raise AssertionError(f"new_roadmap_timeline.py accepted unsafe name: {unsafe_name}")
+
+        roadmap_render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_ROADMAP_WORK), unsafe_name],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if roadmap_render_result.returncode == 0:
+            raise AssertionError(f"render_roadmap_timeline_work.py accepted unsafe name: {unsafe_name}")
 
 
 def parse_path_numbers(path_data: str) -> list[float]:

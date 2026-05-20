@@ -1,0 +1,38 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "swimlane_roadmap",
+  "lane_type": "product_model",
+  "title": "Product Model Roadmap",
+  "subtitle": "Roadmap across models A, B, and C",
+  "goal": "Align product model launches and validation milestones.",
+  "time_granularity": "quarter",
+  "time_periods": [
+    {"id": "2025Q2", "label": "2025 Q2", "subtitle": "Apr - Jun", "start": "2025-04-01", "end": "2025-06-30"},
+    {"id": "2025Q3", "label": "2025 Q3", "subtitle": "Jul - Sep", "start": "2025-07-01", "end": "2025-09-30"},
+    {"id": "2025Q4", "label": "2025 Q4", "subtitle": "Oct - Dec", "start": "2025-10-01", "end": "2025-12-31"},
+    {"id": "2026Q1", "label": "2026 Q1", "subtitle": "Jan - Mar", "start": "2026-01-01", "end": "2026-03-31"}
+  ],
+  "lanes": [
+    {"id": "A", "name": "Model A", "subtitle": "Entry Level", "color": "blue"},
+    {"id": "B", "name": "Model B", "subtitle": "Standard", "color": "teal"},
+    {"id": "C", "name": "Model C", "subtitle": "Premium", "color": "purple"}
+  ],
+  "initiatives": [
+    {"id": "A1", "lane_id": "A", "name": "Concept", "start": "2025-04-01", "end": "2025-06-30", "owner": "Product", "status": "completed"},
+    {"id": "A2", "lane_id": "A", "name": "EVT", "start": "2025-07-01", "end": "2025-09-30", "owner": "Engineering", "status": "in_progress"},
+    {"id": "A3", "lane_id": "A", "name": "Launch", "start": "2025-10-01", "end": "2025-12-31", "owner": "Product", "status": "planned"},
+    {"id": "B1", "lane_id": "B", "name": "Architecture", "start": "2025-04-01", "end": "2025-09-30", "owner": "Engineering", "status": "in_progress"},
+    {"id": "B2", "lane_id": "B", "name": "DVT", "start": "2025-10-01", "end": "2026-03-31", "owner": "Validation", "status": "planned"},
+    {"id": "C1", "lane_id": "C", "name": "Feasibility", "start": "2025-07-01", "end": "2025-12-31", "owner": "R&D", "status": "planned"}
+  ],
+  "milestones": [
+    {"id": "M1", "lane_id": "A", "name": "Model A Launch", "date": "2025-11-15", "type": "launch"},
+    {"id": "M2", "lane_id": "B", "name": "DVT Complete", "date": "2026-03-15", "type": "key_milestone"}
+  ],
+  "decision_points": [
+    {"id": "D1", "lane_id": "C", "name": "Go / No-Go", "date": "2025-12-01", "type": "decision"}
+  ],
+  "notes": ["Review launch dependencies monthly."],
+  "show_table": true,
+  "show_summary_panel": true
+}

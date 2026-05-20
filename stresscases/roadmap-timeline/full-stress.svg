@@ -1,0 +1,483 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2390" height="1719" viewBox="0 0 2390 1719">
+<defs>
+  <marker id="arrowNavy" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0B3A75"/>
+  </marker>
+</defs>
+<rect width="2390" height="1719" fill="#FFFFFF"/>
+<text x="36" y="72" font-family="Arial" font-size="40" font-weight="700" fill="#0B3A75">Dense Swimlane Roadmap Stresscase</text>
+<text x="38" y="112" font-family="Arial" font-size="18" font-weight="700" fill="#0B3A75">Goal: <tspan font-weight="500">Verify canvas expansion, lane stacking, milestones, decisions, table, and summary panel.</tspan></text>
+<g id="roadmap-legend" class="roadmap-legend">
+<rect x="1870" y="32" width="500" height="142" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.2"/>
+<text x="1888" y="60" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Legend</text>
+<rect x="1894" y="74" width="20" height="14" rx="3" fill="#2F6BFF" />
+<text x="1926" y="86" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Lane / Initiative</text>
+<rect x="2064" y="74" width="20" height="14" rx="3" fill="#2E9D5B" />
+<text x="2096" y="86" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Completed</text>
+<rect x="1894" y="104" width="20" height="14" rx="3" fill="#F0A22E" />
+<text x="1926" y="116" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">At Risk</text>
+<rect x="2064" y="104" width="20" height="14" rx="3" fill="#D64545" />
+<text x="2096" y="116" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Blocked</text>
+<circle cx="2200" cy="86" r="10" fill="#0B3A75"/>
+<text x="2224" y="91" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Milestone</text>
+<polygon points="2200.0,106.0 2202.6,112.4 2209.5,112.9 2204.3,117.4 2205.9,124.1 2200.0,120.5 2194.1,124.1 2195.7,117.4 2190.5,112.9 2197.4,112.4" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="2224" y="121" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Key Milestone</text>
+<polygon points="2200,136 2210,146 2200,156 2190,146" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="2224" y="151" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Decision Point</text>
+</g>
+<g id="roadmap-timeline" class="roadmap-timeline roadmap-swimlane">
+<g id="roadmap-time-header" class="roadmap-time-header">
+<rect x="270" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="375.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2025 Q1</text>
+<text x="375.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Jan - Mar</text>
+<rect x="480" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="585.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2025 Q2</text>
+<text x="585.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Apr - Jun</text>
+<rect x="690" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="795.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2025 Q3</text>
+<text x="795.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Jul - Sep</text>
+<rect x="900" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1005.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2025 Q4</text>
+<text x="1005.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Oct - Dec</text>
+<rect x="1110" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1215.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2026 Q1</text>
+<text x="1215.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Jan - Mar</text>
+<rect x="1320" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1425.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2026 Q2</text>
+<text x="1425.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Apr - Jun</text>
+<rect x="1530" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1635.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2026 Q3</text>
+<text x="1635.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Jul - Sep</text>
+<rect x="1740" y="205" width="210" height="60" fill="#0B3A75" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1845.0" y="229" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#FFFFFF">2026 Q4</text>
+<text x="1845.0" y="251" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Oct - Dec</text>
+</g>
+<g id="roadmap-lanes" class="roadmap-lanes">
+<rect x="30" y="265" width="240" height="776" rx="8" fill="#F7FAFD" stroke="#D8E1EE" stroke-width="1"/>
+<g class="roadmap-lane" data-lane-id="design" data-marker-band="true" data-row-count="2" data-marker-slot-count="1" data-lane-height="140.0">
+<circle cx="64" cy="335.0" r="16" fill="#2F6BFF"/>
+<g class="lucide-icon lucide-component" transform="translate(55.0 326.0) scale(0.750)" stroke="#FFFFFF" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z" />
+  <path d="M2.297 11.293a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0z" />
+  <path d="M8.916 17.912a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0z" />
+  <path d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z" />
+</g>
+<text x="90" y="340.0" font-family="Arial" font-size="15" font-weight="700" fill="#0B234A">Design</text>
+</g>
+<g class="roadmap-lane" data-lane-id="platform" data-marker-band="true" data-row-count="2" data-marker-slot-count="1" data-lane-height="140.0">
+<circle cx="64" cy="475.0" r="16" fill="#2C9C96"/>
+<g class="lucide-icon lucide-layers" transform="translate(55.0 466.0) scale(0.750)" stroke="#FFFFFF" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+  <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+  <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+</g>
+<text x="90" y="480.0" font-family="Arial" font-size="15" font-weight="700" fill="#0B234A">Platform</text>
+</g>
+<g class="roadmap-lane" data-lane-id="firmware" data-marker-band="false" data-row-count="2" data-marker-slot-count="0" data-lane-height="112.0">
+<circle cx="64" cy="601.0" r="16" fill="#7A5CCB"/>
+<g class="lucide-icon lucide-circuit-board" transform="translate(55.0 592.0) scale(0.750)" stroke="#FFFFFF" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <path d="M11 9h4a2 2 0 0 0 2-2V3" />
+  <circle cx="9" cy="9" r="2" />
+  <path d="M7 21v-4a2 2 0 0 1 2-2h4" />
+  <circle cx="15" cy="15" r="2" />
+</g>
+<text x="90" y="606.0" font-family="Arial" font-size="15" font-weight="700" fill="#0B234A">Firmware</text>
+</g>
+<g class="roadmap-lane" data-lane-id="validation" data-marker-band="true" data-row-count="2" data-marker-slot-count="1" data-lane-height="140.0">
+<circle cx="64" cy="727.0" r="16" fill="#F0A22E"/>
+<g class="lucide-icon lucide-clipboard-check" transform="translate(55.0 718.0) scale(0.750)" stroke="#FFFFFF" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+  <path d="m9 14 2 2 4-4" />
+</g>
+<text x="90" y="732.0" font-family="Arial" font-size="15" font-weight="700" fill="#0B234A">Validation</text>
+</g>
+<g class="roadmap-lane" data-lane-id="operations" data-marker-band="true" data-row-count="2" data-marker-slot-count="1" data-lane-height="140.0">
+<circle cx="64" cy="867.0" r="16" fill="#2E9D5B"/>
+<g class="lucide-icon lucide-factory" transform="translate(55.0 858.0) scale(0.750)" stroke="#FFFFFF" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 16h.01" />
+  <path d="M16 16h.01" />
+  <path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 10.5v-2a.5.5 0 0 0-.769-.422L9.77 10.922A.5.5 0 0 1 9 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" />
+  <path d="M8 16h.01" />
+</g>
+<text x="90" y="872.0" font-family="Arial" font-size="15" font-weight="700" fill="#0B234A">Operations</text>
+</g>
+<g class="roadmap-lane" data-lane-id="launch" data-marker-band="true" data-row-count="1" data-marker-slot-count="1" data-lane-height="104.0">
+<circle cx="64" cy="989.0" r="16" fill="#8A96A8"/>
+<g class="lucide-icon lucide-rocket" transform="translate(55.0 980.0) scale(0.750)" stroke="#FFFFFF" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" />
+  <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" />
+  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" />
+</g>
+<text x="90" y="994.0" font-family="Arial" font-size="15" font-weight="700" fill="#0B234A">Launch</text>
+</g>
+</g>
+<g id="roadmap-grid" class="roadmap-grid">
+<rect x="270" y="265" width="1680" height="776" fill="#FFFFFF" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="265" x2="270" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="480" y1="265" x2="480" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="690" y1="265" x2="690" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="900" y1="265" x2="900" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1110" y1="265" x2="1110" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1320" y1="265" x2="1320" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1530" y1="265" x2="1530" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1740" y1="265" x2="1740" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1950" y1="265" x2="1950" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="405" x2="1950" y2="405" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="545" x2="1950" y2="545" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="657" x2="1950" y2="657" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="797" x2="1950" y2="797" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="937" x2="1950" y2="937" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="270" y1="1041" x2="1950" y2="1041" stroke="#D8E1EE" stroke-width="1"/>
+</g>
+<g id="roadmap-initiatives" class="roadmap-initiatives">
+<g class="roadmap-initiative" data-id="D1" data-lane-id="design">
+<rect x="270.0" y="285" width="420.0" height="28" rx="6" fill="#DCEBFF" stroke="#2F6BFF" stroke-width="1.2"/>
+<text x="480.0" y="303" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">D1 Architecture</text>
+<circle cx="682.0" cy="299" r="7" fill="#2E9D5B" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="D2" data-lane-id="design">
+<rect x="480.0" y="321" width="420.0" height="28" rx="6" fill="#DCEBFF" stroke="#2F6BFF" stroke-width="1.2"/>
+<text x="690.0" y="339" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">D2 Package Design</text>
+<circle cx="892.0" cy="335" r="7" fill="#2F6BFF" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="D3" data-lane-id="design">
+<rect x="1110.0" y="285" width="420.0" height="28" rx="6" fill="#DCEBFF" stroke="#2F6BFF" stroke-width="1.2"/>
+<text x="1320.0" y="303" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">D3 Cost Reduction</text>
+<circle cx="1522.0" cy="299" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="P1" data-lane-id="platform">
+<rect x="270.0" y="425" width="630.0" height="28" rx="6" fill="#DDF4F1" stroke="#2C9C96" stroke-width="1.2"/>
+<text x="585.0" y="443" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">P1 Optical Engine v1</text>
+<circle cx="892.0" cy="439" r="7" fill="#2F6BFF" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="P2" data-lane-id="platform">
+<rect x="900.0" y="425" width="630.0" height="28" rx="6" fill="#DDF4F1" stroke="#2C9C96" stroke-width="1.2"/>
+<text x="1215.0" y="443" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">P2 Optical Engine v2</text>
+<circle cx="1522.0" cy="439" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="P3" data-lane-id="platform">
+<rect x="1320.0" y="461" width="630.0" height="28" rx="6" fill="#DDF4F1" stroke="#2C9C96" stroke-width="1.2"/>
+<text x="1635.0" y="479" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">P3 Thermal Upgrade</text>
+<circle cx="1942.0" cy="475" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="F1" data-lane-id="firmware">
+<rect x="343.14606741573033" y="565" width="416.08470181503895" height="28" rx="6" fill="#ECE7FF" stroke="#7A5CCB" stroke-width="1.2"/>
+<text x="551.1884183232498" y="583" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">F1 Control Loop</text>
+<circle cx="751.2307692307693" cy="579" r="7" fill="#2F6BFF" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="F2" data-lane-id="firmware">
+<rect x="761.5384615384615" y="565" width="558.4615384615385" height="28" rx="6" fill="#ECE7FF" stroke="#7A5CCB" stroke-width="1.2"/>
+<text x="1040.7692307692307" y="583" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">F2 Telemetry</text>
+<circle cx="1312.0" cy="579" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="F3" data-lane-id="firmware">
+<rect x="1110.0" y="601" width="630.0" height="28" rx="6" fill="#ECE7FF" stroke="#7A5CCB" stroke-width="1.2"/>
+<text x="1425.0" y="619" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">F3 Recovery Robustness</text>
+<circle cx="1732.0" cy="615" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="V1" data-lane-id="validation">
+<rect x="690.0" y="677" width="420.0" height="28" rx="6" fill="#FFF1D6" stroke="#F0A22E" stroke-width="1.2"/>
+<text x="900.0" y="695" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">V1 EVT</text>
+<circle cx="1102.0" cy="691" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="V2" data-lane-id="validation">
+<rect x="1110.0" y="677" width="420.0" height="28" rx="6" fill="#FFF1D6" stroke="#F0A22E" stroke-width="1.2"/>
+<text x="1320.0" y="695" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">V2 DVT</text>
+<circle cx="1522.0" cy="691" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="V3" data-lane-id="validation">
+<rect x="1320.0" y="713" width="630.0" height="28" rx="6" fill="#FFF1D6" stroke="#F0A22E" stroke-width="1.2"/>
+<text x="1635.0" y="731" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">V3 Reliability</text>
+<circle cx="1942.0" cy="727" r="7" fill="#F0A22E" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="O1" data-lane-id="operations">
+<rect x="900.0" y="817" width="420.0" height="28" rx="6" fill="#E2F6EA" stroke="#2E9D5B" stroke-width="1.2"/>
+<text x="1110.0" y="835" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">O1 Pilot Line</text>
+<circle cx="1312.0" cy="831" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="O2" data-lane-id="operations">
+<rect x="1110.0" y="853" width="630.0" height="28" rx="6" fill="#E2F6EA" stroke="#2E9D5B" stroke-width="1.2"/>
+<text x="1425.0" y="871" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">O2 Supplier Ramp</text>
+<circle cx="1732.0" cy="867" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="O3" data-lane-id="operations">
+<rect x="1530.0" y="817" width="420.0" height="28" rx="6" fill="#E2F6EA" stroke="#2E9D5B" stroke-width="1.2"/>
+<text x="1740.0" y="835" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">O3 MP Readiness</text>
+<circle cx="1942.0" cy="831" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="L1" data-lane-id="launch">
+<rect x="900.0" y="957" width="210.0" height="28" rx="6" fill="#EEF2F7" stroke="#8A96A8" stroke-width="1.2"/>
+<text x="1005.0" y="975" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">L1 Alpha Release</text>
+<circle cx="1102.0" cy="971" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="L2" data-lane-id="launch">
+<rect x="1320.0" y="957" width="210.0" height="28" rx="6" fill="#EEF2F7" stroke="#8A96A8" stroke-width="1.2"/>
+<text x="1425.0" y="975" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">L2 Beta Release</text>
+<circle cx="1522.0" cy="971" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g class="roadmap-initiative" data-id="L3" data-lane-id="launch">
+<rect x="1740.0" y="957" width="210.0" height="28" rx="6" fill="#EEF2F7" stroke="#8A96A8" stroke-width="1.2"/>
+<text x="1845.0" y="975" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">L3 Market Launch</text>
+<circle cx="1942.0" cy="971" r="7" fill="#8A96A8" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+</g>
+<g id="roadmap-milestones" class="roadmap-milestones">
+<g class="roadmap-milestone roadmap-milestone" data-id="M1" data-lane-id="design">
+<polygon points="655.0,365.0 657.6,371.4 664.5,371.9 659.3,376.4 660.9,383.1 655.0,379.5 649.1,383.1 650.7,376.4 645.5,371.9 652.4,371.4" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="669.0" y="380" font-family="Arial" font-size="12" font-weight="700" fill="#0B3A75">Architecture Freeze</text>
+</g>
+<g class="roadmap-milestone roadmap-milestone" data-id="M2" data-lane-id="validation">
+<polygon points="1073.1,757.0 1075.7,763.4 1082.6,763.9 1077.4,768.4 1079.0,775.1 1073.1,771.5 1067.2,775.1 1068.8,768.4 1063.6,763.9 1070.4,763.4" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1087.076923076923" y="772" font-family="Arial" font-size="12" font-weight="700" fill="#0B3A75">EVT Complete</text>
+</g>
+<g class="roadmap-milestone roadmap-milestone" data-id="M3" data-lane-id="launch">
+<polygon points="1843.8,1001.0 1846.5,1007.4 1853.4,1007.9 1848.1,1012.4 1849.7,1019.1 1843.8,1015.5 1838.0,1019.1 1839.6,1012.4 1834.3,1007.9 1841.2,1007.4" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1857.8461538461538" y="1016" font-family="Arial" font-size="12" font-weight="700" fill="#0B3A75">Market Launch</text>
+</g>
+</g>
+<g id="roadmap-decisions" class="roadmap-decisions">
+<g class="roadmap-milestone roadmap-decision" data-id="G1" data-lane-id="platform">
+<polygon points="865.3846153846154,505 875.3846153846154,515 865.3846153846154,525 855.3846153846154,515" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="879.3846153846154" y="520" font-family="Arial" font-size="12" font-weight="700" fill="#0B3A75">Platform Gate</text>
+</g>
+<g class="roadmap-milestone roadmap-decision" data-id="G2" data-lane-id="operations">
+<polygon points="1705.3846153846155,897 1715.3846153846155,907 1705.3846153846155,917 1695.3846153846155,907" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="1719.3846153846155" y="912" font-family="Arial" font-size="12" font-weight="700" fill="#0B3A75">MP Gate</text>
+</g>
+</g>
+</g>
+<g id="roadmap-table" class="roadmap-table">
+<rect x="36" y="1069" width="1280" height="580" rx="8" fill="#FFFFFF" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1069" width="1280" height="40" rx="8" fill="#0B3A75"/>
+<text x="46" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">ID</text>
+<text x="90" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Initiative</text>
+<text x="320" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Lane</text>
+<text x="490" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Owner</text>
+<text x="586.0" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Start</text>
+<text x="682.0" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">End</text>
+<text x="778.0" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Duration</text>
+<text x="859.6" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Key Milestone</text>
+<text x="1109.2" y="1095" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Status</text>
+<text x="46" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">D1</text>
+<text x="90" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Architecture</text>
+<text x="320" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Design</text>
+<text x="490" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Design</text>
+<text x="586.0" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-01-01</text>
+<text x="682.0" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-06-30</text>
+<text x="778.0" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">M1: Architecture Freeze</text>
+<text x="1109.2" y="1126" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Completed</text>
+<line x1="36" y1="1139" x2="1316" y2="1139" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1139" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">D2</text>
+<text x="90" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Package Design</text>
+<text x="320" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Design</text>
+<text x="490" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Design</text>
+<text x="586.0" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-04-01</text>
+<text x="682.0" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-09-30</text>
+<text x="778.0" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">M1: Architecture Freeze</text>
+<text x="1109.2" y="1156" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">In Progress</text>
+<line x1="36" y1="1169" x2="1316" y2="1169" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">D3</text>
+<text x="90" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Cost Reduction</text>
+<text x="320" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Design</text>
+<text x="490" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Design</text>
+<text x="586.0" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-01-01</text>
+<text x="682.0" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-06-30</text>
+<text x="778.0" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1186" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1199" x2="1316" y2="1199" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1199" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">P1</text>
+<text x="90" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Optical Engine v1</text>
+<text x="320" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Platform</text>
+<text x="490" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Platform</text>
+<text x="586.0" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-01-01</text>
+<text x="682.0" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-09-30</text>
+<text x="778.0" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">9M</text>
+<text x="859.6" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1216" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">In Progress</text>
+<line x1="36" y1="1229" x2="1316" y2="1229" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">P2</text>
+<text x="90" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Optical Engine v2</text>
+<text x="320" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Platform</text>
+<text x="490" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Platform</text>
+<text x="586.0" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-10-01</text>
+<text x="682.0" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-06-30</text>
+<text x="778.0" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">9M</text>
+<text x="859.6" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1246" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1259" x2="1316" y2="1259" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1259" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">P3</text>
+<text x="90" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Thermal Upgrade</text>
+<text x="320" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Platform</text>
+<text x="490" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Platform</text>
+<text x="586.0" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-04-01</text>
+<text x="682.0" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-12-31</text>
+<text x="778.0" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">9M</text>
+<text x="859.6" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1276" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1289" x2="1316" y2="1289" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">F1</text>
+<text x="90" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Control Loop</text>
+<text x="320" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Firmware</text>
+<text x="490" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Firmware</text>
+<text x="586.0" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-02-01</text>
+<text x="682.0" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-07-31</text>
+<text x="778.0" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1306" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">In Progress</text>
+<line x1="36" y1="1319" x2="1316" y2="1319" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1319" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">F2</text>
+<text x="90" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Telemetry</text>
+<text x="320" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Firmware</text>
+<text x="490" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Firmware</text>
+<text x="586.0" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-08-01</text>
+<text x="682.0" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-03-31</text>
+<text x="778.0" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">8M</text>
+<text x="859.6" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1336" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1349" x2="1316" y2="1349" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">F3</text>
+<text x="90" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Recovery Robustness</text>
+<text x="320" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Firmware</text>
+<text x="490" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Firmware</text>
+<text x="586.0" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-01-01</text>
+<text x="682.0" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-09-30</text>
+<text x="778.0" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">9M</text>
+<text x="859.6" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1366" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1379" x2="1316" y2="1379" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1379" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">V1</text>
+<text x="90" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">EVT</text>
+<text x="320" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="490" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="586.0" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-07-01</text>
+<text x="682.0" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-12-31</text>
+<text x="778.0" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">M2: EVT Complete</text>
+<text x="1109.2" y="1396" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1409" x2="1316" y2="1409" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">V2</text>
+<text x="90" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">DVT</text>
+<text x="320" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="490" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="586.0" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-01-01</text>
+<text x="682.0" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-06-30</text>
+<text x="778.0" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1426" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1439" x2="1316" y2="1439" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1439" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">V3</text>
+<text x="90" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Reliability</text>
+<text x="320" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="490" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Validation</text>
+<text x="586.0" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-04-01</text>
+<text x="682.0" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-12-31</text>
+<text x="778.0" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">9M</text>
+<text x="859.6" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1456" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">At Risk</text>
+<line x1="36" y1="1469" x2="1316" y2="1469" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">O1</text>
+<text x="90" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Pilot Line</text>
+<text x="320" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Operations</text>
+<text x="490" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Ops</text>
+<text x="586.0" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-10-01</text>
+<text x="682.0" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-03-31</text>
+<text x="778.0" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1486" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1499" x2="1316" y2="1499" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1499" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">O2</text>
+<text x="90" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Supplier Ramp</text>
+<text x="320" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Operations</text>
+<text x="490" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Ops</text>
+<text x="586.0" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-01-01</text>
+<text x="682.0" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-09-30</text>
+<text x="778.0" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">9M</text>
+<text x="859.6" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1516" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1529" x2="1316" y2="1529" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">O3</text>
+<text x="90" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">MP Readiness</text>
+<text x="320" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Operations</text>
+<text x="490" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Ops</text>
+<text x="586.0" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-07-01</text>
+<text x="682.0" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-12-31</text>
+<text x="778.0" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">6M</text>
+<text x="859.6" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1546" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1559" x2="1316" y2="1559" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1559" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">L1</text>
+<text x="90" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Alpha Release</text>
+<text x="320" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Launch</text>
+<text x="490" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Product</text>
+<text x="586.0" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-10-01</text>
+<text x="682.0" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-12-31</text>
+<text x="778.0" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">3M</text>
+<text x="859.6" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1576" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1589" x2="1316" y2="1589" stroke="#D8E1EE" stroke-width="1"/>
+<text x="46" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">L2</text>
+<text x="90" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Beta Release</text>
+<text x="320" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Launch</text>
+<text x="490" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Product</text>
+<text x="586.0" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-04-01</text>
+<text x="682.0" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-06-30</text>
+<text x="778.0" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">3M</text>
+<text x="859.6" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">-</text>
+<text x="1109.2" y="1606" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1619" x2="1316" y2="1619" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="36" y="1619" width="1280" height="30" fill="#F7FAFD"/>
+<text x="46" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">L3</text>
+<text x="90" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Market Launch</text>
+<text x="320" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Launch</text>
+<text x="490" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Product</text>
+<text x="586.0" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-10-01</text>
+<text x="682.0" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2026-12-31</text>
+<text x="778.0" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">3M</text>
+<text x="859.6" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">M3: Market Launch</text>
+<text x="1109.2" y="1636" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="36" y1="1649" x2="1316" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="80" y1="1069" x2="80" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="310" y1="1069" x2="310" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="480" y1="1069" x2="480" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="576.0" y1="1069" x2="576.0" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="672.0" y1="1069" x2="672.0" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="768.0" y1="1069" x2="768.0" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="849.6" y1="1069" x2="849.6" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1099.2" y1="1069" x2="1099.2" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+<line x1="1316.0" y1="1069" x2="1316.0" y2="1649" stroke="#D8E1EE" stroke-width="1"/>
+</g>
+<g id="roadmap-summary-panel" class="roadmap-summary-panel">
+<rect x="1994" y="1069" width="360" height="580" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.2"/>
+<text x="2016" y="1103" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Key Milestones</text>
+<polygon points="2020.0,1121.0 2021.9,1125.5 2026.7,1125.8 2023.0,1129.0 2024.1,1133.7 2020.0,1131.2 2015.9,1133.7 2017.0,1129.0 2013.3,1125.8 2018.1,1125.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="2040" y="1133" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">2025-06-15  Architecture Freeze</text>
+<polygon points="2020.0,1149.0 2021.9,1153.5 2026.7,1153.8 2023.0,1157.0 2024.1,1161.7 2020.0,1159.2 2015.9,1161.7 2017.0,1157.0 2013.3,1153.8 2018.1,1153.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="2040" y="1161" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">2025-12-15  EVT Complete</text>
+<polygon points="2020.0,1177.0 2021.9,1181.5 2026.7,1181.8 2023.0,1185.0 2024.1,1189.7 2020.0,1187.2 2015.9,1189.7 2017.0,1185.0 2013.3,1181.8 2018.1,1181.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="2040" y="1189" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">2026-11-15  Market Launch</text>
+<line x1="2016" y1="1227" x2="2332" y2="1227" stroke="#D8E1EE" stroke-width="1"/>
+<text x="2016" y="1259" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Decision Points</text>
+<polygon points="2020,1275 2027,1282 2020,1289 2013,1282" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="2040" y="1287" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">2025-09-15  Platform Gate</text>
+<polygon points="2020,1303 2027,1310 2020,1317 2013,1310" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="2040" y="1315" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">2026-09-15  MP Gate</text>
+<line x1="2016" y1="1353" x2="2332" y2="1353" stroke="#D8E1EE" stroke-width="1"/>
+<text x="2016" y="1387" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Notes</text>
+<text x="2022" y="1415" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- Dense roadmap should expand while keeping</text>
+<text x="2022" y="1435" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- labels readable.</text>
+</g>
+</svg>

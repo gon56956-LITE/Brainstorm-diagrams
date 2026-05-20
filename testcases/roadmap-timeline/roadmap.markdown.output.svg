@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1188" viewBox="0 0 1920 1188">
+<defs>
+  <marker id="arrowNavy" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0B3A75"/>
+  </marker>
+</defs>
+<rect width="1920" height="1188" fill="#FFFFFF"/>
+<text x="36" y="72" font-family="Arial" font-size="40" font-weight="700" fill="#0B3A75">Reliability Qualification Timeline</text>
+<text x="38" y="112" font-family="Arial" font-size="18" font-weight="700" fill="#0B3A75">Goal: <tspan font-weight="500">Track the sequence of reliability qualification milestones for an optical module before release.</tspan></text>
+<g id="roadmap-legend" class="roadmap-legend">
+<rect x="1460" y="32" width="440" height="142" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.2"/>
+<text x="1478" y="60" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Legend</text>
+<circle cx="1488" cy="86" r="10" fill="#0B3A75"/>
+<text x="1512" y="91" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Milestone</text>
+<polygon points="1488.0,106.0 1490.6,112.4 1497.5,112.9 1492.3,117.4 1493.9,124.1 1488.0,120.5 1482.1,124.1 1483.7,117.4 1478.5,112.9 1485.4,112.4" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1512" y="121" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Key Milestone</text>
+<polygon points="1488,136 1498,146 1488,156 1478,146" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="1512" y="151" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Decision Point</text>
+</g>
+<g id="roadmap-timeline" class="roadmap-timeline roadmap-milestone">
+<g id="roadmap-phases" class="roadmap-phases">
+<rect x="120" y="546" width="459.85401459854006" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="130" y="562" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Planning</text>
+<rect x="585.9854014598541" y="574" width="649.9270072992699" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="595.9854014598541" y="590" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Stress Execution</text>
+<rect x="1242.043795620438" y="602" width="367.8832116788319" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1252.043795620438" y="618" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">FA &amp; Closure</text>
+<rect x="1616.058394160584" y="630" width="183.94160583941607" height="22" rx="5" fill="#DCEBFF" stroke="#9DBCE8" stroke-width="1"/>
+<text x="1626.058394160584" y="646" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Release Review</text>
+</g>
+<line x1="120" y1="468" x2="1800" y2="468" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
+<g id="roadmap-milestones" class="roadmap-milestones">
+<g class="roadmap-milestone" data-id="R1">
+<line x1="156.78832116788323" y1="414" x2="156.78832116788323" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<circle cx="156.78832116788323" cy="468" r="12" fill="#0B3A75"/>
+<text x="156.78832116788323" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Apr 07</text>
+<rect x="120" y="315" width="150" height="99" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="195.0" y="335" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Qualification</text>
+<text x="195.0" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Kickoff</text>
+<text x="195.0" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Confirm stress plan,</text>
+<text x="195.0" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">sample size, and pass</text>
+<text x="195.0" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">criteria</text>
+</g>
+<g class="roadmap-milestone" data-id="R2">
+<line x1="371.3868613138686" y1="414" x2="371.3868613138686" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<circle cx="371.3868613138686" cy="468" r="12" fill="#0B3A75"/>
+<text x="371.3868613138686" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">May 12</text>
+<rect x="296.3868613138686" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="371.3868613138686" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Sample Readiness</text>
+<text x="371.3868613138686" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Release screened</text>
+<text x="371.3868613138686" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">samples and golden</text>
+<text x="371.3868613138686" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">units</text>
+</g>
+<g class="roadmap-milestone" data-id="R3">
+<line x1="500.1459854014599" y1="297" x2="500.1459854014599" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="500.1459854014599,456 512.1459854014599,468 500.1459854014599,480 488.1459854014599,468" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="500.1459854014599" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Jun 02</text>
+<rect x="425.1459854014599" y="213" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="500.1459854014599" y="233" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Test Plan Review</text>
+<text x="500.1459854014599" y="252" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Approve aging, thermal</text>
+<text x="500.1459854014599" y="268" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">cycling, damp heat,</text>
+<text x="500.1459854014599" y="284" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">and ESD scope</text>
+</g>
+<g class="roadmap-milestone" data-id="R4">
+<line x1="733.1386861313869" y1="414" x2="733.1386861313869" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="733.1,456.0 736.3,463.6 744.6,464.3 738.3,469.7 740.2,477.7 733.1,473.4 726.1,477.7 728.0,469.7 721.7,464.3 730.0,463.6" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="733.1386861313869" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Jul 10</text>
+<rect x="658.1386861313869" y="315" width="150" height="99" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="733.1386861313869" y="335" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">High-Temp Aging</text>
+<text x="733.1386861313869" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Start</text>
+<text x="733.1386861313869" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Start long-duration</text>
+<text x="733.1386861313869" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">high-temperature</text>
+<text x="733.1386861313869" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">operating life test</text>
+</g>
+<g class="roadmap-milestone" data-id="R5">
+<line x1="990.6569343065694" y1="414" x2="990.6569343065694" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="990.6569343065694,456 1002.6569343065694,468 990.6569343065694,480 978.6569343065694,468" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="990.6569343065694" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Aug 21</text>
+<rect x="915.6569343065694" y="315" width="150" height="99" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="990.6569343065694" y="335" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Interim Data</text>
+<text x="990.6569343065694" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Review</text>
+<text x="990.6569343065694" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Check power drift, BER</text>
+<text x="990.6569343065694" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">trend, and temperature</text>
+<text x="990.6569343065694" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">margin</text>
+</g>
+<g class="roadmap-milestone" data-id="R6">
+<line x1="1254.3065693430658" y1="414" x2="1254.3065693430658" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="1254.3065693430658,456 1266.3065693430658,468 1254.3065693430658,480 1242.3065693430658,468" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="1254.3065693430658" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Oct 03</text>
+<rect x="1179.3065693430658" y="315" width="150" height="99" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1254.3065693430658" y="335" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Failure Analysis</text>
+<text x="1254.3065693430658" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Gate</text>
+<text x="1254.3065693430658" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Decide whether</text>
+<text x="1254.3065693430658" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">observed failures</text>
+<text x="1254.3065693430658" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">require corrective</text>
+</g>
+<g class="roadmap-milestone" data-id="R7">
+<line x1="1511.8248175182482" y1="414" x2="1511.8248175182482" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="1511.8,456.0 1515.0,463.6 1523.2,464.3 1517.0,469.7 1518.9,477.7 1511.8,473.4 1504.8,477.7 1506.7,469.7 1500.4,464.3 1508.7,463.6" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1511.8248175182482" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Nov 14</text>
+<rect x="1436.8248175182482" y="315" width="150" height="99" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1511.8248175182482" y="335" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Qualification</text>
+<text x="1511.8248175182482" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Complete</text>
+<text x="1511.8248175182482" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Complete required</text>
+<text x="1511.8248175182482" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">reliability stress</text>
+<text x="1511.8248175182482" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">reports</text>
+</g>
+<g class="roadmap-milestone" data-id="R8">
+<line x1="1726.4233576642337" y1="414" x2="1726.4233576642337" y2="468" stroke="#9DBCE8" stroke-width="1"/>
+<polygon points="1726.4,456.0 1729.6,463.6 1737.8,464.3 1731.6,469.7 1733.5,477.7 1726.4,473.4 1719.4,477.7 1721.3,469.7 1715.0,464.3 1723.2,463.6" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="1726.4233576642337" y="510" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Dec 19</text>
+<rect x="1650" y="330" width="150" height="84" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.1"/>
+<text x="1725.0" y="350" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#0B234A">Release Readiness</text>
+<text x="1725.0" y="369" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">Approve production</text>
+<text x="1725.0" y="385" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">release with</text>
+<text x="1725.0" y="401" text-anchor="middle" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">documented residual</text>
+</g>
+</g>
+</g>
+<g id="roadmap-table" class="roadmap-table">
+<rect x="42" y="700" width="1420" height="294" rx="8" fill="#FFFFFF" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="700" width="1420" height="38" rx="8" fill="#0B3A75"/>
+<text x="52" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">ID</text>
+<text x="126.1981981981982" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Type</text>
+<text x="195.27927927927928" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Milestone</text>
+<text x="489.51351351351354" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Description</text>
+<text x="950.0540540540542" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Target Date</text>
+<text x="1118.918918918919" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Owner</text>
+<text x="1280.1081081081081" y="724" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Status</text>
+<text x="52" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R1</text>
+<circle cx="150.73873873873873" cy="754.0" r="7" fill="#0B3A75"/>
+<text x="195.27927927927928" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Qualification Kickoff</text>
+<text x="489.51351351351354" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Confirm stress plan, sample size, and pass criteria</text>
+<text x="950.0540540540542" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-04-07</text>
+<text x="1118.918918918919" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Reliability</text>
+<text x="1280.1081081081081" y="759" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Completed</text>
+<line x1="42" y1="770" x2="1462" y2="770" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="770" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R2</text>
+<circle cx="150.73873873873873" cy="786.0" r="7" fill="#0B3A75"/>
+<text x="195.27927927927928" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Sample Readiness</text>
+<text x="489.51351351351354" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Release screened samples and golden units</text>
+<text x="950.0540540540542" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-05-12</text>
+<text x="1118.918918918919" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">NPI</text>
+<text x="1280.1081081081081" y="791" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Completed</text>
+<line x1="42" y1="802" x2="1462" y2="802" stroke="#D8E1EE" stroke-width="1"/>
+<text x="52" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R3</text>
+<polygon points="150.73873873873873,811.0 157.73873873873873,818.0 150.73873873873873,825.0 143.73873873873873,818.0" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="195.27927927927928" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Test Plan Review</text>
+<text x="489.51351351351354" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Approve aging, thermal cycling, damp heat, and ESD scope</text>
+<text x="950.0540540540542" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-06-02</text>
+<text x="1118.918918918919" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Quality</text>
+<text x="1280.1081081081081" y="823" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Completed</text>
+<line x1="42" y1="834" x2="1462" y2="834" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="834" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R4</text>
+<polygon points="150.7,843.0 152.6,847.5 157.4,847.8 153.7,851.0 154.9,855.7 150.7,853.1 146.6,855.7 147.7,851.0 144.1,847.8 148.9,847.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="195.27927927927928" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">High-Temp Aging Start</text>
+<text x="489.51351351351354" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Start long-duration high-temperature operating life test</text>
+<text x="950.0540540540542" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-07-10</text>
+<text x="1118.918918918919" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Reliability</text>
+<text x="1280.1081081081081" y="855" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">In Progress</text>
+<line x1="42" y1="866" x2="1462" y2="866" stroke="#D8E1EE" stroke-width="1"/>
+<text x="52" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R5</text>
+<polygon points="150.73873873873873,875.0 157.73873873873873,882.0 150.73873873873873,889.0 143.73873873873873,882.0" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="195.27927927927928" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Interim Data Review</text>
+<text x="489.51351351351354" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Check power drift, BER trend, and temperature margin</text>
+<text x="950.0540540540542" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-08-21</text>
+<text x="1118.918918918919" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Engineering</text>
+<text x="1280.1081081081081" y="887" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="898" x2="1462" y2="898" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="898" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R6</text>
+<polygon points="150.73873873873873,907.0 157.73873873873873,914.0 150.73873873873873,921.0 143.73873873873873,914.0" fill="#FFFFFF" stroke="#0B3A75" stroke-width="2.2"/>
+<text x="195.27927927927928" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Failure Analysis Gate</text>
+<text x="489.51351351351354" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Decide whether observed failures require corrective action</text>
+<text x="950.0540540540542" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-10-03</text>
+<text x="1118.918918918919" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">FA Team</text>
+<text x="1280.1081081081081" y="919" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="930" x2="1462" y2="930" stroke="#D8E1EE" stroke-width="1"/>
+<text x="52" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R7</text>
+<polygon points="150.7,939.0 152.6,943.5 157.4,943.8 153.7,947.0 154.9,951.7 150.7,949.1 146.6,951.7 147.7,947.0 144.1,943.8 148.9,943.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="195.27927927927928" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Qualification Complete</text>
+<text x="489.51351351351354" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Complete required reliability stress reports</text>
+<text x="950.0540540540542" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-11-14</text>
+<text x="1118.918918918919" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Quality</text>
+<text x="1280.1081081081081" y="951" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="962" x2="1462" y2="962" stroke="#D8E1EE" stroke-width="1"/>
+<rect x="42" y="962" width="1420" height="32" fill="#F7FAFD"/>
+<text x="52" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">R8</text>
+<polygon points="150.7,971.0 152.6,975.5 157.4,975.8 153.7,979.0 154.9,983.7 150.7,981.1 146.6,983.7 147.7,979.0 144.1,975.8 148.9,975.5" fill="#0B3A75" stroke="#0B3A75" stroke-width="1.4"/>
+<text x="195.27927927927928" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Release Readiness</text>
+<text x="489.51351351351354" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Approve production release with documented residual risks</text>
+<text x="950.0540540540542" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">2025-12-19</text>
+<text x="1118.918918918919" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Program</text>
+<text x="1280.1081081081081" y="983" font-family="Arial" font-size="13" font-weight="600" fill="#0B234A">Planned</text>
+<line x1="42" y1="994" x2="1462" y2="994" stroke="#D8E1EE" stroke-width="1"/>
+</g>
+<g id="roadmap-summary-panel" class="roadmap-summary-panel roadmap-milestone-info-panel">
+<rect x="1524" y="700" width="360" height="408" rx="8" fill="#F7FAFD" stroke="#9DBCE8" stroke-width="1.2"/>
+<text x="1546" y="734" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Phase Plan</text>
+<text x="1548" y="764" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Planning</text>
+<text x="1548" y="782" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-04-01 - 2025-06-15</text>
+<text x="1548" y="806" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Stress Execution</text>
+<text x="1548" y="824" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-06-16 - 2025-09-30</text>
+<text x="1548" y="848" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">FA &amp; Closure</text>
+<text x="1548" y="866" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-10-01 - 2025-11-30</text>
+<text x="1548" y="890" font-family="Arial" font-size="12" font-weight="700" fill="#0B234A">Release Review</text>
+<text x="1548" y="908" font-family="Arial" font-size="11" font-weight="600" fill="#5F6F86">2025-12-01 - 2025-12-31</text>
+<line x1="1546" y1="938" x2="1862" y2="938" stroke="#D8E1EE" stroke-width="1"/>
+<text x="1546" y="972" font-family="Arial" font-size="16" font-weight="700" fill="#0B234A">Notes</text>
+<text x="1552" y="1000" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- Release readiness depends on closing</text>
+<text x="1552" y="1020" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- high-temperature aging drift and</text>
+<text x="1552" y="1040" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- Customer-facing dates should stay gated</text>
+<text x="1552" y="1060" font-family="Arial" font-size="12" font-weight="600" fill="#0B234A">- by qualification evidence rather than</text>
+</g>
+</svg>

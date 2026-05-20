@@ -1,0 +1,28 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "milestone_timeline",
+  "title": "Dense Milestone Timeline Stresscase",
+  "goal": "Verify many milestones, phase bands, detail cards, and expanded width.",
+  "time_granularity": "month",
+  "milestones": [
+    {"id": "T1", "name": "Kickoff", "date": "2025-01-15", "type": "start", "owner": "PMO", "status": "completed", "output": "Program starts"},
+    {"id": "T2", "name": "Requirements", "date": "2025-02-28", "type": "milestone", "owner": "Product", "status": "completed", "output": "Requirements signed"},
+    {"id": "T3", "name": "Architecture Review", "date": "2025-04-15", "type": "review", "owner": "R&D", "status": "completed", "output": "Architecture reviewed"},
+    {"id": "T4", "name": "Prototype", "date": "2025-06-30", "type": "milestone", "owner": "R&D", "status": "in_progress", "output": "Prototype ready"},
+    {"id": "T5", "name": "EVT Complete", "date": "2025-08-31", "type": "key_milestone", "owner": "Validation", "status": "planned", "output": "EVT done"},
+    {"id": "T6", "name": "DVT Complete", "date": "2025-10-31", "type": "key_milestone", "owner": "Validation", "status": "planned", "output": "DVT done"},
+    {"id": "T7", "name": "Pilot Build", "date": "2025-12-15", "type": "milestone", "owner": "Ops", "status": "planned", "output": "Pilot complete"},
+    {"id": "T8", "name": "PVT Complete", "date": "2026-02-28", "type": "key_milestone", "owner": "Ops", "status": "planned", "output": "PVT complete"},
+    {"id": "T9", "name": "MP Decision", "date": "2026-03-31", "type": "decision", "owner": "Leadership", "status": "planned", "output": "Go / no-go"},
+    {"id": "T10", "name": "Market Launch", "date": "2026-04-30", "type": "launch", "owner": "Product", "status": "planned", "output": "Launch"}
+  ],
+  "phases": [
+    {"name": "Planning", "start": "2025-01-01", "end": "2025-04-30"},
+    {"name": "Build", "start": "2025-05-01", "end": "2025-08-31"},
+    {"name": "Validate", "start": "2025-09-01", "end": "2026-02-28"},
+    {"name": "Launch", "start": "2026-03-01", "end": "2026-04-30"}
+  ],
+  "notes": ["Dense timeline should remain readable."],
+  "show_detail_cards": true,
+  "show_table": true
+}

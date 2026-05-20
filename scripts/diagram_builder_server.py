@@ -27,6 +27,7 @@ EXPORT_FISHBONE = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE = ROOT / "scripts" / "export_fault_tree_png.py"
 EXPORT_EXCLUSION_TREE = ROOT / "scripts" / "export_exclusion_tree_png.py"
 EXPORT_TWO_BY_TWO = ROOT / "scripts" / "export_two_by_two_matrix_png.py"
+EXPORT_ROADMAP = ROOT / "scripts" / "export_roadmap_timeline_png.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
@@ -54,6 +55,12 @@ DIAGRAMS = {
         "work": ROOT / "work" / "two-by-two-matrix",
         "template": TEMPLATES / "two-by-two-matrix.template.json",
         "export": EXPORT_TWO_BY_TWO,
+    },
+    "roadmap_timeline": {
+        "label": "Roadmap Timeline",
+        "work": ROOT / "work" / "roadmap-timeline",
+        "template": TEMPLATES / "roadmap-timeline.template.json",
+        "export": EXPORT_ROADMAP,
     },
 }
 
@@ -212,7 +219,7 @@ def request_model(payload: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
 def canonical_diagram_type(value: Any) -> str:
     diagram_type = str(value).strip().lower().replace("-", "_").replace(" ", "_")
     if diagram_type not in DIAGRAMS:
-        raise ValueError("diagram_type must be fishbone, fault_tree, exclusion_tree, or two_by_two_matrix.")
+        raise ValueError("diagram_type must be fishbone, fault_tree, exclusion_tree, two_by_two_matrix, or roadmap_timeline.")
     return diagram_type
 
 
@@ -645,6 +652,60 @@ INDEX_HTML = r"""<!doctype html>
       text-align: center;
       font-weight: 700;
     }
+    .roadmap-row {
+      display: grid;
+      grid-template-columns: 64px minmax(130px, 1fr) 112px 112px 102px auto;
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    .roadmap-row input,
+    .roadmap-row select {
+      min-width: 0;
+    }
+    .roadmap-period-row {
+      grid-template-columns: minmax(150px, 1fr) 132px 132px auto;
+    }
+    .roadmap-lane-row {
+      grid-template-columns: 120px minmax(180px, 1fr) 132px auto;
+    }
+    .roadmap-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .roadmap-checkbox input {
+      width: auto;
+    }
+    .roadmap-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .roadmap-card-grid input,
+    .roadmap-card-grid select {
+      min-width: 0;
+    }
+    .roadmap-field {
+      min-width: 0;
+    }
+    .roadmap-field.full {
+      grid-column: 1 / -1;
+    }
+    .roadmap-field label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 1250px) {
+      .roadmap-card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .matrix-item-label {
       color: var(--muted);
       font-size: 12px;
@@ -719,7 +780,7 @@ INDEX_HTML = r"""<!doctype html>
   <header>
     <div>
       <h1>Brainstorm Diagram Builder</h1>
-      <span>Edit JSON-backed fishbone, fault-tree, exclusion-tree, and two-by-two matrix diagrams without touching Markdown.</span>
+      <span>Edit JSON-backed fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap diagrams without touching Markdown.</span>
     </div>
   </header>
   <main>
@@ -731,6 +792,7 @@ INDEX_HTML = r"""<!doctype html>
           <option value="fault_tree">Fault Tree</option>
           <option value="exclusion_tree">Sequential Exclusion Tree</option>
           <option value="two_by_two_matrix">Two-by-Two Matrix</option>
+          <option value="roadmap_timeline">Roadmap Timeline</option>
         </select>
       </div>
       <div class="row">
@@ -814,6 +876,7 @@ INDEX_HTML = r"""<!doctype html>
           <li>Fault Tree: 1 top event, recommended 3-5 first-level intermediate events, up to 8 first-level intermediate events, up to 4 children per intermediate event, currently supports second-level intermediate events.</li>
           <li>Sequential Exclusion Tree: 1 target problem, recommended 3-6 check points on one main path, each check has one Yes path and one No cause card.</li>
           <li>Two-by-Two Matrix: one preset or custom axis pair, recommended 4-20 scored items, maximum 20. X and Y scores must be 1-5, and the Decision Table shows every item.</li>
+          <li>Roadmap Timeline: choose swimlane roadmap or milestone timeline, keep title and goal visible, and use table/summary panels for review-ready detail.</li>
           <li>Drafts below the recommended count can still render after confirmation, but may not be useful for review.</li>
         </ul>
       </div>
@@ -825,7 +888,8 @@ INDEX_HTML = r"""<!doctype html>
       fishbone: { categories: 8, minCategories: 4, entries: 5, children: 3 },
       fault_tree: { first: 8, recommendedFirst: 5, minFirst: 3, children: 4, nestedChildren: 4 },
       exclusion_tree: { checks: 6, minChecks: 3 },
-      two_by_two_matrix: { items: 20, minItems: 4 }
+      two_by_two_matrix: { items: 20, minItems: 4 },
+      roadmap_timeline: { minPeriods: 2, minLanes: 1, minInitiatives: 1, minMilestones: 1 }
     };
     const TWO_BY_TWO_PRESET_TEMPLATES = {
       action_priority: {
@@ -886,6 +950,70 @@ INDEX_HTML = r"""<!doctype html>
         ]
       }
     };
+    const ROADMAP_PRESET_TEMPLATES = {
+      swimlane_roadmap: {
+        diagram_type: "roadmap_timeline",
+        preset: "swimlane_roadmap",
+        lane_type: "theme",
+        title: "Roadmap / Timeline",
+        goal: "Deliver value through coordinated roadmap execution.",
+        language: "en",
+        time_granularity: "quarter",
+        time_periods: [
+          { id: "2025Q2", label: "2025 Q2", subtitle: "Apr - Jun", start: "2025-04-01", end: "2025-06-30" },
+          { id: "2025Q3", label: "2025 Q3", subtitle: "Jul - Sep", start: "2025-07-01", end: "2025-09-30" },
+          { id: "2025Q4", label: "2025 Q4", subtitle: "Oct - Dec", start: "2025-10-01", end: "2025-12-31" },
+          { id: "2026Q1", label: "2026 Q1", subtitle: "Jan - Mar", start: "2026-01-01", end: "2026-03-31" }
+        ],
+        lanes: [
+          { id: "customer", name: "Customer Value", color: "blue" },
+          { id: "platform", name: "Platform & Tech", color: "teal" },
+          { id: "operations", name: "Operational Excellence", color: "purple" }
+        ],
+        initiatives: [
+          { id: "R1", lane_id: "customer", name: "Improve Core Experience", start: "2025-04-15", end: "2025-06-30", owner: "Product", status: "in_progress" },
+          { id: "R2", lane_id: "customer", name: "New Personalization", start: "2025-10-15", end: "2026-02-28", owner: "Data & AI", status: "planned" },
+          { id: "R3", lane_id: "platform", name: "Cloud Migration", start: "2025-05-01", end: "2025-08-31", owner: "Platform", status: "in_progress" },
+          { id: "R4", lane_id: "platform", name: "Data Platform v1", start: "2025-10-01", end: "2026-02-15", owner: "Data", status: "planned" },
+          { id: "R5", lane_id: "operations", name: "Process Automation", start: "2025-04-15", end: "2025-08-15", owner: "Operations", status: "in_progress" },
+          { id: "R6", lane_id: "operations", name: "Lean Initiative", start: "2025-10-15", end: "2026-01-31", owner: "Operations", status: "planned" }
+        ],
+        milestones: [
+          { id: "M1", lane_id: "customer", name: "App 2.0 Launch", date: "2025-11-01", type: "launch" },
+          { id: "M2", lane_id: "platform", name: "Architecture Review", date: "2025-09-15", type: "key_milestone" }
+        ],
+        decision_points: [
+          { id: "D1", lane_id: "platform", name: "Go / No-Go", date: "2025-09-15", type: "decision" }
+        ],
+        notes: ["Timeline is subject to change based on dependencies and resource availability."],
+        show_table: true,
+        show_summary_panel: true
+      },
+      milestone_timeline: {
+        diagram_type: "roadmap_timeline",
+        preset: "milestone_timeline",
+        title: "Milestone Timeline",
+        goal: "Launch the next-generation product on time with quality.",
+        language: "en",
+        time_granularity: "month",
+        milestones: [
+          { id: "T1", name: "Project Kickoff", date: "2025-04-01", type: "start", owner: "PMO", status: "completed", output: "Define scope, team and plan" },
+          { id: "T2", name: "Requirements Sign-off", date: "2025-05-15", type: "milestone", owner: "Product", status: "completed", output: "Finalize product requirements" },
+          { id: "T3", name: "Design Review", date: "2025-06-30", type: "review", owner: "R&D", status: "completed", output: "Complete system design review" },
+          { id: "T4", name: "Prototype Ready", date: "2025-08-15", type: "milestone", owner: "R&D", status: "planned", output: "Prototype build completed" },
+          { id: "T5", name: "EVT Completion", date: "2025-10-31", type: "key_milestone", owner: "R&D", status: "planned", output: "Engineering validation test completed" },
+          { id: "T6", name: "Market Launch", date: "2026-04-30", type: "launch", owner: "Product", status: "planned", output: "Official product launch" }
+        ],
+        phases: [
+          { name: "Design Phase", start: "2025-04-01", end: "2025-06-30" },
+          { name: "Validation Phase", start: "2025-07-01", end: "2025-12-31" },
+          { name: "Launch Phase", start: "2026-01-01", end: "2026-04-30" }
+        ],
+        notes: ["Dependencies and risks are tracked separately."],
+        show_detail_cards: true,
+        show_table: true
+      }
+    };
     const RECENT_KEY = "brainstormDiagramBuilderRecent";
     const NAME_PATTERN = /^[a-z0-9][a-z0-9_-]{0,63}$/;
     let model = {};
@@ -922,6 +1050,7 @@ INDEX_HTML = r"""<!doctype html>
       if (diagramType === "fault_tree") return "Fault Tree";
       if (diagramType === "exclusion_tree") return "Sequential Exclusion Tree";
       if (diagramType === "two_by_two_matrix") return "Two-by-Two Matrix";
+      if (diagramType === "roadmap_timeline") return "Roadmap Timeline";
       return "Fishbone";
     }
 
@@ -1050,7 +1179,7 @@ INDEX_HTML = r"""<!doctype html>
           requireText(errors, `Check Point ${index + 1} fail cause`, oneLanguageValue(check.fail_conclusion, "text"));
         });
         requireText(errors, "Final Pass Conclusion", oneLanguageValue(model.final_pass_conclusion, "text"));
-      } else {
+      } else if (currentType() === "two_by_two_matrix") {
         requireText(errors, "Title", model.title);
         const items = Array.isArray(model.items) ? model.items : [];
         if (items.length < 1) errors.push("Two-by-two matrix needs at least 1 item.");
@@ -1062,6 +1191,56 @@ INDEX_HTML = r"""<!doctype html>
           if (!Number.isFinite(x) || x < 1 || x > 5) errors.push(`Item ${index + 1} x_score must be 1-5.`);
           if (!Number.isFinite(y) || y < 1 || y > 5) errors.push(`Item ${index + 1} y_score must be 1-5.`);
         });
+      } else if (currentType() === "roadmap_timeline") {
+        requireText(errors, "Title", model.title);
+        requireText(errors, "Goal", model.goal);
+        if (!["swimlane_roadmap", "milestone_timeline"].includes(String(model.preset || ""))) {
+          errors.push("Roadmap preset must be swimlane_roadmap or milestone_timeline.");
+        }
+        const milestones = Array.isArray(model.milestones) ? model.milestones : [];
+        if (model.preset === "swimlane_roadmap") {
+          const periods = Array.isArray(model.time_periods) ? model.time_periods : [];
+          const lanes = Array.isArray(model.lanes) ? model.lanes : [];
+          const initiatives = Array.isArray(model.initiatives) ? model.initiatives : [];
+          if (periods.length < 1) errors.push("Swimlane roadmap needs at least 1 time period.");
+          if (lanes.length < 1) errors.push("Swimlane roadmap needs at least 1 lane.");
+          if (initiatives.length < 1) errors.push("Swimlane roadmap needs at least 1 initiative.");
+          periods.forEach((period, index) => {
+            requireText(errors, `Period ${index + 1} label`, period.label);
+            requireText(errors, `Period ${index + 1} start`, period.start);
+            requireText(errors, `Period ${index + 1} end`, period.end);
+          });
+          lanes.forEach((lane, index) => {
+            requireText(errors, `Lane ${index + 1} id`, lane.id);
+            requireText(errors, `Lane ${index + 1} name`, lane.name);
+          });
+          initiatives.forEach((initiative, index) => {
+            requireText(errors, `Initiative ${index + 1} id`, initiative.id);
+            requireText(errors, `Initiative ${index + 1} lane`, initiative.lane_id);
+            requireText(errors, `Initiative ${index + 1} name`, initiative.name);
+            requireText(errors, `Initiative ${index + 1} start`, initiative.start);
+            requireText(errors, `Initiative ${index + 1} end`, initiative.end);
+          });
+          [...milestones, ...(Array.isArray(model.decision_points) ? model.decision_points : [])].forEach((marker, index) => {
+            requireText(errors, `Marker ${index + 1} id`, marker.id);
+            requireText(errors, `Marker ${index + 1} lane`, marker.lane_id);
+            requireText(errors, `Marker ${index + 1} name`, marker.name);
+            requireText(errors, `Marker ${index + 1} date`, marker.date);
+          });
+        } else {
+          if (milestones.length < 1) errors.push("Milestone timeline needs at least 1 milestone.");
+          milestones.forEach((marker, index) => {
+            requireText(errors, `Milestone ${index + 1} id`, marker.id);
+            requireText(errors, `Milestone ${index + 1} name`, marker.name);
+            requireText(errors, `Milestone ${index + 1} date`, marker.date);
+          });
+          const phases = Array.isArray(model.phases) ? model.phases : [];
+          phases.forEach((phase, index) => {
+            requireText(errors, `Phase ${index + 1} name`, phase.name);
+            requireText(errors, `Phase ${index + 1} start`, phase.start);
+            requireText(errors, `Phase ${index + 1} end`, phase.end);
+          });
+        }
       }
       return errors;
     }
@@ -1089,6 +1268,19 @@ INDEX_HTML = r"""<!doctype html>
         const items = Array.isArray(model.items) ? model.items : [];
         if (items.length > 0 && items.length < LIMITS.two_by_two_matrix.minItems) {
           warnings.push(`Two-by-two matrix works best with at least ${LIMITS.two_by_two_matrix.minItems} scored items.`);
+        }
+      } else if (currentType() === "roadmap_timeline") {
+        const limits = LIMITS.roadmap_timeline;
+        if (model.preset === "swimlane_roadmap") {
+          const periods = Array.isArray(model.time_periods) ? model.time_periods : [];
+          const lanes = Array.isArray(model.lanes) ? model.lanes : [];
+          const initiatives = Array.isArray(model.initiatives) ? model.initiatives : [];
+          if (periods.length > 0 && periods.length < limits.minPeriods) warnings.push(`Swimlane roadmap works best with at least ${limits.minPeriods} time periods.`);
+          if (lanes.length > 0 && lanes.length < limits.minLanes) warnings.push(`Swimlane roadmap works best with at least ${limits.minLanes} lane.`);
+          if (initiatives.length > 0 && initiatives.length < limits.minInitiatives) warnings.push(`Swimlane roadmap works best with at least ${limits.minInitiatives} initiative.`);
+        } else if (model.preset === "milestone_timeline") {
+          const milestones = Array.isArray(model.milestones) ? model.milestones : [];
+          if (milestones.length > 0 && milestones.length < limits.minMilestones) warnings.push(`Milestone timeline works best with at least ${limits.minMilestones} milestone.`);
         }
       }
       return warnings;
@@ -1311,6 +1503,7 @@ INDEX_HTML = r"""<!doctype html>
       if (currentType() === "fishbone") return fishboneToMarkdown();
       if (currentType() === "fault_tree") return faultTreeToMarkdown();
       if (currentType() === "two_by_two_matrix") return twoByTwoToMarkdown();
+      if (currentType() === "roadmap_timeline") return roadmapToMarkdown();
       return exclusionTreeToMarkdown();
     }
 
@@ -1406,6 +1599,95 @@ INDEX_HTML = r"""<!doctype html>
       return lines.join("\n") + "\n";
     }
 
+    function roadmapToMarkdown() {
+      if (model.preset === "milestone_timeline") return roadmapMilestoneToMarkdown();
+      return roadmapSwimlaneToMarkdown();
+    }
+
+    function roadmapSwimlaneToMarkdown() {
+      const header = [
+        "diagram_type: roadmap_timeline",
+        "preset: swimlane_roadmap",
+        `lane_type: ${mdLine(model.lane_type) || "theme"}`,
+        `language: ${mdLine(model.language) || "en"}`,
+        `time_granularity: ${mdLine(model.time_granularity) || "quarter"}`,
+        `show_table: ${model.show_table !== false ? "true" : "false"}`,
+        `show_summary_panel: ${model.show_summary_panel !== false ? "true" : "false"}`,
+      ];
+      const lines = [
+        yamlHeader(header),
+        `# ${mdLine(model.title) || "Roadmap / Timeline"}`,
+        "",
+        `**Goal:** ${mdLine(model.goal) || "Align initiatives and milestones over time."}`,
+        "",
+        "## Time Periods",
+        "",
+        "| ID | Label | Subtitle | Start | End |",
+        "|---|---|---|---|---|",
+      ];
+      for (const period of model.time_periods || []) {
+        lines.push(`| ${mdLine(period.id)} | ${mdLine(period.label)} | ${mdLine(period.subtitle)} | ${mdLine(period.start)} | ${mdLine(period.end)} |`);
+      }
+      lines.push("", "## Lanes", "", "| ID | Name | Color |", "|---|---|---|");
+      for (const lane of model.lanes || []) {
+        lines.push(`| ${mdLine(lane.id)} | ${mdLine(lane.name)} | ${mdLine(lane.color) || "blue"} |`);
+      }
+      lines.push("", "## Initiatives", "", "| ID | Lane ID | Name | Start | End | Owner | Status |", "|---|---|---|---|---|---|---|");
+      for (const item of model.initiatives || []) {
+        lines.push(`| ${mdLine(item.id)} | ${mdLine(item.lane_id)} | ${mdLine(item.name)} | ${mdLine(item.start)} | ${mdLine(item.end)} | ${mdLine(item.owner)} | ${mdLine(item.status) || "planned"} |`);
+      }
+      lines.push("", "## Milestones", "", "| ID | Lane ID | Name | Date | Type |", "|---|---|---|---|---|");
+      for (const marker of model.milestones || []) {
+        lines.push(`| ${mdLine(marker.id)} | ${mdLine(marker.lane_id)} | ${mdLine(marker.name)} | ${mdLine(marker.date)} | ${mdLine(marker.type) || "key_milestone"} |`);
+      }
+      lines.push("", "## Decision Points", "", "| ID | Lane ID | Name | Date | Type |", "|---|---|---|---|---|");
+      for (const marker of model.decision_points || []) {
+        lines.push(`| ${mdLine(marker.id)} | ${mdLine(marker.lane_id)} | ${mdLine(marker.name)} | ${mdLine(marker.date)} | ${mdLine(marker.type) || "decision"} |`);
+      }
+      writeRoadmapNotes(lines);
+      return lines.join("\n").replace(/\n{3,}/g, "\n\n") + "\n";
+    }
+
+    function roadmapMilestoneToMarkdown() {
+      const header = [
+        "diagram_type: roadmap_timeline",
+        "preset: milestone_timeline",
+        `language: ${mdLine(model.language) || "en"}`,
+        `time_granularity: ${mdLine(model.time_granularity) || "month"}`,
+        `show_detail_cards: ${model.show_detail_cards !== false ? "true" : "false"}`,
+        `show_table: ${model.show_table !== false ? "true" : "false"}`,
+      ];
+      const lines = [
+        yamlHeader(header),
+        `# ${mdLine(model.title) || "Milestone Timeline"}`,
+        "",
+        `**Goal:** ${mdLine(model.goal) || "Launch the product on time with quality."}`,
+        "",
+        "## Milestones",
+        "",
+        "| ID | Name | Date | Type | Owner | Status | Output |",
+        "|---|---|---|---|---|---|---|",
+      ];
+      for (const marker of model.milestones || []) {
+        lines.push(`| ${mdLine(marker.id)} | ${mdLine(marker.name)} | ${mdLine(marker.date)} | ${mdLine(marker.type) || "milestone"} | ${mdLine(marker.owner)} | ${mdLine(marker.status) || "planned"} | ${mdLine(marker.output)} |`);
+      }
+      lines.push("", "## Phases", "", "| Name | Start | End |", "|---|---|---|");
+      for (const phase of model.phases || []) {
+        lines.push(`| ${mdLine(phase.name)} | ${mdLine(phase.start)} | ${mdLine(phase.end)} |`);
+      }
+      writeRoadmapNotes(lines);
+      return lines.join("\n").replace(/\n{3,}/g, "\n\n") + "\n";
+    }
+
+    function writeRoadmapNotes(lines) {
+      const notes = Array.isArray(model.notes)
+        ? model.notes
+        : String(model.notes || "").split(/\r?\n/).map(note => note.trim()).filter(Boolean);
+      if (!notes.length) return;
+      lines.push("", "## Notes", "");
+      for (const note of notes) lines.push(`- ${mdLine(note)}`);
+    }
+
     async function loadSvgIfExists() {
       try {
         const response = await fetch(`/api/svg?diagram_type=${encodeURIComponent(currentType())}&name=${encodeURIComponent(safeName())}`);
@@ -1420,6 +1702,7 @@ INDEX_HTML = r"""<!doctype html>
     function syncDiagramType() {
       model.diagram_type = currentType();
       if (model.diagram_type === "exclusion_tree") cleanExclusionTreeModel();
+      if (model.diagram_type === "roadmap_timeline") delete model.subtitle;
     }
 
     function input(value, onInput, placeholder = "") {
@@ -1459,6 +1742,20 @@ INDEX_HTML = r"""<!doctype html>
       return el;
     }
 
+    function checkbox(labelText, checked, onChange) {
+      const label = document.createElement("label");
+      label.className = "roadmap-checkbox";
+      const el = document.createElement("input");
+      el.type = "checkbox";
+      el.checked = Boolean(checked);
+      el.addEventListener("change", () => {
+        onChange(el.checked);
+        updateValidation();
+      });
+      label.append(el, document.createTextNode(labelText));
+      return label;
+    }
+
     function button(text, onClick, disabled = false) {
       const el = document.createElement("button");
       el.type = "button";
@@ -1495,12 +1792,34 @@ INDEX_HTML = r"""<!doctype html>
       return wrapper;
     }
 
+    function roadmapCard(titleText, onRemove) {
+      const box = document.createElement("div");
+      box.className = "item";
+      const head = document.createElement("div");
+      head.className = "item-head";
+      const title = document.createElement("h3");
+      title.textContent = titleText;
+      head.append(title, button("Remove", onRemove));
+      box.appendChild(head);
+      return box;
+    }
+
+    function roadmapField(labelText, control, className = "") {
+      const wrapper = document.createElement("div");
+      wrapper.className = `roadmap-field ${className}`.trim();
+      const label = document.createElement("label");
+      label.textContent = labelText;
+      wrapper.append(label, control);
+      return wrapper;
+    }
+
     function renderForm() {
       formRoot.innerHTML = "";
       if (currentType() === "fishbone") renderFishboneForm();
       else if (currentType() === "fault_tree") renderFaultTreeForm();
       else if (currentType() === "exclusion_tree") renderExclusionTreeForm();
-      else renderTwoByTwoForm();
+      else if (currentType() === "two_by_two_matrix") renderTwoByTwoForm();
+      else renderRoadmapForm();
       updateValidation();
     }
 
@@ -1919,6 +2238,418 @@ INDEX_HTML = r"""<!doctype html>
       renderForm();
     }
 
+    function renderRoadmapForm() {
+      model.diagram_type = "roadmap_timeline";
+      model.preset = model.preset || "swimlane_roadmap";
+      model.language = model.language || "en";
+      model.time_granularity = model.time_granularity || (model.preset === "milestone_timeline" ? "month" : "quarter");
+      delete model.subtitle;
+      formRoot.appendChild(row("Title", input(model.title, value => model.title = value, "Roadmap / Timeline")));
+      formRoot.appendChild(row("Goal", input(model.goal, value => model.goal = value, "Visible goal statement")));
+      formRoot.appendChild(row("Preset", select(model.preset, ["swimlane_roadmap", "milestone_timeline"], value => applyRoadmapPreset(value))));
+      formRoot.appendChild(row("Time Granularity", select(model.time_granularity, ["month", "quarter"], value => applyRoadmapGranularity(value))));
+      if (model.preset === "milestone_timeline") renderRoadmapMilestoneForm();
+      else renderRoadmapSwimlaneForm();
+    }
+
+    function renderRoadmapSwimlaneForm() {
+      model.lane_type = model.lane_type || "theme";
+      model.time_periods = Array.isArray(model.time_periods) ? model.time_periods : (Array.isArray(model.periods) ? model.periods : []);
+      delete model.periods;
+      model.lanes = Array.isArray(model.lanes) ? model.lanes : [];
+      model.initiatives = Array.isArray(model.initiatives) ? model.initiatives : [];
+      model.milestones = Array.isArray(model.milestones) ? model.milestones : [];
+      model.decision_points = Array.isArray(model.decision_points) ? model.decision_points : [];
+      if (!model.time_periods.length) {
+        model.time_periods = buildRoadmapPeriods(roadmapDateRange(), model.time_granularity || "quarter");
+      }
+      model.show_table = model.show_table !== false;
+      model.show_summary_panel = model.show_summary_panel !== false;
+      formRoot.appendChild(row("Lane Type", input(model.lane_type, value => model.lane_type = value, "theme")));
+      const options = document.createElement("div");
+      options.className = "toolbar";
+      options.append(
+        checkbox("Show table", model.show_table, value => model.show_table = value),
+        checkbox("Show summary panel", model.show_summary_panel, value => model.show_summary_panel = value)
+      );
+      formRoot.appendChild(row("Options", options));
+      renderRoadmapPeriods();
+      renderRoadmapLanes();
+      renderRoadmapInitiatives();
+      renderRoadmapMarkers("Milestones", "milestones", "key_milestone");
+      renderRoadmapMarkers("Decision Points", "decision_points", "decision");
+      renderRoadmapNotes();
+    }
+
+    function renderRoadmapMilestoneForm() {
+      model.milestones = Array.isArray(model.milestones) ? model.milestones : [];
+      model.phases = Array.isArray(model.phases) ? model.phases : [];
+      model.show_detail_cards = model.show_detail_cards !== false;
+      model.show_table = model.show_table !== false;
+      const options = document.createElement("div");
+      options.className = "toolbar";
+      options.append(
+        checkbox("Show detail cards", model.show_detail_cards, value => model.show_detail_cards = value),
+        checkbox("Show table", model.show_table, value => model.show_table = value)
+      );
+      formRoot.appendChild(row("Options", options));
+      renderRoadmapTimelineMilestones();
+      renderRoadmapPhases();
+      renderRoadmapNotes();
+    }
+
+    function renderRoadmapPeriods() {
+      const periods = section("Time Periods", "Edit the visible label and date range. Period IDs and header subtitles are generated from the selected granularity.");
+      periods.querySelector(".section-title").appendChild(button("Add Period", () => {
+        model.time_periods.push(nextRoadmapPeriod());
+        renderForm();
+      }));
+      model.time_periods.forEach((period, index) => {
+        normalizeRoadmapPeriod(period, model.time_granularity || "quarter");
+        const line = document.createElement("div");
+        line.className = "roadmap-row roadmap-period-row";
+        line.append(
+          input(period.label, value => period.label = value, "Label"),
+          input(period.start, value => {
+            period.start = value;
+            normalizeRoadmapPeriod(period, model.time_granularity || "quarter");
+          }, "Start"),
+          input(period.end, value => {
+            period.end = value;
+            normalizeRoadmapPeriod(period, model.time_granularity || "quarter");
+          }, "End"),
+          button("Remove", () => {
+            model.time_periods.splice(index, 1);
+            renderForm();
+          })
+        );
+        periods.appendChild(line);
+      });
+      formRoot.appendChild(periods);
+    }
+
+    function renderRoadmapLanes() {
+      const lanes = section("Lanes", "Lane IDs are used by initiatives, milestones, and decision points.");
+      lanes.querySelector(".section-title").appendChild(button("Add Lane", () => {
+        model.lanes.push({ id: `lane_${model.lanes.length + 1}`, name: "New Lane", color: "blue" });
+        renderForm();
+      }));
+      model.lanes.forEach((lane, index) => {
+        const line = document.createElement("div");
+        line.className = "roadmap-row roadmap-lane-row";
+        line.append(
+          input(lane.id, value => lane.id = value, "ID"),
+          input(lane.name, value => lane.name = value, "Lane name"),
+          select(lane.color || "blue", ["blue", "teal", "purple", "green", "orange", "red", "gray"], value => lane.color = value),
+          button("Remove", () => {
+            model.lanes.splice(index, 1);
+            renderForm();
+          })
+        );
+        lanes.appendChild(line);
+      });
+      formRoot.appendChild(lanes);
+    }
+
+    function renderRoadmapInitiatives() {
+      const laneOptions = roadmapLaneOptions();
+      const initiatives = section("Initiatives", "Bars keep their real start and end dates; labels are truncated in the diagram when needed.");
+      initiatives.querySelector(".section-title").appendChild(button("Add Initiative", () => {
+        model.initiatives.push({ id: `R${model.initiatives.length + 1}`, lane_id: laneOptions[0] || "lane_1", name: "New Initiative", start: "2026-01-01", end: "2026-03-31", owner: "", status: "planned" });
+        renderForm();
+      }));
+      model.initiatives.forEach((item, index) => {
+        const box = roadmapCard(`Initiative ${item.id || index + 1}`, () => {
+            model.initiatives.splice(index, 1);
+            renderForm();
+        });
+        const fields = document.createElement("div");
+        fields.className = "roadmap-card-grid";
+        fields.append(
+          roadmapField("ID", input(item.id, value => item.id = value, "ID")),
+          roadmapField("Name", input(item.name, value => item.name = value, "Initiative name")),
+          roadmapField("Lane", select(item.lane_id, includeOption(laneOptions, item.lane_id), value => item.lane_id = value)),
+          roadmapField("Status", select(item.status || "planned", ["planned", "in_progress", "completed", "at_risk"], value => item.status = value)),
+          roadmapField("Start", input(item.start, value => item.start = value, "Start")),
+          roadmapField("End", input(item.end, value => item.end = value, "End")),
+          roadmapField("Owner", input(item.owner, value => item.owner = value, "Owner"))
+        );
+        box.appendChild(fields);
+        initiatives.appendChild(box);
+      });
+      formRoot.appendChild(initiatives);
+    }
+
+    function renderRoadmapMarkers(title, field, defaultType) {
+      const laneOptions = roadmapLaneOptions();
+      const markers = section(title, "Markers use lane IDs and dates; same-date markers are automatically separated by the renderer.");
+      markers.querySelector(".section-title").appendChild(button(`Add ${title.slice(0, -1)}`, () => {
+        model[field].push({ id: nextRoadmapId(field), lane_id: laneOptions[0] || "lane_1", name: "New Marker", date: "2026-01-01", type: defaultType });
+        renderForm();
+      }));
+      model[field].forEach((marker, index) => {
+        const box = roadmapCard(`${title.slice(0, -1)} ${marker.id || index + 1}`, () => {
+            model[field].splice(index, 1);
+            renderForm();
+        });
+        const fields = document.createElement("div");
+        fields.className = "roadmap-card-grid";
+        fields.append(
+          roadmapField("ID", input(marker.id, value => marker.id = value, "ID")),
+          roadmapField("Name", input(marker.name, value => marker.name = value, "Name")),
+          roadmapField("Lane", select(marker.lane_id, includeOption(laneOptions, marker.lane_id), value => marker.lane_id = value)),
+          roadmapField("Date", input(marker.date, value => marker.date = value, "Date")),
+          roadmapField("Type", select(marker.type || defaultType, ["key_milestone", "decision", "launch", "review", "milestone", "start"], value => marker.type = value))
+        );
+        box.appendChild(fields);
+        markers.appendChild(box);
+      });
+      formRoot.appendChild(markers);
+    }
+
+    function renderRoadmapTimelineMilestones() {
+      const milestones = section("Milestones", "Milestone rows feed the timeline nodes, detail cards, and milestone table.");
+      milestones.querySelector(".section-title").appendChild(button("Add Milestone", () => {
+        model.milestones.push({ id: `T${model.milestones.length + 1}`, name: "New Milestone", date: "2026-01-01", type: "milestone", owner: "", status: "planned", output: "" });
+        renderForm();
+      }));
+      model.milestones.forEach((marker, index) => {
+        const box = roadmapCard(`Milestone ${marker.id || index + 1}`, () => {
+            model.milestones.splice(index, 1);
+            renderForm();
+        });
+        const fields = document.createElement("div");
+        fields.className = "roadmap-card-grid";
+        fields.append(
+          roadmapField("ID", input(marker.id, value => marker.id = value, "ID")),
+          roadmapField("Name", input(marker.name, value => marker.name = value, "Milestone name")),
+          roadmapField("Date", input(marker.date, value => marker.date = value, "Date")),
+          roadmapField("Type", select(marker.type || "milestone", ["start", "milestone", "key_milestone", "decision", "review", "launch"], value => marker.type = value)),
+          roadmapField("Status", select(marker.status || "planned", ["planned", "in_progress", "completed", "at_risk"], value => marker.status = value)),
+          roadmapField("Owner", input(marker.owner, value => marker.owner = value, "Owner")),
+          roadmapField("Output", input(marker.output, value => marker.output = value, "Milestone output or decision basis"), "full")
+        );
+        box.appendChild(fields);
+        milestones.appendChild(box);
+      });
+      formRoot.appendChild(milestones);
+    }
+
+    function renderRoadmapPhases() {
+      const phases = section("Phases", "Phase bands are time ranges below the milestone axis.");
+      phases.querySelector(".section-title").appendChild(button("Add Phase", () => {
+        model.phases.push({ name: "New Phase", start: "2026-01-01", end: "2026-03-31" });
+        renderForm();
+      }));
+      model.phases.forEach((phase, index) => {
+        const line = document.createElement("div");
+        line.className = "roadmap-row roadmap-period-row";
+        line.append(
+          input(phase.name, value => phase.name = value, "Phase name"),
+          input(phase.start, value => phase.start = value, "Start"),
+          input(phase.end, value => phase.end = value, "End"),
+          button("Remove", () => {
+            model.phases.splice(index, 1);
+            renderForm();
+          })
+        );
+        phases.appendChild(line);
+      });
+      formRoot.appendChild(phases);
+    }
+
+    function renderRoadmapNotes() {
+      model.notes = Array.isArray(model.notes)
+        ? model.notes
+        : String(model.notes || "").split(/\r?\n/).map(note => note.trim()).filter(Boolean);
+      const notes = section("Notes", "Visible in the notes or summary area. Keep each note short.");
+      notes.querySelector(".section-title").appendChild(button("Add Note", () => {
+        model.notes.push("New note");
+        renderForm();
+      }));
+      model.notes.forEach((note, index) => {
+        const line = document.createElement("div");
+        line.className = "inline";
+        line.append(
+          input(note, value => model.notes[index] = value, "Note"),
+          button("Remove", () => {
+            model.notes.splice(index, 1);
+            renderForm();
+          })
+        );
+        notes.appendChild(line);
+      });
+      formRoot.appendChild(notes);
+    }
+
+    function roadmapLaneOptions() {
+      const options = (Array.isArray(model.lanes) ? model.lanes : [])
+        .map(lane => lane.id)
+        .filter(Boolean);
+      return options.length ? options : ["lane_1"];
+    }
+
+    function includeOption(options, value) {
+      const clean = String(value || "");
+      if (!clean || options.includes(clean)) return options;
+      return [clean, ...options];
+    }
+
+    function nextRoadmapId(field) {
+      const prefix = field === "decision_points" ? "D" : "M";
+      return `${prefix}${(Array.isArray(model[field]) ? model[field].length : 0) + 1}`;
+    }
+
+    function dateFromIso(value) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || "").trim());
+      if (!match) return null;
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      const date = new Date(Date.UTC(year, month - 1, day));
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function pad2(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function formatIsoDate(date) {
+      return `${date.getUTCFullYear()}-${pad2(date.getUTCMonth() + 1)}-${pad2(date.getUTCDate())}`;
+    }
+
+    function startOfMonthDate(date) {
+      return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1));
+    }
+
+    function endOfMonthDate(date) {
+      return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0));
+    }
+
+    function startOfQuarterDate(date) {
+      const quarterMonth = Math.floor(date.getUTCMonth() / 3) * 3;
+      return new Date(Date.UTC(date.getUTCFullYear(), quarterMonth, 1));
+    }
+
+    function endOfQuarterDate(date) {
+      const start = startOfQuarterDate(date);
+      return new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + 3, 0));
+    }
+
+    function addMonths(date, count) {
+      return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + count, 1));
+    }
+
+    function roadmapQuarter(date) {
+      return Math.floor(date.getUTCMonth() / 3) + 1;
+    }
+
+    function roadmapMonthName(monthIndex) {
+      return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][monthIndex];
+    }
+
+    function roadmapPeriodLabel(start, granularity) {
+      if (granularity === "month") return `${start.getUTCFullYear()} ${roadmapMonthName(start.getUTCMonth())}`;
+      return `${start.getUTCFullYear()} Q${roadmapQuarter(start)}`;
+    }
+
+    function roadmapPeriodSubtitle(start, granularity) {
+      if (granularity === "month") return "";
+      const firstMonth = Math.floor(start.getUTCMonth() / 3) * 3;
+      return `${roadmapMonthName(firstMonth)} - ${roadmapMonthName(firstMonth + 2)}`;
+    }
+
+    function roadmapPeriodId(start, granularity) {
+      if (granularity === "month") return `${start.getUTCFullYear()}${pad2(start.getUTCMonth() + 1)}`;
+      return `${start.getUTCFullYear()}Q${roadmapQuarter(start)}`;
+    }
+
+    function makeRoadmapPeriod(startDate, granularity) {
+      const start = granularity === "month" ? startOfMonthDate(startDate) : startOfQuarterDate(startDate);
+      const end = granularity === "month" ? endOfMonthDate(start) : endOfQuarterDate(start);
+      return {
+        id: roadmapPeriodId(start, granularity),
+        label: roadmapPeriodLabel(start, granularity),
+        subtitle: roadmapPeriodSubtitle(start, granularity),
+        start: formatIsoDate(start),
+        end: formatIsoDate(end)
+      };
+    }
+
+    function normalizeRoadmapPeriod(period, granularity) {
+      const start = dateFromIso(period.start);
+      if (!start) return;
+      period.id = roadmapPeriodId(start, granularity);
+      period.subtitle = roadmapPeriodSubtitle(start, granularity);
+      if (!String(period.label || "").trim()) {
+        period.label = roadmapPeriodLabel(start, granularity);
+      }
+    }
+
+    function roadmapDateRange() {
+      const dates = [];
+      const addDate = value => {
+        const date = dateFromIso(value);
+        if (date) dates.push(date);
+      };
+      (Array.isArray(model.time_periods) ? model.time_periods : []).forEach(period => {
+        addDate(period.start);
+        addDate(period.end);
+      });
+      (Array.isArray(model.initiatives) ? model.initiatives : []).forEach(item => {
+        addDate(item.start);
+        addDate(item.end);
+      });
+      (Array.isArray(model.milestones) ? model.milestones : []).forEach(marker => addDate(marker.date));
+      (Array.isArray(model.decision_points) ? model.decision_points : []).forEach(marker => addDate(marker.date));
+      (Array.isArray(model.phases) ? model.phases : []).forEach(phase => {
+        addDate(phase.start);
+        addDate(phase.end);
+      });
+      if (!dates.length) {
+        return { start: new Date(Date.UTC(2025, 3, 1)), end: new Date(Date.UTC(2026, 2, 31)) };
+      }
+      dates.sort((a, b) => a.getTime() - b.getTime());
+      return { start: dates[0], end: dates[dates.length - 1] };
+    }
+
+    function buildRoadmapPeriods(range, granularity) {
+      const start = granularity === "month" ? startOfMonthDate(range.start) : startOfQuarterDate(range.start);
+      const end = granularity === "month" ? endOfMonthDate(range.end) : endOfQuarterDate(range.end);
+      const step = granularity === "month" ? 1 : 3;
+      const periods = [];
+      let cursor = start;
+      while (cursor.getTime() <= end.getTime() && periods.length < 120) {
+        periods.push(makeRoadmapPeriod(cursor, granularity));
+        cursor = addMonths(cursor, step);
+      }
+      return periods.length ? periods : [makeRoadmapPeriod(new Date(Date.UTC(2025, 3, 1)), granularity)];
+    }
+
+    function nextRoadmapPeriod() {
+      const granularity = model.time_granularity === "month" ? "month" : "quarter";
+      const periods = Array.isArray(model.time_periods) ? model.time_periods : [];
+      const lastEnd = periods.length ? dateFromIso(periods[periods.length - 1].end) : null;
+      const nextStart = lastEnd ? addMonths(startOfMonthDate(lastEnd), 1) : new Date(Date.UTC(2026, 0, 1));
+      return makeRoadmapPeriod(nextStart, granularity);
+    }
+
+    function applyRoadmapGranularity(value) {
+      const granularity = value === "month" ? "month" : "quarter";
+      model.time_granularity = granularity;
+      if (model.preset === "swimlane_roadmap") {
+        model.time_periods = buildRoadmapPeriods(roadmapDateRange(), granularity);
+      }
+      renderForm();
+    }
+
+    function applyRoadmapPreset(preset) {
+      const template = ROADMAP_PRESET_TEMPLATES[preset] || ROADMAP_PRESET_TEMPLATES.swimlane_roadmap;
+      model = JSON.parse(JSON.stringify(template));
+      delete model.subtitle;
+      renderForm();
+    }
+
     $("newBtn").addEventListener("click", () => loadTemplate().catch(error => setStatus(error.message, "error")));
     $("loadBtn").addEventListener("click", () => loadFile());
     fileInput.addEventListener("change", () => loadSelectedFile(fileInput.files[0]).catch(error => setStatus(error.message, "error")));
@@ -1955,7 +2686,9 @@ INDEX_HTML = r"""<!doctype html>
           ? "startup-failure"
           : currentType() === "exclusion_tree"
             ? "startup-checks"
-            : "priority-matrix";
+            : currentType() === "two_by_two_matrix"
+              ? "priority-matrix"
+              : "product-roadmap";
       loadTemplate().catch(error => setStatus(error.message, "error"));
     });
     nameEl.addEventListener("input", () => updateValidation());

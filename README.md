@@ -2,7 +2,7 @@
 
 `brainstorm-diagrams` is a Codex skill for generating clean, PPT-ready structured brainstorming diagrams.
 
-Version `0.4.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, sequential exclusion-tree troubleshooting diagrams, and two-by-two prioritization matrices.
+Version `0.5.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, sequential exclusion-tree troubleshooting diagrams, two-by-two prioritization matrices, and roadmap timelines.
 
 ## What This Is
 
@@ -10,7 +10,7 @@ Version `0.4.0` implements deterministic SVG renderers for business-simple fishb
 
 From Codex's perspective, it is a skill: `SKILL.md` and the reference files define when to use it, how inputs should be interpreted, what visual rules to follow, and how output should be verified.
 
-From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, exclusion-tree, and two-by-two matrix SVG files without writing Python code.
+From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline SVG files without writing Python code.
 
 In short:
 
@@ -25,12 +25,14 @@ tools = the local scripts and double-click launchers that perform the work
 - `diagram_type="fault_tree"`
 - `diagram_type="exclusion_tree"`
 - `diagram_type="two_by_two_matrix"`
+- `diagram_type="roadmap_timeline"`
 - JSON input
 - Structured Markdown input
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
 - Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
 - Sequential exclusion-tree target problems, one main checkpoint path, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
 - Codex-assisted natural-language fishbone, fault-tree, exclusion-tree, and two-by-two matrix drafting into editable Markdown
+- Roadmap timeline JSON and structured Markdown rendering for swimlane roadmaps and milestone timelines
 - SVG output
 - PNG export from generated work SVG files
 - Automatic canvas expansion for dense fishbone and nested fault-tree content while keeping fonts, cards, and line widths fixed
@@ -94,6 +96,18 @@ English fallback:
 two_by_two_matrix_tool.cmd
 ```
 
+Roadmap timeline has its own non-technical launcher:
+
+```text
+路线图时间线工具.cmd
+```
+
+English fallback:
+
+```text
+roadmap_timeline_tool.cmd
+```
+
 For a browser-based editor, use the unified local builder:
 
 ```text
@@ -106,7 +120,7 @@ English fallback:
 diagram_builder.cmd
 ```
 
-The fishbone, fault-tree, exclusion-tree, and two-by-two matrix menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON through a local HTML form, saves into `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, or `work/two-by-two-matrix/`, and reuses the same SVG/PNG renderers.
+The fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON for fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline through a local HTML form, saves into the matching `work/<diagram-type>/` folder, and reuses the same SVG/PNG renderers.
 
 Menu options:
 
@@ -150,13 +164,15 @@ Browser-builder usage is similar: double-click `图表编辑器.cmd`, choose a d
 
 Two-by-two matrix usage is also available through the browser builder and command-line scripts: create with `scripts/new_two_by_two_matrix.py <name> --format md --preset action_priority`, edit in `work/two-by-two-matrix/`, then regenerate with `scripts/render_two_by_two_matrix_work.py`. Supported presets are `action_priority`, `risk_benefit`, `evidence_impact`, `value_feasibility`, `urgency_importance`, and `custom`. Use 4-20 items with X/Y scores from 1 to 5; the Decision Table shows every item.
 
-Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, or `work/two-by-two-matrix/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, `priority-matrix`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
+Roadmap timeline usage is available through the browser builder and command-line scripts: create with `scripts/new_roadmap_timeline.py <name> --format md --preset swimlane_roadmap`, edit in `work/roadmap-timeline/`, then regenerate with `scripts/render_roadmap_timeline_work.py`. Supported presets are `swimlane_roadmap` and `milestone_timeline`.
+
+Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, `work/two-by-two-matrix/`, or `work/roadmap-timeline/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, `priority-matrix`, `product-roadmap`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
 ## Natural-Language Drafting
 
 Codex can turn raw customer feedback, workshop notes, failure notes, or troubleshooting notes into a structured Markdown draft before rendering. This is a skill workflow, not a local `.cmd` menu feature: Codex performs the semantic extraction, then the existing local tools render the resulting Markdown.
 
-Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, sequential exclusion tree for one-path troubleshooting or cause-elimination checks, and two-by-two matrix for option comparison or prioritization across two scoring dimensions.
+Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, sequential exclusion tree for one-path troubleshooting or cause-elimination checks, two-by-two matrix for option comparison or prioritization across two scoring dimensions, and roadmap timeline for phase, milestone, or initiative planning over time.
 
 Example prompt:
 
@@ -223,6 +239,7 @@ Export an existing work SVG to PNG:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fault_tree_png.py startup-failure
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_two_by_two_matrix_png.py priority-matrix
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_roadmap_timeline_png.py product-roadmap
 ```
 
 SVG remains the primary editable output. PNG is a convenience format for quick sharing.
@@ -258,6 +275,13 @@ For user-owned exclusion-tree work files, use the exclusion-tree entrypoints:
 ```powershell
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_exclusion_tree.py startup-checks --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_exclusion_tree_work.py startup-checks
+```
+
+For user-owned roadmap timeline work files, use the roadmap entrypoints:
+
+```powershell
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_roadmap_timeline.py product-roadmap --format md --preset swimlane_roadmap
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_roadmap_timeline_work.py product-roadmap
 ```
 
 Start the local HTML builder with:
@@ -381,6 +405,7 @@ Dense diagrams may also report that the canvas was expanded. Sparse diagrams sta
 
 See `templates/fishbone.template.json` and `references/input_contract.md`.
 For fault tree, see `templates/fault-tree.template.json` and `brainstorm_diagrams_fault_tree_spec.md`.
+For roadmap timeline, see `templates/roadmap-timeline.template.json` and `brainstorm_diagrams_roadmap_timeline_spec.md`.
 Fault tree JSON may include `event_detail` for the left-side detail panel; `top_event.description` is also accepted as a fallback. Fault tree uses `layout_mode="review_compact"` by default: first-level events are arranged across the page, while children inside each subtree connect through a vertical trunk with leftward branch lines for review readability.
 Nested intermediate events may use their own `gate`, allowing one first-level event subtree to contain both AND and OR logic while each direct child group still has one gate.
 
@@ -392,16 +417,20 @@ Nested intermediate events may use their own `gate`, allowing one first-level ev
 - `templates/fault-tree.template.json`
 - `templates/exclusion-tree.template.md`
 - `templates/exclusion-tree.template.json`
+- `templates/two-by-two-matrix.template.md`
+- `templates/two-by-two-matrix.template.json`
+- `templates/roadmap-timeline.template.md`
+- `templates/roadmap-timeline.template.json`
 
 Copy a template, edit the content, then render it with `scripts/generate_diagram.py`.
 
 ## Work Files
 
-`scripts/new_fishbone.py`, `scripts/new_fault_tree.py`, and `scripts/new_exclusion_tree.py` create user-owned inputs and SVGs in their matching `work/<diagram-type>/` folders. These directories are for local authoring output, separate from maintained regression files.
+`scripts/new_fishbone.py`, `scripts/new_fault_tree.py`, `scripts/new_exclusion_tree.py`, `scripts/new_two_by_two_matrix.py`, and `scripts/new_roadmap_timeline.py` create user-owned inputs and SVGs in their matching `work/<diagram-type>/` folders. These directories are for local authoring output, separate from maintained regression files.
 
 ## Stresscases
 
-`stresscases/fishbone/`, `stresscases/fault-tree/`, and `stresscases/exclusion-tree/` contain intentionally dense diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
+`stresscases/fishbone/`, `stresscases/fault-tree/`, `stresscases/exclusion-tree/`, `stresscases/two-by-two-matrix/`, and `stresscases/roadmap-timeline/` contain intentionally dense diagrams for manual visual review. They are useful after layout changes because they make spacing problems obvious, but they are not part of the maintained regression testcase set.
 
 `scripts/verify_stresscases.py` protects this area from structural drift: it checks that the full-density SVG expands beyond the base canvas, keeps the topic block on the right, preserves the expected category and brace counts, and does not render `README.md` as an SVG.
 
@@ -411,6 +440,8 @@ Use `references/visual_review_checklist.md` when inspecting the generated stress
 - `stresscases/fault-tree/full-stress.json` -> `stresscases/fault-tree/full-stress.svg`
 - `stresscases/fault-tree/nested-gates.json` -> `stresscases/fault-tree/nested-gates.svg`
 - `stresscases/exclusion-tree/full-stress.json` -> `stresscases/exclusion-tree/full-stress.svg`
+- `stresscases/roadmap-timeline/full-stress.json` -> `stresscases/roadmap-timeline/full-stress.svg`
+- `stresscases/roadmap-timeline/milestone-dense.json` -> `stresscases/roadmap-timeline/milestone-dense.svg`
 
 ## Naturalcases
 
@@ -437,3 +468,6 @@ The optical-module case covers an English product design / manufacturing / appli
 - `testcases/fault-tree/fault-tree.mixed-gates.example.json` -> `testcases/fault-tree/fault-tree.mixed-gates.output.svg`
 - `testcases/fault-tree/fault-tree.nested-gates.example.json` -> `testcases/fault-tree/fault-tree.nested-gates.output.svg`
 - `testcases/fault-tree/fault-tree.multi-nested.example.json` -> `testcases/fault-tree/fault-tree.multi-nested.output.svg`
+- `testcases/roadmap-timeline/roadmap.swimlane.example.json` -> `testcases/roadmap-timeline/roadmap.swimlane.output.svg`
+- `testcases/roadmap-timeline/roadmap.milestone.example.json` -> `testcases/roadmap-timeline/roadmap.milestone.output.svg`
+- `testcases/roadmap-timeline/roadmap.markdown.example.md` -> `testcases/roadmap-timeline/roadmap.markdown.output.svg`

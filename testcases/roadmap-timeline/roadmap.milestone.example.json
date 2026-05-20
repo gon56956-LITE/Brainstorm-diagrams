@@ -1,0 +1,93 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "milestone_timeline",
+  "title": "Optical Module NPI Milestone Timeline",
+  "goal": "Move the next-generation optical module from concept review to controlled customer pilot.",
+  "time_granularity": "month",
+  "milestones": [
+    {
+      "id": "T1",
+      "name": "Concept Review",
+      "date": "2025-04-10",
+      "type": "start",
+      "owner": "Product",
+      "status": "completed",
+      "output": "Confirm customer requirements, target cost, and performance envelope"
+    },
+    {
+      "id": "T2",
+      "name": "Architecture Freeze",
+      "date": "2025-05-28",
+      "type": "key_milestone",
+      "owner": "Engineering",
+      "status": "completed",
+      "output": "Lock optical engine, driver architecture, and package concept"
+    },
+    {
+      "id": "T3",
+      "name": "EVT Build",
+      "date": "2025-07-18",
+      "type": "milestone",
+      "owner": "NPI",
+      "status": "in_progress",
+      "output": "Build engineering samples and close first assembly issues"
+    },
+    {
+      "id": "T4",
+      "name": "EVT Gate",
+      "date": "2025-08-22",
+      "type": "review",
+      "owner": "Quality",
+      "status": "planned",
+      "output": "Review yield, optical margin, firmware stability, and open risks"
+    },
+    {
+      "id": "T5",
+      "name": "DVT Start",
+      "date": "2025-09-15",
+      "type": "milestone",
+      "owner": "Validation",
+      "status": "planned",
+      "output": "Start reliability, thermal, signal-integrity, and interoperability testing"
+    },
+    {
+      "id": "T6",
+      "name": "Pilot Approval",
+      "date": "2025-11-03",
+      "type": "decision",
+      "owner": "Program",
+      "status": "planned",
+      "output": "Approve pilot quantity, containment plan, and customer sample release"
+    },
+    {
+      "id": "T7",
+      "name": "Customer Pilot",
+      "date": "2025-12-12",
+      "type": "key_milestone",
+      "owner": "Field Apps",
+      "status": "planned",
+      "output": "Ship pilot units and monitor field link stability"
+    },
+    {
+      "id": "T8",
+      "name": "Release Decision",
+      "date": "2026-01-30",
+      "type": "launch",
+      "owner": "Leadership",
+      "status": "planned",
+      "output": "Decide controlled launch based on pilot yield and reliability evidence"
+    }
+  ],
+  "phases": [
+    {"name": "Concept & Architecture", "start": "2025-04-01", "end": "2025-05-31"},
+    {"name": "Engineering Validation", "start": "2025-06-01", "end": "2025-08-31"},
+    {"name": "Design Validation", "start": "2025-09-01", "end": "2025-11-30"},
+    {"name": "Pilot & Release", "start": "2025-12-01", "end": "2026-01-31"}
+  ],
+  "show_detail_cards": true,
+  "show_table": true,
+  "notes": [
+    "Gate decisions should be based on yield, reliability, and customer-readiness evidence.",
+    "Customer pilot release requires a containment plan for open risks."
+  ]
+}

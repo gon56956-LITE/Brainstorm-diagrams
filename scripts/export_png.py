@@ -17,7 +17,7 @@ WORK = ROOT / "work" / "fishbone"
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 NUMBER_RE = re.compile(r"-?(?:\d+(?:\.\d+)?|\.\d+)")
 PATH_TOKEN_RE = re.compile(r"[MLHVCSQTAZmlhvcsqtaz]|-?(?:\d+(?:\.\d+)?|\.\d+)")
-STYLE_ATTRS = ("fill", "stroke", "stroke-width")
+STYLE_ATTRS = ("fill", "stroke", "stroke-width", "font-family", "font-size", "font-weight")
 Transform = tuple[float, float, float]
 ANTIALIAS_FACTOR = 2
 
@@ -195,23 +195,19 @@ def draw_path(draw: ImageDraw.ImageDraw, element: ET.Element, scale: float, styl
 
 
 def draw_text(draw: ImageDraw.ImageDraw, image: Image.Image, element: ET.Element, scale: float, style: dict[str, str], transform: Transform) -> None:
-    text = element.text or ""
-    if not text:
+    runs = text_runs(element, style, scale)
+    if not runs:
         return
     x, y = transform_point(number_attr(element, "x"), number_attr(element, "y"), scale, transform)
-    font_size = int(number_attr(element, "font-size", 16) * scale)
-    bold = is_bold_weight(element.attrib.get("font-weight", ""))
-    font = load_font(font_size, bold=bold)
-    fill = paint(style.get("fill")) or "#000000"
     text_anchor = baseline_anchor(element.attrib.get("text-anchor", "start"))
     rotation = parse_rotate(element.attrib.get("transform", ""))
     if rotation is None:
-        draw_text_with_baseline(draw, (x, y), text, font=font, fill=fill, anchor=text_anchor)
+        draw_text_runs_with_baseline(draw, (x, y), runs, anchor=text_anchor)
         return
     angle, cx, cy = rotation
     overlay = Image.new("RGBA", image.size, (255, 255, 255, 0))
     overlay_draw = ImageDraw.Draw(overlay)
-    draw_text_with_baseline(overlay_draw, (x, y), text, font=font, fill=fill, anchor=text_anchor)
+    draw_text_runs_with_baseline(overlay_draw, (x, y), runs, anchor=text_anchor)
     rotated = overlay.rotate(angle, center=(cx * scale, cy * scale), resample=Image.Resampling.BICUBIC)
     image.paste(Image.alpha_composite(image.convert("RGBA"), rotated).convert("RGB"))
 
@@ -416,8 +412,66 @@ def paint(value: str | None) -> str | None:
         return "#000000"
 
 
-def load_font(size: int, *, bold: bool) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    font_names = ["arialbd.ttf" if bold else "arial.ttf", "msyhbd.ttc" if bold else "msyh.ttc"]
+def text_runs(element: ET.Element, base_style: dict[str, str], scale: float) -> list[dict[str, object]]:
+    runs: list[dict[str, object]] = []
+
+    def append_run(text: str | None, run_style: dict[str, str]) -> None:
+        if not text:
+            return
+        font_size = int(float(run_style.get("font-size", "16")) * scale)
+        font_weight = run_style.get("font-weight", "")
+        font_family = run_style.get("font-family", "")
+        font = load_font(font_size, bold=is_bold_weight(font_weight), text=text, font_family=font_family)
+        runs.append({"text": text, "font": font, "fill": paint(run_style.get("fill")) or "#000000"})
+
+    append_run(element.text, base_style)
+    for child in list(element):
+        if local_name(child.tag) != "tspan":
+            continue
+        child_style = effective_style(child, base_style)
+        append_run(child.text, child_style)
+        append_run(child.tail, base_style)
+    return runs
+
+
+def draw_text_runs_with_baseline(draw: ImageDraw.ImageDraw, xy: tuple[float, float], runs: list[dict[str, object]], *, anchor: str) -> None:
+    x, y = xy
+    total_width = sum(text_width(draw, str(run["text"]), run["font"]) for run in runs)
+    if anchor == "ms":
+        x -= total_width / 2
+    elif anchor == "rs":
+        x -= total_width
+    for run in runs:
+        text = str(run["text"])
+        font = run["font"]
+        draw_text_with_baseline(draw, (x, y), text, font=font, fill=str(run["fill"]), anchor="ls")
+        x += text_width(draw, text, font)
+
+
+def text_width(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont | ImageFont.ImageFont) -> float:
+    try:
+        return float(draw.textlength(text, font=font))
+    except AttributeError:
+        bbox = draw.textbbox((0, 0), text, font=font)
+        return float(bbox[2] - bbox[0])
+
+
+def load_font(
+    size: int,
+    *,
+    bold: bool,
+    text: str = "",
+    font_family: str = "",
+) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    families = [family.strip().strip("'\"").lower() for family in font_family.split(",") if family.strip()]
+    wants_cjk = contains_cjk(text)
+    family_names: list[str] = []
+    if wants_cjk:
+        family_names.extend(["microsoft yahei", "noto sans cjk sc", "arial"])
+    family_names.extend(families or ["arial", "microsoft yahei"])
+    if "microsoft yahei" not in family_names:
+        family_names.append("microsoft yahei")
+    font_names = font_file_candidates(family_names, bold)
     font_dirs = [Path(r"C:\Windows\Fonts")]
     for font_dir in font_dirs:
         for name in font_names:
@@ -425,6 +479,19 @@ def load_font(size: int, *, bold: bool) -> ImageFont.FreeTypeFont | ImageFont.Im
             if path.exists():
                 return ImageFont.truetype(str(path), size=size)
     return ImageFont.load_default()
+
+
+def font_file_candidates(families: list[str], bold: bool) -> list[str]:
+    candidates: list[str] = []
+    for family in families:
+        if family in {"arial", "helvetica", "sans-serif"}:
+            candidates.append("arialbd.ttf" if bold else "arial.ttf")
+        elif family in {"microsoft yahei", "yahei", "微软雅黑"}:
+            candidates.append("msyhbd.ttc" if bold else "msyh.ttc")
+        elif family in {"noto sans cjk sc", "noto sans sc"}:
+            candidates.append("NotoSansCJK-Regular.ttc")
+    candidates.extend(["arialbd.ttf" if bold else "arial.ttf", "msyhbd.ttc" if bold else "msyh.ttc"])
+    return list(dict.fromkeys(candidates))
 
 
 def baseline_anchor(text_anchor: str) -> str:
@@ -466,6 +533,10 @@ def is_bold_weight(value: str) -> bool:
         return int(float(normalized)) >= 600
     except ValueError:
         return False
+
+
+def contains_cjk(text: str) -> bool:
+    return any("\u4e00" <= char <= "\u9fff" for char in text)
 
 
 def local_name(tag: str) -> str:

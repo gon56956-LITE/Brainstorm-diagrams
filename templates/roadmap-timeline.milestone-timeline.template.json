@@ -1,0 +1,24 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "milestone_timeline",
+  "title": "Milestone Timeline",
+  "goal": "Launch the next-generation product on time with quality.",
+  "language": "en",
+  "time_granularity": "month",
+  "milestones": [
+    {"id": "T1", "name": "Project Kickoff", "date": "2025-04-01", "type": "start", "owner": "PMO", "status": "completed", "output": "Define scope, team and plan"},
+    {"id": "T2", "name": "Requirements Sign-off", "date": "2025-05-15", "type": "milestone", "owner": "Product", "status": "completed", "output": "Finalize product requirements"},
+    {"id": "T3", "name": "Design Review", "date": "2025-06-30", "type": "review", "owner": "R&D", "status": "completed", "output": "Complete system design review"},
+    {"id": "T4", "name": "Prototype Ready", "date": "2025-08-15", "type": "milestone", "owner": "R&D", "status": "planned", "output": "Prototype build completed"},
+    {"id": "T5", "name": "EVT Completion", "date": "2025-10-31", "type": "key_milestone", "owner": "R&D", "status": "planned", "output": "Engineering validation test completed"},
+    {"id": "T6", "name": "Market Launch", "date": "2026-04-30", "type": "launch", "owner": "Product", "status": "planned", "output": "Official product launch"}
+  ],
+  "phases": [
+    {"name": "Design Phase", "start": "2025-04-01", "end": "2025-06-30"},
+    {"name": "Validation Phase", "start": "2025-07-01", "end": "2025-12-31"},
+    {"name": "Launch Phase", "start": "2026-01-01", "end": "2026-04-30"}
+  ],
+  "notes": ["Dependencies and risks are tracked separately."],
+  "show_detail_cards": true,
+  "show_table": true
+}

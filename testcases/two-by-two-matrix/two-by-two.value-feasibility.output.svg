@@ -5,16 +5,16 @@
   </marker>
 </defs>
 <rect width="1920" height="1080" fill="#FFFFFF"/>
-<text x="70" y="74" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="800" fill="#0B2E63">Feature Screening Matrix</text>
+<text x="70" y="74" font-family="Arial" font-size="40" font-weight="700" fill="#0B2E63">Feature Screening Matrix</text>
 <g id="two-by-two-matrix">
 <line x1="154" y1="806" x2="1076" y2="806" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
 <line x1="154" y1="806" x2="154" y2="150" stroke="#0B3A75" stroke-width="4" marker-end="url(#arrowNavy)"/>
-<text x="610.0" y="864" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Technical Feasibility</text>
-<text transform="rotate(-90 78 477.0)" x="78" y="477.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="700" fill="#0B2E63">Customer Value</text>
-<text x="154" y="840" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
-<text x="1026" y="840" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">High</text>
-<text x="112" y="802" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
-<text x="112" y="194" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">High</text>
+<text x="610.0" y="864" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#0B2E63">Technical Feasibility</text>
+<text transform="rotate(-90 78 477.0)" x="78" y="477.0" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#0B2E63">Customer Value</text>
+<text x="154" y="840" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
+<text x="1026" y="840" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">High</text>
+<text x="112" y="802" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">Low</text>
+<text x="112" y="194" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">High</text>
 <g class="matrix-quadrant matrix-top_left" data-quadrant="top_left">
 <rect x="174.0" y="174.0" width="427.0" height="294.0" rx="14" fill="#EAF7F0" stroke="#B9DCC7" stroke-width="1.6"/>
 <circle cx="228.0" cy="228.0" r="28" fill="#2E8B57"/>
@@ -24,11 +24,11 @@
   <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" />
   <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" />
 </g>
-<text x="268.0" y="223.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Explore</text>
-<text x="268.0" y="254.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">High Value / Low Feasibility</text>
+<text x="268.0" y="223.0" font-family="Arial" font-size="23" font-weight="700" fill="#0B2E63">Explore</text>
+<text x="268.0" y="254.0" font-family="Arial" font-size="17" font-weight="700" fill="#5B677A">High Value / Low Feasibility</text>
 <circle class="matrix-item-marker" cx="228.0" cy="294.0" r="13" fill="#2E8B57"/>
-<text x="228.0" y="299.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">F2</text>
-<text class="matrix-item-label" x="253.0" y="300.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">AI optimization mode</text>
+<text x="228.0" y="299.0" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#FFFFFF">F2</text>
+<text class="matrix-item-label" x="253.0" y="300.0" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">AI optimization mode</text>
 </g>
 <g class="matrix-quadrant matrix-top_right" data-quadrant="top_right">
 <rect x="619.0" y="174.0" width="427.0" height="294.0" rx="14" fill="#EAF3FF" stroke="#BCD5F6" stroke-width="1.6"/>
@@ -37,11 +37,11 @@
   <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
   <path d="m9 12 2 2 4-4" />
 </g>
-<text x="713.0" y="223.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Build Now</text>
-<text x="713.0" y="254.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">High Value / High Feasibility</text>
+<text x="713.0" y="223.0" font-family="Arial" font-size="23" font-weight="700" fill="#0B2E63">Build Now</text>
+<text x="713.0" y="254.0" font-family="Arial" font-size="17" font-weight="700" fill="#5B677A">High Value / High Feasibility</text>
 <circle class="matrix-item-marker" cx="673.0" cy="294.0" r="13" fill="#2F6CCF"/>
-<text x="673.0" y="299.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">F1</text>
-<text class="matrix-item-label" x="698.0" y="300.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Auto calibration</text>
+<text x="673.0" y="299.0" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#FFFFFF">F1</text>
+<text class="matrix-item-label" x="698.0" y="300.0" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">Auto calibration</text>
 </g>
 <g class="matrix-quadrant matrix-bottom_left" data-quadrant="bottom_left">
 <rect x="174.0" y="486.0" width="427.0" height="294.0" rx="14" fill="#FFF6E3" stroke="#F1D7A5" stroke-width="1.6"/>
@@ -51,11 +51,11 @@
   <line x1="10" x2="10" y1="15" y2="9" />
   <line x1="14" x2="14" y1="15" y2="9" />
 </g>
-<text x="268.0" y="535.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Avoid</text>
-<text x="268.0" y="566.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">Low Value / Low Feasibility</text>
+<text x="268.0" y="535.0" font-family="Arial" font-size="23" font-weight="700" fill="#0B2E63">Avoid</text>
+<text x="268.0" y="566.0" font-family="Arial" font-size="17" font-weight="700" fill="#5B677A">Low Value / Low Feasibility</text>
 <circle class="matrix-item-marker" cx="228.0" cy="606.0" r="13" fill="#D99A12"/>
-<text x="228.0" y="611.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">F4</text>
-<text class="matrix-item-label" x="253.0" y="612.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">Legacy protocol support</text>
+<text x="228.0" y="611.0" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#FFFFFF">F4</text>
+<text class="matrix-item-label" x="253.0" y="612.0" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">Legacy protocol support</text>
 </g>
 <g class="matrix-quadrant matrix-bottom_right" data-quadrant="bottom_right">
 <rect x="619.0" y="486.0" width="427.0" height="294.0" rx="14" fill="#FFF0F0" stroke="#F0B8B8" stroke-width="1.6"/>
@@ -66,28 +66,28 @@
   <path d="M22 4h-4" />
   <circle cx="4" cy="20" r="2" />
 </g>
-<text x="713.0" y="535.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="800" fill="#0B2E63">Nice to Have</text>
-<text x="713.0" y="566.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="700" fill="#5B677A">Low Value / High Feasibility</text>
+<text x="713.0" y="535.0" font-family="Arial" font-size="23" font-weight="700" fill="#0B2E63">Nice to Have</text>
+<text x="713.0" y="566.0" font-family="Arial" font-size="17" font-weight="700" fill="#5B677A">Low Value / High Feasibility</text>
 <circle class="matrix-item-marker" cx="673.0" cy="606.0" r="13" fill="#C94040"/>
-<text x="673.0" y="611.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">F3</text>
-<text class="matrix-item-label" x="698.0" y="612.0" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="16" font-weight="700" fill="#0B2E63">New color theme</text>
+<text x="673.0" y="611.0" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#FFFFFF">F3</text>
+<text class="matrix-item-label" x="698.0" y="612.0" font-family="Arial" font-size="16" font-weight="700" fill="#0B2E63">New color theme</text>
 </g>
 </g>
 <g id="matrix-side-table">
-<text x="1086" y="140" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="800" fill="#0B2E63">Decision Table</text>
+<text x="1086" y="140" font-family="Arial" font-size="24" font-weight="700" fill="#0B2E63">Decision Table</text>
 <rect x="1086" y="158" width="770" height="290.0" rx="10" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.3"/>
 <rect x="1086" y="158" width="770" height="58" rx="10" fill="#0B2E63"/>
 <rect x="1086" y="187" width="770" height="29" fill="#0B2E63"/>
-<text x="1112.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">ID</text>
-<text x="1268.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Feature</text>
+<text x="1112.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">ID</text>
+<text x="1268.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Feature</text>
 <line x1="1138.0" y1="158" x2="1138.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1433.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Value</text>
+<text x="1433.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Value</text>
 <line x1="1398.0" y1="158" x2="1398.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1503.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Feasibility</text>
+<text x="1503.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Feasibility</text>
 <line x1="1468.0" y1="158" x2="1468.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1607.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Quadrant</text>
+<text x="1607.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Quadrant</text>
 <line x1="1538.0" y1="158" x2="1538.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1766.0" y="185.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">Product Decision</text>
+<text x="1766.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Product Decision</text>
 <line x1="1676.0" y1="158" x2="1676.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
 <line x1="1086" y1="216" x2="1856" y2="216" stroke="#D8E2EE" stroke-width="1"/>
 <g class="matrix-table-row" data-item-id="F1">
@@ -96,12 +96,12 @@
 <line class="matrix-table-body-grid" x1="1468.0" y1="216.0" x2="1468.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1538.0" y1="216.0" x2="1538.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1676.0" y1="216.0" x2="1676.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1112.0" y="250.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">F1</text>
-<text x="1268.0" y="250.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Auto calibration</text>
-<text x="1433.0" y="250.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
-<text x="1503.0" y="250.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">4</text>
-<text x="1607.0" y="250.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Build Now</text>
-<text x="1766.0" y="250.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Build</text>
+<text x="1112.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">F1</text>
+<text x="1268.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Auto calibration</text>
+<text x="1433.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1607.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Build Now</text>
+<text x="1766.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Build</text>
 </g>
 <g class="matrix-table-row" data-item-id="F2">
 <rect x="1086" y="274.0" width="770" height="58.0" fill="#F8FBFF"/>
@@ -110,12 +110,12 @@
 <line class="matrix-table-body-grid" x1="1468.0" y1="274.0" x2="1468.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1538.0" y1="274.0" x2="1538.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1676.0" y1="274.0" x2="1676.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<text x="1112.0" y="308.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">F2</text>
-<text x="1268.0" y="308.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">AI optimization mode</text>
-<text x="1433.0" y="308.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
-<text x="1503.0" y="308.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
-<text x="1607.0" y="308.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Explore</text>
-<text x="1766.0" y="308.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Prototype</text>
+<text x="1112.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">F2</text>
+<text x="1268.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">AI optimization mode</text>
+<text x="1433.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1607.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Explore</text>
+<text x="1766.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Prototype</text>
 </g>
 <g class="matrix-table-row" data-item-id="F3">
 <line class="matrix-table-body-grid" x1="1138.0" y1="332.0" x2="1138.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
@@ -123,12 +123,12 @@
 <line class="matrix-table-body-grid" x1="1468.0" y1="332.0" x2="1468.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1538.0" y1="332.0" x2="1538.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1676.0" y1="332.0" x2="1676.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1112.0" y="366.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">F3</text>
-<text x="1268.0" y="366.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">New color theme</text>
-<text x="1433.0" y="366.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">2</text>
-<text x="1503.0" y="366.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">5</text>
-<text x="1607.0" y="366.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Nice to Have</text>
-<text x="1766.0" y="366.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Backlog</text>
+<text x="1112.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">F3</text>
+<text x="1268.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">New color theme</text>
+<text x="1433.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1607.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Nice to Have</text>
+<text x="1766.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Backlog</text>
 </g>
 <g class="matrix-table-row" data-item-id="F4">
 <rect x="1086" y="390.0" width="770" height="58.0" fill="#F8FBFF"/>
@@ -137,12 +137,12 @@
 <line class="matrix-table-body-grid" x1="1468.0" y1="390.0" x2="1468.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1538.0" y1="390.0" x2="1538.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
 <line class="matrix-table-body-grid" x1="1676.0" y1="390.0" x2="1676.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<text x="1112.0" y="424.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">F4</text>
-<text x="1268.0" y="424.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#0B2E63">Legacy protocol support</text>
-<text x="1433.0" y="424.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
-<text x="1503.0" y="424.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">1</text>
-<text x="1607.0" y="424.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Avoid</text>
-<text x="1766.0" y="424.0" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" font-weight="600" fill="#5B677A">Drop</text>
+<text x="1112.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">F4</text>
+<text x="1268.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Legacy protocol support</text>
+<text x="1433.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1503.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Avoid</text>
+<text x="1766.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Drop</text>
 </g>
 <line class="matrix-table-row-separator" x1="1086" y1="274.0" x2="1856" y2="274.0" stroke="#C5D3E4" stroke-width="1"/>
 <line class="matrix-table-row-separator" x1="1086" y1="332.0" x2="1856" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
@@ -152,7 +152,7 @@
 </g>
 <g id="matrix-legend">
 <rect x="84" y="910" width="960" height="88" rx="12" fill="#F7FAFD" stroke="#9AA9BD" stroke-width="1.3"/>
-<text x="108" y="946" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="800" fill="#0B2E63">Priority Guide</text>
+<text x="108" y="946" font-family="Arial" font-size="20" font-weight="700" fill="#0B2E63">Priority Guide</text>
 <circle cx="524" cy="937" r="11" fill="#2E8B57"/>
 <g class="lucide-icon lucide-rocket" transform="translate(518.0 931.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
   <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
@@ -160,23 +160,23 @@
   <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" />
   <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" />
 </g>
-<text x="544" y="933" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Explore</text>
-<text x="544" y="951" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Prototype</text>
+<text x="544" y="933" font-family="Arial" font-size="12" font-weight="700" fill="#0B2E63">Explore</text>
+<text x="544" y="951" font-family="Arial" font-size="11" font-weight="600" fill="#5B677A">Prototype</text>
 <circle cx="774" cy="937" r="11" fill="#2F6CCF"/>
 <g class="lucide-icon lucide-badge-check" transform="translate(768.0 931.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
   <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
   <path d="m9 12 2 2 4-4" />
 </g>
-<text x="794" y="933" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Build Now</text>
-<text x="794" y="951" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Build</text>
+<text x="794" y="933" font-family="Arial" font-size="12" font-weight="700" fill="#0B2E63">Build Now</text>
+<text x="794" y="951" font-family="Arial" font-size="11" font-weight="600" fill="#5B677A">Build</text>
 <circle cx="524" cy="972" r="11" fill="#D99A12"/>
 <g class="lucide-icon lucide-circle-pause" transform="translate(518.0 966.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="12" cy="12" r="10" />
   <line x1="10" x2="10" y1="15" y2="9" />
   <line x1="14" x2="14" y1="15" y2="9" />
 </g>
-<text x="544" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Avoid</text>
-<text x="544" y="986" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Drop</text>
+<text x="544" y="968" font-family="Arial" font-size="12" font-weight="700" fill="#0B2E63">Avoid</text>
+<text x="544" y="986" font-family="Arial" font-size="11" font-weight="600" fill="#5B677A">Drop</text>
 <circle cx="774" cy="972" r="11" fill="#C94040"/>
 <g class="lucide-icon lucide-sparkles" transform="translate(768.0 966.0) scale(0.500)" stroke="#FFFFFF" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
   <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
@@ -184,7 +184,7 @@
   <path d="M22 4h-4" />
   <circle cx="4" cy="20" r="2" />
 </g>
-<text x="794" y="968" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12" font-weight="800" fill="#0B2E63">Nice to Have</text>
-<text x="794" y="986" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11" font-weight="600" fill="#5B677A">Backlog</text>
+<text x="794" y="968" font-family="Arial" font-size="12" font-weight="700" fill="#0B2E63">Nice to Have</text>
+<text x="794" y="986" font-family="Arial" font-size="11" font-weight="600" fill="#5B677A">Backlog</text>
 </g>
 </svg>

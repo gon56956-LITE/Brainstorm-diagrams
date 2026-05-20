@@ -1,0 +1,26 @@
+{
+  "diagram_type": "roadmap_timeline",
+  "preset": "swimlane_roadmap",
+  "lane_type": "theme",
+  "title": "Roadmap / Timeline",
+  "goal": "Align initiatives and milestones over time.",
+  "time_granularity": "quarter",
+  "time_periods": [
+    {"id": "2025Q2", "label": "2025 Q2", "subtitle": "Apr - Jun", "start": "2025-04-01", "end": "2025-06-30"},
+    {"id": "2025Q3", "label": "2025 Q3", "subtitle": "Jul - Sep", "start": "2025-07-01", "end": "2025-09-30"},
+    {"id": "2025Q4", "label": "2025 Q4", "subtitle": "Oct - Dec", "start": "2025-10-01", "end": "2025-12-31"}
+  ],
+  "lanes": [
+    {"id": "lane_1", "name": "Workstream A", "color": "blue"},
+    {"id": "lane_2", "name": "Workstream B", "color": "teal"}
+  ],
+  "initiatives": [
+    {"id": "R1", "lane_id": "lane_1", "name": "Phase 1", "start": "2025-04-01", "end": "2025-06-30", "owner": "Team A", "status": "in_progress"},
+    {"id": "R2", "lane_id": "lane_2", "name": "Phase 2", "start": "2025-07-01", "end": "2025-09-30", "owner": "Team B", "status": "planned"}
+  ],
+  "milestones": [
+    {"id": "M1", "lane_id": "lane_1", "name": "Review", "date": "2025-06-15", "type": "key_milestone"}
+  ],
+  "show_table": true,
+  "show_summary_panel": true
+}

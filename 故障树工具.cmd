@@ -1,2 +1,2 @@
 @echo off
-call "%~dp0fault_tree_tool.cmd"
+call "%~dp0fault_tree_tool.cmd" %*

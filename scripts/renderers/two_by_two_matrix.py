@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 LUCIDE_ICON_DIR = ROOT / "assets" / "lucide-candidates"
 WIDTH = 1920
 HEIGHT = 1080
-FONT_STACK = "Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif"
+FONT_STACK = "Arial"
 
 MAX_ITEMS_IN_QUADRANT = 5
 MAX_ITEMS = 20
@@ -331,7 +331,7 @@ def render_two_by_two_matrix(data: dict[str, Any]) -> str:
 
 def render_title(title: str, subtitle: str) -> str:
     chunks = [
-        f'<text x="70" y="74" font-family="{FONT_STACK}" font-size="40" font-weight="800" fill="{PALETTE["navy"]}">{escape(title)}</text>',
+        f'<text x="70" y="74" font-family="{FONT_STACK}" font-size="40" font-weight="700" fill="{PALETTE["navy"]}">{escape(title)}</text>',
     ]
     if subtitle:
         chunks.append(f'<text x="72" y="112" font-family="{FONT_STACK}" font-size="21" font-weight="500" fill="{PALETTE["gray_text"]}">{escape(subtitle)}</text>')
@@ -374,7 +374,7 @@ def render_quadrant_card(quadrant: str, data: dict[str, Any]) -> str:
         f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="14" fill="{PALETTE[bg_key]}" stroke="{PALETTE[border_key]}" stroke-width="1.6"/>',
         f'<circle cx="{x + 54:.1f}" cy="{y + 54:.1f}" r="28" fill="{PALETTE[marker_key]}"/>',
         render_badge_icon(icon, x + 54, y + 54, color="#FFFFFF", size=28),
-        f'<text x="{x + 94:.1f}" y="{y + 49:.1f}" font-family="{FONT_STACK}" font-size="23" font-weight="800" fill="{PALETTE["navy"]}">{escape(localized(config["label"], language))}</text>',
+        f'<text x="{x + 94:.1f}" y="{y + 49:.1f}" font-family="{FONT_STACK}" font-size="23" font-weight="700" fill="{PALETTE["navy"]}">{escape(localized(config["label"], language))}</text>',
         f'<text x="{x + 94:.1f}" y="{y + 80:.1f}" font-family="{FONT_STACK}" font-size="17" font-weight="700" fill="{PALETTE["gray_text"]}">{escape(localized(config["description"], language))}</text>',
     ]
     item_y = y + 120
@@ -397,7 +397,7 @@ def render_matrix_item(item: MatrixItem, cx: float, y: float, text_width: float,
     lines = wrap_text(label, max_chars, max_lines=1)
     return [
         f'<circle class="matrix-item-marker" cx="{cx:.1f}" cy="{y:.1f}" r="13" fill="{color}"/>',
-        f'<text x="{cx:.1f}" y="{y + 5:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="12" font-weight="800" fill="#FFFFFF">{escape(item.id[:3])}</text>',
+        f'<text x="{cx:.1f}" y="{y + 5:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="12" font-weight="700" fill="#FFFFFF">{escape(item.id[:3])}</text>',
         f'<text class="matrix-item-label" x="{cx + 25:.1f}" y="{y + 6:.1f}" font-family="{FONT_STACK}" font-size="16" font-weight="700" fill="{PALETTE["navy"]}">{escape(lines[0])}</text>',
     ]
 
@@ -423,7 +423,7 @@ def render_side_table(data: dict[str, Any]) -> str:
     table_line_gap = 17
     chunks = [
         '<g id="matrix-side-table">',
-        f'<text x="{TABLE_X}" y="{TABLE_Y - 18}" font-family="{FONT_STACK}" font-size="24" font-weight="800" fill="{PALETTE["navy"]}">{escape(localized({"en": "Decision Table", "zh": "决策表"}, language))}</text>',
+        f'<text x="{TABLE_X}" y="{TABLE_Y - 18}" font-family="{FONT_STACK}" font-size="24" font-weight="700" fill="{PALETTE["navy"]}">{escape(localized({"en": "Decision Table", "zh": "决策表"}, language))}</text>',
         f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{TABLE_W}" height="{table_h:.1f}" rx="10" fill="#FFFFFF" stroke="{PALETTE["border"]}" stroke-width="1.3"/>',
         f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{TABLE_W}" height="{header_h}" rx="10" fill="{PALETTE["navy"]}"/>',
         f'<rect x="{TABLE_X}" y="{TABLE_Y + 29}" width="{TABLE_W}" height="29" fill="{PALETTE["navy"]}"/>',
@@ -433,7 +433,7 @@ def render_side_table(data: dict[str, Any]) -> str:
         header_lines = wrap_text(header, max(4, int((width - 12) / 7.4)), max_lines=2)
         header_y = TABLE_Y + 27 - (len(header_lines) - 1) * (table_line_gap / 2)
         for line_index, line in enumerate(header_lines):
-            chunks.append(f'<text x="{x_cursor + width / 2:.1f}" y="{header_y + line_index * table_line_gap:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="{header_font_size}" font-weight="800" fill="#FFFFFF">{escape(line)}</text>')
+            chunks.append(f'<text x="{x_cursor + width / 2:.1f}" y="{header_y + line_index * table_line_gap:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="{header_font_size}" font-weight="700" fill="#FFFFFF">{escape(line)}</text>')
         if x_cursor > TABLE_X:
             chunks.append(f'<line x1="{x_cursor:.1f}" y1="{TABLE_Y}" x2="{x_cursor:.1f}" y2="{TABLE_Y + header_h}" stroke="#D8E2EE" stroke-width="1"/>')
         x_cursor += width
@@ -488,7 +488,7 @@ def render_legend(data: dict[str, Any]) -> str:
     chunks = [
         '<g id="matrix-legend">',
         f'<rect x="{LEGEND_X}" y="{LEGEND_Y}" width="{LEGEND_W}" height="{LEGEND_H}" rx="12" fill="{PALETTE["soft"]}" stroke="{PALETTE["border"]}" stroke-width="1.3"/>',
-        f'<text x="{LEGEND_X + 24}" y="{LEGEND_Y + 36}" font-family="{FONT_STACK}" font-size="20" font-weight="800" fill="{PALETTE["navy"]}">{escape(localized({"en": "Priority Guide", "zh": "优先级说明"}, language))}</text>',
+        f'<text x="{LEGEND_X + 24}" y="{LEGEND_Y + 36}" font-family="{FONT_STACK}" font-size="20" font-weight="700" fill="{PALETTE["navy"]}">{escape(localized({"en": "Priority Guide", "zh": "优先级说明"}, language))}</text>',
     ]
     for index, quadrant in enumerate(QUADRANT_ORDER):
         marker_key, _, _ = QUADRANT_STYLE[quadrant]
@@ -500,7 +500,7 @@ def render_legend(data: dict[str, Any]) -> str:
         y = LEGEND_Y + 27 + row * 35
         chunks.append(f'<circle cx="{x}" cy="{y}" r="11" fill="{PALETTE[marker_key]}"/>')
         chunks.append(render_badge_icon(icon, x, y, color="#FFFFFF", size=12))
-        chunks.append(f'<text x="{x + 20}" y="{y - 4}" font-family="{FONT_STACK}" font-size="12" font-weight="800" fill="{PALETTE["navy"]}">{escape(localized(config["label"], language))}</text>')
+        chunks.append(f'<text x="{x + 20}" y="{y - 4}" font-family="{FONT_STACK}" font-size="12" font-weight="700" fill="{PALETTE["navy"]}">{escape(localized(config["label"], language))}</text>')
         chunks.append(f'<text x="{x + 20}" y="{y + 14}" font-family="{FONT_STACK}" font-size="11" font-weight="600" fill="{PALETTE["gray_text"]}">{escape(localized(config["action"], language))}</text>')
     chunks.append("</g>")
     return "\n".join(chunks)
@@ -517,8 +517,8 @@ def render_notes(data: dict[str, Any]) -> str:
         '<g id="matrix-notes">',
         f'<rect x="{note_x}" y="{note_y}" width="{note_w}" height="{note_h}" rx="8" fill="#FFFFFF" stroke="{PALETTE["blue_border"]}" stroke-width="1.2"/>',
         f'<circle cx="{note_x + 18}" cy="{note_y + 17}" r="10" fill="{PALETTE["blue_bg"]}" stroke="{PALETTE["blue"]}" stroke-width="1.5"/>',
-        f'<text x="{note_x + 18}" y="{note_y + 22}" text-anchor="middle" font-family="{FONT_STACK}" font-size="14" font-weight="800" fill="{PALETTE["blue"]}">i</text>',
-        f'<text x="{note_x + 36}" y="{note_y + 14}" font-family="{FONT_STACK}" font-size="12" font-weight="800" fill="{PALETTE["navy"]}">{escape(localized({"en": "Notes", "zh": "备注"}, language))}</text>',
+        f'<text x="{note_x + 18}" y="{note_y + 22}" text-anchor="middle" font-family="{FONT_STACK}" font-size="14" font-weight="700" fill="{PALETTE["blue"]}">i</text>',
+        f'<text x="{note_x + 36}" y="{note_y + 14}" font-family="{FONT_STACK}" font-size="12" font-weight="700" fill="{PALETTE["navy"]}">{escape(localized({"en": "Notes", "zh": "备注"}, language))}</text>',
     ]
     for line_index, line in enumerate(wrap_text(note, NOTES_LINE_VISUAL_CHARS, max_lines=NOTES_MAX_LINES)):
         chunks.append(f'<text x="{note_x + 82}" y="{note_y + 14 + line_index * 14}" font-family="{FONT_STACK}" font-size="11" font-weight="600" fill="{PALETTE["gray_text"]}">{escape(line)}</text>')

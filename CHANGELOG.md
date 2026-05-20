@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 - 2026-05-19
+
+### Roadmap Timeline
+
+- Added `roadmap_timeline` SVG rendering with `swimlane_roadmap` and `milestone_timeline` presets.
+- Added JSON and Markdown templates, work creation/render/export scripts, double-click launchers, maintained testcases, and stresscases.
+- Added verification coverage for roadmap templates, entrypoints, PNG export, stable SVG groups/classes, and dense canvas expansion.
+
 ## 0.4.0 - 2026-05-18
 
 ### Two-By-Two Matrix
