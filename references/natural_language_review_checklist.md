@@ -4,8 +4,9 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 
 ## Source Fidelity
 
-- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition, two-by-two matrix for two-axis option comparison.
+- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition, two-by-two matrix for two-axis option comparison, roadmap timeline for planning over time.
 - Exclusion tree is used only for sequential troubleshooting, practical verification checks, or cause-elimination workflows.
+- Roadmap timeline is used only when the source includes dates, periods, phases, milestones, or initiative timing.
 - The topic or top event preserves the source's central problem, failure mode, design challenge, or analysis question.
 - Labels come from the source domain, not from generic defaults unless the source explicitly asks for them.
 - Causes, branches, and leaves are traceable to the source text.
@@ -58,6 +59,20 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - Top-level `notes:` is used only for a short visible note supported by the source, roughly 70 English characters or 30 Chinese characters.
 - The draft does not imply exact quantitative precision when the source only supports ordinal ranking.
 
+## Roadmap Timeline Structure
+
+- The draft uses `diagram_type: roadmap_timeline`.
+- The preset matches the source structure: `swimlane_roadmap` for multiple parallel tracks, `milestone_timeline` for one sequence of key events.
+- The diagram is single-language unless the user explicitly requests bilingual content.
+- The title and `Goal:` line preserve the source roadmap topic and planning objective.
+- There is no `Subtitle:` unless explicitly requested.
+- Dates, periods, phases, and marker timing are source-supported. Quarter/month-only source timing is converted conservatively and kept visible in labels.
+- For `swimlane_roadmap`, the draft has at least two time periods, at least two lanes, source-specific initiative bars, and valid lane IDs.
+- For `swimlane_roadmap`, milestones and decision points are used only for explicit launches, reviews, gates, approvals, or decisions.
+- For `milestone_timeline`, the draft has multiple ordered milestones with type, owner/status/output when supported.
+- For `milestone_timeline`, phases are date ranges and not duplicates of point milestones.
+- Notes are short and review-relevant, not full recommendation paragraphs.
+
 ## File Outputs
 
 - The editable draft is saved as `work/<diagram-type>/<safe-name>.md`.
@@ -75,3 +90,4 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - For fault tree, does the diagram show logical failure decomposition without overstating proof?
 - For sequential exclusion tree, would a technician know what to check next without mistaking suspected causes for confirmed root causes?
 - For two-by-two matrix, would a reviewer agree that each option lands in a reasonable quadrant based on the source?
+- For roadmap timeline, would a reviewer recognize the lanes, date ranges, gates, and phases as the source plan rather than an invented schedule?

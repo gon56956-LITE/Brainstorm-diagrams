@@ -6,6 +6,7 @@ from __future__ import annotations
 import subprocess
 import sys
 import re
+from datetime import date
 from pathlib import Path
 
 
@@ -15,6 +16,7 @@ FISHBONE_NATURALCASES = NATURALCASES_ROOT / "fishbone"
 FAULT_TREE_NATURALCASES = NATURALCASES_ROOT / "fault-tree"
 EXCLUSION_TREE_NATURALCASES = NATURALCASES_ROOT / "exclusion-tree"
 TWO_BY_TWO_NATURALCASES = NATURALCASES_ROOT / "two-by-two-matrix"
+ROADMAP_NATURALCASES = NATURALCASES_ROOT / "roadmap-timeline"
 PROMPT_TEMPLATE = ROOT / "references" / "natural_language_prompt_template.md"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
@@ -44,14 +46,20 @@ def verify_directory() -> None:
     if not NATURALCASES_ROOT.exists():
         raise AssertionError("Missing naturalcases directory")
 
-    allowed_dirs = {"fishbone", "fault-tree", "exclusion-tree", "two-by-two-matrix"}
+    allowed_dirs = {"fishbone", "fault-tree", "exclusion-tree", "two-by-two-matrix", "roadmap-timeline"}
     for path in NATURALCASES_ROOT.iterdir():
         if path.name == "README.md":
             continue
         if not path.is_dir() or path.name not in allowed_dirs:
             raise AssertionError(f"Unexpected entry in naturalcases: {path.name}")
 
-    for directory in [FISHBONE_NATURALCASES, FAULT_TREE_NATURALCASES, EXCLUSION_TREE_NATURALCASES, TWO_BY_TWO_NATURALCASES]:
+    for directory in [
+        FISHBONE_NATURALCASES,
+        FAULT_TREE_NATURALCASES,
+        EXCLUSION_TREE_NATURALCASES,
+        TWO_BY_TWO_NATURALCASES,
+        ROADMAP_NATURALCASES,
+    ]:
         if not directory.exists():
             raise AssertionError(f"Missing naturalcase directory: {directory.name}")
         for path in directory.iterdir():
@@ -74,11 +82,14 @@ def verify_prompt_template() -> None:
         "Choose `fault_tree` when the source asks for logical failure decomposition",
         "Choose `exclusion_tree` when the source asks for sequential troubleshooting",
         "Choose `two_by_two_matrix` when the source asks to compare or prioritize options across two scoring dimensions",
+        "Choose `roadmap_timeline` when the source asks for a roadmap",
         "do not start from default fishbone categories",
         "Extract 4-8 domain-specific categories",
         "Extract one specific top event",
         "Extract one target problem",
         "Include 4-20 scored items",
+        "For swimlane roadmaps, extract time periods, lanes, initiatives, milestones, decision points",
+        "For milestone timelines, extract milestones, phases, owner/status/output details",
         "Do not add `Subtitle:` unless the user explicitly asks for a subtitle",
         "Do not add an item-level `Notes` column",
         "Use `Gate: AND` only when the source states that child conditions must occur together",
@@ -96,6 +107,7 @@ def verify_case_pairs() -> None:
     verify_fault_tree_case_pairs()
     verify_exclusion_tree_case_pairs()
     verify_two_by_two_case_pairs()
+    verify_roadmap_case_pairs()
 
 
 def verify_fishbone_case_pairs() -> None:
@@ -148,6 +160,19 @@ def verify_two_by_two_case_pairs() -> None:
         verify_source_expected_pair(source_path, expected_path)
         verify_expected_markdown_renders(expected_path)
         verify_two_by_two_expected_structure(expected_path)
+
+
+def verify_roadmap_case_pairs() -> None:
+    sources = sorted(ROADMAP_NATURALCASES.glob("*.source.txt"))
+    if not sources:
+        raise AssertionError("No roadmap-timeline naturalcase sources found")
+
+    for source_path in sources:
+        stem = source_path.name.removesuffix(".source.txt")
+        expected_path = ROADMAP_NATURALCASES / f"{stem}.expected.md"
+        verify_source_expected_pair(source_path, expected_path)
+        verify_expected_markdown_renders(expected_path)
+        verify_roadmap_expected_structure(expected_path)
 
 
 def verify_source_expected_pair(source_path: Path, expected_path: Path) -> None:
@@ -331,6 +356,143 @@ def verify_two_by_two_expected_structure(path: Path) -> None:
 
     if len(quadrants) < 3:
         raise AssertionError(f"{path.name}: two-by-two naturalcase should exercise at least three quadrants")
+
+
+def verify_roadmap_expected_structure(path: Path) -> None:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from generate_diagram import parse_input
+
+    text = path.read_text(encoding="utf-8")
+    if re.search(r"^Subtitle\s*:", text, flags=re.M):
+        raise AssertionError(f"{path.name}: roadmap naturalcase should not include Subtitle unless explicitly requested")
+
+    data = parse_input(path)
+    if data.get("diagram_type") != "roadmap_timeline":
+        raise AssertionError(f"{path.name}: expected diagram_type=roadmap_timeline")
+
+    preset = str(data.get("preset", "")).strip()
+    if preset not in {"swimlane_roadmap", "milestone_timeline"}:
+        raise AssertionError(f"{path.name}: unexpected roadmap preset: {preset}")
+
+    language = str(data.get("language", "auto")).strip()
+    if language not in {"auto", "en", "zh"}:
+        raise AssertionError(f"{path.name}: language must be auto, en, or zh")
+
+    if not str(data.get("title", "")).strip():
+        raise AssertionError(f"{path.name}: roadmap naturalcase must include a title")
+    if not str(data.get("goal", "")).strip():
+        raise AssertionError(f"{path.name}: roadmap naturalcase must include a visible goal")
+
+    notes = data.get("notes", [])
+    if isinstance(notes, str):
+        notes = [notes]
+    for index, note in enumerate(notes if isinstance(notes, list) else [], start=1):
+        limit = 80 if language != "zh" else 60
+        if visual_len(str(note)) > limit:
+            raise AssertionError(f"{path.name}: roadmap note {index} should stay short enough for the summary panel")
+
+    if preset == "swimlane_roadmap":
+        verify_swimlane_roadmap_expected_structure(path, data)
+    else:
+        verify_milestone_timeline_expected_structure(path, data)
+
+
+def verify_swimlane_roadmap_expected_structure(path: Path, data: dict[str, object]) -> None:
+    periods = data.get("time_periods", data.get("periods", []))
+    lanes = data.get("lanes", [])
+    initiatives = data.get("initiatives", [])
+    milestones = data.get("milestones", [])
+    decisions = data.get("decision_points", [])
+
+    if not isinstance(periods, list) or len(periods) < 2:
+        raise AssertionError(f"{path.name}: swimlane roadmap naturalcase should include at least two time periods")
+    if not isinstance(lanes, list) or len(lanes) < 2:
+        raise AssertionError(f"{path.name}: swimlane roadmap naturalcase should include at least two lanes")
+    if not isinstance(initiatives, list) or len(initiatives) < 2:
+        raise AssertionError(f"{path.name}: swimlane roadmap naturalcase should include multiple initiatives")
+    if not isinstance(milestones, list) or not isinstance(decisions, list) or len(milestones) + len(decisions) < 2:
+        raise AssertionError(f"{path.name}: swimlane roadmap naturalcase should include source-supported markers or decision points")
+
+    lane_ids: set[str] = set()
+    for index, lane in enumerate(lanes, start=1):
+        if not isinstance(lane, dict):
+            raise AssertionError(f"{path.name}: lane {index} must be an object")
+        lane_id = str(lane.get("id", "")).strip()
+        if not lane_id or not str(lane.get("name", "")).strip():
+            raise AssertionError(f"{path.name}: lane {index} must include id and name")
+        lane_ids.add(lane_id)
+
+    initiative_dates: list[date] = []
+    for index, initiative in enumerate(initiatives, start=1):
+        if not isinstance(initiative, dict):
+            raise AssertionError(f"{path.name}: initiative {index} must be an object")
+        lane_id = str(initiative.get("lane_id", "")).strip()
+        if lane_id not in lane_ids:
+            raise AssertionError(f"{path.name}: initiative {index} references unknown lane_id: {lane_id}")
+        if not str(initiative.get("name", "")).strip():
+            raise AssertionError(f"{path.name}: initiative {index} must include a name")
+        start = parse_iso_date(path, f"initiative {index} start", initiative.get("start"))
+        end = parse_iso_date(path, f"initiative {index} end", initiative.get("end"))
+        if end < start:
+            raise AssertionError(f"{path.name}: initiative {index} end date is before start date")
+        initiative_dates.extend([start, end])
+
+    marker_dates: list[date] = []
+    for marker_index, marker in enumerate([*milestones, *decisions], start=1):
+        if not isinstance(marker, dict):
+            raise AssertionError(f"{path.name}: marker {marker_index} must be an object")
+        lane_id = str(marker.get("lane_id", "")).strip()
+        if lane_id and lane_id not in lane_ids:
+            raise AssertionError(f"{path.name}: marker {marker_index} references unknown lane_id: {lane_id}")
+        if not str(marker.get("name", "")).strip():
+            raise AssertionError(f"{path.name}: marker {marker_index} must include a name")
+        marker_dates.append(parse_iso_date(path, f"marker {marker_index} date", marker.get("date")))
+
+    period_starts = [parse_iso_date(path, f"period {index} start", period.get("start")) for index, period in enumerate(periods, start=1) if isinstance(period, dict)]
+    period_ends = [parse_iso_date(path, f"period {index} end", period.get("end")) for index, period in enumerate(periods, start=1) if isinstance(period, dict)]
+    covered_dates = initiative_dates + marker_dates
+    if covered_dates and period_starts and period_ends:
+        if min(covered_dates) < min(period_starts) or max(covered_dates) > max(period_ends):
+            raise AssertionError(f"{path.name}: time periods should cover all initiatives, milestones, and decision points")
+
+
+def verify_milestone_timeline_expected_structure(path: Path, data: dict[str, object]) -> None:
+    milestones = data.get("milestones", [])
+    phases = data.get("phases", [])
+    if not isinstance(milestones, list) or len(milestones) < 4:
+        raise AssertionError(f"{path.name}: milestone timeline naturalcase should include at least four milestones")
+    if not isinstance(phases, list) or len(phases) < 2:
+        raise AssertionError(f"{path.name}: milestone timeline naturalcase should include multiple phases")
+
+    milestone_dates: list[date] = []
+    for index, marker in enumerate(milestones, start=1):
+        if not isinstance(marker, dict):
+            raise AssertionError(f"{path.name}: milestone {index} must be an object")
+        if not str(marker.get("name", "")).strip():
+            raise AssertionError(f"{path.name}: milestone {index} must include a name")
+        if not str(marker.get("type", "")).strip():
+            raise AssertionError(f"{path.name}: milestone {index} must include a type")
+        milestone_dates.append(parse_iso_date(path, f"milestone {index} date", marker.get("date")))
+
+    if milestone_dates != sorted(milestone_dates):
+        raise AssertionError(f"{path.name}: milestone timeline rows should be ordered by date")
+
+    for index, phase in enumerate(phases, start=1):
+        if not isinstance(phase, dict):
+            raise AssertionError(f"{path.name}: phase {index} must be an object")
+        if not str(phase.get("name", "")).strip():
+            raise AssertionError(f"{path.name}: phase {index} must include a name")
+        start = parse_iso_date(path, f"phase {index} start", phase.get("start"))
+        end = parse_iso_date(path, f"phase {index} end", phase.get("end"))
+        if end <= start:
+            raise AssertionError(f"{path.name}: phase {index} should be a date range, not a point event")
+
+
+def parse_iso_date(path: Path, label: str, value: object) -> date:
+    try:
+        return date.fromisoformat(str(value).strip())
+    except (TypeError, ValueError) as exc:
+        raise AssertionError(f"{path.name}: {label} must be an ISO date, got {value!r}") from exc
 
 
 def visual_len(text: str) -> int:

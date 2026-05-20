@@ -1,0 +1,11 @@
+The next-generation optical module program needs a roadmap from 2026 Q1 through 2026 Q4. The goal is to coordinate hardware, firmware, manufacturing, and quality work so the product can enter customer beta in Q4 and reach production launch before the end of the year.
+
+Hardware should complete optical engine prototype builds in Q1, run a package thermal redesign through Q2 and early Q3, and freeze the design after a thermal design decision in mid-August.
+
+Firmware should implement link recovery improvements during Q1 and Q2, complete host compatibility testing in Q3, and support the customer beta period in Q4.
+
+Manufacturing should prepare the pilot line in Q2, run the pilot build in Q3, and complete production readiness work before launch.
+
+Quality and reliability should start qualification planning in Q1, execute reliability testing from Q2 through Q4, and close open reliability risks before production approval.
+
+The key gates are architecture review in mid-March, thermal design decision in mid-August, pilot readiness review in late September, customer beta start in mid-October, and production launch in mid-December.

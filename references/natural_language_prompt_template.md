@@ -17,6 +17,7 @@ Diagram choice:
 - Choose `fault_tree` when the source asks for logical failure decomposition, FTA, top-event breakdown, AND/OR relationships, or causal logic.
 - Choose `exclusion_tree` when the source asks for sequential troubleshooting, step-by-step cause elimination, verification checks, or a practical diagnostic path.
 - Choose `two_by_two_matrix` when the source asks to compare or prioritize options across two scoring dimensions, such as impact/effort, risk/benefit, evidence/impact, value/feasibility, or urgency/importance.
+- Choose `roadmap_timeline` when the source asks for a roadmap, timeline, release plan, milestone plan, phase plan, launch schedule, or cross-team execution plan over time.
 
 Rules:
 - Read the source text first; do not start from default fishbone categories, generic fault-tree branches, or generic troubleshooting steps.
@@ -69,6 +70,19 @@ Two-by-two matrix rules:
 - Do not add an item-level `Notes` column. Use top-level `notes:` only when the user asks for a visible note or the source includes a short note that should appear on the diagram.
 - Keep top-level `notes:` short enough for a two-line guide card: roughly 70 English characters or 30 Chinese characters. Use a decision-summary phrase, not a full recommendation paragraph.
 - Do not turn the matrix into a precise scatter plot; items are grouped into quadrant lists.
+
+Roadmap timeline rules:
+- Choose `preset: swimlane_roadmap` when the source contains multiple lanes such as products, models, modules, workstreams, teams, regions, themes, or customer segments.
+- Choose `preset: milestone_timeline` when the source mainly gives one sequence of key dates, gates, deliverables, or phases.
+- Keep the diagram single-language. Use `language: auto` unless the user explicitly requests `en` or `zh`; do not create English/Chinese paired labels by default.
+- Extract a visible title and `Goal:` line from the source's roadmap topic and planning objective.
+- Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
+- For swimlane roadmaps, extract time periods, lanes, initiatives, milestones, decision points, and short notes when supported.
+- For milestone timelines, extract milestones, phases, owner/status/output details, and short notes when supported.
+- Use explicit dates from the source. If the source gives only quarters or months, convert them to reasonable period start/end dates and preserve the visible label.
+- Use marker types from `start`, `milestone`, `key_milestone`, `decision`, `review`, and `launch`; use statuses from `planned`, `in_progress`, `completed`, and `at_risk`.
+- Keep labels short enough for diagram cards and bars; put longer explanations in milestone `Output` or a short note.
+- If the source lacks dates or a clear sequence, ask for date ranges or milestone timing instead of inventing a schedule.
 
 Execution:
 1. Write structured Markdown to `work/<diagram-type>/<safe-name>.md`.
@@ -171,6 +185,85 @@ notes: Optional visible note supported by the source
 | A2 | Option name | 5 | 4 |
 ```
 
+## Roadmap Timeline Markdown Output Shape
+
+Swimlane roadmap:
+
+```markdown
+---
+diagram_type: roadmap_timeline
+preset: swimlane_roadmap
+lane_type: workstream
+language: auto
+time_granularity: quarter
+show_table: true
+show_summary_panel: true
+---
+
+# Roadmap Title
+
+**Goal:** Visible roadmap goal from the source.
+
+## Time Periods
+
+| ID | Label | Subtitle | Start | End |
+|---|---|---|---|---|
+| 2026Q1 | 2026 Q1 | Jan - Mar | 2026-01-01 | 2026-03-31 |
+
+## Lanes
+
+| ID | Name | Color |
+|---|---|---|
+| hardware | Hardware | blue |
+
+## Initiatives
+
+| ID | Lane ID | Name | Start | End | Owner | Status |
+|---|---|---|---|---|---|---|
+| R1 | hardware | Prototype build | 2026-01-15 | 2026-03-15 | Hardware | planned |
+
+## Milestones
+
+| ID | Lane ID | Name | Date | Type |
+|---|---|---|---|---|
+| M1 | hardware | Architecture review | 2026-03-15 | review |
+
+## Decision Points
+
+| ID | Lane ID | Name | Date | Type |
+|---|---|---|---|---|
+| D1 | hardware | Design freeze | 2026-08-15 | decision |
+```
+
+Milestone timeline:
+
+```markdown
+---
+diagram_type: roadmap_timeline
+preset: milestone_timeline
+language: auto
+time_granularity: month
+show_detail_cards: true
+show_table: true
+---
+
+# Milestone Timeline Title
+
+**Goal:** Visible timeline goal from the source.
+
+## Milestones
+
+| ID | Name | Date | Type | Owner | Status | Output |
+|---|---|---|---|---|---|---|
+| T1 | Kickoff | 2026-01-10 | start | PMO | planned | Confirm scope and owners |
+
+## Phases
+
+| Name | Start | End |
+|---|---|---|
+| Planning | 2026-01-01 | 2026-02-28 |
+```
+
 ## Quality Gate Before Rendering
 
 - The chosen diagram type matches the user's intent.
@@ -189,6 +282,11 @@ notes: Optional visible note supported by the source
 - Two-by-two matrix uses one language only unless the user explicitly provides or requests bilingual labels.
 - Two-by-two matrix includes 4-20 items and does not use a subtitle or item-level notes unless explicitly requested.
 - Two-by-two matrix items have source-traceable 1-5 scores on both axes.
+- Roadmap timeline preset matches the source structure: swimlane for parallel lanes, milestone timeline for one sequence.
+- Roadmap timeline uses one language only unless the user explicitly provides or requests bilingual labels.
+- Roadmap timeline includes a visible goal, source-supported dates, and no subtitle unless explicitly requested.
+- Swimlane roadmap initiatives are assigned to valid lane IDs and time periods cover all bars and markers.
+- Milestone timeline milestones are ordered by date and phases are date ranges, not point events.
 - Similar causes are grouped rather than duplicated.
 - The draft stays within renderer limits for the selected diagram type.
 - The file name is a safe stem: lowercase letters, numbers, hyphen, or underscore.

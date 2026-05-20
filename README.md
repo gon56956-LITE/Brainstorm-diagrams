@@ -31,7 +31,7 @@ tools = the local scripts and double-click launchers that perform the work
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
 - Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
 - Sequential exclusion-tree target problems, one main checkpoint path, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
-- Codex-assisted natural-language fishbone, fault-tree, exclusion-tree, and two-by-two matrix drafting into editable Markdown
+- Codex-assisted natural-language fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline drafting into editable Markdown
 - Roadmap timeline JSON and structured Markdown rendering for swimlane roadmaps and milestone timelines
 - SVG output
 - PNG export from generated work SVG files
@@ -192,7 +192,7 @@ Expected output:
 Natural-language drafts should use structures found in the source text, not default categories, generic fault branches, or generic troubleshooting steps. See `references/natural_language_extraction.md`.
 For a reusable Codex prompt shape, see `references/natural_language_prompt_template.md`.
 Use `references/natural_language_review_checklist.md` to review whether the generated draft stayed faithful to the source text.
-See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, `naturalcases/exclusion-tree/`, and `naturalcases/two-by-two-matrix/` for source text and expected Markdown examples.
+See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, `naturalcases/exclusion-tree/`, `naturalcases/two-by-two-matrix/`, and `naturalcases/roadmap-timeline/` for source text and expected Markdown examples.
 
 ## Badge Library
 
@@ -452,6 +452,7 @@ Use `references/visual_review_checklist.md` when inspecting the generated stress
 - `naturalcases/fault-tree/startup-intermittent-failure.source.txt` -> `naturalcases/fault-tree/startup-intermittent-failure.expected.md`
 - `naturalcases/exclusion-tree/field-link-dropout.source.txt` -> `naturalcases/exclusion-tree/field-link-dropout.expected.md`
 - `naturalcases/two-by-two-matrix/priority-options.source.txt` -> `naturalcases/two-by-two-matrix/priority-options.expected.md`
+- `naturalcases/roadmap-timeline/optical-module-release-roadmap.source.txt` -> `naturalcases/roadmap-timeline/optical-module-release-roadmap.expected.md`
 
 The optical-module case covers an English product design / manufacturing / application scenario and protects confirmed Lucide badge mappings for technical categories.
 

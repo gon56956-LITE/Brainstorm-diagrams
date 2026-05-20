@@ -7,7 +7,7 @@ description: Generate clean, PPT-ready structured brainstorming and analysis dia
 
 Use this skill to create structured thinking diagrams for brainstorming, root-cause analysis, product design, process design, and solution exploration.
 
-Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, `diagram_type="two_by_two_matrix"`, and `diagram_type="roadmap_timeline"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, and two-by-two matrix. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
+Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, `diagram_type="two_by_two_matrix"`, and `diagram_type="roadmap_timeline"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, two-by-two matrix, and roadmap timeline. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
 
 ```text
 鱼骨图工具.cmd
@@ -202,7 +202,7 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 7. For non-technical editing, run `diagram_builder.cmd` or `scripts/diagram_builder_server.py`; the browser UI should save JSON, render SVG, and export PNG using the same work folders and renderers.
 8. Read the printed `Diagnostics:` block for defaults, truncation, ignored nesting, and compatibility notices.
 9. Check the generated SVG for readability and adherence to `references/visual_style_contract.md`.
-10. For natural-language drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/`, `naturalcases/fault-tree/`, and `naturalcases/exclusion-tree/` as examples, not as generated output storage.
+10. For natural-language drafts, review semantic quality with `references/natural_language_review_checklist.md`; use `naturalcases/fishbone/`, `naturalcases/fault-tree/`, `naturalcases/exclusion-tree/`, `naturalcases/two-by-two-matrix/`, and `naturalcases/roadmap-timeline/` as examples, not as generated output storage.
 11. For naturalcase edits, run `scripts/verify_naturalcases.py`.
 12. For renderer, badge, testcase, template, work-entrypoint, browser-builder, extraction-doc, or export edits, run `scripts/verify_testcases.py` before finishing.
 13. For dense layout changes, also run `scripts/render_stresscases.py`, run `scripts/verify_stresscases.py`, and inspect the relevant `stresscases/<diagram-type>/full-stress.svg` by eye using `references/visual_review_checklist.md`.
@@ -241,7 +241,7 @@ Prefer JSON for automation and structured Markdown for user-authored briefs.
 - Place categories horizontally by estimated left/right footprint instead of simple equal spacing.
 - Use `testcases/fishbone/fishbone.five-primary.*` and `testcases/fishbone/fishbone.five-subcategories.*` as stress tests for the densest supported category content.
 - Use `stresscases/fishbone/full-stress.*` as an optional manual visual stresscase; it is deliberately denser than normal regression testcases.
-- Use `naturalcases/fishbone/*.source.txt`, `naturalcases/fishbone/*.expected.md`, `naturalcases/fault-tree/*.source.txt`, `naturalcases/fault-tree/*.expected.md`, `naturalcases/exclusion-tree/*.source.txt`, and `naturalcases/exclusion-tree/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
+- Use `naturalcases/fishbone/*.source.txt`, `naturalcases/fishbone/*.expected.md`, `naturalcases/fault-tree/*.source.txt`, `naturalcases/fault-tree/*.expected.md`, `naturalcases/exclusion-tree/*.source.txt`, `naturalcases/exclusion-tree/*.expected.md`, `naturalcases/two-by-two-matrix/*.source.txt`, `naturalcases/two-by-two-matrix/*.expected.md`, `naturalcases/roadmap-timeline/*.source.txt`, and `naturalcases/roadmap-timeline/*.expected.md` as semantic extraction examples; do not place generated SVG/PNG files there.
 - Keep `templates/fishbone.template.*`, `templates/fault-tree.template.*`, `templates/exclusion-tree.template.*`, `templates/two-by-two-matrix*.template.*`, and `templates/roadmap-timeline*.template.*` parseable and structurally complete; `scripts/verify_testcases.py` protects them from accidental deletion or malformed edits.
 - Keep `assets/lucide-candidates/` as the reusable Lucide badge library. `scripts/verify_testcases.py` protects required mapped icons and verifies the candidate catalog can still render.
 - Keep user-authored fishbone files in `work/fishbone/`; do not mix them into `testcases/fishbone/`, `templates/`, `stresscases/fishbone/`, or `naturalcases/fishbone/`.
