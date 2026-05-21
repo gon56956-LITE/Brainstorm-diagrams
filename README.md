@@ -26,6 +26,7 @@ tools = the local scripts and double-click launchers that perform the work
 - `diagram_type="exclusion_tree"`
 - `diagram_type="two_by_two_matrix"`
 - `diagram_type="roadmap_timeline"`
+- `diagram_type="fmea_table"`
 - JSON input
 - Structured Markdown input
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
@@ -108,6 +109,12 @@ English fallback:
 roadmap_timeline_tool.cmd
 ```
 
+FMEA table has its own non-technical launcher:
+
+```text
+fmea_table_tool.cmd
+```
+
 For a browser-based editor, use the unified local builder:
 
 ```text
@@ -166,7 +173,9 @@ Two-by-two matrix usage is also available through the browser builder and comman
 
 Roadmap timeline usage is available through the browser builder and command-line scripts: create with `scripts/new_roadmap_timeline.py <name> --format md --preset swimlane_roadmap`, edit in `work/roadmap-timeline/`, then regenerate with `scripts/render_roadmap_timeline_work.py`. Supported presets are `swimlane_roadmap` and `milestone_timeline`.
 
-Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, `work/two-by-two-matrix/`, or `work/roadmap-timeline/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, `priority-matrix`, `product-roadmap`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
+FMEA table usage is available through command-line scripts: create with `scripts/new_fmea_table.py <name> --format md`, edit in `work/fmea-table/`, then regenerate with `scripts/render_fmea_table_work.py`. FMEA table currently supports core rendering and PNG export, not browser-builder editing or natural-language extraction.
+
+Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, `work/two-by-two-matrix/`, `work/roadmap-timeline/`, or `work/fmea-table/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, `priority-matrix`, `product-roadmap`, `process-fmea`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
 ## Natural-Language Drafting
 
@@ -240,6 +249,7 @@ Export an existing work SVG to PNG:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_two_by_two_matrix_png.py priority-matrix
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_roadmap_timeline_png.py product-roadmap
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fmea_table_png.py process-fmea
 ```
 
 SVG remains the primary editable output. PNG is a convenience format for quick sharing.
@@ -406,6 +416,7 @@ Dense diagrams may also report that the canvas was expanded. Sparse diagrams sta
 See `templates/fishbone.template.json` and `references/input_contract.md`.
 For fault tree, see `templates/fault-tree.template.json` and `brainstorm_diagrams_fault_tree_spec.md`.
 For roadmap timeline, see `templates/roadmap-timeline.template.json` and `brainstorm_diagrams_roadmap_timeline_spec.md`.
+For FMEA table, see `templates/fmea-table.template.json` and `brainstorm_diagrams_fmea_table_spec.md`.
 Fault tree JSON may include `event_detail` for the left-side detail panel; `top_event.description` is also accepted as a fallback. Fault tree uses `layout_mode="review_compact"` by default: first-level events are arranged across the page, while children inside each subtree connect through a vertical trunk with leftward branch lines for review readability.
 Nested intermediate events may use their own `gate`, allowing one first-level event subtree to contain both AND and OR logic while each direct child group still has one gate.
 
@@ -421,12 +432,14 @@ Nested intermediate events may use their own `gate`, allowing one first-level ev
 - `templates/two-by-two-matrix.template.json`
 - `templates/roadmap-timeline.template.md`
 - `templates/roadmap-timeline.template.json`
+- `templates/fmea-table.template.md`
+- `templates/fmea-table.template.json`
 
 Copy a template, edit the content, then render it with `scripts/generate_diagram.py`.
 
 ## Work Files
 
-`scripts/new_fishbone.py`, `scripts/new_fault_tree.py`, `scripts/new_exclusion_tree.py`, `scripts/new_two_by_two_matrix.py`, and `scripts/new_roadmap_timeline.py` create user-owned inputs and SVGs in their matching `work/<diagram-type>/` folders. These directories are for local authoring output, separate from maintained regression files.
+`scripts/new_fishbone.py`, `scripts/new_fault_tree.py`, `scripts/new_exclusion_tree.py`, `scripts/new_two_by_two_matrix.py`, `scripts/new_roadmap_timeline.py`, and `scripts/new_fmea_table.py` create user-owned inputs and SVGs in their matching `work/<diagram-type>/` folders. These directories are for local authoring output, separate from maintained regression files.
 
 ## Stresscases
 

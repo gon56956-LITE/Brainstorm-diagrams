@@ -9,6 +9,7 @@ Templates are protected by structural checks in `scripts/verify_testcases.py`. T
 - exclusion_tree: a target problem, 3-6 sequential checkpoints, pass/fail labels, fail conclusions, final pass conclusion, and Markdown authoring guidance with current renderer limits
 - two_by_two_matrix: a preset-specific 2x2 matrix with 4-20 scored items, clear 1-5 X/Y score guidance, no hidden subtitle metadata, and no item-level notes that are not rendered
 - roadmap_timeline: preset-specific swimlane roadmap or milestone timeline input with periods, phases, initiatives or milestones, decision points, summary/table content, and clear single-language guidance
+- fmea_table: row-section FMEA input with item/function, failure mode, effects, causes, controls, 1-10 S/O/D scores, recommended actions, owner, target date, status, and clear RPN guidance
 
 Markdown templates keep user guidance in front matter comments so the parser ignores it. Keep the renderable body limited to headings, recognized key-value lines such as `Gate:` for fault tree, and bullets.
 

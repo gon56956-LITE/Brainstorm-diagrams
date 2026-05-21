@@ -1,0 +1,62 @@
+{
+  "diagram_type": "fmea_table",
+  "language": "en",
+  "title": "FMEA Long Text Wrapping Case",
+  "goal": "Verify long technical wording wraps inside table cells without shrinking the full diagram font.",
+  "project": {
+    "name": "Long Text Review",
+    "owner": "Quality Engineering",
+    "review_frequency": "Weekly",
+    "last_review_date": "2026-05-21"
+  },
+  "rows": [
+    {
+      "id": "L1",
+      "item_function": "High-temperature aging optical power stability",
+      "failure_mode": "Output power drifts beyond the customer-facing stability limit after long-duration high-temperature exposure",
+      "failure_effects": [
+        "Customer may observe unstable link margin during field operation",
+        "Pilot reliability qualification may require repeat aging and additional containment"
+      ],
+      "failure_causes": [
+        "Package-induced mechanical movement during thermal exposure",
+        "Adhesive creep combined with coefficient-of-thermal-expansion mismatch"
+      ],
+      "prevention_controls": [
+        "Released package stack-up design rule",
+        "Adhesive material qualification and cure profile lock"
+      ],
+      "detection_controls": [
+        "Before-and-after optical coupling efficiency comparison",
+        "Thermal resistance measurement and high-temperature aging trend review"
+      ],
+      "severity": 9,
+      "occurrence": 5,
+      "detection": 6,
+      "recommended_actions": [
+        "Add cross-section review for failed units and passing controls",
+        "Run controlled aging split by adhesive lot and package assembly fixture"
+      ],
+      "owner": "Reliability",
+      "target_completion": "2026-06-28",
+      "status": "Open"
+    },
+    {
+      "id": "L2",
+      "item_function": "Firmware compensation behavior",
+      "failure_mode": "Compensation loop masks early drift and delays detection until the final stability window",
+      "failure_effects": ["Late investigation start", "Ambiguous separation between optical degradation and control-loop behavior"],
+      "failure_causes": ["Logging granularity is too coarse", "Boundary behavior was not covered in pilot validation"],
+      "prevention_controls": ["Firmware release checklist", "Design review for compensation limits"],
+      "detection_controls": ["Compensation log review", "Independent station retest"],
+      "severity": 7,
+      "occurrence": 3,
+      "detection": 7,
+      "recommended_actions": ["Add detailed compensation logs during reliability test", "Define alarm threshold for unexpected correction trend"],
+      "owner": "Firmware",
+      "target_completion": "2026-06-20",
+      "status": "In Progress"
+    }
+  ],
+  "notes": ["This testcase intentionally uses longer text to verify row height expansion."]
+}

@@ -1,0 +1,64 @@
+{
+  "diagram_type": "fmea_table",
+  "fmea_type": "process",
+  "language": "en",
+  "title": "Process FMEA: Optical Module Pilot Build",
+  "goal": "Prioritize assembly and test risks that may reduce first-pass yield.",
+  "project": {
+    "name": "Pilot Yield Recovery",
+    "owner": "Quality Engineering",
+    "review_frequency": "Weekly",
+    "last_review_date": "2026-05-21"
+  },
+  "rows": [
+    {
+      "id": "F1",
+      "item_function": "Optical alignment",
+      "failure_mode": "Coupling efficiency below target",
+      "failure_effects": ["Low output power", "Yield loss at final test"],
+      "failure_causes": ["Alignment fixture repeatability drift", "Adhesive shrinkage after cure"],
+      "prevention_controls": ["Daily fixture verification", "Qualified adhesive cure profile"],
+      "detection_controls": ["Coupling efficiency check", "Final optical power test"],
+      "severity": 8,
+      "occurrence": 5,
+      "detection": 5,
+      "recommended_actions": ["Run fixture GRR", "Track coupling shift by adhesive lot"],
+      "owner": "Process Eng",
+      "target_completion": "2026-06-10",
+      "status": "Open"
+    },
+    {
+      "id": "F2",
+      "item_function": "Laser drive setup",
+      "failure_mode": "Incorrect drive current limit",
+      "failure_effects": ["Power instability", "Reliability stress"],
+      "failure_causes": ["Outdated work instruction", "Wrong firmware compensation setting"],
+      "prevention_controls": ["Released work instruction", "Firmware version control"],
+      "detection_controls": ["ATE current log review", "Operator checklist"],
+      "severity": 7,
+      "occurrence": 4,
+      "detection": 4,
+      "recommended_actions": ["Lock approved firmware in setup", "Add first-article current audit"],
+      "owner": "Test Eng",
+      "target_completion": "2026-06-05",
+      "status": "In Progress"
+    },
+    {
+      "id": "F3",
+      "item_function": "Label printing",
+      "failure_mode": "Wrong label format",
+      "failure_effects": ["Rework before shipment"],
+      "failure_causes": ["Wrong template selected"],
+      "prevention_controls": ["Released label template"],
+      "detection_controls": ["Final visual inspection"],
+      "severity": 3,
+      "occurrence": 2,
+      "detection": 4,
+      "recommended_actions": ["Add template lock"],
+      "owner": "QA",
+      "target_completion": "2026-06-02",
+      "status": "Open"
+    }
+  ],
+  "notes": ["RPN is calculated as S x O x D.", "High risk rows need containment and named owners."]
+}

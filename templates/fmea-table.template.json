@@ -1,0 +1,121 @@
+{
+  "diagram_type": "fmea_table",
+  "fmea_type": "process",
+  "language": "en",
+  "title": "Process FMEA: Optical Module Assembly",
+  "goal": "Identify critical assembly risks, calculate RPN from S/O/D scores, and prioritize corrective actions.",
+  "project": {
+    "name": "Optical Module Pilot Build",
+    "owner": "Quality Engineering",
+    "review_frequency": "Weekly during pilot build",
+    "last_review_date": "2026-05-21"
+  },
+  "scoring": {
+    "thresholds": {
+      "high": 200,
+      "medium": 100
+    }
+  },
+  "rows": [
+    {
+      "id": "F1",
+      "item_function": "Optical alignment",
+      "icon": "aperture",
+      "failure_mode": "Coupling efficiency below target",
+      "failure_effects": [
+        "Low output power",
+        "First-pass yield loss"
+      ],
+      "failure_causes": [
+        "Fixture repeatability drift",
+        "Adhesive shrinkage after cure"
+      ],
+      "prevention_controls": [
+        "Daily fixture check",
+        "Qualified adhesive profile"
+      ],
+      "detection_controls": [
+        "Before-and-after coupling check",
+        "Final optical power test"
+      ],
+      "severity": 8,
+      "occurrence": 5,
+      "detection": 5,
+      "recommended_actions": [
+        "Add alignment fixture GRR review",
+        "Track coupling shift by adhesive lot"
+      ],
+      "owner": "Process Eng",
+      "target_completion": "2026-06-10",
+      "status": "Open"
+    },
+    {
+      "id": "F2",
+      "item_function": "Laser drive setup",
+      "icon": "circuit-board",
+      "failure_mode": "Incorrect drive current limit",
+      "failure_effects": [
+        "Power instability",
+        "Premature device stress"
+      ],
+      "failure_causes": [
+        "Outdated work instruction",
+        "Wrong firmware compensation setting"
+      ],
+      "prevention_controls": [
+        "Released work instruction",
+        "Firmware version control"
+      ],
+      "detection_controls": [
+        "ATE current log review",
+        "Operator checklist"
+      ],
+      "severity": 7,
+      "occurrence": 4,
+      "detection": 4,
+      "recommended_actions": [
+        "Lock approved firmware version in setup screen",
+        "Add first-article current audit"
+      ],
+      "owner": "Test Eng",
+      "target_completion": "2026-06-05",
+      "status": "In Progress"
+    },
+    {
+      "id": "F3",
+      "item_function": "Thermal interface assembly",
+      "icon": "thermometer",
+      "failure_mode": "Poor thermal contact",
+      "failure_effects": [
+        "Higher laser temperature",
+        "Reliability margin reduction"
+      ],
+      "failure_causes": [
+        "Uneven TIM thickness",
+        "Insufficient clamp force"
+      ],
+      "prevention_controls": [
+        "Torque-controlled assembly",
+        "TIM thickness specification"
+      ],
+      "detection_controls": [
+        "Thermal resistance sample check",
+        "Visual inspection"
+      ],
+      "severity": 9,
+      "occurrence": 3,
+      "detection": 5,
+      "recommended_actions": [
+        "Add thermal resistance gate for pilot lots",
+        "Review clamp tooling wear"
+      ],
+      "owner": "ME",
+      "target_completion": "2026-06-18",
+      "status": "Open"
+    }
+  ],
+  "notes": [
+    "Keep each row focused on one failure mode.",
+    "Update occurrence and detection scores after corrective actions are verified."
+  ]
+}

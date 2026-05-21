@@ -13,11 +13,12 @@ from typing import Any
 from renderers.fishbone import render_fishbone_to_file
 from renderers.exclusion_tree import parse_exclusion_tree_markdown, render_exclusion_tree_to_file
 from renderers.fault_tree import parse_fault_tree_markdown, render_fault_tree_to_file
+from renderers.fmea_table import parse_fmea_table_markdown, render_fmea_table_to_file
 from renderers.roadmap_timeline import parse_roadmap_timeline_markdown, render_roadmap_timeline_to_file
 from renderers.two_by_two_matrix import parse_two_by_two_matrix_markdown, render_two_by_two_matrix_to_file
 
 
-SUPPORTED_DIAGRAMS = {"fishbone", "fault_tree", "exclusion_tree", "two_by_two_matrix", "roadmap_timeline"}
+SUPPORTED_DIAGRAMS = {"fishbone", "fault_tree", "exclusion_tree", "two_by_two_matrix", "roadmap_timeline", "fmea_table"}
 
 
 def parse_args() -> argparse.Namespace:
@@ -58,6 +59,8 @@ def parse_structured_markdown(text: str) -> dict[str, Any]:
         return parse_two_by_two_matrix_markdown(text)
     if markdown_requests_roadmap_timeline(text, metadata):
         return parse_roadmap_timeline_markdown(text)
+    if markdown_requests_fmea_table(text, metadata):
+        return parse_fmea_table_markdown(text)
 
     topic = ""
     categories: list[dict[str, Any]] = []
@@ -169,6 +172,12 @@ def markdown_requests_roadmap_timeline(text: str, metadata: dict[str, str]) -> b
     return bool(re.search(r"(?im)^\s*diagram_type\s*:\s*[\"']?roadmap[-_ ]timeline[\"']?\s*$", text))
 
 
+def markdown_requests_fmea_table(text: str, metadata: dict[str, str]) -> bool:
+    if canonical_diagram_type(metadata.get("diagram_type", "")) == "fmea_table":
+        return True
+    return bool(re.search(r"(?im)^\s*diagram_type\s*:\s*[\"']?fmea[-_ ]table[\"']?\s*$", text))
+
+
 def canonical_diagram_type(value: Any) -> str:
     return collapse_text(value).lower().replace("-", "_").replace(" ", "_")
 
@@ -211,9 +220,11 @@ def main() -> int:
         diagram_type = canonical_diagram_type(data.get("diagram_type", "fishbone"))
         if diagram_type not in SUPPORTED_DIAGRAMS:
             raise ValueError(
-                "Unsupported diagram_type. Supported values: fishbone, fault_tree, exclusion_tree, two_by_two_matrix, roadmap_timeline."
+                "Unsupported diagram_type. Supported values: fishbone, fault_tree, exclusion_tree, two_by_two_matrix, roadmap_timeline, fmea_table."
             )
-        if diagram_type == "roadmap_timeline":
+        if diagram_type == "fmea_table":
+            result = render_fmea_table_to_file(data, output_path)
+        elif diagram_type == "roadmap_timeline":
             result = render_roadmap_timeline_to_file(data, output_path)
         elif diagram_type == "two_by_two_matrix":
             result = render_two_by_two_matrix_to_file(data, output_path)

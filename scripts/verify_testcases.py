@@ -17,12 +17,14 @@ FAULT_TREE_TESTCASES = ROOT / "testcases" / "fault-tree"
 EXCLUSION_TREE_TESTCASES = ROOT / "testcases" / "exclusion-tree"
 TWO_BY_TWO_TESTCASES = ROOT / "testcases" / "two-by-two-matrix"
 ROADMAP_TESTCASES = ROOT / "testcases" / "roadmap-timeline"
+FMEA_TESTCASES = ROOT / "testcases" / "fmea-table"
 TEMPLATES = ROOT / "templates"
 WORK = ROOT / "work" / "fishbone"
 FAULT_TREE_WORK = ROOT / "work" / "fault-tree"
 EXCLUSION_TREE_WORK = ROOT / "work" / "exclusion-tree"
 TWO_BY_TWO_WORK = ROOT / "work" / "two-by-two-matrix"
 ROADMAP_WORK = ROOT / "work" / "roadmap-timeline"
+FMEA_WORK = ROOT / "work" / "fmea-table"
 LUCIDE_CANDIDATES = ROOT / "assets" / "lucide-candidates"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 NEW_FISHBONE = ROOT / "scripts" / "new_fishbone.py"
@@ -30,16 +32,19 @@ NEW_FAULT_TREE = ROOT / "scripts" / "new_fault_tree.py"
 NEW_EXCLUSION_TREE = ROOT / "scripts" / "new_exclusion_tree.py"
 NEW_TWO_BY_TWO = ROOT / "scripts" / "new_two_by_two_matrix.py"
 NEW_ROADMAP = ROOT / "scripts" / "new_roadmap_timeline.py"
+NEW_FMEA = ROOT / "scripts" / "new_fmea_table.py"
 RENDER_WORK = ROOT / "scripts" / "render_work.py"
 RENDER_FAULT_TREE_WORK = ROOT / "scripts" / "render_fault_tree_work.py"
 RENDER_EXCLUSION_TREE_WORK = ROOT / "scripts" / "render_exclusion_tree_work.py"
 RENDER_TWO_BY_TWO_WORK = ROOT / "scripts" / "render_two_by_two_matrix_work.py"
 RENDER_ROADMAP_WORK = ROOT / "scripts" / "render_roadmap_timeline_work.py"
+RENDER_FMEA_WORK = ROOT / "scripts" / "render_fmea_table_work.py"
 EXPORT_PNG = ROOT / "scripts" / "export_png.py"
 EXPORT_FAULT_TREE_PNG = ROOT / "scripts" / "export_fault_tree_png.py"
 EXPORT_EXCLUSION_TREE_PNG = ROOT / "scripts" / "export_exclusion_tree_png.py"
 EXPORT_TWO_BY_TWO_PNG = ROOT / "scripts" / "export_two_by_two_matrix_png.py"
 EXPORT_ROADMAP_PNG = ROOT / "scripts" / "export_roadmap_timeline_png.py"
+EXPORT_FMEA_PNG = ROOT / "scripts" / "export_fmea_table_png.py"
 DIAGRAM_BUILDER_SERVER = ROOT / "scripts" / "diagram_builder_server.py"
 PYTHON = Path(sys.executable)
 SWIMLANE_BASE_H = 76
@@ -118,6 +123,12 @@ ROADMAP_TESTCASE_PAIRS = [
     ("roadmap.markdown.example.md", "roadmap.markdown.output.svg"),
 ]
 
+FMEA_TESTCASE_PAIRS = [
+    ("fmea.input.example.json", "fmea.output.example.svg"),
+    ("fmea.input.example.md", "fmea.output.md.svg"),
+    ("fmea.long-text.example.json", "fmea.long-text.output.svg"),
+]
+
 TWO_BY_TWO_TEMPLATE_PRESETS = [
     "action_priority",
     "risk_benefit",
@@ -158,6 +169,9 @@ def main() -> int:
     for input_name, output_name in ROADMAP_TESTCASE_PAIRS:
         run_generate(ROADMAP_TESTCASES / input_name, ROADMAP_TESTCASES / output_name)
 
+    for input_name, output_name in FMEA_TESTCASE_PAIRS:
+        run_generate(FMEA_TESTCASES / input_name, FMEA_TESTCASES / output_name)
+
     for _, output_name in TESTCASE_PAIRS:
         verify_svg_basics(TESTCASES / output_name)
 
@@ -178,6 +192,9 @@ def main() -> int:
     for _, output_name in ROADMAP_TESTCASE_PAIRS:
         verify_roadmap_timeline_svg_basics(ROADMAP_TESTCASES / output_name)
 
+    for _, output_name in FMEA_TESTCASE_PAIRS:
+        verify_fmea_table_svg_basics(FMEA_TESTCASES / output_name)
+
     verify_canvas_dimensions()
     verify_subcategory_braces(TESTCASES / "fishbone.subcategory.output.md.svg")
     verify_primary_cause_connectors(TESTCASES / "fishbone.five-primary.output.svg")
@@ -191,16 +208,19 @@ def main() -> int:
     verify_new_exclusion_tree_entrypoint()
     verify_new_two_by_two_entrypoint()
     verify_new_roadmap_entrypoint()
+    verify_new_fmea_entrypoint()
     verify_render_work_entrypoint()
     verify_render_fault_tree_work_entrypoint()
     verify_render_exclusion_tree_work_entrypoint()
     verify_render_two_by_two_work_entrypoint()
     verify_render_roadmap_work_entrypoint()
+    verify_render_fmea_work_entrypoint()
     verify_export_png_entrypoint()
     verify_export_fault_tree_png_entrypoint()
     verify_export_exclusion_tree_png_entrypoint()
     verify_export_two_by_two_png_entrypoint()
     verify_export_roadmap_png_entrypoint()
+    verify_export_fmea_png_entrypoint()
     verify_cmd_launchers()
     verify_diagram_builder_service()
     verify_work_name_validation()
@@ -209,12 +229,14 @@ def main() -> int:
     verify_no_tmp_files(EXCLUSION_TREE_TESTCASES)
     verify_no_tmp_files(TWO_BY_TWO_TESTCASES)
     verify_no_tmp_files(ROADMAP_TESTCASES)
+    verify_no_tmp_files(FMEA_TESTCASES)
     verify_no_tmp_files(TEMPLATES)
     verify_no_tmp_files(WORK)
     verify_no_tmp_files(FAULT_TREE_WORK)
     verify_no_tmp_files(EXCLUSION_TREE_WORK)
     verify_no_tmp_files(TWO_BY_TWO_WORK)
     verify_no_tmp_files(ROADMAP_WORK)
+    verify_no_tmp_files(FMEA_WORK)
 
     print("Verification passed")
     return 0
@@ -651,6 +673,79 @@ def verify_roadmap_timeline_svg_basics(path: Path) -> None:
     verify_roadmap_legend_layout(root, path.name)
     verify_roadmap_summary_layout(root, path.name)
     verify_roadmap_rects_within_canvas(root, path.name)
+
+
+def verify_fmea_table_svg_basics(path: Path) -> None:
+    root = ET.parse(path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError(f"{path.name}: root is not svg")
+    verify_svg_font_style(root, path.name, require_arial=True)
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width < 1920 or height < 1080:
+        raise AssertionError(f"{path.name}: FMEA table should not shrink below 1920x1080, got {width}x{height}")
+
+    groups_by_id = {element.attrib.get("id"): element for element in root.iter() if element.tag.endswith("g")}
+    for required_id in ["fmea-table", "fmea-main-table", "fmea-rating-scale", "fmea-priority-guide"]:
+        if required_id not in groups_by_id:
+            raise AssertionError(f"{path.name}: missing {required_id}")
+    if "fmea-focus-guide" in groups_by_id:
+        raise AssertionError(f"{path.name}: FMEA focus card should not duplicate RPN guidance")
+    text = "\n".join(element.text or "" for element in root.iter() if element.tag.endswith("text"))
+    for required_text in ["Item / Function", "Potential Failure Mode", "RPN", "Recommended Actions"]:
+        if required_text not in text:
+            raise AssertionError(f"{path.name}: missing FMEA header {required_text}")
+    risk_cells = [
+        element
+        for element in root.iter()
+        if element.attrib.get("class") == "fmea-risk-cell"
+    ]
+    if not risk_cells:
+        raise AssertionError(f"{path.name}: missing RPN risk cells")
+    risk_levels = {cell.attrib.get("data-risk-level") for cell in risk_cells}
+    if path.name == "fmea.output.example.svg" and {"high", "medium", "low"} - risk_levels:
+        raise AssertionError(f"{path.name}: expected high, medium, and low RPN risk examples")
+    if path.name == "fmea.output.example.svg":
+        expected_rpns = {"200", "112", "24"}
+        actual_rpns = {cell.attrib.get("data-rpn") for cell in risk_cells}
+        if not expected_rpns <= actual_rpns:
+            raise AssertionError(f"{path.name}: RPN calculation mismatch, got {sorted(actual_rpns)}")
+    score_cells = [
+        element
+        for element in root.iter()
+        if element.attrib.get("class") == "fmea-score-cell"
+    ]
+    if len(score_cells) < len(risk_cells) * 3:
+        raise AssertionError(f"{path.name}: S/O/D score cells should use explicit color-coded score text")
+    status_badges = [
+        element
+        for element in root.iter()
+        if element.attrib.get("class") == "fmea-status-badge"
+    ]
+    if len(status_badges) < len(risk_cells):
+        raise AssertionError(f"{path.name}: status cells should render icon badges")
+    grid_lines = [
+        element
+        for element in root.iter()
+        if element.attrib.get("class") == "fmea-grid-line"
+    ]
+    if len(grid_lines) < 18:
+        raise AssertionError(f"{path.name}: FMEA table grid should draw explicit overlay lines")
+    verify_fmea_table_rects_within_canvas(root, path.name)
+
+
+def verify_fmea_table_rects_within_canvas(root: ET.Element, label: str) -> None:
+    width = float(root.attrib["width"])
+    height = float(root.attrib["height"])
+    for rect in root.iter():
+        if not rect.tag.endswith("rect"):
+            continue
+        x = float(rect.attrib.get("x", "0"))
+        y = float(rect.attrib.get("y", "0"))
+        w = float(rect.attrib.get("width", "0"))
+        h = float(rect.attrib.get("height", "0"))
+        if x < -1 or y < -1 or x + w > width + 1 or y + h > height + 1:
+            raise AssertionError(f"{label}: FMEA rect outside canvas at {x},{y},{w},{h}")
 
 
 def verify_svg_font_style(root: ET.Element, label: str, *, require_arial: bool = False) -> None:
@@ -1936,6 +2031,8 @@ def verify_templates() -> None:
     exclusion_tree_json_template = TEMPLATES / "exclusion-tree.template.json"
     two_by_two_templates = two_by_two_template_paths()
     roadmap_templates = roadmap_template_paths()
+    fmea_md_template = TEMPLATES / "fmea-table.template.md"
+    fmea_json_template = TEMPLATES / "fmea-table.template.json"
     two_by_two_md_template = TEMPLATES / "two-by-two-matrix.template.md"
     two_by_two_json_template = TEMPLATES / "two-by-two-matrix.template.json"
     for path in [
@@ -1947,6 +2044,8 @@ def verify_templates() -> None:
         exclusion_tree_json_template,
         *two_by_two_templates,
         *roadmap_templates,
+        fmea_md_template,
+        fmea_json_template,
     ]:
         if not path.exists():
             raise AssertionError(f"Missing template: {path.name}")
@@ -1999,6 +2098,14 @@ def verify_templates() -> None:
                 raise AssertionError(f"{template_path.name}: JSON template must be an object")
         verify_roadmap_template_structure(roadmap_data, template_path.name)
 
+    fmea_md_data = parse_input(fmea_md_template)
+    verify_fmea_template_structure(fmea_md_data, fmea_md_template.name)
+
+    fmea_json_data = json.loads(fmea_json_template.read_text(encoding="utf-8"))
+    if not isinstance(fmea_json_data, dict):
+        raise AssertionError(f"{fmea_json_template.name}: JSON template must be an object")
+    verify_fmea_template_structure(fmea_json_data, fmea_json_template.name)
+
     pid = os.getpid()
     template_outputs = [
         TEMPLATES / f"fishbone.template.md.{pid}.tmp.svg",
@@ -2009,6 +2116,8 @@ def verify_templates() -> None:
         TEMPLATES / f"exclusion-tree.template.json.{pid}.tmp.svg",
         *[TEMPLATES / f"{path.name}.{pid}.tmp.svg" for path in two_by_two_templates],
         *[TEMPLATES / f"{path.name}.{pid}.tmp.svg" for path in roadmap_templates],
+        TEMPLATES / f"fmea-table.template.md.{pid}.tmp.svg",
+        TEMPLATES / f"fmea-table.template.json.{pid}.tmp.svg",
     ]
     try:
         run_generate(md_template, template_outputs[0])
@@ -2020,10 +2129,14 @@ def verify_templates() -> None:
         two_by_two_output_start = 6
         two_by_two_output_end = two_by_two_output_start + len(two_by_two_templates)
         roadmap_output_start = two_by_two_output_end
+        roadmap_output_end = roadmap_output_start + len(roadmap_templates)
+        fmea_output_start = roadmap_output_end
         for template_path, output_path in zip(two_by_two_templates, template_outputs[two_by_two_output_start:two_by_two_output_end]):
             run_generate(template_path, output_path)
-        for template_path, output_path in zip(roadmap_templates, template_outputs[roadmap_output_start:]):
+        for template_path, output_path in zip(roadmap_templates, template_outputs[roadmap_output_start:roadmap_output_end]):
             run_generate(template_path, output_path)
+        run_generate(fmea_md_template, template_outputs[fmea_output_start])
+        run_generate(fmea_json_template, template_outputs[fmea_output_start + 1])
         verify_svg_basics(template_outputs[0])
         verify_svg_basics(template_outputs[1])
         verify_fault_tree_svg_basics(template_outputs[2])
@@ -2032,8 +2145,10 @@ def verify_templates() -> None:
         verify_exclusion_tree_svg_basics(template_outputs[5])
         for output_path in template_outputs[two_by_two_output_start:two_by_two_output_end]:
             verify_two_by_two_svg_basics(output_path)
-        for output_path in template_outputs[roadmap_output_start:]:
+        for output_path in template_outputs[roadmap_output_start:roadmap_output_end]:
             verify_roadmap_timeline_svg_basics(output_path)
+        verify_fmea_table_svg_basics(template_outputs[fmea_output_start])
+        verify_fmea_table_svg_basics(template_outputs[fmea_output_start + 1])
     finally:
         for output_path in template_outputs:
             output_path.unlink(missing_ok=True)
@@ -2050,6 +2165,8 @@ def verify_cmd_launchers() -> None:
         "two_by_two_matrix_tool.cmd": "scripts\\new_two_by_two_matrix.py",
         "二乘二矩阵工具.cmd": "two_by_two_matrix_tool.cmd",
         "roadmap_timeline_tool.cmd": "scripts\\new_roadmap_timeline.py",
+        "fmea_table_tool.cmd": "scripts\\new_fmea_table.py",
+        "FMEA表工具.cmd": "fmea_table_tool.cmd",
         "路线图时间线工具.cmd": "roadmap_timeline_tool.cmd",
         "diagram_builder.cmd": "scripts\\diagram_builder_server.py",
         "图表编辑器.cmd": "diagram_builder.cmd",
@@ -2266,6 +2383,24 @@ def verify_roadmap_template_structure(data: dict[str, object], label: str) -> No
             raise AssertionError(f"{label}: milestone timeline template should enable the milestone table")
 
 
+def verify_fmea_template_structure(data: dict[str, object], label: str) -> None:
+    if str(data.get("diagram_type", "")).replace("-", "_") != "fmea_table":
+        raise AssertionError(f"{label}: template must use diagram_type=fmea_table")
+    if not str(data.get("title", "")).strip():
+        raise AssertionError(f"{label}: template must include a title")
+    if not str(data.get("goal", "")).strip():
+        raise AssertionError(f"{label}: template must include a goal")
+    rows = data.get("rows")
+    if not isinstance(rows, list) or len(rows) < 3:
+        raise AssertionError(f"{label}: template must include at least three FMEA rows")
+    for index, row in enumerate(rows, start=1):
+        if not isinstance(row, dict):
+            raise AssertionError(f"{label}: row {index} must be an object")
+        for required in ["item_function", "failure_mode", "severity", "occurrence", "detection", "recommended_actions"]:
+            if required not in row:
+                raise AssertionError(f"{label}: row {index} missing {required}")
+
+
 def verify_no_tmp_files(path: Path) -> None:
     if not path.exists():
         return
@@ -2474,6 +2609,41 @@ def verify_new_roadmap_entrypoint() -> None:
             raise AssertionError("new_roadmap_timeline.py should refuse to overwrite existing work files without --force")
     finally:
         for path in [input_path, preset_input_path, output_path, preset_output_path]:
+            path.unlink(missing_ok=True)
+
+
+def verify_new_fmea_entrypoint() -> None:
+    stem = f"verify-new-fmea-{os.getpid()}"
+    input_path = FMEA_WORK / f"{stem}.md"
+    output_path = FMEA_WORK / f"{stem}.svg"
+    try:
+        FMEA_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [input_path, output_path]:
+            path.unlink(missing_ok=True)
+        result = subprocess.run(
+            [str(PYTHON), str(NEW_FMEA), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise AssertionError(f"new_fmea_table.py failed:\n{result.stderr}")
+        if not input_path.exists() or not output_path.exists():
+            raise AssertionError("new_fmea_table.py did not create expected work files")
+        verify_fmea_table_svg_basics(output_path)
+
+        overwrite_result = subprocess.run(
+            [str(PYTHON), str(NEW_FMEA), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if overwrite_result.returncode == 0:
+            raise AssertionError("new_fmea_table.py should refuse to overwrite existing work files without --force")
+    finally:
+        for path in [input_path, output_path]:
             path.unlink(missing_ok=True)
 
 
@@ -2776,6 +2946,66 @@ def verify_render_roadmap_work_entrypoint() -> None:
             path.unlink(missing_ok=True)
 
 
+def verify_render_fmea_work_entrypoint() -> None:
+    stem = f"verify-render-fmea-{os.getpid()}"
+    md_input_path = FMEA_WORK / f"{stem}.md"
+    json_input_path = FMEA_WORK / f"{stem}.json"
+    output_path = FMEA_WORK / f"{stem}.svg"
+    try:
+        FMEA_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_FMEA), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_fmea_table.py failed during render_fmea verification:\n{create_result.stderr}")
+
+        output_path.unlink(missing_ok=True)
+        render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_FMEA_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if render_result.returncode != 0:
+            raise AssertionError(f"render_fmea_table_work.py failed:\n{render_result.stderr}")
+        if not output_path.exists():
+            raise AssertionError("render_fmea_table_work.py did not create the expected SVG")
+        verify_fmea_table_svg_basics(output_path)
+
+        json_input_path.write_text((TEMPLATES / "fmea-table.template.json").read_text(encoding="utf-8"), encoding="utf-8")
+        ambiguous_result = subprocess.run(
+            [str(PYTHON), str(RENDER_FMEA_WORK), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if ambiguous_result.returncode == 0:
+            raise AssertionError("render_fmea_table_work.py should require --format when md and json inputs both exist")
+
+        format_result = subprocess.run(
+            [str(PYTHON), str(RENDER_FMEA_WORK), stem, "--format", "json"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if format_result.returncode != 0:
+            raise AssertionError(f"render_fmea_table_work.py --format json failed:\n{format_result.stderr}")
+        verify_fmea_table_svg_basics(output_path)
+    finally:
+        for path in [md_input_path, json_input_path, output_path]:
+            path.unlink(missing_ok=True)
+
+
 def verify_export_png_entrypoint() -> None:
     from PIL import Image
 
@@ -3033,6 +3263,59 @@ def verify_export_roadmap_png_entrypoint() -> None:
         )
         if unsafe_result.returncode == 0:
             raise AssertionError("export_roadmap_timeline_png.py accepted an unsafe name")
+    finally:
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+
+def verify_export_fmea_png_entrypoint() -> None:
+    from PIL import Image
+
+    stem = f"verify-export-fmea-png-{os.getpid()}"
+    input_path = FMEA_WORK / f"{stem}.md"
+    svg_path = FMEA_WORK / f"{stem}.svg"
+    png_path = FMEA_WORK / f"{stem}.png"
+    try:
+        FMEA_WORK.mkdir(parents=True, exist_ok=True)
+        for path in [input_path, svg_path, png_path]:
+            path.unlink(missing_ok=True)
+
+        create_result = subprocess.run(
+            [str(PYTHON), str(NEW_FMEA), stem, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if create_result.returncode != 0:
+            raise AssertionError(f"new_fmea_table.py failed during PNG export verification:\n{create_result.stderr}")
+
+        export_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_FMEA_PNG), stem],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if export_result.returncode != 0:
+            raise AssertionError(f"export_fmea_table_png.py failed:\n{export_result.stderr}")
+        if not png_path.exists():
+            raise AssertionError("export_fmea_table_png.py did not create the expected PNG")
+
+        svg_size = svg_dimensions(svg_path)
+        with Image.open(png_path) as image:
+            if image.size != svg_size:
+                raise AssertionError(f"FMEA PNG dimensions {image.size} do not match SVG dimensions {svg_size}")
+
+        unsafe_result = subprocess.run(
+            [str(PYTHON), str(EXPORT_FMEA_PNG), "../outside"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if unsafe_result.returncode == 0:
+            raise AssertionError("export_fmea_table_png.py accepted an unsafe name")
     finally:
         for path in [input_path, svg_path, png_path]:
             path.unlink(missing_ok=True)
@@ -3420,6 +3703,26 @@ def verify_work_name_validation() -> None:
         )
         if roadmap_render_result.returncode == 0:
             raise AssertionError(f"render_roadmap_timeline_work.py accepted unsafe name: {unsafe_name}")
+
+        fmea_create_result = subprocess.run(
+            [str(PYTHON), str(NEW_FMEA), unsafe_name, "--format", "md"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if fmea_create_result.returncode == 0:
+            raise AssertionError(f"new_fmea_table.py accepted unsafe name: {unsafe_name}")
+
+        fmea_render_result = subprocess.run(
+            [str(PYTHON), str(RENDER_FMEA_WORK), unsafe_name],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if fmea_render_result.returncode == 0:
+            raise AssertionError(f"render_fmea_table_work.py accepted unsafe name: {unsafe_name}")
 
 
 def parse_path_numbers(path_data: str) -> list[float]:

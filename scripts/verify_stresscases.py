@@ -17,6 +17,7 @@ FAULT_TREE_STRESSCASES = STRESSCASES_ROOT / "fault-tree"
 EXCLUSION_TREE_STRESSCASES = STRESSCASES_ROOT / "exclusion-tree"
 TWO_BY_TWO_STRESSCASES = STRESSCASES_ROOT / "two-by-two-matrix"
 ROADMAP_STRESSCASES = STRESSCASES_ROOT / "roadmap-timeline"
+FMEA_STRESSCASES = STRESSCASES_ROOT / "fmea-table"
 RENDER_STRESSCASES = ROOT / "scripts" / "render_stresscases.py"
 PYTHON = Path(sys.executable)
 
@@ -40,6 +41,7 @@ def main() -> int:
     verify_two_by_two_matrix_single_quadrant_overload()
     verify_roadmap_timeline_full_stress()
     verify_roadmap_timeline_milestone_dense()
+    verify_fmea_table_full_stress()
     print("Stresscase verification passed")
     return 0
 
@@ -53,6 +55,7 @@ def verify_directory() -> None:
         EXCLUSION_TREE_STRESSCASES,
         TWO_BY_TWO_STRESSCASES,
         ROADMAP_STRESSCASES,
+        FMEA_STRESSCASES,
     ]:
         if not required_dir.exists():
             raise AssertionError(f"Missing stresscases directory: {required_dir.relative_to(ROOT)}")
@@ -929,6 +932,35 @@ def verify_fault_tree_branch_connectors(root: ET.Element, label: str, *, min_tru
     ]
     if rightward:
         raise AssertionError(f"{label}: compact branch lines must run left from the parent trunk")
+
+
+def verify_fmea_table_full_stress() -> None:
+    input_path = FMEA_STRESSCASES / "full-stress.json"
+    output_path = FMEA_STRESSCASES / "full-stress.svg"
+    if not input_path.exists():
+        raise AssertionError("Missing fmea-table/full-stress.json")
+    if not output_path.exists():
+        raise AssertionError("Missing fmea-table/full-stress.svg")
+
+    root = ET.parse(output_path).getroot()
+    if not root.tag.endswith("svg"):
+        raise AssertionError("fmea-table full-stress.svg root is not svg")
+    width = int(float(root.attrib["width"]))
+    height = int(float(root.attrib["height"]))
+    if width < 1920 or height <= 1080:
+        raise AssertionError(f"fmea-table full-stress.svg should expand downward from 1920x1080, got {width}x{height}")
+    groups_by_id = {element.attrib.get("id"): element for element in root.iter() if element.tag.endswith("g")}
+    if "fmea-main-table" not in groups_by_id:
+        raise AssertionError("fmea-table full-stress.svg missing main table")
+    risk_cells = [
+        element
+        for element in root.iter()
+        if element.attrib.get("class") == "fmea-risk-cell"
+    ]
+    if len(risk_cells) < 8:
+        raise AssertionError(f"Expected at least 8 FMEA risk cells, got {len(risk_cells)}")
+    if not any(cell.attrib.get("data-risk-level") == "high" for cell in risk_cells):
+        raise AssertionError("FMEA stresscase must include at least one high RPN row")
 
 
 def parse_path_numbers(path_data: str) -> list[float]:

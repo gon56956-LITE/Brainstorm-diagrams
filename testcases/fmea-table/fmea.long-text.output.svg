@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="FMEA table diagram">
+<rect width="1920" height="1080" fill="#FFFFFF"/>
+<g id="fmea-table" font-family="Arial" fill="#062B5F">
+<text x="28" y="54" font-size="34" font-weight="700">FMEA Long Text Wrapping Case</text>
+<text x="28" y="96" font-size="17" fill="#536781">Goal: Verify long technical wording wraps inside table cells without shrinking the</text>
+<text x="28" y="120" font-size="17" fill="#536781">full diagram font.</text>
+<g id="fmea-rating-scale" class="fmea-panel"><rect x="900" y="22" width="992" height="126" rx="10" fill="#F7FAFF" stroke="#8DA9CC" stroke-width="1.5"/>
+<text x="918" y="50" font-size="17" font-weight="700">Rating Scale (1-10)</text>
+<circle cx="932.0" cy="78" r="13" fill="#D12B2B"/>
+<text x="932.0" y="83" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">S</text>
+<text x="954.0" y="74" font-size="13" font-weight="700">Severity</text>
+<text x="954.0" y="92.0" font-size="11.5" font-weight="400" fill="#062B5F" text-anchor="start">Impact to customer if failure occurs</text>
+<text x="954.0" y="134" font-size="11.5" fill="#062B5F">1 = low / easy    10 = high</text>
+<line x1="1226.7" y1="64" x2="1226.7" y2="134" stroke="#C6D5EA" stroke-width="1.2"/>
+<circle cx="1250.7" cy="78" r="13" fill="#D79200"/>
+<text x="1250.7" y="83" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">O</text>
+<text x="1272.7" y="74" font-size="13" font-weight="700">Occurrence</text>
+<text x="1272.7" y="92.0" font-size="11.5" font-weight="400" fill="#062B5F" text-anchor="start">Likelihood of failure occurrence</text>
+<text x="1272.7" y="134" font-size="11.5" fill="#062B5F">1 = low / easy    10 = high</text>
+<line x1="1545.3" y1="64" x2="1545.3" y2="134" stroke="#C6D5EA" stroke-width="1.2"/>
+<circle cx="1569.3" cy="78" r="13" fill="#2F8C46"/>
+<text x="1569.3" y="83" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">D</text>
+<text x="1591.3" y="74" font-size="13" font-weight="700">Detection</text>
+<text x="1591.3" y="92.0" font-size="11.5" font-weight="400" fill="#062B5F" text-anchor="start">Likelihood of not detecting failure</text>
+<text x="1591.3" y="134" font-size="11.5" fill="#062B5F">1 = low / easy    10 = high</text>
+</g>
+<g id="fmea-main-table" class="fmea-main-table">
+<rect x="16" y="176" width="1888" height="370" fill="#FFFFFF" stroke="#C6D5EA" stroke-width="1.4"/>
+<rect x="16" y="176" width="1888" height="62" fill="#103A70"/>
+<text x="24.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Item / Function</text>
+<text x="174.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Potential Failure Mode</text>
+<text x="329.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Effects</text>
+<text x="509.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Causes</text>
+<text x="744.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Prevention Controls</text>
+<text x="954.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Detection Controls</text>
+<text x="1173.5" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">S</text>
+<text x="1228.5" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">O</text>
+<text x="1283.5" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">D</text>
+<text x="1346.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">RPN</text>
+<text x="1389.0" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start">Recommended Actions</text>
+<text x="1643.5" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Owner</text>
+<text x="1738.5" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Target</text>
+<text x="1847.5" y="200.0" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Status</text>
+<rect x="16" y="238" width="1888" height="162" fill="#FFFFFF"/>
+<rect x="26" y="256" width="4" height="76" rx="2" fill="#164DAD"/>
+<text x="40" y="272" font-size="12" fill="#536781" font-weight="700">L1</text>
+<text x="40" y="294" font-size="13" fill="#062B5F" font-weight="700">High-temperature</text>
+<text x="40" y="311" font-size="13" fill="#062B5F" font-weight="700">aging optical</text>
+<text x="40" y="328" font-size="13" fill="#062B5F" font-weight="700">power stability</text>
+<text x="176.0" y="256.0" font-size="12.5" fill="#062B5F">Output power</text>
+<text x="176.0" y="272.0" font-size="12.5" fill="#062B5F">drifts beyond the</text>
+<text x="176.0" y="288.0" font-size="12.5" fill="#062B5F">customer-facing</text>
+<circle cx="334" cy="252" r="2.4" fill="#0B3A78"/>
+<text x="343.0" y="256.0" font-size="12.5" fill="#062B5F">Customer may observe</text>
+<text x="343.0" y="272.0" font-size="12.5" fill="#062B5F">unstable link margin</text>
+<text x="343.0" y="288.0" font-size="12.5" fill="#062B5F">during field operation</text>
+<circle cx="334" cy="303" r="2.4" fill="#0B3A78"/>
+<text x="343.0" y="307.0" font-size="12.5" fill="#062B5F">Pilot reliability</text>
+<text x="343.0" y="323.0" font-size="12.5" fill="#062B5F">qualification may</text>
+<text x="343.0" y="339.0" font-size="12.5" fill="#062B5F">require repeat aging</text>
+<circle cx="514" cy="252" r="2.4" fill="#0B3A78"/>
+<text x="523.0" y="256.0" font-size="12.5" fill="#062B5F">Package-induced mechanical</text>
+<text x="523.0" y="272.0" font-size="12.5" fill="#062B5F">movement during thermal</text>
+<text x="523.0" y="288.0" font-size="12.5" fill="#062B5F">exposure</text>
+<circle cx="514" cy="303" r="2.4" fill="#0B3A78"/>
+<text x="523.0" y="307.0" font-size="12.5" fill="#062B5F">Adhesive creep combined with</text>
+<text x="523.0" y="323.0" font-size="12.5" fill="#062B5F">coefficient-of-thermal-expan...</text>
+<text x="523.0" y="339.0" font-size="12.5" fill="#062B5F">mismatch</text>
+<circle cx="749" cy="252" r="2.4" fill="#0B3A78"/>
+<text x="758.0" y="256.0" font-size="12.5" fill="#062B5F">Released package stack-up</text>
+<text x="758.0" y="272.0" font-size="12.5" fill="#062B5F">design rule</text>
+<circle cx="749" cy="287" r="2.4" fill="#0B3A78"/>
+<text x="758.0" y="291.0" font-size="12.5" fill="#062B5F">Adhesive material</text>
+<text x="758.0" y="307.0" font-size="12.5" fill="#062B5F">qualification and cure</text>
+<text x="758.0" y="323.0" font-size="12.5" fill="#062B5F">profile lock</text>
+<circle cx="959" cy="252" r="2.4" fill="#0B3A78"/>
+<text x="968.0" y="256.0" font-size="12.5" fill="#062B5F">Before-and-after optical</text>
+<text x="968.0" y="272.0" font-size="12.5" fill="#062B5F">coupling efficiency</text>
+<text x="968.0" y="288.0" font-size="12.5" fill="#062B5F">comparison</text>
+<circle cx="959" cy="303" r="2.4" fill="#0B3A78"/>
+<text x="968.0" y="307.0" font-size="12.5" fill="#062B5F">Thermal resistance</text>
+<text x="968.0" y="323.0" font-size="12.5" fill="#062B5F">measurement and</text>
+<text x="968.0" y="339.0" font-size="12.5" fill="#062B5F">high-temperature aging</text>
+<text class="fmea-score-cell" data-score="9" x="1173.5" y="325.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D12B2B">9</text>
+<text class="fmea-score-cell" data-score="5" x="1228.5" y="325.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D79200">5</text>
+<text class="fmea-score-cell" data-score="6" x="1283.5" y="325.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D79200">6</text>
+<rect class="fmea-risk-cell" data-risk-level="high" data-rpn="270" x="1311" y="238" width="70" height="162" fill="#FCE8E8" opacity="0.82"/>
+<text x="1346.0" y="325.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D12B2B">270</text>
+<circle cx="1394" cy="252" r="2.4" fill="#0B3A78"/>
+<text x="1403.0" y="256.0" font-size="12.5" fill="#062B5F">Add cross-section review for</text>
+<text x="1403.0" y="272.0" font-size="12.5" fill="#062B5F">failed units and passing</text>
+<text x="1403.0" y="288.0" font-size="12.5" fill="#062B5F">controls</text>
+<circle cx="1394" cy="303" r="2.4" fill="#0B3A78"/>
+<text x="1403.0" y="307.0" font-size="12.5" fill="#062B5F">Run controlled aging split</text>
+<text x="1403.0" y="323.0" font-size="12.5" fill="#062B5F">by adhesive lot and package</text>
+<text x="1403.0" y="339.0" font-size="12.5" fill="#062B5F">assembly fixture</text>
+<text x="1643.5" y="323.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">Reliabi...</text>
+<text x="1738.5" y="323.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">2026-06-28</text>
+<g class="fmea-status-badge" data-status="Open">
+<circle cx="1847.5" cy="301.0" r="13" fill="#2B6CBF"/>
+<rect x="1841.5" y="296.0" width="12" height="11" rx="2" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+<line x1="1841.5" y1="300.0" x2="1853.5" y2="300.0" stroke="#FFFFFF" stroke-width="2"/>
+<line x1="1844.5" y1="293.0" x2="1844.5" y2="297.0" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+<line x1="1850.5" y1="293.0" x2="1850.5" y2="297.0" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+<text x="1847.5" y="335.0" font-size="11.5" font-weight="700" fill="#062B5F" text-anchor="middle">Open</text>
+</g>
+<rect x="16" y="400" width="1888" height="146" fill="#F4F8FD"/>
+<rect x="26" y="418" width="4" height="76" rx="2" fill="#1686A7"/>
+<text x="40" y="434" font-size="12" fill="#536781" font-weight="700">L2</text>
+<text x="40" y="456" font-size="13" fill="#062B5F" font-weight="700">Firmware</text>
+<text x="40" y="473" font-size="13" fill="#062B5F" font-weight="700">compensation</text>
+<text x="40" y="490" font-size="13" fill="#062B5F" font-weight="700">behavior</text>
+<text x="176.0" y="418.0" font-size="12.5" fill="#062B5F">Compensation loop</text>
+<text x="176.0" y="434.0" font-size="12.5" fill="#062B5F">masks early drift</text>
+<text x="176.0" y="450.0" font-size="12.5" fill="#062B5F">and delays</text>
+<circle cx="334" cy="414" r="2.4" fill="#0B3A78"/>
+<text x="343.0" y="418.0" font-size="12.5" fill="#062B5F">Late investigation</text>
+<text x="343.0" y="434.0" font-size="12.5" fill="#062B5F">start</text>
+<circle cx="334" cy="449" r="2.4" fill="#0B3A78"/>
+<text x="343.0" y="453.0" font-size="12.5" fill="#062B5F">Ambiguous separation</text>
+<text x="343.0" y="469.0" font-size="12.5" fill="#062B5F">between optical</text>
+<text x="343.0" y="485.0" font-size="12.5" fill="#062B5F">degradation and</text>
+<circle cx="514" cy="414" r="2.4" fill="#0B3A78"/>
+<text x="523.0" y="418.0" font-size="12.5" fill="#062B5F">Logging granularity is too</text>
+<text x="523.0" y="434.0" font-size="12.5" fill="#062B5F">coarse</text>
+<circle cx="514" cy="449" r="2.4" fill="#0B3A78"/>
+<text x="523.0" y="453.0" font-size="12.5" fill="#062B5F">Boundary behavior was not</text>
+<text x="523.0" y="469.0" font-size="12.5" fill="#062B5F">covered in pilot validation</text>
+<circle cx="749" cy="414" r="2.4" fill="#0B3A78"/>
+<text x="758.0" y="418.0" font-size="12.5" fill="#062B5F">Firmware release checklist</text>
+<circle cx="749" cy="433" r="2.4" fill="#0B3A78"/>
+<text x="758.0" y="437.0" font-size="12.5" fill="#062B5F">Design review for</text>
+<text x="758.0" y="453.0" font-size="12.5" fill="#062B5F">compensation limits</text>
+<circle cx="959" cy="414" r="2.4" fill="#0B3A78"/>
+<text x="968.0" y="418.0" font-size="12.5" fill="#062B5F">Compensation log review</text>
+<circle cx="959" cy="433" r="2.4" fill="#0B3A78"/>
+<text x="968.0" y="437.0" font-size="12.5" fill="#062B5F">Independent station</text>
+<text x="968.0" y="453.0" font-size="12.5" fill="#062B5F">retest</text>
+<text class="fmea-score-cell" data-score="7" x="1173.5" y="479.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D12B2B">7</text>
+<text class="fmea-score-cell" data-score="3" x="1228.5" y="479.0" font-size="16" font-weight="700" text-anchor="middle" fill="#2F8C46">3</text>
+<text class="fmea-score-cell" data-score="7" x="1283.5" y="479.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D12B2B">7</text>
+<rect class="fmea-risk-cell" data-risk-level="medium" data-rpn="147" x="1311" y="400" width="70" height="146" fill="#FFF2D6" opacity="0.82"/>
+<text x="1346.0" y="479.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D79200">147</text>
+<circle cx="1394" cy="414" r="2.4" fill="#0B3A78"/>
+<text x="1403.0" y="418.0" font-size="12.5" fill="#062B5F">Add detailed compensation</text>
+<text x="1403.0" y="434.0" font-size="12.5" fill="#062B5F">logs during reliability test</text>
+<circle cx="1394" cy="449" r="2.4" fill="#0B3A78"/>
+<text x="1403.0" y="453.0" font-size="12.5" fill="#062B5F">Define alarm threshold for</text>
+<text x="1403.0" y="469.0" font-size="12.5" fill="#062B5F">unexpected correction trend</text>
+<text x="1643.5" y="477.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">Firmware</text>
+<text x="1738.5" y="477.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">2026-06-20</text>
+<g class="fmea-status-badge" data-status="In Progress">
+<circle cx="1847.5" cy="455.0" r="13" fill="#D79200"/>
+<circle cx="1847.5" cy="455.0" r="6.5" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="24 16" stroke-linecap="round"/>
+<circle cx="1852.5" cy="450.0" r="2.5" fill="#FFFFFF"/>
+<text x="1847.5" y="489.0" font-size="11.5" font-weight="700" fill="#062B5F" text-anchor="middle">In Progress</text>
+</g>
+<line class="fmea-grid-line" x1="16" y1="176" x2="16" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="166" y1="176" x2="166" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="321" y1="176" x2="321" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="501" y1="176" x2="501" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="736" y1="176" x2="736" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="946" y1="176" x2="946" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1146" y1="176" x2="1146" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1201" y1="176" x2="1201" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1256" y1="176" x2="1256" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1311" y1="176" x2="1311" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1381" y1="176" x2="1381" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1601" y1="176" x2="1601" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1686" y1="176" x2="1686" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1791" y1="176" x2="1791" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="1904" y1="176" x2="1904" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="16" y1="176" x2="1904" y2="176" stroke="#AFC1DA" stroke-width="1.25"/>
+<line class="fmea-grid-line" x1="16" y1="238" x2="1904" y2="238" stroke="#AFC1DA" stroke-width="1.25"/>
+<line class="fmea-grid-line" x1="16" y1="400" x2="1904" y2="400" stroke="#AFC1DA" stroke-width="1.15"/>
+<line class="fmea-grid-line" x1="16" y1="546" x2="1904" y2="546" stroke="#AFC1DA" stroke-width="1.15"/>
+</g>
+<g id="fmea-priority-guide" class="fmea-panel"><rect x="24" y="564" width="642" height="128" rx="10" fill="#F7FAFF" stroke="#8DA9CC" stroke-width="1.5"/>
+<text x="42" y="594" font-size="18" font-weight="700">RPN Priority Guide</text>
+<text x="42" y="618" font-size="12.5" font-weight="700" fill="#062B5F">RPN = S x O x D; RPN cell color shows risk level.</text>
+<rect x="42.0" y="632" width="188.0" height="42" rx="7" fill="#FCE8E8" stroke="#D12B2B" stroke-width="1.1"/>
+<text x="52.0" y="650" font-size="12.5" font-weight="700" fill="#D12B2B">RPN &gt;= 200</text>
+<text x="52.0" y="667" font-size="12" font-weight="700" fill="#062B5F">High Risk</text>
+<text x="52.0" y="688" font-size="11.5" fill="#536781">Immediate action required</text>
+<rect x="244.0" y="632" width="188.0" height="42" rx="7" fill="#FFF2D6" stroke="#D79200" stroke-width="1.1"/>
+<text x="254.0" y="650" font-size="12.5" font-weight="700" fill="#D79200">100 &lt;= RPN &lt; 200</text>
+<text x="254.0" y="667" font-size="12" font-weight="700" fill="#062B5F">Medium Risk</text>
+<text x="254.0" y="688" font-size="11.5" fill="#536781">Plan and track actions</text>
+<rect x="446.0" y="632" width="188.0" height="42" rx="7" fill="#E8F5EA" stroke="#2F8C46" stroke-width="1.1"/>
+<text x="456.0" y="650" font-size="12.5" font-weight="700" fill="#2F8C46">RPN &lt; 100</text>
+<text x="456.0" y="667" font-size="12" font-weight="700" fill="#062B5F">Low Risk</text>
+<text x="456.0" y="688" font-size="11.5" fill="#536781">Monitor and maintain</text>
+</g>
+<g class="fmea-panel"><rect x="690" y="564" width="722" height="128" rx="10" fill="#F7FAFF" stroke="#8DA9CC" stroke-width="1.5"/>
+<text x="708" y="594" font-size="18" font-weight="700">Notes</text>
+<text x="708" y="622" font-size="13" fill="#536781">This testcase intentionally uses longer text to verify row height expansion.</text>
+</g>
+<g class="fmea-panel"><rect x="1436" y="564" width="456" height="128" rx="10" fill="#F7FAFF" stroke="#8DA9CC" stroke-width="1.5"/>
+<text x="1454" y="594" font-size="18" font-weight="700">Review Info</text>
+<text x="1454" y="622" font-size="13" fill="#536781">Project: Long Text Review</text>
+<text x="1454" y="642" font-size="13" fill="#536781">Owner: Quality Engineering</text>
+<text x="1454" y="662" font-size="13" fill="#536781">Review frequency: Weekly</text>
+<text x="1454" y="682" font-size="13" fill="#536781">Last review: 2026-05-21</text>
+</g>
+</g>
+</svg>
