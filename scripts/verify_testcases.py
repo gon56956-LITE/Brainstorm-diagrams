@@ -3403,6 +3403,7 @@ def verify_diagram_builder_service() -> None:
     verify_diagram_builder_exclusion_language_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_two_by_two_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_roadmap_ui(diagram_builder_server.INDEX_HTML)
+    verify_diagram_builder_fmea_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_load_file_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_preview_zoom_ui(diagram_builder_server.INDEX_HTML)
 
@@ -3412,6 +3413,7 @@ def verify_diagram_builder_service() -> None:
         "exclusion_tree": f"verify-builder-exclusion-tree-{os.getpid()}",
         "two_by_two_matrix": f"verify-builder-two-by-two-{os.getpid()}",
         "roadmap_timeline": f"verify-builder-roadmap-{os.getpid()}",
+        "fmea_table": f"verify-builder-fmea-{os.getpid()}",
     }
     paths: list[Path] = []
     try:
@@ -3434,6 +3436,11 @@ def verify_diagram_builder_service() -> None:
         loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-roadmap.md", roadmap_md)
         if loaded_type != "roadmap_timeline" or loaded_data.get("diagram_type") != "roadmap_timeline":
             raise AssertionError("diagram_builder_server failed to parse a loaded roadmap Markdown file")
+
+        fmea_md = (TEMPLATES / "fmea-table.template.md").read_text(encoding="utf-8")
+        loaded_type, loaded_data = diagram_builder_server.parse_uploaded_file("legacy-fmea.md", fmea_md)
+        if loaded_type != "fmea_table" or loaded_data.get("diagram_type") != "fmea_table":
+            raise AssertionError("diagram_builder_server failed to parse a loaded FMEA Markdown file")
 
         for diagram_type, stem in stems.items():
             data = diagram_builder_server.load_template(diagram_type)
@@ -3459,6 +3466,8 @@ def verify_diagram_builder_service() -> None:
                 verify_two_by_two_svg_basics(svg_path)
             elif diagram_type == "roadmap_timeline":
                 verify_roadmap_timeline_svg_basics(svg_path)
+            elif diagram_type == "fmea_table":
+                verify_fmea_table_svg_basics(svg_path)
             expected_size = svg_dimensions(svg_path)
             with Image.open(png_path) as image:
                 if image.size != expected_size:
@@ -3592,6 +3601,33 @@ def verify_diagram_builder_roadmap_ui(index_html: str) -> None:
         raise AssertionError("diagram builder roadmap Markdown export should write a visible Goal line")
     if "subtitle:" in markdown_html:
         raise AssertionError("diagram builder roadmap Markdown export should not write title-area subtitle metadata")
+
+
+def verify_diagram_builder_fmea_ui(index_html: str) -> None:
+    if '<option value="fmea_table">FMEA Table</option>' not in index_html:
+        raise AssertionError("diagram builder should expose FMEA Table in the diagram type selector")
+    start = index_html.find("function renderFmeaForm()")
+    end = index_html.find("function renderRoadmapForm()", start)
+    fmea_html = index_html[start:end] if start >= 0 and end > start else index_html
+    for required in [
+        "function renderFmeaForm()",
+        "Project / Review Info",
+        "FMEA Rows",
+        "scoreInput",
+        "RPN:",
+        "fmeaToMarkdown",
+        "normalizeFmeaRow",
+        "delete item.icon",
+        "severity",
+        "occurrence",
+        "detection",
+    ]:
+        if required not in index_html:
+            raise AssertionError(f"diagram builder FMEA UI missing {required!r}")
+    if 'fmeaField("Icon"' in fmea_html or "item.icon =" in fmea_html:
+        raise AssertionError("diagram builder FMEA UI should not expose item icon controls")
+    if "fmea_table: { rows: 12" not in index_html:
+        raise AssertionError("diagram builder FMEA UI should document the 12-row builder limit")
 
 
 def verify_diagram_builder_load_file_ui(index_html: str) -> None:

@@ -7,7 +7,7 @@ description: Generate clean, PPT-ready structured brainstorming and analysis dia
 
 Use this skill to create structured thinking diagrams for brainstorming, root-cause analysis, product design, process design, and solution exploration.
 
-Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, `diagram_type="two_by_two_matrix"`, `diagram_type="roadmap_timeline"`, and `diagram_type="fmea_table"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, two-by-two matrix, and roadmap timeline. FMEA table is core-renderer only for now; do not use the browser builder or natural-language extractor for it yet. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
+Current version supports `diagram_type="fishbone"`, `diagram_type="fault_tree"`, `diagram_type="exclusion_tree"`, `diagram_type="two_by_two_matrix"`, `diagram_type="roadmap_timeline"`, and `diagram_type="fmea_table"` as editable SVG output. Work SVGs can also be exported to PNG for sharing, and Codex-assisted natural-language drafting currently supports fishbone, fault tree, exclusion tree, two-by-two matrix, and roadmap timeline. FMEA table is supported by the core renderer, command-line tool, and browser builder; natural-language drafting is not enabled for FMEA yet. For non-technical fishbone users, prefer the double-click launcher after the draft structure exists:
 
 ```text
 鱼骨图工具.cmd
@@ -67,7 +67,7 @@ English fallback:
 roadmap_timeline_tool.cmd
 ```
 
-For a browser-based local editor that supports fishbone, fault tree, exclusion tree, two-by-two matrix, and roadmap timeline, use:
+For a browser-based local editor that supports fishbone, fault tree, exclusion tree, two-by-two matrix, roadmap timeline, and FMEA table, use:
 
 ```text
 图表编辑器.cmd

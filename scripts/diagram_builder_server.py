@@ -28,6 +28,7 @@ EXPORT_FAULT_TREE = ROOT / "scripts" / "export_fault_tree_png.py"
 EXPORT_EXCLUSION_TREE = ROOT / "scripts" / "export_exclusion_tree_png.py"
 EXPORT_TWO_BY_TWO = ROOT / "scripts" / "export_two_by_two_matrix_png.py"
 EXPORT_ROADMAP = ROOT / "scripts" / "export_roadmap_timeline_png.py"
+EXPORT_FMEA = ROOT / "scripts" / "export_fmea_table_png.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
@@ -61,6 +62,12 @@ DIAGRAMS = {
         "work": ROOT / "work" / "roadmap-timeline",
         "template": TEMPLATES / "roadmap-timeline.template.json",
         "export": EXPORT_ROADMAP,
+    },
+    "fmea_table": {
+        "label": "FMEA Table",
+        "work": ROOT / "work" / "fmea-table",
+        "template": TEMPLATES / "fmea-table.template.json",
+        "export": EXPORT_FMEA,
     },
 }
 
@@ -219,7 +226,7 @@ def request_model(payload: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
 def canonical_diagram_type(value: Any) -> str:
     diagram_type = str(value).strip().lower().replace("-", "_").replace(" ", "_")
     if diagram_type not in DIAGRAMS:
-        raise ValueError("diagram_type must be fishbone, fault_tree, exclusion_tree, two_by_two_matrix, or roadmap_timeline.")
+        raise ValueError("diagram_type must be fishbone, fault_tree, exclusion_tree, two_by_two_matrix, roadmap_timeline, or fmea_table.")
     return diagram_type
 
 
@@ -695,6 +702,77 @@ INDEX_HTML = r"""<!doctype html>
     .roadmap-field.full {
       grid-column: 1 / -1;
     }
+    .fmea-project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .fmea-row-card {
+      display: grid;
+      gap: 10px;
+    }
+    .fmea-row-top {
+      display: grid;
+      grid-template-columns: 72px minmax(180px, 1fr) minmax(240px, 1.5fr);
+      gap: 8px;
+      align-items: end;
+    }
+    .fmea-row-meta {
+      display: grid;
+      grid-template-columns: minmax(150px, 1fr) 122px 146px;
+      gap: 8px;
+    }
+    .fmea-score-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 72px) 1fr;
+      gap: 8px;
+      align-items: end;
+    }
+    .fmea-text-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .fmea-field {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+    .fmea-field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .fmea-field.full {
+      grid-column: 1 / -1;
+    }
+    .fmea-field input,
+    .fmea-field select,
+    .fmea-field textarea {
+      box-sizing: border-box;
+      min-width: 0;
+      width: 100%;
+    }
+    .fmea-score {
+      text-align: center;
+    }
+    .fmea-rpn-preview {
+      align-self: center;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    @media (max-width: 1350px) {
+      .fmea-text-grid,
+      .fmea-row-meta,
+      .fmea-project-grid {
+        grid-template-columns: 1fr;
+      }
+      .fmea-score-strip {
+        grid-template-columns: repeat(3, 72px);
+      }
+    }
     .roadmap-field label {
       display: block;
       margin-bottom: 4px;
@@ -780,7 +858,7 @@ INDEX_HTML = r"""<!doctype html>
   <header>
     <div>
       <h1>Brainstorm Diagram Builder</h1>
-      <span>Edit JSON-backed fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap diagrams without touching Markdown.</span>
+      <span>Edit JSON-backed fishbone, fault-tree, exclusion-tree, two-by-two matrix, roadmap, and FMEA diagrams without touching Markdown.</span>
     </div>
   </header>
   <main>
@@ -793,6 +871,7 @@ INDEX_HTML = r"""<!doctype html>
           <option value="exclusion_tree">Sequential Exclusion Tree</option>
           <option value="two_by_two_matrix">Two-by-Two Matrix</option>
           <option value="roadmap_timeline">Roadmap Timeline</option>
+          <option value="fmea_table">FMEA Table</option>
         </select>
       </div>
       <div class="row">
@@ -877,6 +956,7 @@ INDEX_HTML = r"""<!doctype html>
           <li>Sequential Exclusion Tree: 1 target problem, recommended 3-6 check points on one main path, each check has one Yes path and one No cause card.</li>
           <li>Two-by-Two Matrix: one preset or custom axis pair, recommended 4-20 scored items, maximum 20. X and Y scores must be 1-5, and the Decision Table shows every item.</li>
           <li>Roadmap Timeline: choose swimlane roadmap or milestone timeline, keep title and goal visible, and use table/summary panels for review-ready detail.</li>
+          <li>FMEA Table: use focused rows with S/O/D scores from 1-10. RPN is calculated from S × O × D, and the table can grow downward for dense content.</li>
           <li>Drafts below the recommended count can still render after confirmation, but may not be useful for review.</li>
         </ul>
       </div>
@@ -889,7 +969,8 @@ INDEX_HTML = r"""<!doctype html>
       fault_tree: { first: 8, recommendedFirst: 5, minFirst: 3, children: 4, nestedChildren: 4 },
       exclusion_tree: { checks: 6, minChecks: 3 },
       two_by_two_matrix: { items: 20, minItems: 4 },
-      roadmap_timeline: { minPeriods: 2, minLanes: 1, minInitiatives: 1, minMilestones: 1 }
+      roadmap_timeline: { minPeriods: 2, minLanes: 1, minInitiatives: 1, minMilestones: 1 },
+      fmea_table: { rows: 12, minRows: 3, scoreMin: 1, scoreMax: 10 }
     };
     const TWO_BY_TWO_PRESET_TEMPLATES = {
       action_priority: {
@@ -1241,6 +1322,23 @@ INDEX_HTML = r"""<!doctype html>
             requireText(errors, `Phase ${index + 1} end`, phase.end);
           });
         }
+      } else if (currentType() === "fmea_table") {
+        requireText(errors, "Title", model.title);
+        requireText(errors, "Goal", model.goal);
+        const rows = Array.isArray(model.rows) ? model.rows : [];
+        if (rows.length < 1) errors.push("FMEA table needs at least 1 row.");
+        if (rows.length > LIMITS.fmea_table.rows) errors.push(`FMEA table supports up to ${LIMITS.fmea_table.rows} rows in the builder.`);
+        rows.forEach((item, index) => {
+          requireText(errors, `FMEA row ${index + 1} id`, item.id);
+          requireText(errors, `FMEA row ${index + 1} item / function`, item.item_function);
+          requireText(errors, `FMEA row ${index + 1} failure mode`, item.failure_mode);
+          for (const key of ["severity", "occurrence", "detection"]) {
+            const score = Number(item[key]);
+            if (!Number.isFinite(score) || score < LIMITS.fmea_table.scoreMin || score > LIMITS.fmea_table.scoreMax) {
+              errors.push(`FMEA row ${index + 1} ${key} must be ${LIMITS.fmea_table.scoreMin}-${LIMITS.fmea_table.scoreMax}.`);
+            }
+          }
+        });
       }
       return errors;
     }
@@ -1281,6 +1379,11 @@ INDEX_HTML = r"""<!doctype html>
         } else if (model.preset === "milestone_timeline") {
           const milestones = Array.isArray(model.milestones) ? model.milestones : [];
           if (milestones.length > 0 && milestones.length < limits.minMilestones) warnings.push(`Milestone timeline works best with at least ${limits.minMilestones} milestone.`);
+        }
+      } else if (currentType() === "fmea_table") {
+        const rows = Array.isArray(model.rows) ? model.rows : [];
+        if (rows.length > 0 && rows.length < LIMITS.fmea_table.minRows) {
+          warnings.push(`FMEA table works best with at least ${LIMITS.fmea_table.minRows} focused rows.`);
         }
       }
       return warnings;
@@ -1467,19 +1570,35 @@ INDEX_HTML = r"""<!doctype html>
     }
 
     async function exportPng() {
+      if (!ensureValidForAction()) return;
+      if (!confirmValidationWarnings()) {
+        setStatus("Export canceled.", "");
+        return;
+      }
+      setStatus("Rendering current diagram before PNG export...", "");
+      const renderResult = await api("/api/render", {
+        method: "POST",
+        body: JSON.stringify({ diagram_type: currentType(), name: safeName(), data: model })
+      });
+      setPreviewSvg(renderResult.svg);
+      previewMeta.textContent = safeName() + ".svg";
+      rememberRecent();
+      setStatus("Exporting PNG...", "");
       const result = await api("/api/export", {
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType(), name: safeName() })
       });
-      setStatus(result.message, "ok");
+      previewMeta.textContent = safeName() + ".png";
+      setStatus(result.message + " Open the work folder to view it.", "ok");
     }
 
     async function openFolder() {
+      setStatus("Opening work folder...", "");
       const result = await api("/api/open-folder", {
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType() })
       });
-      setStatus(result.message, "ok");
+      setStatus(result.message + " If Explorer stays behind other windows, check the taskbar.", "ok");
     }
 
     function downloadText(filename, text, mimeType) {
@@ -1504,6 +1623,7 @@ INDEX_HTML = r"""<!doctype html>
       if (currentType() === "fault_tree") return faultTreeToMarkdown();
       if (currentType() === "two_by_two_matrix") return twoByTwoToMarkdown();
       if (currentType() === "roadmap_timeline") return roadmapToMarkdown();
+      if (currentType() === "fmea_table") return fmeaToMarkdown();
       return exclusionTreeToMarkdown();
     }
 
@@ -1688,6 +1808,49 @@ INDEX_HTML = r"""<!doctype html>
       for (const note of notes) lines.push(`- ${mdLine(note)}`);
     }
 
+    function fmeaToMarkdown() {
+      const project = model.project || {};
+      const header = [
+        "diagram_type: fmea_table",
+        `fmea_type: ${mdLine(model.fmea_type) || "process"}`,
+        `language: ${mdLine(model.language) || "en"}`,
+      ];
+      const lines = [
+        yamlHeader(header),
+        `# ${mdLine(model.title) || "Process FMEA"}`,
+        "",
+        `Goal: ${mdLine(model.goal) || "Identify critical risks, calculate RPN, and prioritize corrective actions."}`,
+        `Project: ${mdLine(project.name)}`,
+        `Owner: ${mdLine(project.owner)}`,
+        `Review Frequency: ${mdLine(project.review_frequency)}`,
+        `Last Review Date: ${mdLine(project.last_review_date)}`,
+      ];
+      for (const note of model.notes || []) lines.push(`Note: ${mdLine(note)}`);
+      for (const row of model.rows || []) {
+        lines.push("", `## Row ${mdLine(row.id) || "F"}`, "");
+        lines.push(`Item / Function: ${mdLine(row.item_function)}`);
+        lines.push(`Failure Mode: ${mdLine(row.failure_mode)}`);
+        writeFmeaList(lines, "Effects", row.failure_effects);
+        writeFmeaList(lines, "Causes", row.failure_causes);
+        writeFmeaList(lines, "Prevention Controls", row.prevention_controls);
+        writeFmeaList(lines, "Detection Controls", row.detection_controls);
+        lines.push(`Severity: ${mdLine(row.severity) || "5"}`);
+        lines.push(`Occurrence: ${mdLine(row.occurrence) || "4"}`);
+        lines.push(`Detection: ${mdLine(row.detection) || "4"}`);
+        writeFmeaList(lines, "Recommended Actions", row.recommended_actions);
+        lines.push(`Owner: ${mdLine(row.owner)}`);
+        lines.push(`Target Completion: ${mdLine(row.target_completion)}`);
+        lines.push(`Status: ${mdLine(row.status) || "Open"}`);
+      }
+      return lines.join("\n").replace(/\n{3,}/g, "\n\n") + "\n";
+    }
+
+    function writeFmeaList(lines, title, values) {
+      lines.push(`${title}:`);
+      const items = Array.isArray(values) ? values : textareaToList(values);
+      for (const item of items) lines.push(`- ${mdLine(item)}`);
+    }
+
     async function loadSvgIfExists() {
       try {
         const response = await fetch(`/api/svg?diagram_type=${encodeURIComponent(currentType())}&name=${encodeURIComponent(safeName())}`);
@@ -1703,6 +1866,10 @@ INDEX_HTML = r"""<!doctype html>
       model.diagram_type = currentType();
       if (model.diagram_type === "exclusion_tree") cleanExclusionTreeModel();
       if (model.diagram_type === "roadmap_timeline") delete model.subtitle;
+      if (model.diagram_type === "fmea_table") {
+        model.rows = Array.isArray(model.rows) ? model.rows : [];
+        model.rows.forEach((row, index) => normalizeFmeaRow(row, index));
+      }
     }
 
     function input(value, onInput, placeholder = "") {
@@ -1813,13 +1980,34 @@ INDEX_HTML = r"""<!doctype html>
       return wrapper;
     }
 
+    function fmeaField(labelText, control, className = "") {
+      const wrapper = document.createElement("div");
+      wrapper.className = `fmea-field ${className}`.trim();
+      const label = document.createElement("label");
+      label.textContent = labelText;
+      wrapper.append(label, control);
+      return wrapper;
+    }
+
+    function scoreInput(value, onInput, titleText) {
+      const el = input(value, value => onInput(Number(value)), "1-10");
+      el.className = "fmea-score";
+      el.type = "number";
+      el.min = "1";
+      el.max = "10";
+      el.step = "1";
+      el.title = titleText;
+      return el;
+    }
+
     function renderForm() {
       formRoot.innerHTML = "";
       if (currentType() === "fishbone") renderFishboneForm();
       else if (currentType() === "fault_tree") renderFaultTreeForm();
       else if (currentType() === "exclusion_tree") renderExclusionTreeForm();
       else if (currentType() === "two_by_two_matrix") renderTwoByTwoForm();
-      else renderRoadmapForm();
+      else if (currentType() === "roadmap_timeline") renderRoadmapForm();
+      else renderFmeaForm();
       updateValidation();
     }
 
@@ -2236,6 +2424,135 @@ INDEX_HTML = r"""<!doctype html>
       if (template.x_axis) model.x_axis = template.x_axis;
       if (template.y_axis) model.y_axis = template.y_axis;
       renderForm();
+    }
+
+    function renderFmeaForm() {
+      model.diagram_type = "fmea_table";
+      model.fmea_type = model.fmea_type || "process";
+      model.language = model.language || "en";
+      model.project = model.project && typeof model.project === "object" ? model.project : {};
+      model.rows = Array.isArray(model.rows) ? model.rows : [];
+      model.notes = Array.isArray(model.notes)
+        ? model.notes
+        : String(model.notes || "").split(/\r?\n/).map(note => note.trim()).filter(Boolean);
+
+      formRoot.appendChild(row("Title", input(model.title, value => model.title = value, "Process FMEA")));
+      formRoot.appendChild(row("Goal", input(model.goal, value => model.goal = value, "Visible FMEA goal")));
+      formRoot.appendChild(row("FMEA Type", select(model.fmea_type, ["process", "design"], value => model.fmea_type = value)));
+
+      const project = section("Project / Review Info", "Visible in the Review Info card. Owner here is the overall FMEA owner; row owner is edited per failure mode.");
+      const projectGrid = document.createElement("div");
+      projectGrid.className = "fmea-project-grid";
+      projectGrid.append(
+        fmeaField("Project", input(model.project.name, value => model.project.name = value, "Project name")),
+        fmeaField("Owner", input(model.project.owner, value => model.project.owner = value, "Overall owner")),
+        fmeaField("Review Frequency", input(model.project.review_frequency, value => model.project.review_frequency = value, "Weekly during pilot build")),
+        fmeaField("Last Review Date", input(model.project.last_review_date, value => model.project.last_review_date = value, "YYYY-MM-DD"))
+      );
+      project.appendChild(projectGrid);
+      formRoot.appendChild(project);
+
+      const limits = LIMITS.fmea_table;
+      const rows = section("FMEA Rows", `Use focused rows. S/O/D scores must be ${limits.scoreMin}-${limits.scoreMax}; RPN is calculated as S × O × D. The renderer compacts row margins first, then expands canvas height when needed.`);
+      rows.querySelector(".section-title").appendChild(button("Add Row", () => {
+        if (model.rows.length < limits.rows) {
+          model.rows.push({
+            id: `F${model.rows.length + 1}`,
+            item_function: "New item / function",
+            failure_mode: "Potential failure mode",
+            failure_effects: [],
+            failure_causes: [],
+            prevention_controls: [],
+            detection_controls: [],
+            severity: 5,
+            occurrence: 4,
+            detection: 4,
+            recommended_actions: [],
+            owner: "",
+            target_completion: "",
+            status: "Open"
+          });
+          renderForm();
+        }
+      }, model.rows.length >= limits.rows));
+      model.rows.forEach((item, index) => {
+        normalizeFmeaRow(item, index);
+        const box = roadmapCard(`Row ${item.id || index + 1}`, () => {
+          model.rows.splice(index, 1);
+          renderForm();
+        });
+        box.classList.add("fmea-row-card");
+        const top = document.createElement("div");
+        top.className = "fmea-row-top";
+        top.append(
+          fmeaField("ID", input(item.id, value => item.id = value, "F1")),
+          fmeaField("Item / Function", input(item.item_function, value => item.item_function = value, "Item / function")),
+          fmeaField("Failure Mode", input(item.failure_mode, value => item.failure_mode = value, "Potential failure mode"))
+        );
+        const meta = document.createElement("div");
+        meta.className = "fmea-row-meta";
+        meta.append(
+          fmeaField("Owner", input(item.owner, value => item.owner = value, "Owner")),
+          fmeaField("Target", input(item.target_completion, value => item.target_completion = value, "YYYY-MM-DD")),
+          fmeaField("Status", select(item.status || "Open", ["Open", "Planned", "In Progress", "Completed", "At Risk", "Delayed"], value => item.status = value))
+        );
+        const scoreStrip = document.createElement("div");
+        scoreStrip.className = "fmea-score-strip";
+        scoreStrip.append(
+          fmeaField("S", scoreInput(item.severity, value => item.severity = value, "Severity 1-10")),
+          fmeaField("O", scoreInput(item.occurrence, value => item.occurrence = value, "Occurrence 1-10")),
+          fmeaField("D", scoreInput(item.detection, value => item.detection = value, "Detection 1-10"))
+        );
+        const rpn = document.createElement("div");
+        rpn.className = "fmea-rpn-preview";
+        rpn.textContent = `RPN: ${fmeaRpn(item) || "-"}`;
+        scoreStrip.appendChild(rpn);
+
+        const textGrid = document.createElement("div");
+        textGrid.className = "fmea-text-grid";
+        textGrid.append(
+          fmeaField("Effects", textarea(listToTextarea(item.failure_effects), value => item.failure_effects = textareaToList(value))),
+          fmeaField("Causes", textarea(listToTextarea(item.failure_causes), value => item.failure_causes = textareaToList(value))),
+          fmeaField("Prevention Controls", textarea(listToTextarea(item.prevention_controls), value => item.prevention_controls = textareaToList(value))),
+          fmeaField("Detection Controls", textarea(listToTextarea(item.detection_controls), value => item.detection_controls = textareaToList(value))),
+          fmeaField("Recommended Actions", textarea(listToTextarea(item.recommended_actions), value => item.recommended_actions = textareaToList(value)), "full")
+        );
+        box.append(top, meta, scoreStrip, textGrid);
+        rows.appendChild(box);
+      });
+      formRoot.appendChild(rows);
+
+      const notes = section("Notes", "Visible in the Notes panel. Keep each note short.");
+      notes.appendChild(textarea(listToTextarea(model.notes), value => model.notes = textareaToList(value)));
+      formRoot.appendChild(notes);
+    }
+
+    function normalizeFmeaRow(item, index) {
+      item.id = item.id || `F${index + 1}`;
+      item.failure_effects = Array.isArray(item.failure_effects) ? item.failure_effects : textareaToList(item.failure_effects);
+      item.failure_causes = Array.isArray(item.failure_causes) ? item.failure_causes : textareaToList(item.failure_causes);
+      item.prevention_controls = Array.isArray(item.prevention_controls) ? item.prevention_controls : textareaToList(item.prevention_controls);
+      item.detection_controls = Array.isArray(item.detection_controls) ? item.detection_controls : textareaToList(item.detection_controls);
+      item.recommended_actions = Array.isArray(item.recommended_actions) ? item.recommended_actions : textareaToList(item.recommended_actions);
+      delete item.icon;
+    }
+
+    function fmeaRpn(item) {
+      const s = Number(item.severity);
+      const o = Number(item.occurrence);
+      const d = Number(item.detection);
+      if (![s, o, d].every(Number.isFinite)) return "";
+      return s * o * d;
+    }
+
+    function listToTextarea(value) {
+      if (Array.isArray(value)) return value.join("\n");
+      return String(value || "");
+    }
+
+    function textareaToList(value) {
+      if (Array.isArray(value)) return value;
+      return String(value || "").split(/\r?\n/).map(item => item.trim()).filter(Boolean);
     }
 
     function renderRoadmapForm() {
@@ -2688,7 +3005,9 @@ INDEX_HTML = r"""<!doctype html>
             ? "startup-checks"
             : currentType() === "two_by_two_matrix"
               ? "priority-matrix"
-              : "product-roadmap";
+              : currentType() === "roadmap_timeline"
+                ? "product-roadmap"
+                : "process-fmea";
       loadTemplate().catch(error => setStatus(error.message, "error"));
     });
     nameEl.addEventListener("input", () => updateValidation());
