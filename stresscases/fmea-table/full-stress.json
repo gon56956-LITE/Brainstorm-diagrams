@@ -2,7 +2,7 @@
   "diagram_type": "fmea_table",
   "language": "en",
   "title": "Stress FMEA: Dense Optical Module Risk Review",
-  "goal": "Verify that dense FMEA content extends the SVG height while preserving readable table typography.",
+  "goal": "Verify that dense FMEA content preserves readable table typography and expands only when content requires it.",
   "project": {
     "name": "Dense Pilot FMEA",
     "owner": "Quality Engineering",

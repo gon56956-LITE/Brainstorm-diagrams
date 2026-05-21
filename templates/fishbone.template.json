@@ -1,15 +1,19 @@
 {
   "diagram_type": "fishbone",
+  "title": "",
+  "subtitle": "",
   "topic": "Problem / Topic",
-  "output": "svg",
-  "theme": "business_simple",
   "categories": [
     {
       "name_en": "People",
       "items": [
         {
           "subcategory": "Training",
-          "items": ["Onboarding", "Skill matrix", "Certification"]
+          "items": [
+            "Onboarding",
+            "Skill matrix",
+            "Certification"
+          ]
         },
         "Role clarity",
         "Handoff quality"
@@ -17,11 +21,19 @@
     },
     {
       "name_en": "Process",
-      "items": ["Inspection", "Escalation path", "Closure speed"]
+      "items": [
+        "Inspection",
+        "Escalation path",
+        "Closure speed"
+      ]
     },
     {
       "name_en": "Tools",
-      "items": ["Calibration", "Test coverage", "Data logging"]
+      "items": [
+        "Calibration",
+        "Test coverage",
+        "Data logging"
+      ]
     },
     {
       "name_en": "Materials",
@@ -29,7 +41,10 @@
         "Supplier variation",
         {
           "subcategory": "Packaging",
-          "items": ["Shock protection", "Label accuracy"]
+          "items": [
+            "Shock protection",
+            "Label accuracy"
+          ]
         }
       ]
     }

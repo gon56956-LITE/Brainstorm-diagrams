@@ -8,6 +8,7 @@ language: en
 
 Goal: Identify critical assembly risks, calculate RPN from S/O/D scores, and prioritize corrective actions.
 Project: Optical Module Pilot Build
+Owner: Quality Engineering
 Review Frequency: Weekly during pilot build
 Last Review Date: 2026-05-21
 Note: Keep each row focused on one failure mode.
@@ -16,7 +17,6 @@ Note: Update occurrence and detection scores after corrective actions are verifi
 ## Row F1
 
 Item / Function: Optical alignment
-Icon: aperture
 Failure Mode: Coupling efficiency below target
 Effects:
 - Low output power
@@ -43,7 +43,6 @@ Status: Open
 ## Row F2
 
 Item / Function: Laser drive setup
-Icon: circuit-board
 Failure Mode: Incorrect drive current limit
 Effects:
 - Power instability
@@ -70,7 +69,6 @@ Status: In Progress
 ## Row F3
 
 Item / Function: Thermal interface assembly
-Icon: thermometer
 Failure Mode: Poor thermal contact
 Effects:
 - Higher laser temperature

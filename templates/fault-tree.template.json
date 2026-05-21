@@ -19,21 +19,20 @@
   "diagram_type": "fault_tree",
   "title": "Fault Tree Analysis",
   "subtitle": "Top Event - System Fails to Start",
+  "show_legend": true,
   "output": "svg",
   "theme": "business_simple",
-  "show_legend": true,
   "top_event": {
     "id": "T0",
-    "label": "System Fails to Start",
-    "description": "Failure occurs during cold start after overnight storage."
+    "label": "System Fails to Start"
   },
   "event_detail": {
     "title": "Event Detail",
-    "text": "Failure occurs during cold start after overnight storage.",
+    "text": "",
     "bullets": [
-      "Observed on engineering samples from batch A",
-      "Recovered only after power cycle",
-      "Impact: startup blocked",
+      "Observed during cold start after overnight storage",
+      "Scope: engineering samples from batch A",
+      "Impact: startup blocked until power cycle",
       "Review focus: identify which branch should be tested first"
     ]
   },
@@ -41,10 +40,9 @@
     "gate": "OR",
     "children": [
       {
-        "id": "1",
+        "id": 1,
         "type": "intermediate_event",
         "label": "Power Path Issue",
-        "gate": "OR",
         "children": [
           {
             "id": "1.1",
@@ -60,7 +58,6 @@
             "id": "1.3",
             "type": "intermediate_event",
             "label": "Fuse Opens Under Startup Surge",
-            "gate": "AND",
             "children": [
               {
                 "id": "1.3.1",
@@ -72,13 +69,13 @@
                 "type": "basic_event",
                 "label": "High Inrush Current"
               }
-            ]
+            ],
+            "gate": "AND"
           },
           {
             "id": "1.4",
             "type": "intermediate_event",
             "label": "Input Connector Intermittent",
-            "gate": "OR",
             "children": [
               {
                 "id": "1.4.1",
@@ -90,15 +87,16 @@
                 "type": "basic_event",
                 "label": "Harness Pin Backed Out"
               }
-            ]
+            ],
+            "gate": "OR"
           }
-        ]
+        ],
+        "gate": "OR"
       },
       {
-        "id": "2",
+        "id": 2,
         "type": "intermediate_event",
         "label": "Control Unit Issue",
-        "gate": "AND",
         "children": [
           {
             "id": "2.1",
@@ -110,13 +108,13 @@
             "type": "basic_event",
             "label": "Controller Fault"
           }
-        ]
+        ],
+        "gate": "AND"
       },
       {
-        "id": "3",
+        "id": 3,
         "type": "intermediate_event",
         "label": "Start Signal Issue",
-        "gate": "OR",
         "children": [
           {
             "id": "3.1",
@@ -133,7 +131,8 @@
             "type": "basic_event",
             "label": "Sensor Fault"
           }
-        ]
+        ],
+        "gate": "OR"
       }
     ]
   }

@@ -20,7 +20,6 @@
     {
       "id": "F1",
       "item_function": "Optical alignment",
-      "icon": "aperture",
       "failure_mode": "Coupling efficiency below target",
       "failure_effects": [
         "Low output power",
@@ -52,7 +51,6 @@
     {
       "id": "F2",
       "item_function": "Laser drive setup",
-      "icon": "circuit-board",
       "failure_mode": "Incorrect drive current limit",
       "failure_effects": [
         "Power instability",
@@ -84,7 +82,6 @@
     {
       "id": "F3",
       "item_function": "Thermal interface assembly",
-      "icon": "thermometer",
       "failure_mode": "Poor thermal contact",
       "failure_effects": [
         "Higher laser temperature",

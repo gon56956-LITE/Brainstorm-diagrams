@@ -8,6 +8,7 @@ language: en
 
 Goal: Prioritize assembly and test risks that may reduce first-pass yield.
 Project: Pilot Yield Recovery
+Owner: Quality Engineering
 Review Frequency: Weekly
 Last Review Date: 2026-05-21
 Note: RPN is calculated as S x O x D.

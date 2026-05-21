@@ -127,6 +127,8 @@ FMEA_TESTCASE_PAIRS = [
     ("fmea.input.example.json", "fmea.output.example.svg"),
     ("fmea.input.example.md", "fmea.output.md.svg"),
     ("fmea.long-text.example.json", "fmea.long-text.output.svg"),
+    ("fmea.density-8.example.json", "fmea.density-8.output.svg"),
+    ("fmea.density-12.example.json", "fmea.density-12.output.svg"),
 ]
 
 TWO_BY_TWO_TEMPLATE_PRESETS = [
@@ -731,7 +733,47 @@ def verify_fmea_table_svg_basics(path: Path) -> None:
     ]
     if len(grid_lines) < 18:
         raise AssertionError(f"{path.name}: FMEA table grid should draw explicit overlay lines")
+    verify_fmea_table_body_text_clearance(root, path.name)
     verify_fmea_table_rects_within_canvas(root, path.name)
+
+
+def verify_fmea_table_body_text_clearance(root: ET.Element, label: str) -> None:
+    main_table = next((element for element in root.iter() if element.attrib.get("id") == "fmea-main-table"), None)
+    if main_table is None:
+        raise AssertionError(f"{label}: missing FMEA main table")
+    horizontal_lines = []
+    for element in main_table.iter():
+        if not element.tag.endswith("line") or element.attrib.get("class") != "fmea-grid-line":
+            continue
+        y1 = float(element.attrib.get("y1", "0"))
+        y2 = float(element.attrib.get("y2", "0"))
+        x1 = float(element.attrib.get("x1", "0"))
+        x2 = float(element.attrib.get("x2", "0"))
+        if abs(y1 - y2) < 0.01 and x2 - x1 > 1000:
+            horizontal_lines.append(y1)
+    horizontal_lines = sorted(set(horizontal_lines))
+    if len(horizontal_lines) < 3:
+        raise AssertionError(f"{label}: missing FMEA body row grid lines")
+    header_bottom = horizontal_lines[1]
+    for text in main_table.iter():
+        if not text.tag.endswith("text"):
+            continue
+        text_y_raw = text.attrib.get("y")
+        text_x_raw = text.attrib.get("x")
+        if text_y_raw is None or text_x_raw is None:
+            continue
+        text_y = float(text_y_raw)
+        text_x = float(text_x_raw)
+        if text_y <= header_bottom or not (16 <= text_x <= 1904):
+            continue
+        row_top = max((line_y for line_y in horizontal_lines if line_y <= text_y), default=None)
+        row_bottom = min((line_y for line_y in horizontal_lines if line_y > text_y), default=None)
+        if row_top is None or row_bottom is None:
+            continue
+        if text_y - row_top < 14:
+            raise AssertionError(f"{label}: FMEA body text is too close to row top grid at y={text_y}")
+        if row_bottom - text_y < 5:
+            raise AssertionError(f"{label}: FMEA body text is too close to row bottom grid at y={text_y}")
 
 
 def verify_fmea_table_rects_within_canvas(root: ET.Element, label: str) -> None:
@@ -2100,11 +2142,13 @@ def verify_templates() -> None:
 
     fmea_md_data = parse_input(fmea_md_template)
     verify_fmea_template_structure(fmea_md_data, fmea_md_template.name)
+    verify_fmea_markdown_template_guidance(fmea_md_template, fmea_md_data)
 
     fmea_json_data = json.loads(fmea_json_template.read_text(encoding="utf-8"))
     if not isinstance(fmea_json_data, dict):
         raise AssertionError(f"{fmea_json_template.name}: JSON template must be an object")
     verify_fmea_template_structure(fmea_json_data, fmea_json_template.name)
+    verify_fmea_json_template_guidance(fmea_json_template, fmea_json_data)
 
     pid = os.getpid()
     template_outputs = [
@@ -2331,6 +2375,11 @@ def verify_two_by_two_template_structure(data: dict[str, object], label: str) ->
             raise AssertionError(f"{label}: item {index} must include id and name")
         if str(item.get("notes", item.get("note", ""))).strip():
             raise AssertionError(f"{label}: template item {index} should not include non-rendered item-level notes")
+        if label.endswith(".json"):
+            allowed_item_keys = {"id", "name", "x_score", "y_score"}
+            extra_item_keys = set(item) - allowed_item_keys
+            if extra_item_keys:
+                raise AssertionError(f"{label}: item {index} includes non-rendered fields: {sorted(extra_item_keys)}")
 
 
 def verify_two_by_two_template_guidance(path: Path, data: dict[str, object]) -> None:
@@ -2399,6 +2448,31 @@ def verify_fmea_template_structure(data: dict[str, object], label: str) -> None:
         for required in ["item_function", "failure_mode", "severity", "occurrence", "detection", "recommended_actions"]:
             if required not in row:
                 raise AssertionError(f"{label}: row {index} missing {required}")
+
+
+def verify_fmea_markdown_template_guidance(template_path: Path, data: dict[str, object]) -> None:
+    text = template_path.read_text(encoding="utf-8")
+    if re.search(r"(?im)^\s*Icon\s*:", text):
+        raise AssertionError(f"{template_path.name}: Markdown template should not ask for Icon when item badges are not rendered")
+    project = data.get("project")
+    if not isinstance(project, dict) or not str(project.get("owner", "")).strip():
+        raise AssertionError(f"{template_path.name}: Markdown template should include top-level Owner for the Review Info card")
+
+
+def verify_fmea_json_template_guidance(template_path: Path, data: dict[str, object]) -> None:
+    rows = data.get("rows")
+    if not isinstance(rows, list):
+        raise AssertionError(f"{template_path.name}: JSON template must include rows")
+    for index, row in enumerate(rows, start=1):
+        if not isinstance(row, dict):
+            raise AssertionError(f"{template_path.name}: row {index} must be an object")
+        if not str(row.get("id", "")).strip():
+            raise AssertionError(f"{template_path.name}: row {index} should include the same visible row ID as the Markdown section")
+        if "icon" in row:
+            raise AssertionError(f"{template_path.name}: row {index} should not include Icon when item badges are not rendered")
+    project = data.get("project")
+    if not isinstance(project, dict) or not str(project.get("owner", "")).strip():
+        raise AssertionError(f"{template_path.name}: JSON template should include project.owner for the Review Info card")
 
 
 def verify_no_tmp_files(path: Path) -> None:

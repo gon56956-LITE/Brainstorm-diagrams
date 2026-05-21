@@ -947,8 +947,8 @@ def verify_fmea_table_full_stress() -> None:
         raise AssertionError("fmea-table full-stress.svg root is not svg")
     width = int(float(root.attrib["width"]))
     height = int(float(root.attrib["height"]))
-    if width < 1920 or height <= 1080:
-        raise AssertionError(f"fmea-table full-stress.svg should expand downward from 1920x1080, got {width}x{height}")
+    if width < 1920 or height < 1080:
+        raise AssertionError(f"fmea-table full-stress.svg should not shrink below 1920x1080, got {width}x{height}")
     groups_by_id = {element.attrib.get("id"): element for element in root.iter() if element.tag.endswith("g")}
     if "fmea-main-table" not in groups_by_id:
         raise AssertionError("fmea-table full-stress.svg missing main table")

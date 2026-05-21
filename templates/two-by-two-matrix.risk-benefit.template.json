@@ -3,8 +3,10 @@
   "preset": "risk_benefit",
   "title": "Risk-Benefit Matrix",
   "language": "auto",
-  "theme": "business_simple",
-  "score_scale": {"min": 1, "max": 5},
+  "score_scale": {
+    "min": 1,
+    "max": 5
+  },
   "_template_guidance": {
     "item_limit": "Use 4-20 items. Maximum supported item count is 20.",
     "score_range": "x_score and y_score must be numbers from 1 to 5. 1 means Low, 5 means High; scores 3-5 are placed on the High side.",
@@ -12,12 +14,33 @@
     "visible_notes": "Use top-level notes only when you want a visible Notes area. Do not add item-level notes."
   },
   "items": [
-    {"id": "O1", "name": "Switch supplier", "x_score": 4, "y_score": 5},
-    {"id": "O2", "name": "Minor process update", "x_score": 1, "y_score": 2},
-    {"id": "O3", "name": "Add automated inspection", "x_score": 3, "y_score": 4},
-    {"id": "O4", "name": "Skip incoming validation", "x_score": 5, "y_score": 1}
+    {
+      "id": "O1",
+      "name": "Switch supplier",
+      "x_score": 4,
+      "y_score": 5
+    },
+    {
+      "id": "O2",
+      "name": "Minor process update",
+      "x_score": 1,
+      "y_score": 2
+    },
+    {
+      "id": "O3",
+      "name": "Add automated inspection",
+      "x_score": 3,
+      "y_score": 4
+    },
+    {
+      "id": "O4",
+      "name": "Skip incoming validation",
+      "x_score": 5,
+      "y_score": 1
+    }
   ],
   "show_side_table": true,
   "show_legend": true,
-  "output": "svg"
+  "show_subtitle": false,
+  "notes": ""
 }

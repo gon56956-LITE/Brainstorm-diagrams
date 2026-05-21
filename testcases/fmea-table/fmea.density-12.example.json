@@ -1,0 +1,27 @@
+{
+  "diagram_type": "fmea_table",
+  "language": "en",
+  "title": "FMEA Density Review: 12 Dense Rows",
+  "goal": "Review dense row height when many concise FMEA rows are present.",
+  "project": {
+    "name": "FMEA Dense Review",
+    "owner": "Quality Engineering",
+    "review_frequency": "Weekly",
+    "last_review_date": "2026-05-21"
+  },
+  "rows": [
+    {"id": "D1", "item_function": "Optical alignment", "failure_mode": "Low coupling", "failure_effects": ["Low power"], "failure_causes": ["Fixture drift"], "prevention_controls": ["Fixture check"], "detection_controls": ["Power test"], "severity": 8, "occurrence": 4, "detection": 5, "recommended_actions": ["Audit fixture"], "owner": "PE", "target_completion": "2026-06-05", "status": "Open"},
+    {"id": "D2", "item_function": "Laser drive", "failure_mode": "Wrong current", "failure_effects": ["Power drift"], "failure_causes": ["Setup error"], "prevention_controls": ["Setup lock"], "detection_controls": ["Current log"], "severity": 7, "occurrence": 4, "detection": 4, "recommended_actions": ["Audit setup"], "owner": "TE", "target_completion": "2026-06-06", "status": "In Progress"},
+    {"id": "D3", "item_function": "Thermal contact", "failure_mode": "High resistance", "failure_effects": ["Hot device"], "failure_causes": ["TIM gap"], "prevention_controls": ["Torque control"], "detection_controls": ["Thermal check"], "severity": 8, "occurrence": 3, "detection": 5, "recommended_actions": ["Add thermal gate"], "owner": "ME", "target_completion": "2026-06-10", "status": "Planned"},
+    {"id": "D4", "item_function": "Connector mating", "failure_mode": "Loose mating", "failure_effects": ["Link drop"], "failure_causes": ["Retention variation"], "prevention_controls": ["Retention spec"], "detection_controls": ["Visual check"], "severity": 7, "occurrence": 3, "detection": 6, "recommended_actions": ["Add gauge"], "owner": "QA", "target_completion": "2026-06-12", "status": "Open"},
+    {"id": "D5", "item_function": "Firmware version", "failure_mode": "Wrong release", "failure_effects": ["Unstable behavior"], "failure_causes": ["Manual selection"], "prevention_controls": ["Checklist"], "detection_controls": ["Version readback"], "severity": 6, "occurrence": 3, "detection": 3, "recommended_actions": ["Lock release"], "owner": "FW", "target_completion": "2026-06-08", "status": "Completed"},
+    {"id": "D6", "item_function": "Inspection criteria", "failure_mode": "Inconsistent judgment", "failure_effects": ["False rework"], "failure_causes": ["Examples missing"], "prevention_controls": ["Criteria guide"], "detection_controls": ["QA audit"], "severity": 4, "occurrence": 4, "detection": 4, "recommended_actions": ["Add examples"], "owner": "QA", "target_completion": "2026-06-09", "status": "Open"},
+    {"id": "D7", "item_function": "Packing cap", "failure_mode": "Cap missing", "failure_effects": ["Connector exposure"], "failure_causes": ["Checklist gap"], "prevention_controls": ["Packing SOP"], "detection_controls": ["Outgoing audit"], "severity": 5, "occurrence": 2, "detection": 4, "recommended_actions": ["Add checklist"], "owner": "MFG", "target_completion": "2026-06-07", "status": "Planned"},
+    {"id": "D8", "item_function": "Label data", "failure_mode": "Wrong data", "failure_effects": ["Shipment hold"], "failure_causes": ["Manual entry"], "prevention_controls": ["Template lock"], "detection_controls": ["Final check"], "severity": 3, "occurrence": 3, "detection": 3, "recommended_actions": ["Lock barcode source"], "owner": "QA", "target_completion": "2026-06-04", "status": "Open"},
+    {"id": "D9", "item_function": "ESD handling", "failure_mode": "Latent damage", "failure_effects": ["Reliability risk"], "failure_causes": ["Grounding gap"], "prevention_controls": ["ESD audit"], "detection_controls": ["Station check"], "severity": 8, "occurrence": 2, "detection": 7, "recommended_actions": ["Audit grounding"], "owner": "QA", "target_completion": "2026-06-14", "status": "Open"},
+    {"id": "D10", "item_function": "Test fixture", "failure_mode": "Bad contact", "failure_effects": ["False fail"], "failure_causes": ["Socket wear"], "prevention_controls": ["PM schedule"], "detection_controls": ["Golden unit"], "severity": 5, "occurrence": 4, "detection": 4, "recommended_actions": ["Add socket PM"], "owner": "TE", "target_completion": "2026-06-13", "status": "In Progress"},
+    {"id": "D11", "item_function": "Cleaning process", "failure_mode": "Residue remains", "failure_effects": ["Optical loss"], "failure_causes": ["Solvent age"], "prevention_controls": ["Bath control"], "detection_controls": ["Microscope check"], "severity": 6, "occurrence": 3, "detection": 5, "recommended_actions": ["Track solvent life"], "owner": "MFG", "target_completion": "2026-06-11", "status": "Open"},
+    {"id": "D12", "item_function": "Database upload", "failure_mode": "Missing record", "failure_effects": ["Traceability gap"], "failure_causes": ["Network drop"], "prevention_controls": ["Retry rule"], "detection_controls": ["Upload audit"], "severity": 4, "occurrence": 3, "detection": 3, "recommended_actions": ["Add retry log"], "owner": "IT", "target_completion": "2026-06-15", "status": "Planned"}
+  ],
+  "notes": ["Twelve concise rows should use dense row density before expanding canvas."]
+}

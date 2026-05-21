@@ -1,6 +1,7 @@
 {
   "diagram_type": "exclusion_tree",
   "title": "Sequential Exclusion Tree",
+  "subtitle": "",
   "problem": {
     "text_en": "System Fails to Start"
   },
@@ -13,10 +14,9 @@
       "Stop when a failed check identifies a likely root cause"
     ]
   },
-  "theme": "business_simple",
   "checks": [
     {
-      "id": "1",
+      "id": 1,
       "text_en": "Power Input OK?",
       "fail_conclusion": {
         "text_en": "No Power Input",
@@ -24,21 +24,21 @@
       }
     },
     {
-      "id": "2",
+      "id": 2,
       "text_en": "Power Module Output OK?",
       "fail_conclusion": {
         "text_en": "Power Module Fault"
       }
     },
     {
-      "id": "3",
+      "id": 3,
       "text_en": "Control Board OK?",
       "fail_conclusion": {
         "text_en": "Control Board Fault"
       }
     },
     {
-      "id": "4",
+      "id": 4,
       "text_en": "Start Signal OK?",
       "fail_conclusion": {
         "text_en": "Start Signal Issue"
@@ -49,6 +49,5 @@
     "text_en": "No issue found in this path. Consider other rare causes or deeper analysis."
   },
   "show_legend": true,
-  "show_how_to_use": true,
-  "output": "svg"
+  "show_how_to_use": true
 }

@@ -3,8 +3,10 @@
   "preset": "action_priority",
   "title": "Action Priority Matrix",
   "language": "auto",
-  "theme": "business_simple",
-  "score_scale": {"min": 1, "max": 5},
+  "score_scale": {
+    "min": 1,
+    "max": 5
+  },
   "_template_guidance": {
     "item_limit": "Use 4-20 items. Maximum supported item count is 20.",
     "score_range": "x_score and y_score must be numbers from 1 to 5. 1 means Low, 5 means High; scores 3-5 are placed on the High side.",
@@ -12,13 +14,39 @@
     "visible_notes": "Use top-level notes only when you want a visible Notes area. Do not add item-level notes."
   },
   "items": [
-    {"id": "A1", "name": "Automate weekly report", "x_score": 2, "y_score": 5, "owner": "Ops"},
-    {"id": "A2", "name": "Redesign approval workflow", "x_score": 5, "y_score": 5, "owner": "Process"},
-    {"id": "A3", "name": "Standardize checklist", "x_score": 1, "y_score": 3, "owner": "Quality"},
-    {"id": "A4", "name": "Build custom dashboard", "x_score": 5, "y_score": 2, "owner": "IT"},
-    {"id": "A5", "name": "Update training material", "x_score": 2, "y_score": 3, "owner": "Training"}
+    {
+      "id": "A1",
+      "name": "Automate weekly report",
+      "x_score": 2,
+      "y_score": 5
+    },
+    {
+      "id": "A2",
+      "name": "Redesign approval workflow",
+      "x_score": 5,
+      "y_score": 5
+    },
+    {
+      "id": "A3",
+      "name": "Standardize checklist",
+      "x_score": 1,
+      "y_score": 3
+    },
+    {
+      "id": "A4",
+      "name": "Build custom dashboard",
+      "x_score": 5,
+      "y_score": 2
+    },
+    {
+      "id": "A5",
+      "name": "Update training material",
+      "x_score": 2,
+      "y_score": 3
+    }
   ],
   "show_side_table": true,
   "show_legend": true,
-  "output": "svg"
+  "show_subtitle": false,
+  "notes": ""
 }

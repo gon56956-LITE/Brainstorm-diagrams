@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html
+import math
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -43,6 +44,24 @@ class Column:
     label: str
     width: int
     align: str = "left"
+
+
+@dataclass(frozen=True)
+class DensityProfile:
+    name: str
+    min_row_h: int
+    max_row_h: int
+    vertical_padding: int
+    line_h: int
+    text_font: float
+    item_font: float
+
+
+DENSITY_PROFILES = {
+    "normal": DensityProfile("normal", 88, 190, 28, 16, 12.5, 13),
+    "compact": DensityProfile("compact", 74, 172, 22, 15, 12.5, 13),
+    "dense": DensityProfile("dense", 64, 156, 16, 14, 12, 12.5),
+}
 
 
 COLUMNS = [
@@ -195,6 +214,8 @@ def parse_fmea_table_markdown(text: str) -> dict[str, Any]:
                 notes.append(value)
             elif canonical.startswith("project."):
                 project[canonical.split(".", 1)[1]] = value
+            elif current is None and canonical == "owner":
+                project["owner"] = value
             elif current is not None and canonical:
                 if canonical in LIST_FIELDS:
                     current[canonical] = split_inline_list(value)
@@ -456,7 +477,8 @@ def render_svg(data: dict[str, Any]) -> str:
     table_x = 16
     table_y = 154
     header_h = 62
-    row_heights = [measure_row_height(row) for row in rows]
+    density = density_for_rows(len(rows))
+    row_heights = [measure_row_height(row, density) for row in rows]
     table_h = header_h + sum(row_heights)
     bottom_y = table_y + table_h + 18
     bottom_h = 128
@@ -468,7 +490,7 @@ def render_svg(data: dict[str, Any]) -> str:
     ]
     render_title(parts, data)
     render_top_panels(parts, data)
-    render_main_table(parts, data, table_x, table_y, header_h, row_heights)
+    render_main_table(parts, data, table_x, table_y, header_h, row_heights, density)
     render_bottom_panels(parts, data, bottom_y, bottom_h)
     parts.append("</g>")
     parts.append("</svg>")
@@ -525,7 +547,15 @@ def render_panel(parts: list[str], x: int, y: int, w: int, h: int, title: str, l
     parts.append("</g>")
 
 
-def render_main_table(parts: list[str], data: dict[str, Any], x: int, y: int, header_h: int, row_heights: list[int]) -> None:
+def render_main_table(
+    parts: list[str],
+    data: dict[str, Any],
+    x: int,
+    y: int,
+    header_h: int,
+    row_heights: list[int],
+    density: DensityProfile,
+) -> None:
     parts.append(f'<g id="fmea-main-table" class="fmea-main-table">')
     parts.append(f'<rect x="{x}" y="{y}" width="{TABLE_W}" height="{header_h + sum(row_heights)}" fill="#FFFFFF" stroke="{GRID}" stroke-width="1.4"/>')
     parts.append(f'<rect x="{x}" y="{y}" width="{TABLE_W}" height="{header_h}" fill="{HEADER_FILL}"/>')
@@ -540,7 +570,7 @@ def render_main_table(parts: list[str], data: dict[str, Any], x: int, y: int, he
         row_h = row_heights[index]
         fill = ROW_ALT if index % 2 else "#FFFFFF"
         parts.append(f'<rect x="{x}" y="{cursor_y}" width="{TABLE_W}" height="{row_h}" fill="{fill}"/>')
-        render_table_row(parts, row, x, cursor_y, row_h)
+        render_table_row(parts, row, x, cursor_y, row_h, density)
         cursor_y += row_h
     render_table_grid(parts, x, y, header_h, row_heights)
     parts.append("</g>")
@@ -569,7 +599,7 @@ def header_label(column: Column, language: str) -> str:
     return column.label
 
 
-def render_table_row(parts: list[str], row: dict[str, Any], x: int, y: int, h: int) -> None:
+def render_table_row(parts: list[str], row: dict[str, Any], x: int, y: int, h: int, density: DensityProfile) -> None:
     cursor_x = x
     for column in COLUMNS:
         content = row.get(column.key)
@@ -578,9 +608,9 @@ def render_table_row(parts: list[str], row: dict[str, Any], x: int, y: int, h: i
         if column.key == "rpn":
             render_rpn_cell(parts, row, cell_x, y, cell_w, h)
         elif column.key == "item_function":
-            render_item_cell(parts, row, cell_x, y, cell_w, h)
+            render_item_cell(parts, row, cell_x, y, cell_w, h, density)
         elif column.key == "status":
-            render_status_cell(parts, collapse(content), cell_x, y, cell_w, h)
+            render_status_cell(parts, collapse(content), cell_x, y, cell_w, h, density)
         elif column.key in {"severity", "occurrence", "detection"}:
             render_score_cell(parts, content, cell_x, y, cell_w, h)
         elif column.key in {"owner", "target_completion"}:
@@ -590,18 +620,23 @@ def render_table_row(parts: list[str], row: dict[str, Any], x: int, y: int, h: i
             parts.append(f'<text x="{cell_x + cell_w / 2:.1f}" y="{y + h / 2 + 5:.1f}" font-size="15" font-weight="700" text-anchor="middle">{esc(value)}</text>')
         else:
             lines = content_lines(content)
-            render_bulleted_cell(parts, lines, cell_x + 10, y + 18, cell_w - 20, h - 24)
+            block_h = measure_bulleted_block_height(lines, cell_w - 20, density)
+            start_y = centered_baseline_start(y, h, block_h, density.text_font)
+            render_bulleted_cell(parts, lines, cell_x + 10, start_y, cell_w - 20, y + h - 8, density)
         cursor_x += cell_w
 
 
-def render_item_cell(parts: list[str], row: dict[str, Any], x: int, y: int, w: int, h: int) -> None:
+def render_item_cell(parts: list[str], row: dict[str, Any], x: int, y: int, w: int, h: int, density: DensityProfile) -> None:
     icon = row["icon"] or icon_for_text(row["item_function"])
     color = icon_color(icon)
-    parts.append(f'<rect x="{x + 10}" y="{y + 18}" width="4" height="{max(44, min(76, h - 36))}" rx="2" fill="{color}"/>')
-    parts.append(f'<text x="{x + 24}" y="{y + 34}" font-size="12" fill="{MUTED}" font-weight="700">{esc(row["id"])}</text>')
-    lines = wrap_text(row["item_function"], chars_for_width(w - 34, 13), max_lines=4)
+    lines = wrap_text(row["item_function"], chars_for_width(w - 34, density.item_font), max_lines=4)
+    block_h = measure_item_block_height(lines, density)
+    block_top = y + max(8, (h - block_h) / 2)
+    stripe_h = max(34, min(70, block_h + 2))
+    parts.append(f'<rect x="{x + 10}" y="{block_top - 2:.1f}" width="4" height="{stripe_h:.1f}" rx="2" fill="{color}"/>')
+    parts.append(f'<text x="{x + 24}" y="{block_top + 12:.1f}" font-size="12" fill="{MUTED}" font-weight="700">{esc(row["id"])}</text>')
     for index, line in enumerate(lines):
-        parts.append(f'<text x="{x + 24}" y="{y + 56 + index * 17}" font-size="13" fill="{TEXT}" font-weight="700">{esc(line)}</text>')
+        parts.append(f'<text x="{x + 24}" y="{block_top + 34 + index * density.line_h:.1f}" font-size="{density.item_font:g}" fill="{TEXT}" font-weight="700">{esc(line)}</text>')
 
 
 def render_score_cell(parts: list[str], value: Any, x: int, y: int, w: int, h: int) -> None:
@@ -627,7 +662,7 @@ def render_owner_target_cell(parts: list[str], value: str, x: int, y: int, w: in
         parts.append(f'<text x="{x + w / 2:.1f}" y="{start_y + index * line_gap:.1f}" font-size="12.5" font-weight="500" fill="{TEXT}" text-anchor="middle">{esc(line)}</text>')
 
 
-def render_status_cell(parts: list[str], status: str, x: int, y: int, w: int, h: int) -> None:
+def render_status_cell(parts: list[str], status: str, x: int, y: int, w: int, h: int, density: DensityProfile) -> None:
     normalized = status.lower()
     if "closed" in normalized or "done" in normalized or "complete" in normalized:
         glyph, color = "check", LOW_STROKE
@@ -648,10 +683,12 @@ def render_status_cell(parts: list[str], status: str, x: int, y: int, w: int, h:
         glyph, color = "calendar", "#2B6CBF"
         label = status or "Open"
     cx = x + w / 2
-    cy = y + h / 2 - 18
+    label_lines = wrap_text(label, chars_for_width(w - 20, 11.5), max_lines=2)
+    block_h = 26 + 14 + len(label_lines) * 13
+    cy = y + (h - block_h) / 2 + 13
     parts.append(f'<g class="fmea-status-badge" data-status="{esc(status or "Open")}">')
     render_status_symbol(parts, glyph, cx, cy, color)
-    render_wrapped_text(parts, label, x + 10, cy + 34, w - 20, 11.5, TEXT, "700", max_lines=2, align="center")
+    render_wrapped_text(parts, label, x + 10, cy + 30, w - 20, 11.5, TEXT, "700", max_lines=2, align="center")
     parts.append("</g>")
 
 
@@ -705,22 +742,30 @@ def content_lines(value: Any) -> list[str]:
     return [text] if text else []
 
 
-def render_bulleted_cell(parts: list[str], lines: list[str], x: float, y: float, w: float, max_h: float) -> None:
+def render_bulleted_cell(
+    parts: list[str],
+    lines: list[str],
+    x: float,
+    y: float,
+    w: float,
+    bottom_y: float,
+    density: DensityProfile,
+) -> None:
     cursor_y = y
     for item_index, item in enumerate(lines):
-        wrapped = wrap_text(item, chars_for_width(w - 12), max_lines=3)
+        wrapped = wrap_text(item, chars_for_width(w - 12, density.text_font), max_lines=3)
         for line_index, line in enumerate(wrapped):
-            if cursor_y > y + max_h:
+            if cursor_y > bottom_y:
                 return
             if line_index == 0 and len(lines) > 1:
                 parts.append(f'<circle cx="{x + 3}" cy="{cursor_y - 4}" r="2.4" fill="{NAVY}"/>')
                 text_x = x + 12
             else:
                 text_x = x + (12 if len(lines) > 1 else 0)
-            parts.append(f'<text x="{text_x:.1f}" y="{cursor_y:.1f}" font-size="12.5" fill="{TEXT}">{esc(line)}</text>')
-            cursor_y += 16
+            parts.append(f'<text x="{text_x:.1f}" y="{cursor_y:.1f}" font-size="{density.text_font:g}" fill="{TEXT}">{esc(line)}</text>')
+            cursor_y += density.line_h
         if item_index < len(lines) - 1:
-            cursor_y += 3
+            cursor_y += 2
 
 
 def render_bottom_panels(parts: list[str], data: dict[str, Any], y: int, h: int) -> None:
@@ -770,21 +815,50 @@ def labels(language: str) -> dict[str, str]:
     return LABELS["zh"] if language == "zh" else LABELS["en"]
 
 
-def measure_row_height(row: dict[str, Any]) -> int:
-    max_lines = 3
+def density_for_rows(row_count: int) -> DensityProfile:
+    if row_count > 10:
+        return DENSITY_PROFILES["dense"]
+    if row_count > 5:
+        return DENSITY_PROFILES["compact"]
+    return DENSITY_PROFILES["normal"]
+
+
+def measure_row_height(row: dict[str, Any], density: DensityProfile) -> int:
+    max_block_h = 0.0
     for column in COLUMNS:
         if column.key in {"severity", "occurrence", "detection", "rpn", "status"}:
-            lines = 1
+            block_h = 44
         elif column.key == "item_function":
-            lines = 1 + len(wrap_text(row["item_function"], chars_for_width(column.width - 62), max_lines=4))
+            lines = wrap_text(row["item_function"], chars_for_width(column.width - 34, density.item_font), max_lines=4)
+            block_h = measure_item_block_height(lines, density)
+        elif column.key in {"owner", "target_completion"}:
+            lines = compact_cell_lines(collapse(row.get(column.key)), chars_for_width(column.width - 14, 12.5), max_lines=2)
+            block_h = max(1, len(lines)) * 16
         else:
-            lines = 0
-            for item in content_lines(row.get(column.key)):
-                lines += len(wrap_text(item, chars_for_width(column.width - 32), max_lines=3))
-                lines += 1
-            lines = max(1, lines)
-        max_lines = max(max_lines, lines)
-    return min(190, max(96, 34 + max_lines * 16))
+            block_h = measure_bulleted_block_height(content_lines(row.get(column.key)), column.width - 20, density)
+        max_block_h = max(max_block_h, block_h)
+    natural_h = math.ceil(max_block_h + density.vertical_padding)
+    return min(density.max_row_h, max(density.min_row_h, natural_h))
+
+
+def measure_item_block_height(lines: list[str], density: DensityProfile) -> float:
+    return 39 + max(0, len(lines) - 1) * density.line_h
+
+
+def measure_bulleted_block_height(lines: list[str], width: float, density: DensityProfile) -> float:
+    if not lines:
+        return density.line_h
+    rendered_lines = 0
+    gaps = 0
+    for item_index, item in enumerate(lines):
+        rendered_lines += len(wrap_text(item, chars_for_width(width - 12, density.text_font), max_lines=3))
+        if item_index < len(lines) - 1:
+            gaps += 2
+    return max(1, rendered_lines) * density.line_h + gaps
+
+
+def centered_baseline_start(y: float, h: float, block_h: float, font_size: float) -> float:
+    return y + max(8, (h - block_h) / 2) + font_size
 
 
 def render_wrapped_text(

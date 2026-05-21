@@ -3,8 +3,10 @@
   "preset": "value_feasibility",
   "title": "Feature Screening Matrix",
   "language": "auto",
-  "theme": "business_simple",
-  "score_scale": {"min": 1, "max": 5},
+  "score_scale": {
+    "min": 1,
+    "max": 5
+  },
   "_template_guidance": {
     "item_limit": "Use 4-20 items. Maximum supported item count is 20.",
     "score_range": "x_score and y_score must be numbers from 1 to 5. 1 means Low, 5 means High; scores 3-5 are placed on the High side.",
@@ -12,12 +14,33 @@
     "visible_notes": "Use top-level notes only when you want a visible Notes area. Do not add item-level notes."
   },
   "items": [
-    {"id": "F1", "name": "Auto calibration", "x_score": 4, "y_score": 5},
-    {"id": "F2", "name": "AI optimization mode", "x_score": 2, "y_score": 5},
-    {"id": "F3", "name": "New color theme", "x_score": 5, "y_score": 2},
-    {"id": "F4", "name": "Legacy protocol support", "x_score": 1, "y_score": 1}
+    {
+      "id": "F1",
+      "name": "Auto calibration",
+      "x_score": 4,
+      "y_score": 5
+    },
+    {
+      "id": "F2",
+      "name": "AI optimization mode",
+      "x_score": 2,
+      "y_score": 5
+    },
+    {
+      "id": "F3",
+      "name": "New color theme",
+      "x_score": 5,
+      "y_score": 2
+    },
+    {
+      "id": "F4",
+      "name": "Legacy protocol support",
+      "x_score": 1,
+      "y_score": 1
+    }
   ],
   "show_side_table": true,
   "show_legend": true,
-  "output": "svg"
+  "show_subtitle": false,
+  "notes": ""
 }
