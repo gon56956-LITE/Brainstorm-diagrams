@@ -454,7 +454,7 @@ def render_svg(data: dict[str, Any]) -> str:
     rows = data["rows"]
     language = data["language"]
     table_x = 16
-    table_y = 176
+    table_y = 154
     header_h = 62
     row_heights = [measure_row_height(row) for row in rows]
     table_h = header_h + sum(row_heights)
@@ -485,34 +485,34 @@ def svg_open(width: int, height: int) -> str:
 def render_title(parts: list[str], data: dict[str, Any]) -> None:
     label = labels(data["language"])
     parts.append(f'<text x="{MARGIN_X}" y="54" font-size="34" font-weight="700">{esc(data["title"])}</text>')
-    goal_lines = wrap_text(f"{label['goal']}: {data['goal']}", 86, max_lines=2)
+    goal_lines = wrap_text(f"{label['goal']}: {data['goal']}", 116, max_lines=2)
     for idx, line in enumerate(goal_lines):
         parts.append(f'<text x="{MARGIN_X}" y="{96 + idx * 24}" font-size="17" fill="{MUTED}">{esc(line)}</text>')
 
 
 def render_top_panels(parts: list[str], data: dict[str, Any]) -> None:
     label = labels(data["language"])
-    render_rating_scale(parts, 900, 22, 992, 126, label["rating"])
+    render_rating_scale(parts, 1048, 22, 844, 96, label["rating"])
 
 
 def render_rating_scale(parts: list[str], x: int, y: int, w: int, h: int, title: str) -> None:
     parts.append(f'<g id="fmea-rating-scale" class="fmea-panel"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="10" fill="{PANEL_FILL}" stroke="#8DA9CC" stroke-width="1.5"/>')
     parts.append(f'<text x="{x + 18}" y="{y + 28}" font-size="17" font-weight="700">{esc(title)} (1-10)</text>')
     metrics = [
-        ("S", "Severity", "Impact to customer if failure occurs", "#D12B2B"),
-        ("O", "Occurrence", "Likelihood of failure occurrence", "#D79200"),
-        ("D", "Detection", "Likelihood of not detecting failure", "#2F8C46"),
+        ("S", "Severity", "Customer / product impact", "#D12B2B"),
+        ("O", "Occurrence", "Failure likelihood", "#D79200"),
+        ("D", "Detection", "Detection difficulty", "#2F8C46"),
     ]
     col_w = (w - 36) / 3
     for index, (letter, name, detail, color) in enumerate(metrics):
         col_x = x + 18 + index * col_w
         if index:
-            parts.append(f'<line x1="{col_x - 10:.1f}" y1="{y + 42}" x2="{col_x - 10:.1f}" y2="{y + h - 14}" stroke="{GRID}" stroke-width="1.2"/>')
-        parts.append(f'<circle cx="{col_x + 14:.1f}" cy="{y + 56}" r="13" fill="{color}"/>')
-        parts.append(f'<text x="{col_x + 14:.1f}" y="{y + 61}" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">{letter}</text>')
-        parts.append(f'<text x="{col_x + 36:.1f}" y="{y + 52}" font-size="13" font-weight="700">{name}</text>')
-        render_wrapped_text(parts, detail, col_x + 36, y + 70, col_w - 44, 11.5, TEXT, "400", max_lines=2)
-        parts.append(f'<text x="{col_x + 36:.1f}" y="{y + 112}" font-size="11.5" fill="{TEXT}">1 = low / easy    10 = high</text>')
+            parts.append(f'<line x1="{col_x - 10:.1f}" y1="{y + 40}" x2="{col_x - 10:.1f}" y2="{y + h - 12}" stroke="{GRID}" stroke-width="1.2"/>')
+        parts.append(f'<circle cx="{col_x + 14:.1f}" cy="{y + 55}" r="13" fill="{color}"/>')
+        parts.append(f'<text x="{col_x + 14:.1f}" y="{y + 60}" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">{letter}</text>')
+        parts.append(f'<text x="{col_x + 36:.1f}" y="{y + 51}" font-size="13" font-weight="700">{name}</text>')
+        parts.append(f'<text x="{col_x + 36:.1f}" y="{y + 70}" font-size="11.5" fill="{TEXT}">{esc(detail)}</text>')
+        parts.append(f'<text x="{col_x + 36:.1f}" y="{y + 88}" font-size="11.5" fill="{MUTED}">1 = low / easy, 10 = high</text>')
     parts.append("</g>")
 
 
