@@ -3700,13 +3700,23 @@ def verify_diagram_builder_preview_zoom_ui(index_html: str) -> None:
         'id="zoomOutBtn"',
         'id="zoomInBtn"',
         'id="zoomFitBtn"',
+        'id="openSvgBtn"',
         "setPreviewZoom",
         "applyPreviewZoom",
-        "setPreviewSvg",
+        "svgPreviewUrl",
+        "previewFrameUrl",
+        "setPreviewFrame",
+        "openSvgStandalone",
+        "svg-preview-frame",
+        "/api/svg-preview",
     ]
     missing = [text for text in required if text not in index_html]
     if missing:
         raise AssertionError(f"diagram builder preview zoom UI is missing: {missing}")
+    if "previewBox.innerHTML = svgText" in index_html or "querySelector(\"svg\")" in index_html:
+        raise AssertionError("diagram builder preview should isolate SVG in an iframe instead of injecting inline SVG")
+    if "frame.style.width = Math.round(previewZoom * 100)" in index_html:
+        raise AssertionError("diagram builder zoom should scale SVG preview content, not the iframe shell")
     if "minmax(500px, 0.82fr) minmax(640px, 1.18fr)" not in index_html:
         raise AssertionError("diagram builder editor/preview column ratio should reserve more width for preview")
 

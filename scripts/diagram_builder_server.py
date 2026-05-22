@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import mimetypes
 import os
@@ -15,7 +16,7 @@ from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 from generate_diagram import parse_structured_markdown
 
@@ -122,6 +123,15 @@ class DiagramBuilderHandler(BaseHTTPRequestHandler):
                 if not svg_path.exists():
                     raise ValueError(f"Missing SVG: {svg_path.relative_to(ROOT)}")
                 self.send_text(svg_path.read_text(encoding="utf-8"), "image/svg+xml")
+            elif parsed.path == "/api/svg-preview":
+                query = parse_qs(parsed.query)
+                diagram_type = first_query_value(query, "diagram_type", "fishbone")
+                name = first_query_value(query, "name", "")
+                zoom = parse_preview_zoom(first_query_value(query, "zoom", "1"))
+                svg_path = work_path(diagram_type, name, ".svg")
+                if not svg_path.exists():
+                    raise ValueError(f"Missing SVG: {svg_path.relative_to(ROOT)}")
+                self.send_html(render_svg_preview_html(diagram_type, name, zoom))
             elif parsed.path == "/api/png":
                 query = parse_qs(parsed.query)
                 diagram_type = first_query_value(query, "diagram_type", "fishbone")
@@ -211,6 +221,54 @@ class DiagramBuilderHandler(BaseHTTPRequestHandler):
 def first_query_value(query: dict[str, list[str]], key: str, default: str) -> str:
     values = query.get(key)
     return values[0] if values else default
+
+
+def parse_preview_zoom(value: str) -> float:
+    try:
+        zoom = float(value)
+    except ValueError:
+        zoom = 1.0
+    return max(0.5, min(2.0, zoom))
+
+
+def render_svg_preview_html(diagram_type: str, name: str, zoom: float) -> str:
+    svg_url = (
+        f"/api/svg?diagram_type={quote(diagram_type)}"
+        f"&name={quote(name)}"
+        f"&v={quote(str(os.urandom(4).hex()))}"
+    )
+    image_width = round(zoom * 100)
+    title = html.escape(f"{name}.svg")
+    return f"""<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{title}</title>
+  <style>
+    html, body {{
+      margin: 0;
+      min-height: 100%;
+      background: #f7fafd;
+      font-family: Arial, Helvetica, sans-serif;
+    }}
+    body {{
+      padding: 0;
+      overflow: auto;
+    }}
+    img {{
+      display: block;
+      width: {image_width}%;
+      max-width: none;
+      height: auto;
+      background: #fff;
+    }}
+  </style>
+</head>
+<body>
+  <img src="{html.escape(svg_url, quote=True)}" alt="{title}">
+</body>
+</html>
+"""
 
 
 def request_model(payload: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
@@ -432,11 +490,13 @@ INDEX_HTML = r"""<!doctype html>
       padding: 14px;
       background: #f7fafd;
     }
-    #previewBox svg {
+    #previewBox iframe {
       width: 100%;
-      height: auto;
+      height: 100%;
+      min-height: 760px;
       background: #fff;
       border: 1px solid var(--line);
+      display: block;
     }
     .row {
       display: grid;
@@ -908,6 +968,7 @@ INDEX_HTML = r"""<!doctype html>
             <button id="zoomInBtn" type="button" title="Zoom in">+</button>
             <button id="zoomFitBtn" type="button" title="Fit to width">Fit</button>
           </div>
+          <button id="openSvgBtn" type="button" title="Open the current rendered SVG as a standalone document.">Open SVG</button>
           <span id="previewMeta" class="status"></span>
         </div>
       </div>
@@ -1202,16 +1263,40 @@ INDEX_HTML = r"""<!doctype html>
 
     function applyPreviewZoom() {
       zoomLabel.textContent = Math.round(previewZoom * 100) + "%";
-      const svg = previewBox.querySelector("svg");
-      if (!svg) return;
-      svg.style.width = Math.round(previewZoom * 100) + "%";
-      svg.style.maxWidth = "none";
-      svg.style.height = "auto";
+      const frame = previewBox.querySelector("iframe");
+      if (!frame) return;
+      frame.src = previewFrameUrl();
     }
 
-    function setPreviewSvg(svgText) {
-      previewBox.innerHTML = svgText;
-      applyPreviewZoom();
+    function svgPreviewUrl(cacheBust = true) {
+      const params = new URLSearchParams({
+        diagram_type: currentType(),
+        name: safeName()
+      });
+      if (cacheBust) params.set("v", String(Date.now()));
+      return `/api/svg?${params.toString()}`;
+    }
+
+    function previewFrameUrl() {
+      const params = new URLSearchParams({
+        diagram_type: currentType(),
+        name: safeName(),
+        zoom: String(previewZoom),
+        v: String(Date.now())
+      });
+      return `/api/svg-preview?${params.toString()}`;
+    }
+
+    function setPreviewFrame() {
+      const frame = document.createElement("iframe");
+      frame.className = "svg-preview-frame";
+      frame.title = "SVG preview";
+      frame.src = previewFrameUrl();
+      previewBox.replaceChildren(frame);
+    }
+
+    function openSvgStandalone() {
+      window.open(svgPreviewUrl(false), "_blank", "noopener");
     }
 
     function requireText(errors, label, value) {
@@ -1563,7 +1648,7 @@ INDEX_HTML = r"""<!doctype html>
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType(), name: safeName(), data: model })
       });
-      setPreviewSvg(result.svg);
+      setPreviewFrame();
       previewMeta.textContent = safeName() + ".svg";
       rememberRecent();
       setStatus(result.message, "ok");
@@ -1580,7 +1665,7 @@ INDEX_HTML = r"""<!doctype html>
         method: "POST",
         body: JSON.stringify({ diagram_type: currentType(), name: safeName(), data: model })
       });
-      setPreviewSvg(renderResult.svg);
+      setPreviewFrame();
       previewMeta.textContent = safeName() + ".svg";
       rememberRecent();
       setStatus("Exporting PNG...", "");
@@ -1853,10 +1938,9 @@ INDEX_HTML = r"""<!doctype html>
 
     async function loadSvgIfExists() {
       try {
-        const response = await fetch(`/api/svg?diagram_type=${encodeURIComponent(currentType())}&name=${encodeURIComponent(safeName())}`);
-        const text = await response.text();
+        const response = await fetch(svgPreviewUrl());
         if (response.ok) {
-          setPreviewSvg(text);
+          setPreviewFrame();
           previewMeta.textContent = safeName() + ".svg";
         }
       } catch (_error) {}
@@ -2981,6 +3065,7 @@ INDEX_HTML = r"""<!doctype html>
     });
     $("renderBtn").addEventListener("click", () => renderSvg().catch(error => setStatus(error.message, "error")));
     $("exportBtn").addEventListener("click", () => exportPng().catch(error => setStatus(error.message, "error")));
+    $("openSvgBtn").addEventListener("click", () => openSvgStandalone());
     $("openBtn").addEventListener("click", () => openFolder().catch(error => setStatus(error.message, "error")));
     $("helpBtn").addEventListener("click", () => openHelpDialog());
     $("helpCloseBtn").addEventListener("click", () => closeHelpDialog());
