@@ -17,6 +17,7 @@ FAULT_TREE_NATURALCASES = NATURALCASES_ROOT / "fault-tree"
 EXCLUSION_TREE_NATURALCASES = NATURALCASES_ROOT / "exclusion-tree"
 TWO_BY_TWO_NATURALCASES = NATURALCASES_ROOT / "two-by-two-matrix"
 ROADMAP_NATURALCASES = NATURALCASES_ROOT / "roadmap-timeline"
+FMEA_NATURALCASES = NATURALCASES_ROOT / "fmea-table"
 PROMPT_TEMPLATE = ROOT / "references" / "natural_language_prompt_template.md"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
@@ -46,7 +47,7 @@ def verify_directory() -> None:
     if not NATURALCASES_ROOT.exists():
         raise AssertionError("Missing naturalcases directory")
 
-    allowed_dirs = {"fishbone", "fault-tree", "exclusion-tree", "two-by-two-matrix", "roadmap-timeline"}
+    allowed_dirs = {"fishbone", "fault-tree", "exclusion-tree", "two-by-two-matrix", "roadmap-timeline", "fmea-table"}
     for path in NATURALCASES_ROOT.iterdir():
         if path.name == "README.md":
             continue
@@ -59,6 +60,7 @@ def verify_directory() -> None:
         EXCLUSION_TREE_NATURALCASES,
         TWO_BY_TWO_NATURALCASES,
         ROADMAP_NATURALCASES,
+        FMEA_NATURALCASES,
     ]:
         if not directory.exists():
             raise AssertionError(f"Missing naturalcase directory: {directory.name}")
@@ -83,6 +85,7 @@ def verify_prompt_template() -> None:
         "Choose `exclusion_tree` when the source asks for sequential troubleshooting",
         "Choose `two_by_two_matrix` when the source asks to compare or prioritize options across two scoring dimensions",
         "Choose `roadmap_timeline` when the source asks for a roadmap",
+        "Choose `fmea_table` when the source asks for simplified FMEA",
         "do not start from default fishbone categories",
         "Extract 4-8 domain-specific categories",
         "Extract one specific top event",
@@ -90,6 +93,7 @@ def verify_prompt_template() -> None:
         "Include 4-20 scored items",
         "For swimlane roadmaps, extract time periods, lanes, initiatives, milestones, decision points",
         "For milestone timelines, extract milestones, phases, owner/status/output details",
+        "For FMEA tables, extract item/function, failure mode, effects, causes, controls, S/O/D scores, actions, owner, target, and status",
         "Do not add `Subtitle:` unless the user explicitly asks for a subtitle",
         "Do not add an item-level `Notes` column",
         "Use `Gate: AND` only when the source states that child conditions must occur together",
@@ -108,6 +112,7 @@ def verify_case_pairs() -> None:
     verify_exclusion_tree_case_pairs()
     verify_two_by_two_case_pairs()
     verify_roadmap_case_pairs()
+    verify_fmea_case_pairs()
 
 
 def verify_fishbone_case_pairs() -> None:
@@ -173,6 +178,19 @@ def verify_roadmap_case_pairs() -> None:
         verify_source_expected_pair(source_path, expected_path)
         verify_expected_markdown_renders(expected_path)
         verify_roadmap_expected_structure(expected_path)
+
+
+def verify_fmea_case_pairs() -> None:
+    sources = sorted(FMEA_NATURALCASES.glob("*.source.txt"))
+    if not sources:
+        raise AssertionError("No fmea-table naturalcase sources found")
+
+    for source_path in sources:
+        stem = source_path.name.removesuffix(".source.txt")
+        expected_path = FMEA_NATURALCASES / f"{stem}.expected.md"
+        verify_source_expected_pair(source_path, expected_path)
+        verify_expected_markdown_renders(expected_path)
+        verify_fmea_expected_structure(expected_path)
 
 
 def verify_source_expected_pair(source_path: Path, expected_path: Path) -> None:
@@ -395,6 +413,71 @@ def verify_roadmap_expected_structure(path: Path) -> None:
         verify_swimlane_roadmap_expected_structure(path, data)
     else:
         verify_milestone_timeline_expected_structure(path, data)
+
+
+def verify_fmea_expected_structure(path: Path) -> None:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from generate_diagram import parse_input
+
+    text = path.read_text(encoding="utf-8")
+    if re.search(r"^Subtitle\s*:", text, flags=re.M):
+        raise AssertionError(f"{path.name}: FMEA naturalcase should not include Subtitle")
+    if re.search(r"^\s*Icon\s*:", text, flags=re.M):
+        raise AssertionError(f"{path.name}: FMEA naturalcase should not include non-rendered icon fields")
+
+    data = parse_input(path)
+    if data.get("diagram_type") != "fmea_table":
+        raise AssertionError(f"{path.name}: expected diagram_type=fmea_table")
+
+    language = str(data.get("language", "auto")).strip()
+    if language not in {"auto", "en", "zh"}:
+        raise AssertionError(f"{path.name}: language must be auto, en, or zh")
+
+    if not str(data.get("title", "")).strip():
+        raise AssertionError(f"{path.name}: FMEA naturalcase must include a title")
+    if not str(data.get("goal", "")).strip():
+        raise AssertionError(f"{path.name}: FMEA naturalcase must include a visible goal")
+
+    rows = data.get("rows", [])
+    if not isinstance(rows, list) or not 3 <= len(rows) <= 12:
+        raise AssertionError(f"{path.name}: FMEA naturalcase should include 3-12 rows")
+
+    risk_buckets: set[str] = set()
+    required_list_fields = [
+        "failure_effects",
+        "failure_causes",
+        "prevention_controls",
+        "detection_controls",
+        "recommended_actions",
+    ]
+    for index, row in enumerate(rows, start=1):
+        if not isinstance(row, dict):
+            raise AssertionError(f"{path.name}: FMEA row {index} must be an object")
+        for field in ["item_function", "failure_mode", "owner", "target_completion", "status"]:
+            if not str(row.get(field, "")).strip():
+                raise AssertionError(f"{path.name}: FMEA row {index} must include {field}")
+        for field in required_list_fields:
+            values = row.get(field, [])
+            if not isinstance(values, list) or not [value for value in values if str(value).strip()]:
+                raise AssertionError(f"{path.name}: FMEA row {index} must include {field}")
+        try:
+            severity = int(row.get("severity"))
+            occurrence = int(row.get("occurrence"))
+            detection = int(row.get("detection"))
+        except (TypeError, ValueError) as exc:
+            raise AssertionError(f"{path.name}: FMEA row {index} must include numeric S/O/D scores") from exc
+        if not all(1 <= score <= 10 for score in [severity, occurrence, detection]):
+            raise AssertionError(f"{path.name}: FMEA row {index} scores must be 1-10")
+        rpn = severity * occurrence * detection
+        if rpn >= 200:
+            risk_buckets.add("high")
+        elif rpn >= 100:
+            risk_buckets.add("medium")
+        else:
+            risk_buckets.add("low")
+
+    if len(risk_buckets) < 2:
+        raise AssertionError(f"{path.name}: FMEA naturalcase should exercise at least two RPN risk levels")
 
 
 def verify_swimlane_roadmap_expected_structure(path: Path, data: dict[str, object]) -> None:

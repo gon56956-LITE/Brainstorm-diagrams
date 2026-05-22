@@ -18,6 +18,7 @@ Diagram choice:
 - Choose `exclusion_tree` when the source asks for sequential troubleshooting, step-by-step cause elimination, verification checks, or a practical diagnostic path.
 - Choose `two_by_two_matrix` when the source asks to compare or prioritize options across two scoring dimensions, such as impact/effort, risk/benefit, evidence/impact, value/feasibility, or urgency/importance.
 - Choose `roadmap_timeline` when the source asks for a roadmap, timeline, release plan, milestone plan, phase plan, launch schedule, or cross-team execution plan over time.
+- Choose `fmea_table` when the source asks for simplified FMEA, failure mode and effects analysis, RPN scoring, S/O/D scoring, or a tabular failure-risk review with controls and corrective actions.
 
 Rules:
 - Read the source text first; do not start from default fishbone categories, generic fault-tree branches, or generic troubleshooting steps.
@@ -83,6 +84,21 @@ Roadmap timeline rules:
 - Use marker types from `start`, `milestone`, `key_milestone`, `decision`, `review`, and `launch`; use statuses from `planned`, `in_progress`, `completed`, and `at_risk`.
 - Keep labels short enough for diagram cards and bars; put longer explanations in milestone `Output` or a short note.
 - If the source lacks dates or a clear sequence, ask for date ranges or milestone timing instead of inventing a schedule.
+
+FMEA table rules:
+- Extract a concise title and visible `Goal:` from the source's FMEA topic and review objective.
+- Use `language: auto` unless the user explicitly requests `en` or `zh`; do not create English/Chinese paired labels by default.
+- Use `fmea_type: process` for manufacturing, assembly, test, inspection, or service process risks; use `fmea_type: design` for product function, component, design interface, or architecture risks.
+- For FMEA tables, extract item/function, failure mode, effects, causes, controls, S/O/D scores, actions, owner, target, and status.
+- Include 3-12 rows. If the source has more than 12 failure modes, ask the user to split the FMEA or prioritize top risks before rendering.
+- Keep one item/function and one failure mode per row.
+- Use S/O/D scores from 1-10 only. Higher severity means stronger impact; higher occurrence means more likely; higher detection means harder to detect.
+- If the source gives qualitative risk language but no numeric scores, assign conservative ordinal S/O/D scores from the wording rather than pretending exact measurement.
+- Do not add row-level `Icon:` fields; badges are renderer-derived.
+- Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
+- Preserve uncertainty. Do not mark suspected causes as proven unless the source says they are proven.
+- Keep list fields concise, typically 1-3 bullets per field, so dense FMEA tables remain readable.
+- If the source lacks enough information for at least three meaningful rows, ask for more detail instead of inventing rows.
 
 Execution:
 1. Write structured Markdown to `work/<diagram-type>/<safe-name>.md`.
@@ -264,6 +280,43 @@ show_table: true
 | Planning | 2026-01-01 | 2026-02-28 |
 ```
 
+## FMEA Table Markdown Output Shape
+
+```markdown
+---
+diagram_type: fmea_table
+fmea_type: process
+language: auto
+---
+
+# FMEA Title
+
+Goal: Visible FMEA review goal from the source.
+Project: Source-supported project or product context
+Owner: Source-supported review owner
+
+## Row F1
+
+Item / Function: Process step, component, or function
+Failure Mode: Specific potential failure mode
+Effects:
+- Source-supported effect
+Causes:
+- Source-supported cause
+Prevention Controls:
+- Current prevention control
+Detection Controls:
+- Current detection control
+Severity: 8
+Occurrence: 4
+Detection: 5
+Recommended Actions:
+- Corrective or risk-reduction action
+Owner: Function or person
+Target Completion: 2026-06-30
+Status: Open
+```
+
 ## Quality Gate Before Rendering
 
 - The chosen diagram type matches the user's intent.
@@ -287,6 +340,10 @@ show_table: true
 - Roadmap timeline includes a visible goal, source-supported dates, and no subtitle unless explicitly requested.
 - Swimlane roadmap initiatives are assigned to valid lane IDs and time periods cover all bars and markers.
 - Milestone timeline milestones are ordered by date and phases are date ranges, not point events.
+- FMEA table has a visible title and goal, 3-12 rows, and one failure mode per row.
+- FMEA table rows include source-traceable item/function, failure mode, effects, causes, prevention controls, detection controls, S/O/D scores, actions, owner, target, and status.
+- FMEA S/O/D scores are 1-10 and do not imply unsupported precision.
+- FMEA rows do not include user-authored icon fields or a subtitle unless explicitly requested.
 - Similar causes are grouped rather than duplicated.
 - The draft stays within renderer limits for the selected diagram type.
 - The file name is a safe stem: lowercase letters, numbers, hyphen, or underscore.

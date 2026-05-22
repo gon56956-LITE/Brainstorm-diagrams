@@ -4,7 +4,7 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 
 ## Source Fidelity
 
-- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition, two-by-two matrix for two-axis option comparison, roadmap timeline for planning over time.
+- The diagram type matches the source intent: fishbone for broad brainstorming, fault tree for logical top-event decomposition, two-by-two matrix for two-axis option comparison, roadmap timeline for planning over time, and FMEA table for failure mode/effects/control/action review.
 - Exclusion tree is used only for sequential troubleshooting, practical verification checks, or cause-elimination workflows.
 - Roadmap timeline is used only when the source includes dates, periods, phases, milestones, or initiative timing.
 - The topic or top event preserves the source's central problem, failure mode, design challenge, or analysis question.
@@ -73,6 +73,22 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - For `milestone_timeline`, phases are date ranges and not duplicates of point milestones.
 - Notes are short and review-relevant, not full recommendation paragraphs.
 
+## FMEA Table Structure
+
+- The draft uses `diagram_type: fmea_table`.
+- The title and `Goal:` preserve the source's FMEA topic and review objective.
+- The draft uses one language unless the user explicitly requests bilingual content.
+- The draft has 3-12 rows; if the source has more failure modes, it is split or prioritized before rendering.
+- Each row has one item/function and one potential failure mode.
+- Effects describe source-supported customer, product, yield, reliability, schedule, safety, or operational impacts.
+- Causes describe source-supported mechanisms, control gaps, design/process weaknesses, supplier issues, or use conditions.
+- Prevention controls and detection controls are separated correctly.
+- S/O/D scores are 1-10, source-traceable, and do not imply unsupported precision.
+- Recommended actions, owner, target completion, and status come from the source or a conservative normalization of the source.
+- Row-level `Icon:` fields are not authored; badges are renderer-derived.
+- There is no `Subtitle:` unless explicitly requested.
+- The draft does not imply a suspected cause is proven unless the source states it.
+
 ## File Outputs
 
 - The editable draft is saved as `work/<diagram-type>/<safe-name>.md`.
@@ -91,3 +107,4 @@ Use this checklist after Codex turns raw text into an editable Markdown draft. I
 - For sequential exclusion tree, would a technician know what to check next without mistaking suspected causes for confirmed root causes?
 - For two-by-two matrix, would a reviewer agree that each option lands in a reasonable quadrant based on the source?
 - For roadmap timeline, would a reviewer recognize the lanes, date ranges, gates, and phases as the source plan rather than an invented schedule?
+- For FMEA, would a reviewer agree that each row has the right failure mode, effects, controls, S/O/D scoring, and action ownership?

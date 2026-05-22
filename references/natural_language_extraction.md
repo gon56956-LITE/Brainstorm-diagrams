@@ -121,6 +121,43 @@ show_summary_panel: true
 | R1 | hardware | Prototype build | 2026-01-15 | 2026-03-15 | Hardware | planned |
 ```
 
+Choose `fmea_table` when the source asks for simplified FMEA, failure mode and effects analysis, risk priority number scoring, S/O/D scoring, or a tabular failure-risk review with controls and corrective actions:
+
+```markdown
+---
+diagram_type: fmea_table
+fmea_type: process
+language: auto
+---
+
+# FMEA Title
+
+Goal: Visible FMEA review goal from the source.
+Project: Source-supported project or product context
+Owner: Source-supported review owner
+
+## Row F1
+
+Item / Function: Process step, component, or function
+Failure Mode: Specific potential failure mode
+Effects:
+- Source-supported effect
+Causes:
+- Source-supported cause
+Prevention Controls:
+- Current prevention control
+Detection Controls:
+- Current detection control
+Severity: 8
+Occurrence: 4
+Detection: 5
+Recommended Actions:
+- Corrective or risk-reduction action
+Owner: Function or person
+Target Completion: 2026-06-30
+Status: Open
+```
+
 ## Extraction Rules
 
 ### Fishbone
@@ -206,10 +243,36 @@ show_summary_panel: true
 - Preserve uncertainty. Do not convert a planning assumption into a committed launch promise unless the source says it is committed.
 - If the source lacks dates or a clear sequence, ask for date ranges or milestone timing instead of inventing a schedule.
 
+### FMEA Table
+
+- Extract a concise title from the product, process, subsystem, failure review, or event being assessed.
+- Extract a visible `Goal:` from the source's FMEA purpose, review objective, risk-reduction goal, or containment objective.
+- Use `language: auto` unless the user explicitly requests `en` or `zh`.
+- Keep diagram labels single-language. Do not render English/Chinese pairs by default.
+- Use `fmea_type: process` for manufacturing, assembly, test, inspection, or service process risks; use `fmea_type: design` for product function, component, design interface, or architecture risks.
+- Extract 3-12 rows. If the source has more than 12 failure modes, ask the user to split the FMEA or prioritize the top risks before rendering.
+- Each row should represent one item/function and one potential failure mode. Do not combine unrelated failure modes into one row.
+- For each row, extract:
+  - `Item / Function` from the component, process step, function, interface, or control point.
+  - `Failure Mode` as the specific way the item/function could fail.
+  - `Effects` as customer, product, test, reliability, safety, yield, schedule, or operational impacts.
+  - `Causes` as suspected mechanisms, process weaknesses, design weaknesses, supplier issues, use conditions, or control gaps.
+  - `Prevention Controls` as existing controls that reduce occurrence.
+  - `Detection Controls` as existing checks that detect the failure or cause.
+  - `Severity`, `Occurrence`, and `Detection` scores from 1-10.
+  - `Recommended Actions`, `Owner`, `Target Completion`, and `Status` when supported by the source.
+- Do not add row-level `Icon:` fields. Item badges are renderer-derived and not user-authored.
+- Do not add `Subtitle:` unless the user explicitly asks for a subtitle.
+- Use only S/O/D scores in the 1-10 range. Higher severity means stronger impact; higher occurrence means more likely; higher detection means harder to detect.
+- If the source gives qualitative risk language but no numeric scores, assign conservative ordinal S/O/D scores and keep them traceable to the wording.
+- Preserve uncertainty. Do not mark a suspected cause as proven unless the source states it is proven.
+- Keep each list concise. Prefer 1-3 bullets per field so dense FMEA tables remain readable.
+- If the source lacks enough information to populate at least item/function, failure mode, effects, causes, and controls for three rows, ask for more detail instead of inventing rows.
+
 ## Workflow
 
 1. Read the user's natural-language source.
-2. Choose `fishbone`, `fault_tree`, `exclusion_tree`, `two_by_two_matrix`, or `roadmap_timeline` based on the source and the user's wording.
+2. Choose `fishbone`, `fault_tree`, `exclusion_tree`, `two_by_two_matrix`, `roadmap_timeline`, or `fmea_table` based on the source and the user's wording.
 3. Extract the diagram structure using the rules above.
 4. Write structured Markdown to `work/<diagram-type>/<safe-name>.md`.
 5. Render the SVG with the matching work renderer or `scripts/generate_diagram.py`.
