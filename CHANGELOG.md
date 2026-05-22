@@ -5,7 +5,7 @@
 ### FMEA Table
 
 - Added core `fmea_table` SVG rendering with simplified FMEA columns, calculated RPN, risk coloring, row-section Markdown input, JSON templates, command-line work creation/render/export scripts, testcases, and stresscases.
-- Kept FMEA table out of browser-builder and natural-language support for the first release.
+- Added FMEA table support to the browser builder, non-technical launcher workflow, and Codex-assisted natural-language drafting examples.
 
 ## 0.5.0 - 2026-05-19
 

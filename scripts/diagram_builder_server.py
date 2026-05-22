@@ -32,6 +32,7 @@ EXPORT_ROADMAP = ROOT / "scripts" / "export_roadmap_timeline_png.py"
 EXPORT_FMEA = ROOT / "scripts" / "export_fmea_table_png.py"
 PYTHON = Path(sys.executable)
 SAFE_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
+PORT_FALLBACK_ATTEMPTS = 10
 
 DIAGRAMS = {
     "fishbone": {
@@ -76,15 +77,17 @@ DIAGRAMS = {
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Start the local brainstorm diagram HTML editor.")
     parser.add_argument("--host", default="127.0.0.1", help="Host to bind (default: 127.0.0.1)")
-    parser.add_argument("--port", type=int, default=8765, help="Port to bind (default: 8765)")
+    parser.add_argument("--port", type=int, default=8765, help="Preferred port to bind (default: 8765)")
     parser.add_argument("--no-open", action="store_true", help="Do not open the browser automatically")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    server = ThreadingHTTPServer((args.host, args.port), DiagramBuilderHandler)
-    url = f"http://{args.host}:{args.port}/"
+    server, actual_port = bind_server(args.host, args.port)
+    url = f"http://{args.host}:{actual_port}/"
+    if args.port != 0 and actual_port != args.port:
+        print(f"Requested port {args.port} was unavailable; using {actual_port}.")
     print(f"Diagram builder running at {url}")
     print("Press Ctrl+C to stop.")
     if not args.no_open:
@@ -96,6 +99,23 @@ def main() -> int:
     finally:
         server.server_close()
     return 0
+
+
+def bind_server(host: str, preferred_port: int) -> tuple[ThreadingHTTPServer, int]:
+    if preferred_port == 0:
+        server = ThreadingHTTPServer((host, 0), DiagramBuilderHandler)
+        return server, int(server.server_address[1])
+
+    last_error: OSError | None = None
+    final_port = min(65535, preferred_port + PORT_FALLBACK_ATTEMPTS - 1)
+    for port in range(preferred_port, final_port + 1):
+        try:
+            server = ThreadingHTTPServer((host, port), DiagramBuilderHandler)
+        except OSError as exc:
+            last_error = exc
+            continue
+        return server, port
+    raise OSError(f"Could not bind {host}:{preferred_port}-{final_port}") from last_error
 
 
 class DiagramBuilderHandler(BaseHTTPRequestHandler):

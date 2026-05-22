@@ -67,6 +67,18 @@ English fallback:
 roadmap_timeline_tool.cmd
 ```
 
+For non-technical FMEA table users, use the dedicated launcher:
+
+```text
+FMEAè¡¨å·¥å…·.cmd
+```
+
+English fallback:
+
+```text
+fmea_table_tool.cmd
+```
+
 For a browser-based local editor that supports fishbone, fault tree, exclusion tree, two-by-two matrix, roadmap timeline, and FMEA table, use:
 
 ```text
@@ -87,6 +99,7 @@ Command-line usage is also available:
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_exclusion_tree.py startup-checks --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_two_by_two_matrix.py priority-matrix --format md --preset action_priority
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_roadmap_timeline.py product-roadmap --format md --preset swimlane_roadmap
+& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fmea_table.py process-fmea --format md
 & "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\diagram_builder_server.py
 ```
 

@@ -3,9 +3,10 @@
 
 from __future__ import annotations
 
+import os
+import re
 import subprocess
 import sys
-import re
 from datetime import date
 from pathlib import Path
 
@@ -21,6 +22,14 @@ FMEA_NATURALCASES = NATURALCASES_ROOT / "fmea-table"
 PROMPT_TEMPLATE = ROOT / "references" / "natural_language_prompt_template.md"
 GENERATE = ROOT / "scripts" / "generate_diagram.py"
 PYTHON = Path(sys.executable)
+NATURALCASE_WORK_DIRS = {
+    "fishbone": ROOT / "work" / "fishbone",
+    "fault-tree": ROOT / "work" / "fault-tree",
+    "exclusion-tree": ROOT / "work" / "exclusion-tree",
+    "two-by-two-matrix": ROOT / "work" / "two-by-two-matrix",
+    "roadmap-timeline": ROOT / "work" / "roadmap-timeline",
+    "fmea-table": ROOT / "work" / "fmea-table",
+}
 
 EXPECTED_LUCIDE_CASE_ICONS = {
     "optical-module-stability": {
@@ -203,7 +212,9 @@ def verify_source_expected_pair(source_path: Path, expected_path: Path) -> None:
 
 
 def verify_expected_markdown_renders(path: Path) -> None:
-    output_path = path.parent / f"{path.stem}.tmp.svg"
+    output_dir = NATURALCASE_WORK_DIRS[path.parent.name]
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / f"verify-naturalcase-{path.parent.name}-{path.stem}-{os.getpid()}.svg"
     try:
         result = subprocess.run(
             [str(PYTHON), str(GENERATE), str(path), str(output_path)],

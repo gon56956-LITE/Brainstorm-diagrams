@@ -2,7 +2,7 @@
 
 `brainstorm-diagrams` is a Codex skill for generating clean, PPT-ready structured brainstorming diagrams.
 
-Version `0.5.0` implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, sequential exclusion-tree troubleshooting diagrams, two-by-two prioritization matrices, and roadmap timelines.
+Current unreleased version implements deterministic SVG renderers for business-simple fishbone / Ishikawa diagrams, fault tree analysis diagrams, sequential exclusion-tree troubleshooting diagrams, two-by-two prioritization matrices, roadmap timelines, and simplified FMEA tables.
 
 ## What This Is
 
@@ -10,7 +10,7 @@ Version `0.5.0` implements deterministic SVG renderers for business-simple fishb
 
 From Codex's perspective, it is a skill: `SKILL.md` and the reference files define when to use it, how inputs should be interpreted, what visual rules to follow, and how output should be verified.
 
-From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline SVG files without writing Python code.
+From a non-technical user's perspective, it is also a small local tool: double-click launchers and scripts can create, regenerate, and verify fishbone, fault-tree, exclusion-tree, two-by-two matrix, roadmap timeline, and FMEA table SVG files without writing Python code.
 
 In short:
 
@@ -32,7 +32,7 @@ tools = the local scripts and double-click launchers that perform the work
 - Fault tree top events, event detail panels, AND/OR gates, intermediate events, and basic event leaves
 - Fault tree nested mixed-gate subtrees, such as an OR branch containing an AND condition
 - Sequential exclusion-tree target problems, one main checkpoint path, Yes/Pass continuation paths, No/Fail root-cause cards, and final no-issue-found cards
-- Codex-assisted natural-language fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline drafting into editable Markdown
+- Codex-assisted natural-language fishbone, fault-tree, exclusion-tree, two-by-two matrix, roadmap timeline, and FMEA table drafting into editable Markdown
 - Roadmap timeline JSON and structured Markdown rendering for swimlane roadmaps and milestone timelines
 - SVG output
 - PNG export from generated work SVG files
@@ -127,7 +127,7 @@ English fallback:
 diagram_builder.cmd
 ```
 
-The fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON for fishbone, fault-tree, exclusion-tree, two-by-two matrix, and roadmap timeline through a local HTML form, saves into the matching `work/<diagram-type>/` folder, and reuses the same SVG/PNG renderers.
+The fishbone, fault-tree, exclusion-tree, two-by-two matrix, roadmap timeline, and FMEA table menus can create a new diagram, regenerate a work SVG after editing, export PNG, or run verification. The browser builder edits structured JSON for fishbone, fault-tree, exclusion-tree, two-by-two matrix, roadmap timeline, and FMEA table through a local HTML form, saves into the matching `work/<diagram-type>/` folder, and reuses the same SVG/PNG renderers.
 
 Menu options:
 
@@ -173,7 +173,7 @@ Two-by-two matrix usage is also available through the browser builder and comman
 
 Roadmap timeline usage is available through the browser builder and command-line scripts: create with `scripts/new_roadmap_timeline.py <name> --format md --preset swimlane_roadmap`, edit in `work/roadmap-timeline/`, then regenerate with `scripts/render_roadmap_timeline_work.py`. Supported presets are `swimlane_roadmap` and `milestone_timeline`.
 
-FMEA table usage is available through command-line scripts: create with `scripts/new_fmea_table.py <name> --format md`, edit in `work/fmea-table/`, then regenerate with `scripts/render_fmea_table_work.py`. FMEA table currently supports core rendering and PNG export, not browser-builder editing or natural-language extraction.
+FMEA table usage is available through `fmea_table_tool.cmd`, the browser builder, and command-line scripts: create with `scripts/new_fmea_table.py <name> --format md`, edit in `work/fmea-table/`, then regenerate with `scripts/render_fmea_table_work.py`. Codex-assisted natural-language FMEA drafts are supported as structured Markdown before rendering.
 
 Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, `work/two-by-two-matrix/`, `work/roadmap-timeline/`, or `work/fmea-table/`. Use safe names such as `my-analysis`, `startup-failure`, `startup-checks`, `priority-matrix`, `product-roadmap`, `process-fmea`, or `customer_complaints_v1`; do not enter spaces, folders, `..`, or full paths.
 
@@ -181,7 +181,7 @@ Diagram names are file names under `work/fishbone/`, `work/fault-tree/`, `work/e
 
 Codex can turn raw customer feedback, workshop notes, failure notes, or troubleshooting notes into a structured Markdown draft before rendering. This is a skill workflow, not a local `.cmd` menu feature: Codex performs the semantic extraction, then the existing local tools render the resulting Markdown.
 
-Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, sequential exclusion tree for one-path troubleshooting or cause-elimination checks, two-by-two matrix for option comparison or prioritization across two scoring dimensions, and roadmap timeline for phase, milestone, or initiative planning over time.
+Use fishbone for broad cause brainstorming, fault tree for logical top-event decomposition or parallel cause branches, sequential exclusion tree for one-path troubleshooting or cause-elimination checks, two-by-two matrix for option comparison or prioritization across two scoring dimensions, roadmap timeline for phase, milestone, or initiative planning over time, and FMEA table for failure mode/effects/control/action review.
 
 Example prompt:
 
@@ -201,7 +201,7 @@ Expected output:
 Natural-language drafts should use structures found in the source text, not default categories, generic fault branches, or generic troubleshooting steps. See `references/natural_language_extraction.md`.
 For a reusable Codex prompt shape, see `references/natural_language_prompt_template.md`.
 Use `references/natural_language_review_checklist.md` to review whether the generated draft stayed faithful to the source text.
-See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, `naturalcases/exclusion-tree/`, `naturalcases/two-by-two-matrix/`, and `naturalcases/roadmap-timeline/` for source text and expected Markdown examples.
+See `naturalcases/fishbone/`, `naturalcases/fault-tree/`, `naturalcases/exclusion-tree/`, `naturalcases/two-by-two-matrix/`, `naturalcases/roadmap-timeline/`, and `naturalcases/fmea-table/` for source text and expected Markdown examples.
 
 ## Badge Library
 

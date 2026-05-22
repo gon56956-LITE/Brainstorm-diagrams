@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import socket
 import subprocess
 import sys
 from pathlib import Path
@@ -2223,6 +2224,8 @@ def verify_cmd_launchers() -> None:
         text = raw.decode("utf-8", errors="ignore")
         if expected_text not in text:
             raise AssertionError(f"{name}: launcher does not reference {expected_text}")
+        if name == "diagram_builder.cmd" and ("Stop-Process" in text or "Get-NetTCPConnection" in text):
+            raise AssertionError("diagram_builder.cmd must not terminate arbitrary processes before startup")
         if b"\n" in raw.replace(b"\r\n", b""):
             raise AssertionError(f"{name}: Windows launcher must use CRLF line endings so cmd.exe can resolve labels")
         if expected_text.endswith(".cmd") and "%*" not in text:
@@ -3406,6 +3409,7 @@ def verify_diagram_builder_service() -> None:
     verify_diagram_builder_fmea_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_load_file_ui(diagram_builder_server.INDEX_HTML)
     verify_diagram_builder_preview_zoom_ui(diagram_builder_server.INDEX_HTML)
+    verify_diagram_builder_port_fallback(diagram_builder_server)
 
     stems = {
         "fishbone": f"verify-builder-fishbone-{os.getpid()}",
@@ -3482,6 +3486,24 @@ def verify_diagram_builder_service() -> None:
     finally:
         for path in paths:
             path.unlink(missing_ok=True)
+
+
+def verify_diagram_builder_port_fallback(diagram_builder_server: object) -> None:
+    blocker = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    blocker.bind(("127.0.0.1", 0))
+    blocker.listen(1)
+    occupied_port = int(blocker.getsockname()[1])
+    server = None
+    try:
+        server, actual_port = diagram_builder_server.bind_server("127.0.0.1", occupied_port)
+        if actual_port == occupied_port:
+            raise AssertionError("diagram builder fallback reused an occupied port")
+        if actual_port <= occupied_port:
+            raise AssertionError(f"diagram builder fallback should use a later port, got {actual_port}")
+    finally:
+        if server is not None:
+            server.server_close()
+        blocker.close()
 
 
 def verify_diagram_builder_exclusion_language_ui(index_html: str) -> None:
