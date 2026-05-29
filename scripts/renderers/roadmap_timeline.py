@@ -11,6 +11,8 @@ from typing import Any
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 
+from renderers.text_utils import chars_for_width, truncate_text, visual_len as shared_visual_len, wrap_text as shared_wrap_text
+
 
 ROOT = Path(__file__).resolve().parents[2]
 LUCIDE_ICON_DIR = ROOT / "assets" / "lucide-candidates"
@@ -177,6 +179,7 @@ def normalize_input(data: dict[str, Any]) -> dict[str, Any]:
         markers = normalize_markers(data.get("milestones", []), language, diagnostics)
         phases = normalize_phases(data.get("phases", []), diagnostics)
         periods = normalize_periods(data, markers=markers, phases=phases, initiatives=[], diagnostics=diagnostics)
+        timeline_start, timeline_end = milestone_timeline_bounds(data, markers, phases, periods)
         return {
             "diagram_type": "roadmap_timeline",
             "preset": preset,
@@ -188,6 +191,8 @@ def normalize_input(data: dict[str, Any]) -> dict[str, Any]:
             "theme": clean_text(data.get("style", "business_simple")) or "business_simple",
             "time_granularity": canonical(data.get("time_granularity", "month")) or "month",
             "periods": periods,
+            "timeline_start": timeline_start,
+            "timeline_end": timeline_end,
             "milestones": markers,
             "phases": phases,
             "show_detail_cards": as_bool(data.get("show_detail_cards", True)),
@@ -432,6 +437,28 @@ def generate_periods(start: date, end: date, granularity: str) -> list[Period]:
     return [period for period in periods if period.end >= start and period.start <= end]
 
 
+def milestone_timeline_bounds(
+    data: dict[str, Any],
+    markers: list[Marker],
+    phases: list[dict[str, Any]],
+    periods: list[Period],
+) -> tuple[date, date]:
+    if isinstance(data.get("time_periods"), list) and data.get("time_periods"):
+        return periods[0].start, periods[-1].end
+    dates: list[date] = [marker.date for marker in markers]
+    if dates:
+        start = min(dates)
+        end = max(dates)
+        return start, max(start, end)
+    for phase in phases:
+        dates.extend([phase["start"], phase["end"]])
+    if not dates:
+        return periods[0].start, periods[-1].end
+    start = min(dates)
+    end = max(dates)
+    return start, max(start, end)
+
+
 def assign_initiative_rows(initiatives: list[Initiative], lanes: list[Lane], periods: list[Period]) -> None:
     starts: dict[str, list[date]] = {lane.id: [] for lane in lanes}
     for lane in lanes:
@@ -583,7 +610,9 @@ def render_milestone_timeline(data: dict[str, Any]) -> str:
     desired_axis_w = max(1500, max(1, len(markers) - 1) * slot_w)
     canvas_w = max(WIDTH, axis_margin * 2 + desired_axis_w)
     axis_w = canvas_w - axis_margin * 2
-    card_placements = plan_milestone_card_placements(markers, periods, axis_x, axis_w, data["show_detail_cards"])
+    timeline_start = data["timeline_start"]
+    timeline_end = data["timeline_end"]
+    card_placements = plan_milestone_card_placements(markers, timeline_start, timeline_end, axis_x, axis_w, data["show_detail_cards"])
     card_row_count = 1 + max((placement.row for placement in card_placements), default=0)
     legend_bottom = 32 + 142
     card_h = max((placement.card_h for placement in card_placements), default=72)
@@ -595,9 +624,10 @@ def render_milestone_timeline(data: dict[str, Any]) -> str:
     table_y = phase_y + phase_h + 42
     summary_w = 360
     summary_x = canvas_w - summary_w - 36
+    table_w = max(980, min(1420, summary_x - 78))
     table_h = 0
     if data["show_table"]:
-        table_h = 42 + len(markers) * 32
+        table_h = milestone_table_height(data, table_w)
     summary_h = milestone_info_panel_height(data)
     canvas_h = max(HEIGHT, table_y + max(table_h, summary_h) + 80)
 
@@ -608,13 +638,12 @@ def render_milestone_timeline(data: dict[str, Any]) -> str:
         render_title(data),
         render_roadmap_legend(canvas_w - 460, 32, include_lanes=False),
         '<g id="roadmap-timeline" class="roadmap-timeline roadmap-milestone">',
-        render_phase_bands(data.get("phases", []), periods, axis_x, phase_y, axis_w),
+        render_phase_bands(data.get("phases", []), timeline_start, timeline_end, axis_x, phase_y, axis_w),
         f'<line x1="{axis_x}" y1="{axis_y}" x2="{axis_x + axis_w}" y2="{axis_y}" stroke="{PALETTE["navy"]}" stroke-width="4" marker-end="url(#arrowNavy)"/>',
-        render_milestone_nodes(markers, periods, axis_x, axis_y, axis_w, data["show_detail_cards"], card_placements, card_row_gap),
+        render_milestone_nodes(markers, timeline_start, timeline_end, axis_x, axis_y, axis_w, data["show_detail_cards"], card_placements, card_row_gap),
         "</g>",
     ]
     if data["show_table"]:
-        table_w = max(980, min(1420, summary_x - 78))
         parts.append(render_milestone_table(data, 42, table_y, table_w))
         parts.append(render_milestone_summary(data, summary_x, table_y, summary_w, summary_h))
     else:
@@ -771,7 +800,7 @@ def render_initiative_table(data: dict[str, Any], x: float, y: float, width: flo
     chunks.append(f'<rect x="{x}" y="{y}" width="{width}" height="{header_h}" rx="8" fill="{PALETTE["navy"]}"/>')
     cx = x
     for header, col_w in zip(headers, columns):
-        chunks.append(f'<text x="{cx + 10}" y="{y + 26}" font-family="{FONT_STACK}" font-size="13" font-weight="700" fill="#FFFFFF">{escape(fit_text(header, int((col_w - 16) / 7.2)))}</text>')
+        chunks.append(f'<text x="{cx + 10}" y="{y + 26}" font-family="{FONT_STACK}" font-size="13" font-weight="700" fill="#FFFFFF">{escape(fit_text(header, chars_for_width(col_w - 16, 7.2 / 0.52)))}</text>')
         cx += col_w
     row_y = y + header_h
     for row_index, (values, row_h) in enumerate(zip(rows, row_heights)):
@@ -878,13 +907,8 @@ def fit_table_columns(desired_columns: list[float], min_columns: list[float], wi
 
 
 def initiative_table_cell_lines(value: str, col_w: float) -> list[str]:
-    max_chars = max(4, int((col_w - 18) / 7.2))
-    lines = wrap_text(value, max_chars, max_lines=2)
-    if not lines:
-        return [""]
-    if len(lines) == 2 and visual_len(lines[-1]) > max_chars:
-        lines[-1] = fit_text(lines[-1], max_chars)
-    return lines
+    max_chars = chars_for_width(col_w - 18, 7.2 / 0.52)
+    return wrap_text(value, max_chars, max_lines=None) or [""]
 
 
 def initiative_milestone_label(item: Initiative, milestones: list[Marker]) -> str:
@@ -931,7 +955,7 @@ def render_summary_panel(data: dict[str, Any], x: float, y: float, width: float,
         chunks.append(f'<text x="{x + 22}" y="{cy}" font-family="{FONT_STACK}" font-size="16" font-weight="700" fill="{PALETTE["text"]}">Notes</text>')
         cy += 28
         for note in data["notes"][:4]:
-            for line in wrap_text(note, max(28, int((width - 60) / 7.2)), max_lines=2):
+            for line in wrap_text(note, chars_for_width(width - 60, 7.2 / 0.52, minimum=28), max_lines=2):
                 chunks.append(f'<text x="{x + 28}" y="{cy}" font-family="{FONT_STACK}" font-size="12" font-weight="600" fill="{PALETTE["text"]}">- {escape(line)}</text>')
                 cy += 20
     chunks.append("</g>")
@@ -949,13 +973,13 @@ def summary_panel_height(data: dict[str, Any]) -> int:
     return max(260, height + 28)
 
 
-def render_phase_bands(phases: list[dict[str, Any]], periods: list[Period], x: float, y: float, axis_w: float) -> str:
+def render_phase_bands(phases: list[dict[str, Any]], start: date, end: date, x: float, y: float, axis_w: float) -> str:
     if not phases:
         return ""
     chunks = ['<g id="roadmap-phases" class="roadmap-phases">']
     for index, phase in enumerate(phases):
-        x1 = date_to_x_continuous(phase["start"], periods, x, axis_w)
-        x2 = date_to_x_continuous(phase["end"], periods, x, axis_w)
+        x1 = date_to_x_in_range(phase["start"], start, end, x, axis_w)
+        x2 = date_to_x_in_range(phase["end"], start, end, x, axis_w)
         chunks.append(f'<rect x="{min(x1, x2)}" y="{y + index * 28}" width="{max(40, abs(x2 - x1))}" height="22" rx="5" fill="{PALETTE["blue_bg"]}" stroke="{PALETTE["border"]}" stroke-width="1"/>')
         chunks.append(f'<text x="{min(x1, x2) + 10}" y="{y + 16 + index * 28}" font-family="{FONT_STACK}" font-size="12" font-weight="700" fill="{PALETTE["text"]}">{escape(phase["name"])}</text>')
     chunks.append("</g>")
@@ -964,7 +988,8 @@ def render_phase_bands(phases: list[dict[str, Any]], periods: list[Period], x: f
 
 def render_milestone_nodes(
     markers: list[Marker],
-    periods: list[Period],
+    start: date,
+    end: date,
     x: float,
     y: float,
     axis_w: float,
@@ -975,7 +1000,7 @@ def render_milestone_nodes(
     chunks = ['<g id="roadmap-milestones" class="roadmap-milestones">']
     placement_by_id = {placement.marker_id: placement for placement in placements}
     for index, marker in enumerate(markers):
-        node_x = date_to_x_continuous(marker.date, periods, x, axis_w)
+        node_x = date_to_x_in_range(marker.date, start, end, x, axis_w)
         shape = "star" if marker.marker_type in {"launch", "key_milestone"} else ("diamond" if marker.marker_type in {"review", "decision"} else "circle")
         chunks.append(f'<g class="roadmap-milestone" data-id="{escape(marker.id)}">')
         if show_cards:
@@ -1004,14 +1029,14 @@ def render_milestone_nodes(
     return "\n".join(chunks)
 
 
-def plan_milestone_card_placements(markers: list[Marker], periods: list[Period], x: float, axis_w: float, show_cards: bool) -> list[MilestoneCardPlacement]:
+def plan_milestone_card_placements(markers: list[Marker], start: date, end: date, x: float, axis_w: float, show_cards: bool) -> list[MilestoneCardPlacement]:
     if not show_cards:
         return []
     card_w = 150
     rows: list[list[tuple[float, float]]] = []
     placements: list[MilestoneCardPlacement] = []
     for marker in markers:
-        node_x = date_to_x_continuous(marker.date, periods, x, axis_w)
+        node_x = date_to_x_in_range(marker.date, start, end, x, axis_w)
         card_x = min(max(node_x - card_w / 2, x), x + axis_w - card_w)
         row = milestone_card_row(card_x, card_w, rows)
         title_lines = wrap_text(marker.name, 18, max_lines=3)
@@ -1039,34 +1064,63 @@ def milestone_card_row(card_x: float, card_w: float, rows: list[list[tuple[float
 
 def render_milestone_table(data: dict[str, Any], x: float, y: float, width: float) -> str:
     rows: list[Marker] = data["milestones"]
-    row_h = 32
     header_h = 38
-    columns = [58, 54, 230, 360, 132, 126, 150]
-    scale = width / sum(columns)
-    columns = [value * scale for value in columns]
+    columns = milestone_table_columns(width)
     headers = ["ID", "Type", "Milestone", "Description", "Target Date", "Owner", "Status"]
+    row_values = [milestone_table_row_values(marker) for marker in rows]
+    row_lines = [milestone_table_row_lines(values, columns) for values in row_values]
+    row_heights = [max(32, 14 + max(len(lines) for lines in line_set) * 16) for line_set in row_lines]
+    table_h = header_h + sum(row_heights)
     chunks = ['<g id="roadmap-table" class="roadmap-table">']
-    chunks.append(f'<rect x="{x}" y="{y}" width="{width}" height="{header_h + len(rows) * row_h}" rx="8" fill="#FFFFFF" stroke="{PALETTE["grid"]}" stroke-width="1"/>')
+    chunks.append(f'<rect x="{x}" y="{y}" width="{width}" height="{table_h}" rx="8" fill="#FFFFFF" stroke="{PALETTE["grid"]}" stroke-width="1"/>')
     chunks.append(f'<rect x="{x}" y="{y}" width="{width}" height="{header_h}" rx="8" fill="{PALETTE["navy"]}"/>')
     cx = x
     for header, col_w in zip(headers, columns):
         chunks.append(f'<text x="{cx + 10}" y="{y + 24}" font-family="{FONT_STACK}" font-size="13" font-weight="700" fill="#FFFFFF">{escape(header)}</text>')
         cx += col_w
-    for row_index, marker in enumerate(rows):
-        row_y = y + header_h + row_index * row_h
+    row_y = y + header_h
+    for row_index, (marker, line_set, row_h) in enumerate(zip(rows, row_lines, row_heights)):
         if row_index % 2:
             chunks.append(f'<rect x="{x}" y="{row_y}" width="{width}" height="{row_h}" fill="{PALETTE["soft"]}"/>')
-        values = [marker.id, "", marker.name, marker.output or "-", marker.date.isoformat(), marker.owner, status_label(marker.status)]
         cx = x
-        for col_index, (value, col_w) in enumerate(zip(values, columns)):
+        for col_index, (lines, col_w) in enumerate(zip(line_set, columns)):
             if col_index == 1:
                 chunks.append(marker_shape(milestone_table_marker_shape(marker), cx + col_w / 2, row_y + row_h / 2, 7, PALETTE["navy"]))
             else:
-                chunks.append(f'<text x="{cx + 10}" y="{row_y + 21}" font-family="{FONT_STACK}" font-size="13" font-weight="600" fill="{PALETTE["text"]}">{escape(fit_text(value, int(col_w / 7.5)))}</text>')
+                text_y = row_y + max(21, (row_h - (len(lines) - 1) * 16) / 2 + 5)
+                for line_index, line in enumerate(lines):
+                    chunks.append(f'<text x="{cx + 10}" y="{text_y + line_index * 16}" font-family="{FONT_STACK}" font-size="13" font-weight="600" fill="{PALETTE["text"]}">{escape(line)}</text>')
             cx += col_w
         chunks.append(f'<line x1="{x}" y1="{row_y + row_h}" x2="{x + width}" y2="{row_y + row_h}" stroke="{PALETTE["grid"]}" stroke-width="1"/>')
+        row_y += row_h
     chunks.append("</g>")
     return "\n".join(chunks)
+
+
+def milestone_table_height(data: dict[str, Any], width: float) -> float:
+    columns = milestone_table_columns(width)
+    rows = [milestone_table_row_lines(milestone_table_row_values(marker), columns) for marker in data["milestones"]]
+    return 38 + sum(max(32, 14 + max(len(lines) for lines in row) * 16) for row in rows)
+
+
+def milestone_table_columns(width: float) -> list[float]:
+    columns = [58, 54, 230, 360, 132, 126, 150]
+    scale = width / sum(columns)
+    return [value * scale for value in columns]
+
+
+def milestone_table_row_values(marker: Marker) -> list[str]:
+    return [marker.id, "", marker.name, marker.output or "-", marker.date.isoformat(), marker.owner, status_label(marker.status)]
+
+
+def milestone_table_row_lines(values: list[str], columns: list[float]) -> list[list[str]]:
+    result: list[list[str]] = []
+    for index, (value, col_w) in enumerate(zip(values, columns)):
+        if index == 1:
+            result.append([""])
+        else:
+            result.append(wrap_text(value, chars_for_width(col_w - 16, 7.5 / 0.52), max_lines=None) or [""])
+    return result
 
 
 def milestone_table_marker_shape(marker: Marker) -> str:
@@ -1104,7 +1158,7 @@ def render_milestone_info_panel(data: dict[str, Any], x: float, y: float, width:
         chunks.append(f'<text x="{x + 22}" y="{cy}" font-family="{FONT_STACK}" font-size="16" font-weight="700" fill="{PALETTE["text"]}">Notes</text>')
         cy += 28
         for note in data["notes"][:4]:
-            for line in wrap_text(note, max(28, int((width - 60) / 7.2)), max_lines=2):
+            for line in wrap_text(note, chars_for_width(width - 60, 7.2 / 0.52, minimum=28), max_lines=2):
                 chunks.append(f'<text x="{x + 28}" y="{cy}" font-family="{FONT_STACK}" font-size="12" font-weight="600" fill="{PALETTE["text"]}">- {escape(line)}</text>')
                 cy += 20
     chunks.append("</g>")
@@ -1137,6 +1191,10 @@ def date_to_x(value: date, periods: list[Period], grid_x: float, period_w: float
 def date_to_x_continuous(value: date, periods: list[Period], x: float, width: float) -> float:
     start = periods[0].start
     end = periods[-1].end
+    return date_to_x_in_range(value, start, end, x, width)
+
+
+def date_to_x_in_range(value: date, start: date, end: date, x: float, width: float) -> float:
     span = max(1, end.toordinal() - start.toordinal())
     ratio = min(1, max(0, (value.toordinal() - start.toordinal()) / span))
     return x + ratio * width
@@ -1353,40 +1411,11 @@ def parse_key_value(line: str) -> tuple[str, str] | None:
 
 
 def wrap_text(text: str, max_chars: int, max_lines: int | None = None) -> list[str]:
-    clean = clean_text(text)
-    if not clean:
-        return [""]
-    has_cjk = contains_cjk(clean)
-    units = list(clean) if has_cjk else clean.split()
-    lines: list[str] = []
-    current = ""
-    for unit in units:
-        sep = "" if has_cjk else " "
-        candidate = unit if not current else current + sep + unit
-        if visual_len(candidate) <= max_chars:
-            current = candidate
-        else:
-            if current:
-                lines.append(current)
-            current = unit
-    if current:
-        lines.append(current)
-    return lines[:max_lines] if max_lines is not None else lines
+    return shared_wrap_text(text, max_chars, max_lines, punctuation_overflow=2)
 
 
 def fit_text(text: str, max_chars: int) -> str:
-    clean = clean_text(text)
-    if visual_len(clean) <= max_chars:
-        return clean
-    output = ""
-    length = 0
-    for char in clean:
-        char_len = 2 if ord(char) > 127 else 1
-        if length + char_len > max_chars - 3:
-            break
-        output += char
-        length += char_len
-    return output.rstrip() + "..."
+    return truncate_text(text, max_chars)
 
 
 def fit_label_with_ellipsis(text: str, max_chars: int) -> str:
@@ -1421,7 +1450,7 @@ def contains_cjk(text: str) -> bool:
 
 
 def visual_len(text: str) -> int:
-    return sum(2 if ord(char) > 127 else 1 for char in text)
+    return shared_visual_len(text)
 
 
 def svg_header(width: int | float, height: int | float) -> str:

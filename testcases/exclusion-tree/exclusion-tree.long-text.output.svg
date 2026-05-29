@@ -16,12 +16,12 @@
 <text x="76" y="90" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B2E63">Event Detail</text>
 <line x1="76" y1="110" x2="520" y2="110" stroke="#CBD5E1" stroke-width="1.5"/>
 <text x="76" y="142" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">The unit sometimes fails to complete cold startup</text>
-<text x="76" y="169" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">validation after overnight storage and requires a full</text>
-<text x="76" y="196" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">power cycle to recover.</text>
+<text x="76" y="169" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">validation after overnight storage and requires a</text>
+<text x="76" y="196" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">full power cycle to recover.</text>
 <text x="76" y="223" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Observed across mixed environmental chambers</text>
 <text x="76" y="247" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Impacts delayed shipment qualification</text>
-<text x="76" y="271" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Scope includes engineering samples from two assembly</text>
-<text x="76" y="295" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">  lots</text>
+<text x="76" y="271" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Scope includes engineering samples from two</text>
+<text x="76" y="295" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">  assembly lots</text>
 </g>
 <g class="exclusion-top-event">
 <rect id="exclusion-top-event-block" x="610.0" y="72.0" width="300" height="154.0" rx="14" fill="#0B2E63" filter="url(#softShadow)"/>

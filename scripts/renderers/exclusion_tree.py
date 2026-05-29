@@ -9,6 +9,8 @@ from typing import Any
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 
+from renderers.text_utils import chars_for_width, visual_len as shared_visual_len, wrap_text as shared_wrap_text
+
 
 WIDTH = 1920
 HEIGHT = 1080
@@ -791,13 +793,13 @@ def measure_event_detail_panel(detail: EventDetail) -> float:
 
 def card_text_chars(width: float, char_px: float, minimum: int) -> int:
     text_width = max(120, width - CARD_TEXT_X_OFFSET - CARD_TEXT_RIGHT_PAD)
-    return max(minimum, int(text_width / char_px))
+    return chars_for_width(text_width, char_px / 0.52, minimum=minimum)
 
 
 def detail_text_chars() -> tuple[int, int]:
     text_width = max(120, DETAIL_W - DETAIL_TEXT_X_OFFSET - DETAIL_TEXT_RIGHT_PAD)
-    body_chars = max(34, int(text_width / 8.0))
-    bullet_chars = max(32, int((text_width - 14) / 8.0))
+    body_chars = chars_for_width(text_width, 18, latin_factor=0.50, minimum=24)
+    bullet_chars = chars_for_width(text_width - 14, 17, latin_factor=0.50, minimum=22)
     return body_chars, bullet_chars
 
 
@@ -1095,74 +1097,12 @@ def validate_svg(svg: str) -> None:
 
 
 def wrap_text(text: str, max_chars: int, max_lines: int | None = 3) -> list[str]:
-    text = clean_text(text)
-    if not text:
-        return []
-    words = text.split()
-    if len(words) <= 1:
-        return split_long_text(text, max_chars, max_lines)
-    lines: list[str] = []
-    current = ""
-    for word in words:
-        if visual_len(word) > max_chars:
-            if current:
-                lines.append(current)
-                current = ""
-                if max_lines is not None and len(lines) >= max_lines:
-                    break
-            for chunk in split_long_text(word, max_chars, None):
-                if max_lines is not None and len(lines) >= max_lines:
-                    break
-                lines.append(chunk)
-            continue
-        candidate = f"{current} {word}".strip()
-        if visual_len(candidate) <= max_chars or not current:
-            current = candidate
-        else:
-            lines.append(current)
-            current = word
-            if max_lines is not None and len(lines) >= max_lines:
-                break
-    if current and (max_lines is None or len(lines) < max_lines):
-        lines.append(current)
-    if max_lines is not None and len(lines) == max_lines and words and visual_len(" ".join(words)) > sum(visual_len(line) for line in lines):
-        lines[-1] = trim_ellipsis(lines[-1], max_chars)
-    return lines or [text]
-
-
-def split_long_text(text: str, max_chars: int, max_lines: int | None) -> list[str]:
-    lines: list[str] = []
-    current = ""
-    current_len = 0
-    for char in text:
-        char_len = visual_len(char)
-        if current and current_len + char_len > max_chars:
-            if char in "ï¼Œã€‚ï¼ï¼Ÿï¼›ï¼šã€,.!?;:":
-                current += char
-                lines.append(current)
-                current = ""
-                current_len = 0
-                continue
-            lines.append(current)
-            current = char
-            current_len = char_len
-        else:
-            current += char
-            current_len += char_len
-    if current:
-        lines.append(current)
-    if max_lines is not None and len(lines) > max_lines:
-        lines = lines[:max_lines]
-        lines[-1] = trim_ellipsis(lines[-1], max_chars)
-    return lines
-
-
-def trim_ellipsis(text: str, max_chars: int) -> str:
-    return text[: max(1, max_chars - 1)].rstrip() + "..."
+    lines = shared_wrap_text(text, max_chars, max_lines)
+    return [] if lines == [""] else lines
 
 
 def visual_len(text: str) -> int:
-    return sum(2 if ord(char) > 127 else 1 for char in text)
+    return shared_visual_len(text)
 
 
 def clean_text(value: Any) -> str:

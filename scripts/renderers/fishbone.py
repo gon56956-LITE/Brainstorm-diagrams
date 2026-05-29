@@ -11,6 +11,7 @@ from typing import Any
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 
+from renderers.text_utils import estimate_text_width, truncate_text, visual_len, wrap_text
 
 WIDTH = 1920
 HEIGHT = 1080
@@ -722,14 +723,15 @@ def category_footprint(category: Category, start_side: str) -> tuple[float, floa
 
 def item_horizontal_extent(item: FishboneEntry) -> int:
     if item.kind == "subcategory" and item.text:
-        card_w = max(118, min(176, 42 + len(item.text) * 8))
-        child_width = max([text_width(child, 13, 22) for child in item.children] or [0])
+        title_lines = wrap_text(item.text, 16, 3)
+        card_w = max(118, min(176, 42 + estimate_text_width(max(title_lines, key=visual_len), 15)))
+        child_width = max([max(text_width(line, 13, 22) for line in wrap_text(child, 22, 2)) for child in item.children] or [0])
         return 56 + card_w + 18 + 24 + child_width + 18
     return 34 + 14 + text_width(item.text, 17, 22)
 
 
 def text_width(text: str, font_size: int, limit: int) -> int:
-    return round(min(len(text), limit) * font_size * 0.52)
+    return round(estimate_text_width(truncate_text(text, limit), font_size))
 
 
 def render_branch(category_layout: CategoryLayout, render_layout: RenderLayout) -> str:
@@ -737,10 +739,10 @@ def render_branch(category_layout: CategoryLayout, render_layout: RenderLayout) 
     x = category_layout.x
     top = category_layout.top
     card_x = x - CARD_W // 2
-    branch_length = branch_length_for_category(category)
+    branch_length = branch_length_for_category(category, category_layout.start_side)
     card_y = render_layout.spine_y - CARD_H - branch_length if top else render_layout.spine_y + branch_length
     connector_end_y = card_y + CARD_H if top else card_y
-    connector_dx = branch_dx(abs(render_layout.spine_y - connector_end_y))
+    connector_dx = min(branch_dx(abs(render_layout.spine_y - connector_end_y)), CARD_W / 2 - 34)
     connector_end_x = x - connector_dx
     connector_stroke = PALETTE["navy"] if top else PALETTE["line_blue"]
 
@@ -936,19 +938,21 @@ def wrap_category_label(text: str) -> list[str]:
     text = text.strip()
     if not text:
         return [""]
-    if len(text) <= 10:
+    if visual_len(text) <= 12:
         return [text]
     if any(separator in text for separator in [" ", "/", "&", "|", "-", "、", "，"]):
         return wrap_label(text, 12, 2)
-    split_at = math.ceil(len(text) / 2)
-    lines = [text[:split_at], text[split_at:]]
-    if len(lines[1]) > 10:
-        lines[1] = truncate(lines[1], 10)
+    lines = wrap_text(text, 12, 2)
+    if len(lines) == 1:
+        split_at = math.ceil(len(text) / 2)
+        lines = [text[:split_at], text[split_at:]]
+    if visual_len(lines[1]) > 12:
+        lines[1] = truncate(lines[1], 12)
     return lines
 
 
 def category_label_font_size(lines: list[str]) -> int:
-    longest = max((len(line) for line in lines), default=0)
+    longest = max((visual_len(line) for line in lines), default=0)
     if len(lines) > 1:
         if longest > 10:
             return 18
@@ -963,7 +967,7 @@ def category_label_font_size(lines: list[str]) -> int:
 def render_items(items: list[FishboneEntry], node_x: int, connector_x: int, connector_y: int, *, top: bool, start_side: str, spine_y: int) -> str:
     lines = []
     ordered = items if items else [FishboneEntry(kind="cause", text="", children=[]) for _ in range(4)]
-    row_centers = row_center_offsets(ordered)
+    row_centers = row_center_offsets(ordered, start_side)
     segment_top = min(connector_y, spine_y)
     segment_bottom = max(connector_y, spine_y)
     usable_top = segment_top + ROW_EDGE_PADDING
@@ -1004,15 +1008,21 @@ def render_cause_entry(text: str, anchor_x: int, yy: int, *, side: str) -> str:
         f'<circle cx="{anchor_x}" cy="{yy - 6}" r="7" fill="{PALETTE["background"]}" stroke="{PALETTE["blue"]}" stroke-width="3"/>',
     ]
     if text:
-        parts.append(f'<text x="{text_x}" y="{yy}" text-anchor="{anchor}" font-family="{FONT_STACK}" font-size="17" fill="{PALETTE["text"]}">{xml(truncate(text, 22))}</text>')
+        for line_index, line in enumerate(wrap_text(text, 22, 2)):
+            parts.append(f'<text x="{text_x}" y="{yy + line_index * 18 - (9 if line_index == 0 and visual_len(text) > 22 else 0)}" text-anchor="{anchor}" font-family="{FONT_STACK}" font-size="17" fill="{PALETTE["text"]}">{xml(line)}</text>')
     else:
         parts.append(f'<line x1="{placeholder_x1}" y1="{yy - 6}" x2="{placeholder_x2}" y2="{yy - 6}" stroke="{PALETTE["light_gray"]}" stroke-width="2"/>')
     return "\n".join(parts)
 
 
 def render_subcategory_entry(entry: FishboneEntry, anchor_x: int, yy: int, *, side: str) -> str:
-    card_w = max(118, min(176, 42 + len(entry.text) * 8))
-    card_h = 34
+    title_lines = wrap_text(entry.text, 16, 3)
+    card_w = max(118, min(176, 42 + estimate_text_width(max(title_lines, key=visual_len), 15)))
+    card_h = 34 + (len(title_lines) - 1) * 16
+    child_lines = [wrap_text(child, 22, 2) for child in entry.children]
+    child_row_heights = [len(lines) * 14 for lines in child_lines]
+    child_row_gap = 8
+    child_block_h = sum(child_row_heights) + max(0, len(child_row_heights) - 1) * child_row_gap
     connection_len = 56
     if side == "right":
         card_x = anchor_x + connection_len
@@ -1033,26 +1043,33 @@ def render_subcategory_entry(entry: FishboneEntry, anchor_x: int, yy: int, *, si
         child_anchor = "end"
         child_circle_x = brace_x - 10
     card_y = yy - 25
-    child_start_y = card_y + card_h / 2 + 5 - (len(entry.children) - 1) * CHILD_ROW_GAP / 2
+    child_top_y = card_y + card_h / 2 - child_block_h / 2
     parts = [
         f'<line x1="{anchor_x}" y1="{yy - 6}" x2="{line_x2}" y2="{yy - 6}" stroke="{PALETTE["line_blue"]}" stroke-width="2" stroke-linecap="round"/>',
         f'<circle cx="{anchor_x}" cy="{yy - 6}" r="8" fill="{PALETTE["background"]}" stroke="{PALETTE["blue"]}" stroke-width="3"/>',
         f'<rect x="{card_x}" y="{card_y}" width="{card_w}" height="{card_h}" rx="8" fill="#F8FBFF" stroke="{PALETTE["soft_blue"]}" stroke-width="2"/>',
-        f'<text x="{text_x}" y="{card_y + 23}" text-anchor="{text_anchor}" font-family="{FONT_STACK}" font-size="15" font-weight="700" fill="{PALETTE["navy"]}">{xml(truncate(entry.text, 18))}</text>',
     ]
+    title_start_y = card_y + 22 - (len(title_lines) - 1) * 2
+    for line_index, line in enumerate(title_lines):
+        parts.append(f'<text x="{text_x}" y="{title_start_y + line_index * 16}" text-anchor="{text_anchor}" font-family="{FONT_STACK}" font-size="15" font-weight="700" fill="{PALETTE["navy"]}">{xml(line)}</text>')
     if entry.children:
-        bullet_center_y = card_y + card_h / 2
-        parts.append(render_child_brace(brace_x, bullet_center_y, len(entry.children), side=side))
-    for child_index, child in enumerate(entry.children):
-        child_y = child_start_y + child_index * CHILD_ROW_GAP
+        parts.append(render_child_brace(brace_x, card_y + card_h / 2, len(entry.children), side=side, height=child_block_h))
+    cursor_y = child_top_y
+    for child_index, lines in enumerate(child_lines):
+        child_y = cursor_y + 13
         parts.append(f'<circle cx="{child_circle_x}" cy="{child_y - 5}" r="4.5" fill="{PALETTE["background"]}" stroke="{PALETTE["gray"]}" stroke-width="1.6"/>')
-        parts.append(f'<text x="{child_text_x}" y="{child_y}" text-anchor="{child_anchor}" font-family="{FONT_STACK}" font-size="13" fill="{PALETTE["muted_text"]}">{xml(truncate(child, 22))}</text>')
+        for line_index, line in enumerate(lines):
+            parts.append(f'<text x="{child_text_x}" y="{child_y + line_index * 14}" text-anchor="{child_anchor}" font-family="{FONT_STACK}" font-size="13" fill="{PALETTE["muted_text"]}">{xml(line)}</text>')
+        cursor_y += child_row_heights[child_index] + child_row_gap
     return "\n".join(parts)
 
 
-def branch_length_for_category(category: Category) -> int:
+def branch_length_for_category(category: Category, start_side: str | None = None) -> int:
     has_subcategory = any(item.kind == "subcategory" for item in category.items)
-    required_length = required_branch_length(category.items)
+    if start_side is None:
+        required_length = max(required_branch_length(category.items, "right"), required_branch_length(category.items, "left"))
+    else:
+        required_length = required_branch_length(category.items, start_side)
     if has_subcategory:
         return max(MEDIUM_BRANCH_LENGTH, required_length)
     if len(category.items) <= 2:
@@ -1060,18 +1077,24 @@ def branch_length_for_category(category: Category) -> int:
     return max(STANDARD_BRANCH_LENGTH, required_length)
 
 
-def required_branch_length(items: list[FishboneEntry]) -> int:
+def required_branch_length(items: list[FishboneEntry], start_side: str = "right") -> int:
     ordered = items if items else [FishboneEntry(kind="cause", text="", children=[]) for _ in range(4)]
-    centers = row_center_offsets(ordered)
+    centers = row_center_offsets(ordered, start_side)
     visual_height = item_top_extent(ordered[0]) + centers[-1] + item_bottom_extent(ordered[-1])
     return math.ceil(visual_height + ROW_EDGE_PADDING * 2)
 
 
-def row_center_offsets(items: list[FishboneEntry]) -> list[float]:
+def row_center_offsets(items: list[FishboneEntry], start_side: str = "right") -> list[float]:
     offsets = [0.0]
-    for previous, current in zip(items, items[1:]):
-        gap = max(MIN_ROW_CENTER_GAP, item_bottom_extent(previous) + item_top_extent(current) + ROW_CLEARANCE)
-        offsets.append(offsets[-1] + gap)
+    last_by_side: dict[str, tuple[float, FishboneEntry]] = {side_for_item(0, start_side): (0.0, items[0])}
+    for index, current in enumerate(items[1:], start=1):
+        side = side_for_item(index, start_side)
+        next_offset = offsets[-1] + MIN_ROW_CENTER_GAP
+        if side in last_by_side:
+            previous_center, previous = last_by_side[side]
+            next_offset = max(next_offset, previous_center + item_bottom_extent(previous) + item_top_extent(current) + ROW_CLEARANCE)
+        offsets.append(next_offset)
+        last_by_side[side] = (next_offset, current)
     return offsets
 
 
@@ -1081,16 +1104,25 @@ def item_visual_height(item: FishboneEntry) -> int:
 
 def item_top_extent(item: FishboneEntry) -> int:
     if item.kind == "subcategory" and item.text:
-        brace_height = {0: 34, 1: 24, 2: 44, 3: 62}.get(len(item.children), 62)
-        return math.ceil(max(25, 8 + brace_height / 2))
-    return 20
+        title_extra = max(0, len(wrap_text(item.text, 16, 3)) - 1) * 8
+        child_block_h = subcategory_child_block_height(item)
+        return math.ceil(max(25, 8 + title_extra + child_block_h / 2))
+    return 30 if len(wrap_text(item.text, 22, 2)) > 1 else 20
 
 
 def item_bottom_extent(item: FishboneEntry) -> int:
     if item.kind == "subcategory" and item.text:
-        brace_height = {0: 34, 1: 24, 2: 44, 3: 62}.get(len(item.children), 62)
-        return math.ceil(max(9, brace_height / 2 - 8))
-    return 8
+        title_extra = max(0, len(wrap_text(item.text, 16, 3)) - 1) * 8
+        child_block_h = subcategory_child_block_height(item)
+        return math.ceil(max(9, title_extra + child_block_h / 2 - 8))
+    return 16 if len(wrap_text(item.text, 22, 2)) > 1 else 8
+
+
+def subcategory_child_block_height(item: FishboneEntry) -> int:
+    if not item.children:
+        return 34
+    line_counts = [len(wrap_text(child, 22, 2)) for child in item.children]
+    return sum(count * 14 for count in line_counts) + max(0, len(line_counts) - 1) * 8
 
 
 def side_for_item(row: int, start_side: str) -> str:
@@ -1101,9 +1133,9 @@ def opposite_side(side: str) -> str:
     return "left" if side == "right" else "right"
 
 
-def render_child_brace(x: float, center_y: float, child_count: int, *, side: str) -> str:
+def render_child_brace(x: float, center_y: float, child_count: int, *, side: str, height: float | None = None) -> str:
     height_by_count = {1: 24, 2: 44, 3: 62}
-    height = height_by_count.get(child_count, 62)
+    height = max(height_by_count.get(child_count, 62), height or 0)
     top = center_y - height / 2
     bottom = center_y + height / 2
     mid = center_y
@@ -1154,9 +1186,9 @@ def render_topic_block(data: dict[str, Any], layout: RenderLayout) -> str:
 
 
 def topic_font_size(text: str) -> int:
-    if len(text) > 34:
+    if visual_len(text) > 34:
         return 25
-    if len(text) > 25:
+    if visual_len(text) > 25:
         return 28
     return 31
 
@@ -1186,34 +1218,15 @@ def render_target_icon(cx: float, cy: float) -> str:
 
 
 def wrap_label(text: str, limit: int, max_lines: int) -> list[str]:
-    words = text.split()
-    if not words:
-        return [""]
-    lines: list[str] = []
-    current = ""
-    for word in words:
-        candidate = f"{current} {word}".strip()
-        if len(candidate) <= limit or not current:
-            current = candidate
-        else:
-            lines.append(current)
-            current = word
-    if current:
-        lines.append(current)
-    if len(lines) > max_lines:
-        lines = lines[:max_lines]
-        lines[-1] = truncate(lines[-1], limit - 1) + "..."
-    return lines
+    return wrap_text(text, limit, max_lines)
 
 
 def truncate(text: str, limit: int) -> str:
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 3)].rstrip() + "..."
+    return truncate_text(text, limit)
 
 
 def contains_cjk(text: str) -> bool:
-    return any("\u4e00" <= char <= "\u9fff" for char in text)
+    return any(visual_len(char) == 2 for char in text)
 
 
 def xml(value: Any) -> str:

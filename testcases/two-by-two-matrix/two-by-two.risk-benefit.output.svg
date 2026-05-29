@@ -72,80 +72,80 @@
 </g>
 <g id="matrix-side-table">
 <text x="1086" y="140" font-family="Arial" font-size="24" font-weight="700" fill="#0B2E63">Decision Table</text>
-<rect x="1086" y="158" width="770" height="290.0" rx="10" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.3"/>
-<rect x="1086" y="158" width="770" height="58" rx="10" fill="#0B2E63"/>
-<rect x="1086" y="187" width="770" height="29" fill="#0B2E63"/>
-<text x="1112.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">ID</text>
-<text x="1268.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Option</text>
-<line x1="1138.0" y1="158" x2="1138.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1433.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Benefit</text>
-<line x1="1398.0" y1="158" x2="1398.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1503.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Risk</text>
-<line x1="1468.0" y1="158" x2="1468.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1607.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Quadrant</text>
-<line x1="1538.0" y1="158" x2="1538.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1766.0" y="185.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Decision</text>
-<line x1="1676.0" y1="158" x2="1676.0" y2="216" stroke="#D8E2EE" stroke-width="1"/>
-<line x1="1086" y1="216" x2="1856" y2="216" stroke="#D8E2EE" stroke-width="1"/>
+<rect x="1086" y="158" width="770" height="226.0" rx="10" fill="#FFFFFF" stroke="#9AA9BD" stroke-width="1.3"/>
+<rect x="1086" y="158" width="770" height="50" rx="10" fill="#0B2E63"/>
+<rect x="1086" y="187" width="770" height="21" fill="#0B2E63"/>
+<text x="1112.0" y="188.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">ID</text>
+<text x="1268.0" y="188.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Option</text>
+<line x1="1138.0" y1="158" x2="1138.0" y2="208" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1433.0" y="188.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Benefit</text>
+<line x1="1398.0" y1="158" x2="1398.0" y2="208" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1503.0" y="188.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Risk</text>
+<line x1="1468.0" y1="158" x2="1468.0" y2="208" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1607.0" y="188.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Quadrant</text>
+<line x1="1538.0" y1="158" x2="1538.0" y2="208" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1766.0" y="188.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#FFFFFF">Decision</text>
+<line x1="1676.0" y1="158" x2="1676.0" y2="208" stroke="#D8E2EE" stroke-width="1"/>
+<line x1="1086" y1="208" x2="1856" y2="208" stroke="#D8E2EE" stroke-width="1"/>
 <g class="matrix-table-row" data-item-id="O1">
-<line class="matrix-table-body-grid" x1="1138.0" y1="216.0" x2="1138.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1398.0" y1="216.0" x2="1398.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1468.0" y1="216.0" x2="1468.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1538.0" y1="216.0" x2="1538.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1676.0" y1="216.0" x2="1676.0" y2="274.0" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1112.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O1</text>
-<text x="1268.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Switch supplier</text>
-<text x="1433.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
-<text x="1503.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">4</text>
-<text x="1607.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Strategic Bet</text>
-<text x="1766.0" y="250.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Mitigate and review</text>
+<line class="matrix-table-body-grid" x1="1138.0" y1="208.0" x2="1138.0" y2="252.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="208.0" x2="1398.0" y2="252.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="208.0" x2="1468.0" y2="252.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="208.0" x2="1538.0" y2="252.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="208.0" x2="1676.0" y2="252.0" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="235.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O1</text>
+<text x="1268.0" y="235.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Switch supplier</text>
+<text x="1433.0" y="235.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1503.0" y="235.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1607.0" y="235.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Strategic Bet</text>
+<text x="1766.0" y="235.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Mitigate and review</text>
 </g>
+<line class="matrix-table-row-separator" x1="1086" y1="252.0" x2="1856" y2="252.0" stroke="#C5D3E4" stroke-width="1"/>
 <g class="matrix-table-row" data-item-id="O2">
-<rect x="1086" y="274.0" width="770" height="58.0" fill="#F8FBFF"/>
-<line class="matrix-table-body-grid" x1="1138.0" y1="274.0" x2="1138.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1398.0" y1="274.0" x2="1398.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1468.0" y1="274.0" x2="1468.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1538.0" y1="274.0" x2="1538.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1676.0" y1="274.0" x2="1676.0" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<text x="1112.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O2</text>
-<text x="1268.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Minor process update</text>
-<text x="1433.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">2</text>
-<text x="1503.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">1</text>
-<text x="1607.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Safe but Limited</text>
-<text x="1766.0" y="308.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Low priority</text>
+<rect x="1086" y="252.0" width="770" height="44.0" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="252.0" x2="1138.0" y2="296.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="252.0" x2="1398.0" y2="296.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="252.0" x2="1468.0" y2="296.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="252.0" x2="1538.0" y2="296.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="252.0" x2="1676.0" y2="296.0" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="279.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O2</text>
+<text x="1268.0" y="279.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Minor process update</text>
+<text x="1433.0" y="279.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">2</text>
+<text x="1503.0" y="279.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1607.0" y="279.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Safe but Limited</text>
+<text x="1766.0" y="279.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Low priority</text>
 </g>
+<line class="matrix-table-row-separator" x1="1086" y1="296.0" x2="1856" y2="296.0" stroke="#C5D3E4" stroke-width="1"/>
 <g class="matrix-table-row" data-item-id="O3">
-<line class="matrix-table-body-grid" x1="1138.0" y1="332.0" x2="1138.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1398.0" y1="332.0" x2="1398.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1468.0" y1="332.0" x2="1468.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1538.0" y1="332.0" x2="1538.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1676.0" y1="332.0" x2="1676.0" y2="390.0" stroke="#D8E2EE" stroke-width="1"/>
-<text x="1112.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O3</text>
-<text x="1268.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Add automated inspection</text>
-<text x="1433.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">4</text>
-<text x="1503.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">3</text>
-<text x="1607.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Strategic Bet</text>
-<text x="1766.0" y="366.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Mitigate and review</text>
+<line class="matrix-table-body-grid" x1="1138.0" y1="296.0" x2="1138.0" y2="340.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="296.0" x2="1398.0" y2="340.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="296.0" x2="1468.0" y2="340.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="296.0" x2="1538.0" y2="340.0" stroke="#D8E2EE" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="296.0" x2="1676.0" y2="340.0" stroke="#D8E2EE" stroke-width="1"/>
+<text x="1112.0" y="323.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O3</text>
+<text x="1268.0" y="323.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Add automated inspection</text>
+<text x="1433.0" y="323.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">4</text>
+<text x="1503.0" y="323.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">3</text>
+<text x="1607.0" y="323.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Strategic Bet</text>
+<text x="1766.0" y="323.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Mitigate and review</text>
 </g>
+<line class="matrix-table-row-separator" x1="1086" y1="340.0" x2="1856" y2="340.0" stroke="#C5D3E4" stroke-width="1"/>
 <g class="matrix-table-row" data-item-id="O4">
-<rect x="1086" y="390.0" width="770" height="58.0" fill="#F8FBFF"/>
-<line class="matrix-table-body-grid" x1="1138.0" y1="390.0" x2="1138.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1398.0" y1="390.0" x2="1398.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1468.0" y1="390.0" x2="1468.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1538.0" y1="390.0" x2="1538.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-body-grid" x1="1676.0" y1="390.0" x2="1676.0" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<text x="1112.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O4</text>
-<text x="1268.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Skip incoming validation</text>
-<text x="1433.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">1</text>
-<text x="1503.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
-<text x="1607.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Avoid</text>
-<text x="1766.0" y="424.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Avoid</text>
+<rect x="1086" y="340.0" width="770" height="44.0" fill="#F8FBFF"/>
+<line class="matrix-table-body-grid" x1="1138.0" y1="340.0" x2="1138.0" y2="384.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1398.0" y1="340.0" x2="1398.0" y2="384.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1468.0" y1="340.0" x2="1468.0" y2="384.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1538.0" y1="340.0" x2="1538.0" y2="384.0" stroke="#C5D3E4" stroke-width="1"/>
+<line class="matrix-table-body-grid" x1="1676.0" y1="340.0" x2="1676.0" y2="384.0" stroke="#C5D3E4" stroke-width="1"/>
+<text x="1112.0" y="367.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">O4</text>
+<text x="1268.0" y="367.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0B2E63">Skip incoming validation</text>
+<text x="1433.0" y="367.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">1</text>
+<text x="1503.0" y="367.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">5</text>
+<text x="1607.0" y="367.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Avoid</text>
+<text x="1766.0" y="367.0" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#5B677A">Avoid</text>
 </g>
-<line class="matrix-table-row-separator" x1="1086" y1="274.0" x2="1856" y2="274.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-row-separator" x1="1086" y1="332.0" x2="1856" y2="332.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-row-separator" x1="1086" y1="390.0" x2="1856" y2="390.0" stroke="#C5D3E4" stroke-width="1"/>
-<line class="matrix-table-row-separator" x1="1086" y1="448.0" x2="1856" y2="448.0" stroke="#C5D3E4" stroke-width="1"/>
-<rect x="1086" y="158" width="770" height="290.0" rx="10" fill="none" stroke="#9AA9BD" stroke-width="1.3"/>
+<line class="matrix-table-row-separator" x1="1086" y1="384.0" x2="1856" y2="384.0" stroke="#C5D3E4" stroke-width="1"/>
+<rect x="1086" y="158" width="770" height="226.0" rx="10" fill="none" stroke="#9AA9BD" stroke-width="1.3"/>
 </g>
 <g id="matrix-legend">
 <rect x="84" y="910" width="960" height="88" rx="12" fill="#F7FAFD" stroke="#9AA9BD" stroke-width="1.3"/>

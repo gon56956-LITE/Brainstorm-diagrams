@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree as ET
 
+from renderers.text_utils import chars_for_width as shared_chars_for_width, truncate_text, visual_len as shared_visual_len, wrap_text as shared_wrap_text
+
 
 ROOT = Path(__file__).resolve().parents[2]
 LUCIDE_CANDIDATES = ROOT / "assets" / "lucide-candidates"
@@ -881,28 +883,8 @@ def render_wrapped_text(
 
 
 def wrap_text(text: str, max_chars: int, max_lines: int | None = None) -> list[str]:
-    text = collapse(text)
-    if not text:
-        return []
-    max_chars = max(6, max_chars)
-    words = text.split()
-    lines: list[str] = []
-    current = ""
-    for word in words:
-        candidate = word if not current else f"{current} {word}"
-        if visual_len(candidate) <= max_chars:
-            current = candidate
-        else:
-            if current:
-                lines.append(current)
-            current = trim_word(word, max_chars)
-        if max_lines and len(lines) >= max_lines:
-            break
-    if current and (not max_lines or len(lines) < max_lines):
-        lines.append(current)
-    if max_lines and len(lines) == max_lines and words and visual_len(" ".join(words)) > visual_len(" ".join(lines)):
-        lines[-1] = ellipsize(lines[-1], max_chars)
-    return lines
+    lines = shared_wrap_text(text, max(6, max_chars), max_lines)
+    return [] if lines == [""] else lines
 
 
 def compact_cell_lines(text: str, max_chars: int, max_lines: int) -> list[str]:
@@ -919,22 +901,15 @@ def compact_cell_lines(text: str, max_chars: int, max_lines: int) -> list[str]:
 
 
 def chars_for_width(width: float, font_size: float = 12.5) -> int:
-    return max(4, int(width / (font_size * 0.52)))
+    return shared_chars_for_width(width, font_size)
 
 
 def visual_len(text: str) -> int:
-    return sum(2 if "\u4e00" <= char <= "\u9fff" else 1 for char in text)
+    return shared_visual_len(text)
 
 
 def trim_word(word: str, max_chars: int) -> str:
-    if visual_len(word) <= max_chars:
-        return word
-    result = ""
-    for char in word:
-        if visual_len(result + char) > max_chars - 3:
-            break
-        result += char
-    return result + "..."
+    return truncate_text(word, max_chars)
 
 
 def ellipsize(text: str, max_chars: int) -> str:

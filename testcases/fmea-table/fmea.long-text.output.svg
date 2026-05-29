@@ -48,7 +48,7 @@
 <text x="40" y="309.5" font-size="13" fill="#062B5F" font-weight="700">power stability</text>
 <text x="176.0" y="267.5" font-size="12.5" fill="#062B5F">Output power</text>
 <text x="176.0" y="283.5" font-size="12.5" fill="#062B5F">drifts beyond the</text>
-<text x="176.0" y="299.5" font-size="12.5" fill="#062B5F">customer-facing</text>
+<text x="176.0" y="299.5" font-size="12.5" fill="#062B5F">customer-facing...</text>
 <circle cx="334" cy="238.5" r="2.4" fill="#0B3A78"/>
 <text x="343.0" y="242.5" font-size="12.5" fill="#062B5F">Customer may observe</text>
 <text x="343.0" y="258.5" font-size="12.5" fill="#062B5F">unstable link margin</text>
@@ -56,15 +56,15 @@
 <circle cx="334" cy="288.5" r="2.4" fill="#0B3A78"/>
 <text x="343.0" y="292.5" font-size="12.5" fill="#062B5F">Pilot reliability</text>
 <text x="343.0" y="308.5" font-size="12.5" fill="#062B5F">qualification may</text>
-<text x="343.0" y="324.5" font-size="12.5" fill="#062B5F">require repeat aging</text>
+<text x="343.0" y="324.5" font-size="12.5" fill="#062B5F">require repeat agin...</text>
 <circle cx="514" cy="238.5" r="2.4" fill="#0B3A78"/>
 <text x="523.0" y="242.5" font-size="12.5" fill="#062B5F">Package-induced mechanical</text>
 <text x="523.0" y="258.5" font-size="12.5" fill="#062B5F">movement during thermal</text>
 <text x="523.0" y="274.5" font-size="12.5" fill="#062B5F">exposure</text>
 <circle cx="514" cy="288.5" r="2.4" fill="#0B3A78"/>
 <text x="523.0" y="292.5" font-size="12.5" fill="#062B5F">Adhesive creep combined with</text>
-<text x="523.0" y="308.5" font-size="12.5" fill="#062B5F">coefficient-of-thermal-expan...</text>
-<text x="523.0" y="324.5" font-size="12.5" fill="#062B5F">mismatch</text>
+<text x="523.0" y="308.5" font-size="12.5" fill="#062B5F">coefficient-of-thermal-expansio</text>
+<text x="523.0" y="324.5" font-size="12.5" fill="#062B5F">n mismatch</text>
 <circle cx="749" cy="246.5" r="2.4" fill="#0B3A78"/>
 <text x="758.0" y="250.5" font-size="12.5" fill="#062B5F">Released package stack-up</text>
 <text x="758.0" y="266.5" font-size="12.5" fill="#062B5F">design rule</text>
@@ -79,7 +79,7 @@
 <circle cx="959" cy="288.5" r="2.4" fill="#0B3A78"/>
 <text x="968.0" y="292.5" font-size="12.5" fill="#062B5F">Thermal resistance</text>
 <text x="968.0" y="308.5" font-size="12.5" fill="#062B5F">measurement and</text>
-<text x="968.0" y="324.5" font-size="12.5" fill="#062B5F">high-temperature aging</text>
+<text x="968.0" y="324.5" font-size="12.5" fill="#062B5F">high-temperature aging...</text>
 <text class="fmea-score-cell" data-score="9" x="1173.5" y="285.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D12B2B">9</text>
 <text class="fmea-score-cell" data-score="5" x="1228.5" y="285.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D79200">5</text>
 <text class="fmea-score-cell" data-score="6" x="1283.5" y="285.0" font-size="16" font-weight="700" text-anchor="middle" fill="#D79200">6</text>
@@ -93,7 +93,8 @@
 <text x="1403.0" y="292.5" font-size="12.5" fill="#062B5F">Run controlled aging split</text>
 <text x="1403.0" y="308.5" font-size="12.5" fill="#062B5F">by adhesive lot and package</text>
 <text x="1403.0" y="324.5" font-size="12.5" fill="#062B5F">assembly fixture</text>
-<text x="1643.5" y="283.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">Reliabi...</text>
+<text x="1643.5" y="275.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">Reliabilit</text>
+<text x="1643.5" y="291.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">y</text>
 <text x="1738.5" y="283.0" font-size="12.5" font-weight="500" fill="#062B5F" text-anchor="middle">2026-06-28</text>
 <g class="fmea-status-badge" data-status="Open">
 <circle cx="1847.5" cy="265.5" r="13" fill="#2B6CBF"/>
@@ -111,14 +112,14 @@
 <text x="40" y="427.5" font-size="13" fill="#062B5F" font-weight="700">behavior</text>
 <text x="176.0" y="385.5" font-size="12.5" fill="#062B5F">Compensation loop</text>
 <text x="176.0" y="401.5" font-size="12.5" fill="#062B5F">masks early drift</text>
-<text x="176.0" y="417.5" font-size="12.5" fill="#062B5F">and delays</text>
+<text x="176.0" y="417.5" font-size="12.5" fill="#062B5F">and delays...</text>
 <circle cx="334" cy="364.5" r="2.4" fill="#0B3A78"/>
 <text x="343.0" y="368.5" font-size="12.5" fill="#062B5F">Late investigation</text>
 <text x="343.0" y="384.5" font-size="12.5" fill="#062B5F">start</text>
 <circle cx="334" cy="398.5" r="2.4" fill="#0B3A78"/>
 <text x="343.0" y="402.5" font-size="12.5" fill="#062B5F">Ambiguous separation</text>
 <text x="343.0" y="418.5" font-size="12.5" fill="#062B5F">between optical</text>
-<text x="343.0" y="434.5" font-size="12.5" fill="#062B5F">degradation and</text>
+<text x="343.0" y="434.5" font-size="12.5" fill="#062B5F">degradation and...</text>
 <circle cx="514" cy="372.5" r="2.4" fill="#0B3A78"/>
 <text x="523.0" y="376.5" font-size="12.5" fill="#062B5F">Logging granularity is too</text>
 <text x="523.0" y="392.5" font-size="12.5" fill="#062B5F">coarse</text>

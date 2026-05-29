@@ -15,8 +15,8 @@
 <rect x="48" y="46" width="500" height="220.0" rx="14" fill="#FFFFFF" stroke="#6E93BD" stroke-width="1.8" filter="url(#subtleShadow)"/>
 <text x="76" y="90" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B2E63">Event Detail</text>
 <line x1="76" y1="110" x2="520" y2="110" stroke="#CBD5E1" stroke-width="1.5"/>
-<text x="76" y="142" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">The system does not complete startup after power is</text>
-<text x="76" y="169" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">applied.</text>
+<text x="76" y="142" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">The system does not complete startup after power</text>
+<text x="76" y="169" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" fill="#5B677A">is applied.</text>
 <text x="76" y="196" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Observed during validation after overnight storage</text>
 <text x="76" y="220" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#5B677A">- Use the checks below in sequence</text>
 </g>

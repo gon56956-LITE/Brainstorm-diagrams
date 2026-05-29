@@ -10,6 +10,8 @@ from typing import Any
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 
+from renderers.text_utils import chars_for_width, estimate_text_width as measure_text_width, truncate_text, wrap_text
+
 
 WIDTH = 1920
 HEIGHT = 1080
@@ -598,7 +600,7 @@ def node_size(node: FaultNode, depth: int) -> tuple[int, int]:
 def top_event_size(node: FaultNode) -> tuple[int, int]:
     text = join_bilingual(node.label, node.label_zh)
     text_width = TOP_EVENT_W - TOP_EVENT_TEXT_PADDING_X - 20
-    char_limit = max(8, int(text_width / (24 * 0.55)))
+    char_limit = chars_for_width(text_width, 24, latin_factor=0.55, minimum=8)
     line_count = len(wrap_label(text, char_limit, None))
     height = max(TOP_EVENT_H, TOP_EVENT_TEXT_PADDING_Y * 2 + line_count * (24 + 4))
     return TOP_EVENT_W, height
@@ -607,7 +609,7 @@ def top_event_size(node: FaultNode) -> tuple[int, int]:
 def intermediate_event_size(node: FaultNode) -> tuple[int, int]:
     text = join_bilingual(node.label, node.label_zh)
     text_width = INTERMEDIATE_W - INTERMEDIATE_TEXT_PADDING_X * 2
-    char_limit = max(8, int(text_width / (18 * 0.55)))
+    char_limit = chars_for_width(text_width, 18, latin_factor=0.55, minimum=8)
     line_count = len(wrap_label(text, char_limit, None))
     height = max(INTERMEDIATE_H, INTERMEDIATE_TEXT_PADDING_Y * 2 + line_count * (18 + 4))
     return INTERMEDIATE_W, height
@@ -618,7 +620,7 @@ def basic_event_size(node: FaultNode) -> tuple[int, int]:
     estimated = estimate_text_width(text, 15) + BASIC_TEXT_PADDING_X * 2
     width = round_up(max(BASIC_W, min(BASIC_MAX_W, math.ceil(estimated))), 10)
     text_width = width - BASIC_TEXT_PADDING_X * 2
-    char_limit = max(8, int(text_width / (15 * 0.55)))
+    char_limit = chars_for_width(text_width, 15, latin_factor=0.55, minimum=8)
     line_count = len(wrap_label(text, char_limit, None))
     height = max(BASIC_H, BASIC_TEXT_PADDING_Y * 2 + line_count * 19)
     return width, height
@@ -704,7 +706,7 @@ def render_event_detail_panel(data: dict[str, Any]) -> str:
     body_size = 17
     line_gap = 23
     body_width = w - padding * 2
-    body_char_limit = max(18, int(body_width / (body_size * 0.54)))
+    body_char_limit = chars_for_width(body_width, body_size, latin_factor=0.54, minimum=18)
 
     visible_lines: list[tuple[str, bool]] = []
     for line in wrap_label(text, body_char_limit, 3) if text else []:
@@ -925,7 +927,7 @@ def render_centered_text(
     bold: bool,
 ) -> list[str]:
     text = join_bilingual(node.label, node.label_zh)
-    char_limit = max(8, int(width / (font_size * 0.55)))
+    char_limit = chars_for_width(width, font_size, latin_factor=0.55, minimum=8)
     lines = wrap_label(text, char_limit, max_lines)
     line_height = font_size + 4
     visual_height = len(lines) * line_height
@@ -938,17 +940,7 @@ def render_centered_text(
 
 
 def estimate_text_width(text: str, font_size: int) -> float:
-    width = 0.0
-    for char in text:
-        if "\u4e00" <= char <= "\u9fff":
-            width += font_size
-        elif char.isupper():
-            width += font_size * 0.62
-        elif char in {" ", "-", "/"}:
-            width += font_size * 0.35
-        else:
-            width += font_size * 0.54
-    return width
+    return measure_text_width(text, font_size)
 
 
 def render_gate(gate: str, cx: float, cy: float, *, scale: float = 1.0) -> str:
@@ -1070,33 +1062,11 @@ def clean_text(value: Any) -> str:
 
 
 def wrap_label(text: str, limit: int, max_lines: int | None) -> list[str]:
-    if not text:
-        return [""]
-    words = text.split()
-    if len(words) == 1 and len(words[0]) > limit:
-        lines = [words[0][i : i + limit] for i in range(0, len(words[0]), limit)]
-    else:
-        lines: list[str] = []
-        current = ""
-        for word in words:
-            candidate = f"{current} {word}".strip()
-            if len(candidate) <= limit or not current:
-                current = candidate
-            else:
-                lines.append(current)
-                current = word
-        if current:
-            lines.append(current)
-    if max_lines is not None and len(lines) > max_lines:
-        lines = lines[:max_lines]
-        lines[-1] = truncate(lines[-1], max(4, limit - 1))
-    return lines
+    return wrap_text(text, limit, max_lines)
 
 
 def truncate(text: str, limit: int) -> str:
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 3)].rstrip() + "..."
+    return truncate_text(text, limit)
 
 
 def round_up(value: int, step: int) -> int:

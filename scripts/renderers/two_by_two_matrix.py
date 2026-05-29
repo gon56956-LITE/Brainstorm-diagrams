@@ -9,6 +9,8 @@ from typing import Any
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 
+from renderers.text_utils import chars_for_width, truncate_text, visual_len as shared_visual_len, wrap_text as shared_wrap_text
+
 
 ROOT = Path(__file__).resolve().parents[2]
 LUCIDE_ICON_DIR = ROOT / "assets" / "lucide-candidates"
@@ -39,6 +41,11 @@ TABLE_X = 1086
 TABLE_Y = 158
 TABLE_W = 770
 TABLE_H = 840
+TABLE_HEADER_LINE_GAP = 15
+TABLE_BODY_LINE_GAP = 15
+TABLE_HEADER_MIN_H = 50
+TABLE_BODY_MIN_H = 44
+TABLE_ROW_PAD_Y = 12
 LEGEND_X = 84
 LEGEND_Y = 910
 LEGEND_W = 960
@@ -312,15 +319,18 @@ def normalize_input(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def render_two_by_two_matrix(data: dict[str, Any]) -> str:
+    table_layout = side_table_layout(data) if data["show_side_table"] else None
+    canvas_width = max(WIDTH, TABLE_X + (table_layout["width"] if table_layout else TABLE_W) + 64)
+    canvas_height = max(HEIGHT, (table_layout["height"] + TABLE_Y + 60) if table_layout else HEIGHT)
     parts = [
-        svg_header(),
+        svg_header(canvas_width, canvas_height),
         defs(),
-        f'<rect width="{WIDTH}" height="{HEIGHT}" fill="{PALETTE["background"]}"/>',
+        f'<rect width="{canvas_width}" height="{canvas_height}" fill="{PALETTE["background"]}"/>',
         render_title(data["title"], data["subtitle"]),
         render_matrix(data),
     ]
     if data["show_side_table"]:
-        parts.append(render_side_table(data))
+        parts.append(render_side_table(data, table_layout))
     if data["show_legend"]:
         parts.append(render_legend(data))
     if data["show_notes"]:
@@ -393,16 +403,18 @@ def render_quadrant_card(quadrant: str, data: dict[str, Any]) -> str:
 
 def render_matrix_item(item: MatrixItem, cx: float, y: float, text_width: float, color: str) -> list[str]:
     label = item.name
-    max_chars = max(14, int(text_width / 8.2))
+    max_chars = chars_for_width(text_width, 8.2 / 0.52, minimum=14)
     lines = wrap_text(label, max_chars, max_lines=1)
+    item_label = truncate_text(label, max_chars) if visual_len(label) > max_chars else lines[0]
     return [
         f'<circle class="matrix-item-marker" cx="{cx:.1f}" cy="{y:.1f}" r="13" fill="{color}"/>',
         f'<text x="{cx:.1f}" y="{y + 5:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="12" font-weight="700" fill="#FFFFFF">{escape(item.id[:3])}</text>',
-        f'<text class="matrix-item-label" x="{cx + 25:.1f}" y="{y + 6:.1f}" font-family="{FONT_STACK}" font-size="16" font-weight="700" fill="{PALETTE["navy"]}">{escape(lines[0])}</text>',
+        f'<text class="matrix-item-label" x="{cx + 25:.1f}" y="{y + 6:.1f}" font-family="{FONT_STACK}" font-size="16" font-weight="700" fill="{PALETTE["navy"]}">{escape(item_label)}</text>',
     ]
 
 
-def render_side_table(data: dict[str, Any]) -> str:
+def render_side_table(data: dict[str, Any], layout: dict[str, Any] | None = None) -> str:
+    layout = layout or side_table_layout(data)
     preset = data["preset_config"]
     language = data["language"]
     headers = [
@@ -413,59 +425,110 @@ def render_side_table(data: dict[str, Any]) -> str:
         localized({"en": "Quadrant", "zh": "象限"}, language),
         localized(preset["action_column"], language),
     ]
-    widths = [52, 260, 70, 70, 138, 180]
-    row_count = len(data["items"])
-    header_h = 58
-    row_h = min(58, (TABLE_H - header_h) / max(1, row_count))
-    table_h = header_h + row_h * max(1, row_count)
+    widths = layout["widths"]
+    table_w = layout["width"]
+    header_h = layout["header_h"]
+    table_lines = layout["row_lines"]
+    row_heights = layout["row_heights"]
+    table_h = layout["height"]
+    header_lines_by_col = layout["header_lines"]
     header_font_size = 13
     body_font_size = 13
-    table_line_gap = 17
     chunks = [
         '<g id="matrix-side-table">',
         f'<text x="{TABLE_X}" y="{TABLE_Y - 18}" font-family="{FONT_STACK}" font-size="24" font-weight="700" fill="{PALETTE["navy"]}">{escape(localized({"en": "Decision Table", "zh": "决策表"}, language))}</text>',
-        f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{TABLE_W}" height="{table_h:.1f}" rx="10" fill="#FFFFFF" stroke="{PALETTE["border"]}" stroke-width="1.3"/>',
-        f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{TABLE_W}" height="{header_h}" rx="10" fill="{PALETTE["navy"]}"/>',
-        f'<rect x="{TABLE_X}" y="{TABLE_Y + 29}" width="{TABLE_W}" height="29" fill="{PALETTE["navy"]}"/>',
+        f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{table_w}" height="{table_h:.1f}" rx="10" fill="#FFFFFF" stroke="{PALETTE["border"]}" stroke-width="1.3"/>',
+        f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{table_w}" height="{header_h}" rx="10" fill="{PALETTE["navy"]}"/>',
+        f'<rect x="{TABLE_X}" y="{TABLE_Y + 29}" width="{table_w}" height="{max(0, header_h - 29)}" fill="{PALETTE["navy"]}"/>',
     ]
     x_cursor = TABLE_X
-    for header, width in zip(headers, widths):
-        header_lines = wrap_text(header, max(4, int((width - 12) / 7.4)), max_lines=2)
-        header_y = TABLE_Y + 27 - (len(header_lines) - 1) * (table_line_gap / 2)
+    for header_lines, width in zip(header_lines_by_col, widths):
+        header_y = TABLE_Y + header_h / 2 - (len(header_lines) - 1) * (TABLE_HEADER_LINE_GAP / 2) + 5
         for line_index, line in enumerate(header_lines):
-            chunks.append(f'<text x="{x_cursor + width / 2:.1f}" y="{header_y + line_index * table_line_gap:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="{header_font_size}" font-weight="700" fill="#FFFFFF">{escape(line)}</text>')
+            chunks.append(f'<text x="{x_cursor + width / 2:.1f}" y="{header_y + line_index * TABLE_HEADER_LINE_GAP:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="{header_font_size}" font-weight="700" fill="#FFFFFF">{escape(line)}</text>')
         if x_cursor > TABLE_X:
             chunks.append(f'<line x1="{x_cursor:.1f}" y1="{TABLE_Y}" x2="{x_cursor:.1f}" y2="{TABLE_Y + header_h}" stroke="#D8E2EE" stroke-width="1"/>')
         x_cursor += width
-    chunks.append(f'<line x1="{TABLE_X}" y1="{TABLE_Y + header_h}" x2="{TABLE_X + TABLE_W}" y2="{TABLE_Y + header_h}" stroke="#D8E2EE" stroke-width="1"/>')
+    chunks.append(f'<line x1="{TABLE_X}" y1="{TABLE_Y + header_h}" x2="{TABLE_X + table_w}" y2="{TABLE_Y + header_h}" stroke="#D8E2EE" stroke-width="1"/>')
 
-    for row_index, item in enumerate(data["items"]):
-        y = TABLE_Y + header_h + row_index * row_h
+    y = TABLE_Y + header_h
+    for row_index, (item, row, row_h) in enumerate(zip(data["items"], table_lines, row_heights)):
         is_alt_row = row_index % 2 == 1
         body_grid = "#C5D3E4" if is_alt_row else "#D8E2EE"
         chunks.append(f'<g class="matrix-table-row" data-item-id="{escape(item.id)}">')
         if is_alt_row:
-            chunks.append(f'<rect x="{TABLE_X}" y="{y:.1f}" width="{TABLE_W}" height="{row_h:.1f}" fill="#F8FBFF"/>')
+            chunks.append(f'<rect x="{TABLE_X}" y="{y:.1f}" width="{table_w}" height="{row_h:.1f}" fill="#F8FBFF"/>')
         x_cursor = TABLE_X
         for width in widths[:-1]:
             x_cursor += width
             chunks.append(f'<line class="matrix-table-body-grid" x1="{x_cursor:.1f}" y1="{y:.1f}" x2="{x_cursor:.1f}" y2="{y + row_h:.1f}" stroke="{body_grid}" stroke-width="1"/>')
-        row = table_row_values(item, data)
         x_cursor = TABLE_X
-        for col_index, (value, width) in enumerate(zip(row, widths)):
-            text = wrap_text(value, max(4, int((width - 12) / 7.2)), max_lines=2)
-            text_y = y + row_h / 2 - (len(text) - 1) * (table_line_gap / 2) + 5
+        for col_index, (text, width) in enumerate(zip(row, widths)):
+            text_y = y + row_h / 2 - (len(text) - 1) * (TABLE_BODY_LINE_GAP / 2) + 5
             color = PALETTE["navy"] if col_index in {0, 1} else PALETTE["gray_text"]
             for line_index, line in enumerate(text):
-                chunks.append(f'<text x="{x_cursor + width / 2:.1f}" y="{text_y + line_index * table_line_gap:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="{body_font_size}" font-weight="600" fill="{color}">{escape(line)}</text>')
+                chunks.append(f'<text x="{x_cursor + width / 2:.1f}" y="{text_y + line_index * TABLE_BODY_LINE_GAP:.1f}" text-anchor="middle" font-family="{FONT_STACK}" font-size="{body_font_size}" font-weight="600" fill="{color}">{escape(line)}</text>')
             x_cursor += width
         chunks.append("</g>")
-    for index in range(1, row_count + 1):
-        y = TABLE_Y + header_h + index * row_h
-        chunks.append(f'<line class="matrix-table-row-separator" x1="{TABLE_X}" y1="{y:.1f}" x2="{TABLE_X + TABLE_W}" y2="{y:.1f}" stroke="#C5D3E4" stroke-width="1"/>')
-    chunks.append(f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{TABLE_W}" height="{table_h:.1f}" rx="10" fill="none" stroke="{PALETTE["border"]}" stroke-width="1.3"/>')
+        y += row_h
+        chunks.append(f'<line class="matrix-table-row-separator" x1="{TABLE_X}" y1="{y:.1f}" x2="{TABLE_X + table_w}" y2="{y:.1f}" stroke="#C5D3E4" stroke-width="1"/>')
+    chunks.append(f'<rect x="{TABLE_X}" y="{TABLE_Y}" width="{table_w}" height="{table_h:.1f}" rx="10" fill="none" stroke="{PALETTE["border"]}" stroke-width="1.3"/>')
     chunks.append("</g>")
     return "\n".join(chunks)
+
+
+def side_table_layout(data: dict[str, Any]) -> dict[str, Any]:
+    widths = side_table_widths(data)
+    language = data["language"]
+    preset = data["preset_config"]
+    headers = [
+        "ID",
+        localized(preset["table_item"], language),
+        localized(preset["y_column"], language),
+        localized(preset["x_column"], language),
+        localized({"en": "Quadrant", "zh": "象限"}, language),
+        localized(preset["action_column"], language),
+    ]
+    header_lines = [wrap_text(header, chars_for_width(width - 12, 7.4 / 0.52), max_lines=None) for header, width in zip(headers, widths)]
+    header_h = max(TABLE_HEADER_MIN_H, TABLE_ROW_PAD_Y + max(len(lines) for lines in header_lines) * TABLE_HEADER_LINE_GAP)
+    rows = [side_table_row_lines(table_row_values(item, data), widths) for item in data["items"]]
+    row_heights = [max(TABLE_BODY_MIN_H, TABLE_ROW_PAD_Y + max(len(lines) for lines in row) * TABLE_BODY_LINE_GAP) for row in rows]
+    return {
+        "widths": widths,
+        "width": sum(widths),
+        "header_lines": header_lines,
+        "header_h": header_h,
+        "row_lines": rows,
+        "row_heights": row_heights,
+        "height": header_h + sum(row_heights),
+    }
+
+
+def side_table_widths(data: dict[str, Any]) -> list[int]:
+    widths = [52, 260, 70, 70, 138, 180]
+    rows = [table_row_values(item, data) for item in data["items"]]
+    for column_index in [1, 5]:
+        widths[column_index] = max(
+            [width_for_two_table_lines(row[column_index], widths[column_index]) for row in rows] or [widths[column_index]]
+        )
+    return widths
+
+
+def width_for_two_table_lines(value: str, starting_width: int) -> int:
+    width = starting_width
+    while width < 1200:
+        max_chars = chars_for_width(width - 12, 7.2 / 0.52)
+        if len(wrap_text(value, max_chars, max_lines=None)) <= 2:
+            return width
+        width += 24
+    return width
+
+
+def side_table_row_lines(row: list[str], widths: list[int]) -> list[list[str]]:
+    return [
+        wrap_text(value, chars_for_width(width - 12, 7.2 / 0.52), max_lines=2) or [""]
+        for value, width in zip(row, widths)
+    ]
 
 
 def table_row_values(item: MatrixItem, data: dict[str, Any]) -> list[str]:
@@ -909,37 +972,11 @@ def contains_cjk(text: str) -> bool:
 
 
 def visual_len(text: str) -> int:
-    return sum(2 if ord(char) > 127 else 1 for char in text)
+    return shared_visual_len(text)
 
 
 def wrap_text(text: str, max_chars: int, max_lines: int | None = None) -> list[str]:
-    clean = clean_text(text)
-    if not clean:
-        return [""]
-    has_cjk = contains_cjk(clean)
-    words = clean.split()
-    lines: list[str] = []
-    current = ""
-    if has_cjk:
-        units = list(clean)
-    elif len(words) == 1:
-        units = [clean]
-    else:
-        units = words
-    for unit in units:
-        sep = "" if has_cjk else " "
-        candidate = unit if not current else current + sep + unit
-        if visual_len(candidate) <= max_chars:
-            current = candidate
-        else:
-            if current:
-                lines.append(current)
-            current = unit
-    if current:
-        lines.append(current)
-    if max_lines is not None:
-        return lines[:max_lines] or [clean[:max_chars]]
-    return lines or [clean]
+    return shared_wrap_text(text, max_chars, max_lines)
 
 
 def trim_to_visual_len(text: str, max_chars: int) -> str:
@@ -947,7 +984,7 @@ def trim_to_visual_len(text: str, max_chars: int) -> str:
     output = ""
     length = 0
     for char in clean:
-        char_len = 2 if ord(char) > 127 else 1
+        char_len = visual_len(char)
         if length + char_len > max_chars:
             break
         output += char
@@ -955,8 +992,8 @@ def trim_to_visual_len(text: str, max_chars: int) -> str:
     return output
 
 
-def svg_header() -> str:
-    return f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}">'
+def svg_header(width: float = WIDTH, height: float = HEIGHT) -> str:
+    return f'<svg xmlns="http://www.w3.org/2000/svg" width="{int(width)}" height="{int(height)}" viewBox="0 0 {int(width)} {int(height)}">'
 
 
 def defs() -> str:

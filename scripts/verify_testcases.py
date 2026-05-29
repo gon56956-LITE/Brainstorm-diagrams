@@ -90,6 +90,8 @@ TESTCASE_PAIRS = [
     ("fishbone.five-primary.example.json", "fishbone.five-primary.output.svg"),
     ("fishbone.five-subcategories.example.json", "fishbone.five-subcategories.output.svg"),
     ("fishbone.dense-collision.example.json", "fishbone.dense-collision.output.svg"),
+    ("fishbone.cjk-text.example.md", "fishbone.cjk-text.output.svg"),
+    ("fishbone.cjk-subcategory-extreme.example.md", "fishbone.cjk-subcategory-extreme.output.svg"),
 ]
 
 FAULT_TREE_TESTCASE_PAIRS = [
@@ -157,6 +159,8 @@ ALLOWED_PRESENTATION_FONT_WEIGHTS = {"400", "500", "600", "700", "normal", "bold
 
 
 def main() -> int:
+    verify_cjk_text_utils()
+
     for input_name, output_name in TESTCASE_PAIRS:
         run_generate(TESTCASES / input_name, TESTCASES / output_name)
 
@@ -189,17 +193,20 @@ def main() -> int:
 
     for _, output_name in TWO_BY_TWO_TESTCASE_PAIRS:
         verify_two_by_two_svg_basics(TWO_BY_TWO_TESTCASES / output_name)
+        verify_no_ellipsis_in_group(TWO_BY_TWO_TESTCASES / output_name, "matrix-side-table")
     verify_two_by_two_item_limit()
     verify_two_by_two_notes_length_guard()
 
     for _, output_name in ROADMAP_TESTCASE_PAIRS:
         verify_roadmap_timeline_svg_basics(ROADMAP_TESTCASES / output_name)
+        verify_no_ellipsis_in_group(ROADMAP_TESTCASES / output_name, "roadmap-table")
 
     for _, output_name in FMEA_TESTCASE_PAIRS:
         verify_fmea_table_svg_basics(FMEA_TESTCASES / output_name)
 
     verify_canvas_dimensions()
     verify_subcategory_braces(TESTCASES / "fishbone.subcategory.output.md.svg")
+    verify_fishbone_extreme_horizontal_gap()
     verify_primary_cause_connectors(TESTCASES / "fishbone.five-primary.output.svg")
     verify_branch_lengths()
     verify_category_labels_and_icons()
@@ -245,6 +252,23 @@ def main() -> int:
     return 0
 
 
+def verify_cjk_text_utils() -> None:
+    from renderers.text_utils import chars_for_width, estimate_text_width, truncate_text, visual_len, wrap_text
+
+    font_size = 16
+    if estimate_text_width("天气异常", font_size) <= estimate_text_width("weather", font_size):
+        raise AssertionError("CJK text width estimation should account for wide glyphs")
+    if visual_len("天气AB") != 6:
+        raise AssertionError("CJK visual length should count wide glyphs as two units")
+    max_chars = chars_for_width(font_size * 4.2, font_size)
+    if len(wrap_text("厄尔尼诺拉尼娜交替", max_chars, max_lines=None)) < 2:
+        raise AssertionError("CJK text should wrap when visual width exceeds the available width")
+    if wrap_text("Alpha Beta", 6, max_lines=2)[-1].endswith("..."):
+        raise AssertionError("Text wrapping should not ellipsize when all lines are still visible")
+    if visual_len(truncate_text("厄尔尼诺拉尼娜交替", 8)) > 8:
+        raise AssertionError("CJK truncation should respect visual length limits")
+
+
 def run_generate(input_path: Path, output_path: Path) -> None:
     result = subprocess.run(
         [str(PYTHON), str(GENERATE), str(input_path), str(output_path)],
@@ -255,6 +279,35 @@ def run_generate(input_path: Path, output_path: Path) -> None:
     )
     if result.returncode != 0:
         raise AssertionError(f"Failed to generate {output_path.name}:\n{result.stderr}")
+
+
+def verify_no_ellipsis_in_group(path: Path, group_id: str) -> None:
+    root = ET.parse(path).getroot()
+    groups = [element for element in root.iter() if element.attrib.get("id") == group_id]
+    if not groups:
+        return
+    for group in groups:
+        for element in group.iter():
+            if element.tag.endswith("text") and "..." in "".join(element.itertext()):
+                raise AssertionError(f"{path.name}: table group {group_id} must show full text without ellipsis")
+
+
+def verify_fishbone_extreme_horizontal_gap() -> None:
+    from generate_diagram import parse_input
+    from renderers.fishbone import category_footprint, normalize_input, plan_render_layout
+
+    data = normalize_input(parse_input(TESTCASES / "fishbone.cjk-subcategory-extreme.example.md"))
+    _, top_layouts, bottom_layouts = plan_render_layout(data["categories"])
+    for label, layouts in [("top", top_layouts), ("bottom", bottom_layouts)]:
+        spans = []
+        for layout in layouts:
+            left, right = category_footprint(layout.category, layout.start_side)
+            spans.append((layout.x - left, layout.x + right))
+        spans.sort()
+        for first, second in zip(spans, spans[1:]):
+            gap = second[0] - first[1]
+            if gap < 60:
+                raise AssertionError(f"fishbone cjk extreme {label} branch horizontal gap is too small: {gap:.1f}px")
 
 
 def verify_two_by_two_item_limit() -> None:
@@ -922,9 +975,14 @@ def verify_roadmap_milestone_timeline_layout(root: ET.Element, label: str) -> No
 
     phase_group = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-phases"), None)
     if phase_group is not None:
+        rightmost_phase_edge = 0.0
         for rect in phase_group.iter():
-            if rect.tag.endswith("rect") and float(rect.attrib.get("y", "0")) <= axis_y:
-                raise AssertionError(f"{label}: milestone phase bands should stay below the timeline axis")
+            if rect.tag.endswith("rect"):
+                if float(rect.attrib.get("y", "0")) <= axis_y:
+                    raise AssertionError(f"{label}: milestone phase bands should stay below the timeline axis")
+                rightmost_phase_edge = max(rightmost_phase_edge, float(rect.attrib.get("x", "0")) + float(rect.attrib.get("width", "0")))
+        if rightmost_phase_edge and axis_end - rightmost_phase_edge > 2:
+            raise AssertionError(f"{label}: milestone timeline should not reserve unused space after the final phase")
 
     legend_rect = None
     legend_group = next((element for element in root.iter() if element.attrib.get("id") == "roadmap-legend"), None)

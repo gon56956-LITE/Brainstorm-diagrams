@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="今年天气很奇怪的原因">
+<defs>
+<linearGradient id="topCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0B3A75"/>
+<stop offset="100%" stop-color="#1F5A98"/>
+</linearGradient>
+<linearGradient id="bottomCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#DDECF9"/>
+<stop offset="100%" stop-color="#BCD5ED"/>
+</linearGradient>
+<filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#16324F" flood-opacity="0.12"/>
+</filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#FFFFFF"/>
+<circle cx="1696" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1696" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1696" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1696" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1720" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1744" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1768" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1792" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1816" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1840" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1864" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1888" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="848" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="872" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="896" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="920" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1760" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1784" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1808" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1832" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1856" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1880" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1904" cy="944" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="982" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1006" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1030" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1054" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="1610" y1="98" x2="1770" y2="98" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="1692,98 1722,130 1788,130" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1610" cy="98" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1770" cy="98" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1788" cy="130" r="5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="1530" y1="1000" x2="1370" y2="1000" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="1448,1000 1418,1032 1352,1032" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1530" cy="1000" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1370" cy="1000" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1352" cy="1032" r="5" fill="#BCD2EA" opacity="0.65"/>
+
+<polyline points="78,492 120,540 78,588" fill="none" stroke="#0B3A75" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.98"/>
+<polyline points="116,492 158,540 116,588" fill="none" stroke="#BFD5EB" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.94"/>
+<polyline points="154,492 196,540 154,588" fill="none" stroke="#D9E8F7" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.92"/>
+<line x1="214" y1="540" x2="1526" y2="540" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="1502" y1="516" x2="1526" y2="540" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="1502" y1="564" x2="1526" y2="540" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="444" y1="540" x2="372" y2="270" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="444" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="444" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="301" y="182" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="349" cy="226" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="334" y="211" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="349" cy="226" r="5" fill="#1E5AA8"/>
+<text x="403" y="228" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">气候变化</text>
+<line x1="406" y1="390" x2="462" y2="390" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="406" cy="390" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="462" y="371" width="132.0" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="476" y="393" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">全球变暖加剧</text>
+<path class="child-curly-brace" d="M 623.0 366.0 C 613.0 366.0 613.0 371.0 613.0 377.0 L 613.0 380.0 C 613.0 385.0 601.0 385.0 601.0 388.0 C 601.0 391.0 613.0 391.0 613.0 396.0 L 613.0 399.0 C 613.0 405.0 613.0 410.0 623.0 410.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="622.0" cy="378.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="636.0" y="383.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">温室气体浓度创新高</text>
+<circle cx="622.0" cy="400.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="636.0" y="405.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">北极海冰减少</text>
+<line x1="415" y1="426" x2="381" y2="426" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="415" cy="426" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="367" y="432" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">极端天气频率上升</text>
+<line x1="1276" y1="540" x2="1204" y2="270" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1276" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1276" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1133" y="182" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1181" cy="226" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<path d="M 1195 206 C 1169 208 1161 228 1175 244 C 1191 232 1199 218 1195 206 Z M 1173 248 C 1179 228 1189 218 1197 210" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="2" stroke-linecap="round"/>
+<text x="1235" y="228" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">城市环境</text>
+<line x1="1238" y1="390" x2="1182.0" y2="390" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1238" cy="390" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1035.0" y="371" width="147.0" height="34" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1168.0" y="393" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">热岛效应更明显</text>
+<path class="child-curly-brace" d="M 1006.0 366.0 C 1016.0 366.0 1016.0 371.0 1016.0 377.0 L 1016.0 380.0 C 1016.0 385.0 1028.0 385.0 1028.0 388.0 C 1028.0 391.0 1016.0 391.0 1016.0 396.0 L 1016.0 399.0 C 1016.0 405.0 1016.0 410.0 1006.0 410.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1007.0" cy="378.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="993.0" y="383.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">夜间降温变慢</text>
+<circle cx="1007.0" cy="400.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="993.0" y="405.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">建筑密度增加</text>
+<line x1="1247" y1="426" x2="1281" y2="426" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1247" cy="426" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="1295" y="432" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">排水系统压力增大</text>
+<line x1="444" y1="540" x2="372" y2="810" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="444" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="444" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="301" y="810" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="349" cy="854" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<rect x="334" y="839" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="349" cy="854" r="5" fill="#1E5AA8"/>
+<text x="403" y="856" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">海洋异常</text>
+<line x1="409" y1="664" x2="465" y2="664" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="409" cy="664" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="465" y="645" width="152.25" height="50" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="479" y="665" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">厄尔尼诺/拉尼娜</text>
+<text x="479" y="681" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">交替</text>
+<path class="child-curly-brace" d="M 646.2 648.0 C 636.2 648.0 636.2 653.0 636.2 659.0 L 636.2 662.0 C 636.2 667.0 624.2 667.0 624.2 670.0 C 624.2 673.0 636.2 673.0 636.2 678.0 L 636.2 681.0 C 636.2 687.0 636.2 692.0 646.2 692.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="645.25" cy="660.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="659.25" y="665.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">海表温度异常偏高</text>
+<circle cx="645.25" cy="682.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="659.25" y="687.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">洋流模式改变</text>
+<line x1="400" y1="700" x2="366" y2="700" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="400" cy="700" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<text x="352" y="706" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" fill="#16324F">印度洋偶极子影响</text>
+<line x1="1276" y1="540" x2="1219" y2="752" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1276" cy="540" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1276" cy="540" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1133" y="752" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1181" cy="796" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<circle cx="1181" cy="784" r="8" fill="#1E5AA8"/>
+<path d="M 1164 815 Q 1181 794 1198 815 Z" fill="#1E5AA8"/>
+<text x="1235" y="798" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="700" fill="#0B3A75">People</text>
+<line x1="1260" y1="592" x2="1226" y2="592" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1260" cy="592" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<line x1="1022" y1="592" x2="1212" y2="592" stroke="#D6DEE8" stroke-width="2"/>
+<line x1="1251" y1="628" x2="1285" y2="628" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1251" cy="628" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<line x1="1299" y1="628" x2="1489" y2="628" stroke="#D6DEE8" stroke-width="2"/>
+<line x1="1241" y1="664" x2="1207" y2="664" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1241" cy="664" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<line x1="1003" y1="664" x2="1193" y2="664" stroke="#D6DEE8" stroke-width="2"/>
+<line x1="1231" y1="700" x2="1265" y2="700" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1231" cy="700" r="7" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<line x1="1279" y1="700" x2="1469" y2="700" stroke="#D6DEE8" stroke-width="2"/>
+<rect id="topic-block" x="1550" y="375" width="280" height="330" rx="14" ry="14" fill="#F8FBFF" stroke="#0B3A75" stroke-width="3" filter="url(#softShadow)"/>
+<circle cx="1690" cy="445" r="38" fill="#D9E8F7" opacity="0.9"/>
+<circle cx="1690" cy="445" r="24" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<circle cx="1690" cy="445" r="10" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<line x1="1690" y1="445" x2="1715" y2="420" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<polyline points="1707,420 1718,417 1715,428" fill="none" stroke="#1E5AA8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1690" y="540" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="31" font-weight="700" fill="#0B3A75">今年天气很奇怪</text>
+<text x="1690" y="576" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="31" font-weight="700" fill="#0B3A75">的原因</text>
+</svg>

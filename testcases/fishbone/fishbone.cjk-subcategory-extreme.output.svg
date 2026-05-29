@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2480" height="1320" viewBox="0 0 2480 1320" role="img" aria-label="中文长文本鱼骨图极限测试">
+<defs>
+<linearGradient id="topCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0B3A75"/>
+<stop offset="100%" stop-color="#1F5A98"/>
+</linearGradient>
+<linearGradient id="bottomCardGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#DDECF9"/>
+<stop offset="100%" stop-color="#BCD5ED"/>
+</linearGradient>
+<filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#16324F" flood-opacity="0.12"/>
+</filter>
+</defs>
+<rect x="0" y="0" width="2480" height="1320" fill="#FFFFFF"/>
+<circle cx="2256" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2280" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2304" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2328" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2352" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2376" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2400" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2424" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2448" cy="16" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2256" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2280" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2304" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2328" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2352" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2376" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2400" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2424" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2448" cy="40" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2256" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2280" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2304" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2328" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2352" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2376" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2400" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2424" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2448" cy="64" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2256" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2280" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2304" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2328" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2352" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2376" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2400" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2424" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2448" cy="88" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2320" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2344" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2368" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2392" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2416" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2440" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2464" cy="1088" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2320" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2344" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2368" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2392" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2416" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2440" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2464" cy="1112" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2320" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2344" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2368" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2392" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2416" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2440" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2464" cy="1136" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2320" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2344" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2368" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2392" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2416" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2440" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2464" cy="1160" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2320" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2344" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2368" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2392" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2416" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2440" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2464" cy="1184" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1222" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1222" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1222" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1222" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1222" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1222" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1246" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1246" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1246" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1246" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1246" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1246" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1270" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1270" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1270" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1270" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1270" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1270" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="16" cy="1294" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="40" cy="1294" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="64" cy="1294" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="88" cy="1294" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="112" cy="1294" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="136" cy="1294" r="3.5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="2170" y1="98" x2="2330" y2="98" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="2252,98 2282,130 2348,130" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="2170" cy="98" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="2330" cy="98" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="2348" cy="130" r="5" fill="#BCD2EA" opacity="0.65"/>
+<line x1="2090" y1="1240" x2="1930" y2="1240" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<polyline points="2008,1240 1978,1272 1912,1272" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="2090" cy="1240" r="5" fill="#BCD2EA" opacity="0.65"/>
+<circle cx="1930" cy="1240" r="5" fill="none" stroke="#BCD2EA" stroke-width="2" opacity="0.65"/>
+<circle cx="1912" cy="1272" r="5" fill="#BCD2EA" opacity="0.65"/>
+
+<polyline points="78,612 120,660 78,708" fill="none" stroke="#0B3A75" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.98"/>
+<polyline points="116,612 158,660 116,708" fill="none" stroke="#BFD5EB" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.94"/>
+<polyline points="154,612 196,660 154,708" fill="none" stroke="#D9E8F7" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter" opacity="0.92"/>
+<line x1="214" y1="660" x2="2086" y2="660" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="2062" y1="636" x2="2086" y2="660" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="2062" y1="684" x2="2086" y2="660" stroke="#0B3A75" stroke-width="6" stroke-linecap="round"/>
+<line x1="681" y1="660" x2="572.0" y2="168" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="681" cy="660" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="681" cy="660" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="538" y="80" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="586" cy="124" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="571" y="109" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="586" cy="124" r="5" fill="#1E5AA8"/>
+<text x="640" y="115" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">第一类极长一</text>
+<text x="640" y="137" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">级分类名...</text>
+<line x1="597" y1="274" x2="653" y2="274" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="597" cy="274" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="653" y="255" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="667" y="273" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第一个二级分类名</text>
+<text x="667" y="289" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">称非常非常长需要</text>
+<text x="667" y="305" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">至少三行才能...</text>
+<path class="child-curly-brace" d="M 844.0 238.0 C 834.0 238.0 834.0 243.0 834.0 249.0 L 834.0 280.0 C 834.0 285.0 822.0 285.0 822.0 288.0 C 822.0 291.0 834.0 291.0 834.0 296.0 L 834.0 327.0 C 834.0 333.0 834.0 338.0 844.0 338.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="843.0" cy="246.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="857.0" y="251.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第一个二级原因文本也非</text>
+<text x="857.0" y="265.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">常长需要换成两行并...</text>
+<circle cx="843.0" cy="282.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="857.0" y="287.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第二个二级原因文本同样</text>
+<text x="857.0" y="301.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">非常长需要独立占用...</text>
+<circle cx="843.0" cy="318.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="857.0" y="323.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三个二级原因文本继续</text>
+<text x="857.0" y="337.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">拉长用于测试花括号...</text>
+<line x1="605" y1="310" x2="549.0" y2="310" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="605" cy="310" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="387.0" y="291" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="535.0" y="309" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第二个二级分类名</text>
+<text x="535.0" y="325" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">称继续使用长中文</text>
+<text x="535.0" y="341" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">文本验证相邻...</text>
+<path class="child-curly-brace" d="M 358.0 274.0 C 368.0 274.0 368.0 279.0 368.0 285.0 L 368.0 316.0 C 368.0 321.0 380.0 321.0 380.0 324.0 C 380.0 327.0 368.0 327.0 368.0 332.0 L 368.0 363.0 C 368.0 369.0 368.0 374.0 358.0 374.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="359.0" cy="282.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="345.0" y="287.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">二级原因一包含多个连续</text>
+<text x="345.0" y="301.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">中文短语用于触发换...</text>
+<circle cx="359.0" cy="318.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="345.0" y="323.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">二级原因二包含多个连续</text>
+<text x="345.0" y="337.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">中文短语用于触发换...</text>
+<circle cx="359.0" cy="354.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="345.0" y="359.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">二级原因三包含多个连续</text>
+<text x="345.0" y="373.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">中文短语用于触发换...</text>
+<line x1="628" y1="416" x2="684" y2="416" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="628" cy="416" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="684" y="397" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="698" y="415" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第三个二级分类名</text>
+<text x="698" y="431" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">称拉满长度确保卡</text>
+<text x="698" y="447" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">片高度和子项...</text>
+<path class="child-curly-brace" d="M 875.0 380.0 C 865.0 380.0 865.0 385.0 865.0 391.0 L 865.0 422.0 C 865.0 427.0 853.0 427.0 853.0 430.0 C 853.0 433.0 865.0 433.0 865.0 438.0 L 865.0 469.0 C 865.0 475.0 865.0 480.0 875.0 480.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="874.0" cy="388.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="888.0" y="393.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三个分类下的第一个长</text>
+<text x="888.0" y="407.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因用于检查上方边界</text>
+<circle cx="874.0" cy="424.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="888.0" y="429.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三个分类下的第二个长</text>
+<text x="888.0" y="443.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因用于检查中间间距</text>
+<circle cx="874.0" cy="460.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="888.0" y="465.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三个分类下的第三个长</text>
+<text x="888.0" y="479.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因用于检查下方边界</text>
+<line x1="636" y1="452" x2="580.0" y2="452" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="636" cy="452" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="418.0" y="433" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="566.0" y="451" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第四个二级分类名</text>
+<text x="566.0" y="467" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">称继续拉长用于验</text>
+<text x="566.0" y="483" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">证底部行距不...</text>
+<path class="child-curly-brace" d="M 389.0 416.0 C 399.0 416.0 399.0 421.0 399.0 427.0 L 399.0 458.0 C 399.0 463.0 411.0 463.0 411.0 466.0 C 411.0 469.0 399.0 469.0 399.0 474.0 L 399.0 505.0 C 399.0 511.0 399.0 516.0 389.0 516.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="390.0" cy="424.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="376.0" y="429.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四个分类第一条长文本</text>
+<text x="376.0" y="443.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因需要两行显示</text>
+<circle cx="390.0" cy="460.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="376.0" y="465.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四个分类第二条长文本</text>
+<text x="376.0" y="479.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因需要两行显示</text>
+<circle cx="390.0" cy="496.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="376.0" y="501.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四个分类第三条长文本</text>
+<text x="376.0" y="515.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因需要两行显示</text>
+<line x1="660" y1="558" x2="716" y2="558" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="660" cy="558" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="716" y="539" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="730" y="557" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第五个二级分类名</text>
+<text x="730" y="573" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">称达到单个一级分</text>
+<text x="730" y="589" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">类的条目数量上限</text>
+<path class="child-curly-brace" d="M 907.0 522.0 C 897.0 522.0 897.0 527.0 897.0 533.0 L 897.0 564.0 C 897.0 569.0 885.0 569.0 885.0 572.0 C 885.0 575.0 897.0 575.0 897.0 580.0 L 897.0 611.0 C 897.0 617.0 897.0 622.0 907.0 622.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="906.0" cy="530.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="920.0" y="535.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第五个分类第一条长文本</text>
+<text x="920.0" y="549.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因需要两行显示</text>
+<circle cx="906.0" cy="566.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="920.0" y="571.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第五个分类第二条长文本</text>
+<text x="920.0" y="585.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因需要两行显示</text>
+<circle cx="906.0" cy="602.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="920.0" y="607.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第五个分类第三条长文本</text>
+<text x="920.0" y="621.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">原因需要两行显示</text>
+<line x1="1599" y1="660" x2="1490.0" y2="168" stroke="#0B3A75" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1599" cy="660" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1599" cy="660" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1456" y="80" width="286" height="88" rx="12" fill="url(#topCardGradient)" stroke="none" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1504" cy="124" r="34" fill="#FFFFFF" stroke="#D9E8F7" stroke-width="2"/>
+<rect x="1489" y="109" width="30" height="30" rx="6" fill="none" stroke="#1E5AA8" stroke-width="4"/>
+<circle cx="1504" cy="124" r="5" fill="#1E5AA8"/>
+<text x="1558" y="115" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">第二类极长一</text>
+<text x="1558" y="137" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">级分类名...</text>
+<line x1="1515" y1="274" x2="1459.0" y2="274" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1515" cy="274" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1297.0" y="255" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1445.0" y="273" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">另一组二级分类名</text>
+<text x="1445.0" y="289" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">称非常非常长用于</text>
+<text x="1445.0" y="305" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">验证上下分支...</text>
+<path class="child-curly-brace" d="M 1268.0 238.0 C 1278.0 238.0 1278.0 243.0 1278.0 249.0 L 1278.0 280.0 C 1278.0 285.0 1290.0 285.0 1290.0 288.0 C 1290.0 291.0 1278.0 291.0 1278.0 296.0 L 1278.0 327.0 C 1278.0 333.0 1278.0 338.0 1268.0 338.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1269.0" cy="246.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1255.0" y="251.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第一条二级原因文</text>
+<text x="1255.0" y="265.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">本非常长需要稳定换行</text>
+<circle cx="1269.0" cy="282.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1255.0" y="287.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第二条二级原因文</text>
+<text x="1255.0" y="301.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">本非常长需要稳定换行</text>
+<circle cx="1269.0" cy="318.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1255.0" y="323.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第三条二级原因文</text>
+<text x="1255.0" y="337.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">本非常长需要稳定换行</text>
+<line x1="1523" y1="310" x2="1579" y2="310" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1523" cy="310" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1579" y="291" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1593" y="309" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">另一组第二个二级</text>
+<text x="1593" y="325" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称继续拉长</text>
+<text x="1593" y="341" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">验证预算</text>
+<path class="child-curly-brace" d="M 1770.0 274.0 C 1760.0 274.0 1760.0 279.0 1760.0 285.0 L 1760.0 316.0 C 1760.0 321.0 1748.0 321.0 1748.0 324.0 C 1748.0 327.0 1760.0 327.0 1760.0 332.0 L 1760.0 363.0 C 1760.0 369.0 1760.0 374.0 1770.0 374.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1769.0" cy="282.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1783.0" y="287.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第二分类第一条原</text>
+<text x="1783.0" y="301.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1769.0" cy="318.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1783.0" y="323.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第二分类第二条原</text>
+<text x="1783.0" y="337.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1769.0" cy="354.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1783.0" y="359.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第二分类第三条原</text>
+<text x="1783.0" y="373.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<line x1="1546" y1="416" x2="1490.0" y2="416" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1546" cy="416" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1328.0" y="397" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1476.0" y="415" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">另一组第三个二级</text>
+<text x="1476.0" y="431" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称继续拉长</text>
+<text x="1476.0" y="447" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">验证预算</text>
+<path class="child-curly-brace" d="M 1299.0 380.0 C 1309.0 380.0 1309.0 385.0 1309.0 391.0 L 1309.0 422.0 C 1309.0 427.0 1321.0 427.0 1321.0 430.0 C 1321.0 433.0 1309.0 433.0 1309.0 438.0 L 1309.0 469.0 C 1309.0 475.0 1309.0 480.0 1299.0 480.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1300.0" cy="388.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1286.0" y="393.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第三分类第一条原</text>
+<text x="1286.0" y="407.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1300.0" cy="424.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1286.0" y="429.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第三分类第二条原</text>
+<text x="1286.0" y="443.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1300.0" cy="460.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1286.0" y="465.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第三分类第三条原</text>
+<text x="1286.0" y="479.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<line x1="1554" y1="452" x2="1610" y2="452" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1554" cy="452" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1610" y="433" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1624" y="451" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">另一组第四个二级</text>
+<text x="1624" y="467" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称继续拉长</text>
+<text x="1624" y="483" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">验证预算</text>
+<path class="child-curly-brace" d="M 1801.0 416.0 C 1791.0 416.0 1791.0 421.0 1791.0 427.0 L 1791.0 458.0 C 1791.0 463.0 1779.0 463.0 1779.0 466.0 C 1779.0 469.0 1791.0 469.0 1791.0 474.0 L 1791.0 505.0 C 1791.0 511.0 1791.0 516.0 1801.0 516.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1800.0" cy="424.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1814.0" y="429.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第四分类第一条原</text>
+<text x="1814.0" y="443.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1800.0" cy="460.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1814.0" y="465.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第四分类第二条原</text>
+<text x="1814.0" y="479.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1800.0" cy="496.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1814.0" y="501.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第四分类第三条原</text>
+<text x="1814.0" y="515.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<line x1="1578" y1="558" x2="1522.0" y2="558" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1578" cy="558" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1360.0" y="539" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1508.0" y="557" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">另一组第五个二级</text>
+<text x="1508.0" y="573" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称继续拉长</text>
+<text x="1508.0" y="589" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">验证预算</text>
+<path class="child-curly-brace" d="M 1331.0 522.0 C 1341.0 522.0 1341.0 527.0 1341.0 533.0 L 1341.0 564.0 C 1341.0 569.0 1353.0 569.0 1353.0 572.0 C 1353.0 575.0 1341.0 575.0 1341.0 580.0 L 1341.0 611.0 C 1341.0 617.0 1341.0 622.0 1331.0 622.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1332.0" cy="530.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1318.0" y="535.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第五分类第一条原</text>
+<text x="1318.0" y="549.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1332.0" cy="566.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1318.0" y="571.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第五分类第二条原</text>
+<text x="1318.0" y="585.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<circle cx="1332.0" cy="602.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1318.0" y="607.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">另一组第五分类第三条原</text>
+<text x="1318.0" y="621.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">因用于极限测试</text>
+<line x1="681" y1="660" x2="572.0" y2="1152" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="681" cy="660" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="681" cy="660" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="538" y="1152" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="586" cy="1196" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<path d="M 564 1208 A 24 24 0 0 1 608 1208" fill="none" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<line x1="586" y1="1204" x2="600" y2="1188" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<circle cx="586" cy="1206" r="5" fill="#1E5AA8"/>
+<text x="640" y="1187" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B3A75">第三类极长一</text>
+<text x="640" y="1209" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B3A75">级分类名...</text>
+<line x1="656" y1="766" x2="712" y2="766" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="656" cy="766" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="712" y="747" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="726" y="765" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第三组第一个二级</text>
+<text x="726" y="781" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="726" y="797" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 903.0 730.0 C 893.0 730.0 893.0 735.0 893.0 741.0 L 893.0 772.0 C 893.0 777.0 881.0 777.0 881.0 780.0 C 881.0 783.0 893.0 783.0 893.0 788.0 L 893.0 819.0 C 893.0 825.0 893.0 830.0 903.0 830.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="902.0" cy="738.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="916.0" y="743.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第一分类第一条超</text>
+<text x="916.0" y="757.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="902.0" cy="774.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="916.0" y="779.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第一分类第二条超</text>
+<text x="916.0" y="793.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="902.0" cy="810.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="916.0" y="815.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第一分类第三条超</text>
+<text x="916.0" y="829.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="648" y1="802" x2="592.0" y2="802" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="648" cy="802" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="430.0" y="783" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="578.0" y="801" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第三组第二个二级</text>
+<text x="578.0" y="817" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="578.0" y="833" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 401.0 766.0 C 411.0 766.0 411.0 771.0 411.0 777.0 L 411.0 808.0 C 411.0 813.0 423.0 813.0 423.0 816.0 C 423.0 819.0 411.0 819.0 411.0 824.0 L 411.0 855.0 C 411.0 861.0 411.0 866.0 401.0 866.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="402.0" cy="774.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="388.0" y="779.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第二分类第一条超</text>
+<text x="388.0" y="793.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="402.0" cy="810.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="388.0" y="815.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第二分类第二条超</text>
+<text x="388.0" y="829.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="402.0" cy="846.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="388.0" y="851.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第二分类第三条超</text>
+<text x="388.0" y="865.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="625" y1="908" x2="681" y2="908" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="625" cy="908" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="681" y="889" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="695" y="907" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第三组第三个二级</text>
+<text x="695" y="923" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="695" y="939" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 872.0 872.0 C 862.0 872.0 862.0 877.0 862.0 883.0 L 862.0 914.0 C 862.0 919.0 850.0 919.0 850.0 922.0 C 850.0 925.0 862.0 925.0 862.0 930.0 L 862.0 961.0 C 862.0 967.0 862.0 972.0 872.0 972.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="871.0" cy="880.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="885.0" y="885.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第三分类第一条超</text>
+<text x="885.0" y="899.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="871.0" cy="916.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="885.0" y="921.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第三分类第二条超</text>
+<text x="885.0" y="935.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="871.0" cy="952.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="885.0" y="957.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第三分类第三条超</text>
+<text x="885.0" y="971.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="617" y1="944" x2="561.0" y2="944" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="617" cy="944" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="399.0" y="925" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="547.0" y="943" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第三组第四个二级</text>
+<text x="547.0" y="959" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="547.0" y="975" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 370.0 908.0 C 380.0 908.0 380.0 913.0 380.0 919.0 L 380.0 950.0 C 380.0 955.0 392.0 955.0 392.0 958.0 C 392.0 961.0 380.0 961.0 380.0 966.0 L 380.0 997.0 C 380.0 1003.0 380.0 1008.0 370.0 1008.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="371.0" cy="916.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="357.0" y="921.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第四分类第一条超</text>
+<text x="357.0" y="935.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="371.0" cy="952.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="357.0" y="957.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第四分类第二条超</text>
+<text x="357.0" y="971.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="371.0" cy="988.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="357.0" y="993.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第四分类第三条超</text>
+<text x="357.0" y="1007.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="593" y1="1050" x2="649" y2="1050" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="593" cy="1050" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="649" y="1031" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="663" y="1049" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第三组第五个二级</text>
+<text x="663" y="1065" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="663" y="1081" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 840.0 1014.0 C 830.0 1014.0 830.0 1019.0 830.0 1025.0 L 830.0 1056.0 C 830.0 1061.0 818.0 1061.0 818.0 1064.0 C 818.0 1067.0 830.0 1067.0 830.0 1072.0 L 830.0 1103.0 C 830.0 1109.0 830.0 1114.0 840.0 1114.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="839.0" cy="1022.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="853.0" y="1027.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第五分类第一条超</text>
+<text x="853.0" y="1041.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="839.0" cy="1058.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="853.0" y="1063.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第五分类第二条超</text>
+<text x="853.0" y="1077.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="839.0" cy="1094.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="853.0" y="1099.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第三组第五分类第三条超</text>
+<text x="853.0" y="1113.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="1599" y1="660" x2="1490.0" y2="1152" stroke="#6E93BD" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="1599" cy="660" r="17" fill="#FFFFFF" stroke="#0B3A75" stroke-width="3"/>
+<circle cx="1599" cy="660" r="9" fill="#EEF6FE" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="1456" y="1152" width="286" height="88" rx="12" fill="url(#bottomCardGradient)" stroke="#BFD5EB" stroke-width="1" filter="url(#softShadow)"/>
+<circle cx="1504" cy="1196" r="34" fill="#FFFFFF" stroke="#BFD5EB" stroke-width="2"/>
+<path d="M 1482 1208 A 24 24 0 0 1 1526 1208" fill="none" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<line x1="1504" y1="1204" x2="1518" y2="1188" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<circle cx="1504" cy="1206" r="5" fill="#1E5AA8"/>
+<text x="1558" y="1187" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B3A75">第四类极长一</text>
+<text x="1558" y="1209" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="700" fill="#0B3A75">级分类名...</text>
+<line x1="1574" y1="766" x2="1518.0" y2="766" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1574" cy="766" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1356.0" y="747" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1504.0" y="765" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第四组第一个二级</text>
+<text x="1504.0" y="781" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="1504.0" y="797" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 1327.0 730.0 C 1337.0 730.0 1337.0 735.0 1337.0 741.0 L 1337.0 772.0 C 1337.0 777.0 1349.0 777.0 1349.0 780.0 C 1349.0 783.0 1337.0 783.0 1337.0 788.0 L 1337.0 819.0 C 1337.0 825.0 1337.0 830.0 1327.0 830.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1328.0" cy="738.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1314.0" y="743.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第一分类第一条超</text>
+<text x="1314.0" y="757.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1328.0" cy="774.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1314.0" y="779.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第一分类第二条超</text>
+<text x="1314.0" y="793.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1328.0" cy="810.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1314.0" y="815.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第一分类第三条超</text>
+<text x="1314.0" y="829.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="1566" y1="802" x2="1622" y2="802" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1566" cy="802" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1622" y="783" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1636" y="801" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第四组第二个二级</text>
+<text x="1636" y="817" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="1636" y="833" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 1813.0 766.0 C 1803.0 766.0 1803.0 771.0 1803.0 777.0 L 1803.0 808.0 C 1803.0 813.0 1791.0 813.0 1791.0 816.0 C 1791.0 819.0 1803.0 819.0 1803.0 824.0 L 1803.0 855.0 C 1803.0 861.0 1803.0 866.0 1813.0 866.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1812.0" cy="774.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1826.0" y="779.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第二分类第一条超</text>
+<text x="1826.0" y="793.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1812.0" cy="810.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1826.0" y="815.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第二分类第二条超</text>
+<text x="1826.0" y="829.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1812.0" cy="846.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1826.0" y="851.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第二分类第三条超</text>
+<text x="1826.0" y="865.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="1543" y1="908" x2="1487.0" y2="908" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1543" cy="908" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1325.0" y="889" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1473.0" y="907" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第四组第三个二级</text>
+<text x="1473.0" y="923" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="1473.0" y="939" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 1296.0 872.0 C 1306.0 872.0 1306.0 877.0 1306.0 883.0 L 1306.0 914.0 C 1306.0 919.0 1318.0 919.0 1318.0 922.0 C 1318.0 925.0 1306.0 925.0 1306.0 930.0 L 1306.0 961.0 C 1306.0 967.0 1306.0 972.0 1296.0 972.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1297.0" cy="880.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1283.0" y="885.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第三分类第一条超</text>
+<text x="1283.0" y="899.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1297.0" cy="916.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1283.0" y="921.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第三分类第二条超</text>
+<text x="1283.0" y="935.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1297.0" cy="952.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1283.0" y="957.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第三分类第三条超</text>
+<text x="1283.0" y="971.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="1535" y1="944" x2="1591" y2="944" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1535" cy="944" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1591" y="925" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1605" y="943" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第四组第四个二级</text>
+<text x="1605" y="959" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="1605" y="975" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 1782.0 908.0 C 1772.0 908.0 1772.0 913.0 1772.0 919.0 L 1772.0 950.0 C 1772.0 955.0 1760.0 955.0 1760.0 958.0 C 1760.0 961.0 1772.0 961.0 1772.0 966.0 L 1772.0 997.0 C 1772.0 1003.0 1772.0 1008.0 1782.0 1008.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1781.0" cy="916.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1795.0" y="921.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第四分类第一条超</text>
+<text x="1795.0" y="935.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1781.0" cy="952.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1795.0" y="957.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第四分类第二条超</text>
+<text x="1795.0" y="971.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1781.0" cy="988.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1795.0" y="993.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第四分类第三条超</text>
+<text x="1795.0" y="1007.0" text-anchor="start" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<line x1="1511" y1="1050" x2="1455.0" y2="1050" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1511" cy="1050" r="8" fill="#FFFFFF" stroke="#1E5AA8" stroke-width="3"/>
+<rect x="1293.0" y="1031" width="162.0" height="66" rx="8" fill="#F8FBFF" stroke="#BFD5EB" stroke-width="2"/>
+<text x="1441.0" y="1049" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">第四组第五个二级</text>
+<text x="1441.0" y="1065" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">分类名称非常非常</text>
+<text x="1441.0" y="1081" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="15" font-weight="700" fill="#0B3A75">长用于验证横...</text>
+<path class="child-curly-brace" d="M 1264.0 1014.0 C 1274.0 1014.0 1274.0 1019.0 1274.0 1025.0 L 1274.0 1056.0 C 1274.0 1061.0 1286.0 1061.0 1286.0 1064.0 C 1286.0 1067.0 1274.0 1067.0 1274.0 1072.0 L 1274.0 1103.0 C 1274.0 1109.0 1274.0 1114.0 1264.0 1114.0" fill="none" stroke="#6E93BD" stroke-width="2" stroke-linecap="round"/>
+<circle cx="1265.0" cy="1022.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1251.0" y="1027.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第五分类第一条超</text>
+<text x="1251.0" y="1041.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1265.0" cy="1058.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1251.0" y="1063.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第五分类第二条超</text>
+<text x="1251.0" y="1077.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<circle cx="1265.0" cy="1094.0" r="4.5" fill="#FFFFFF" stroke="#7A8797" stroke-width="1.6"/>
+<text x="1251.0" y="1099.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">第四组第五分类第三条超</text>
+<text x="1251.0" y="1113.0" text-anchor="end" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="13" fill="#52677A">长二级原因用于横向...</text>
+<rect id="topic-block" x="2110" y="495" width="280" height="330" rx="14" ry="14" fill="#F8FBFF" stroke="#0B3A75" stroke-width="3" filter="url(#softShadow)"/>
+<circle cx="2250" cy="565" r="38" fill="#D9E8F7" opacity="0.9"/>
+<circle cx="2250" cy="565" r="24" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<circle cx="2250" cy="565" r="10" fill="none" stroke="#1E5AA8" stroke-width="5"/>
+<line x1="2250" y1="565" x2="2275" y2="540" stroke="#1E5AA8" stroke-width="5" stroke-linecap="round"/>
+<polyline points="2267,540 2278,537 2275,548" fill="none" stroke="#1E5AA8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="2250" y="660" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="31" font-weight="700" fill="#0B3A75">中文长文本鱼骨</text>
+<text x="2250" y="696" text-anchor="middle" font-family="Arial, Helvetica, Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="31" font-weight="700" fill="#0B3A75">图极限测试</text>
+</svg>
