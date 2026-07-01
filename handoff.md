@@ -7,7 +7,7 @@ Use this file to start a new Codex session with minimal context.
 Repository path:
 
 ```text
-C:\Users\gon56956\.codex\skills\brainstorm-diagrams
+<skills-root>\brainstorm-diagrams
 ```
 
 Remote repositories:
@@ -106,9 +106,9 @@ references/visual_review_checklist.md
 Full verification set:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_testcases.py
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_stresscases.py
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_naturalcases.py
+python scripts\verify_testcases.py
+python scripts\verify_stresscases.py
+python scripts\verify_naturalcases.py
 cmd /c fishbone_tool.cmd verify
 ```
 
@@ -143,7 +143,7 @@ Keep the first fault-tree implementation small:
 ## Suggested New Session Prompt
 
 ```text
-继续开发 C:\Users\gon56956\.codex\skills\brainstorm-diagrams。
+继续开发 <skills-root>\brainstorm-diagrams。
 请先阅读 handoff.md、SKILL.md、README.md、references/maintenance_checklist.md 和 brainstorm_diagrams_fault_tree_spec.md。
 当前 fishbone 已完成并已按 diagram type 重组目录。
 请开始实现第二种 diagram：fault_tree。先做最小可用版本：top event、AND/OR gate、basic event leaves、Markdown/JSON 输入、SVG renderer、templates、testcases 和验证。

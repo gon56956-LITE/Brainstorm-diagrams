@@ -12,7 +12,7 @@ These files are not all active renderer badges. Some have confirmed mappings in 
 Run this to regenerate the blue-styled review board:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_lucide_candidate_catalog.py
+python scripts\render_lucide_candidate_catalog.py
 ```
 
 Output:

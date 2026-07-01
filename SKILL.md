@@ -94,13 +94,13 @@ diagram_builder.cmd
 Command-line usage is also available:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fishbone.py my-analysis --format md
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fault_tree.py startup-failure --format md
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_exclusion_tree.py startup-checks --format md
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_two_by_two_matrix.py priority-matrix --format md --preset action_priority
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_roadmap_timeline.py product-roadmap --format md --preset swimlane_roadmap
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\new_fmea_table.py process-fmea --format md
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\diagram_builder_server.py
+python scripts\new_fishbone.py my-analysis --format md
+python scripts\new_fault_tree.py startup-failure --format md
+python scripts\new_exclusion_tree.py startup-checks --format md
+python scripts\new_two_by_two_matrix.py priority-matrix --format md --preset action_priority
+python scripts\new_roadmap_timeline.py product-roadmap --format md --preset swimlane_roadmap
+python scripts\new_fmea_table.py process-fmea --format md
+python scripts\diagram_builder_server.py
 ```
 
 This creates a user-owned input and initial SVG under `work/fishbone/`, `work/fault-tree/`, `work/exclusion-tree/`, `work/two-by-two-matrix/`, `work/roadmap-timeline/`, or `work/fmea-table/`. To render an existing input directly, use `scripts/generate_diagram.py`.
@@ -118,48 +118,48 @@ Work names must be safe file stems: lowercase letters, numbers, hyphen, and unde
 After editing a `work/fishbone/` input, regenerate it with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_work.py my-analysis
+python scripts\render_work.py my-analysis
 ```
 
 After editing a `work/fault-tree/` input, regenerate it with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_fault_tree_work.py startup-failure
+python scripts\render_fault_tree_work.py startup-failure
 ```
 
 After editing a `work/exclusion-tree/` input, regenerate it with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_exclusion_tree_work.py startup-checks
+python scripts\render_exclusion_tree_work.py startup-checks
 ```
 
 After editing a `work/two-by-two-matrix/` input, regenerate it with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_two_by_two_matrix_work.py priority-matrix
+python scripts\render_two_by_two_matrix_work.py priority-matrix
 ```
 
 After editing a `work/roadmap-timeline/` input, regenerate it with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_roadmap_timeline_work.py product-roadmap
+python scripts\render_roadmap_timeline_work.py product-roadmap
 ```
 
 After editing a `work/fmea-table/` input, regenerate it with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_fmea_table_work.py process-fmea
+python scripts\render_fmea_table_work.py process-fmea
 ```
 
 Export a generated work SVG to PNG with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_png.py my-analysis
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fault_tree_png.py startup-failure
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_exclusion_tree_png.py startup-checks
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_two_by_two_matrix_png.py priority-matrix
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_roadmap_timeline_png.py product-roadmap
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\export_fmea_table_png.py process-fmea
+python scripts\export_png.py my-analysis
+python scripts\export_fault_tree_png.py startup-failure
+python scripts\export_exclusion_tree_png.py startup-checks
+python scripts\export_two_by_two_matrix_png.py priority-matrix
+python scripts\export_roadmap_timeline_png.py product-roadmap
+python scripts\export_fmea_table_png.py process-fmea
 ```
 
 PNG export is intended for SVGs generated by this tool, not arbitrary third-party SVG files.
@@ -169,31 +169,31 @@ Fishbone category badges use confirmed semantic mappings from a curated Lucide S
 Regenerate the badge review board with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_lucide_candidate_catalog.py
+python scripts\render_lucide_candidate_catalog.py
 ```
 
 Run the maintained testcase, template, and layout checks after renderer changes:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_testcases.py
+python scripts\verify_testcases.py
 ```
 
 For manual visual review after dense-layout changes, regenerate stresscases:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_stresscases.py
+python scripts\render_stresscases.py
 ```
 
 To protect the optional stresscase structure:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_stresscases.py
+python scripts\verify_stresscases.py
 ```
 
 To protect natural-language extraction examples:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_naturalcases.py
+python scripts\verify_naturalcases.py
 ```
 
 ## Inputs

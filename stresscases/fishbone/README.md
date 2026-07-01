@@ -7,7 +7,7 @@ Stresscases are not maintained regression outputs like `testcases/fishbone/`. Th
 To regenerate all stresscase SVG files:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_stresscases.py
+python scripts\render_stresscases.py
 ```
 
 The double-click launcher also provides:
@@ -20,7 +20,7 @@ The double-click launcher also provides:
 To verify stresscase structure without treating it as a regression testcase:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_stresscases.py
+python scripts\verify_stresscases.py
 ```
 
 For the manual eye check, use `references/visual_review_checklist.md`.

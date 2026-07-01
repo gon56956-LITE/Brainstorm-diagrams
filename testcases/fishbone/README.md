@@ -3,7 +3,7 @@
 This folder contains maintained fishbone testcase input/output pairs used for renderer regression checks. Regenerate and verify them with:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_testcases.py
+python scripts\verify_testcases.py
 ```
 
 ## Basic Testcases

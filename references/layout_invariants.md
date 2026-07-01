@@ -59,5 +59,5 @@ These constraints capture the current fishbone layout behavior. Keep them stable
 Run this before finishing renderer or example changes:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_testcases.py
+python scripts\verify_testcases.py
 ```

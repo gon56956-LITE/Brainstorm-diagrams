@@ -49,8 +49,8 @@ Use this checklist before finishing changes to `brainstorm-diagrams`.
 Run this set before closing a substantial change:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_testcases.py
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_stresscases.py
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_naturalcases.py
+python scripts\verify_testcases.py
+python scripts\verify_stresscases.py
+python scripts\verify_naturalcases.py
 cmd /c fishbone_tool.cmd verify
 ```

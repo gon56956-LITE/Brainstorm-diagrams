@@ -3,14 +3,17 @@ setlocal
 chcp 65001 >nul
 
 set "ROOT=%~dp0"
-set "PY=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
-
-if not exist "%PY%" (
-  echo Python runtime not found:
-  echo %PY%
-  echo.
-  pause
-  exit /b 1
+set "PY=python"
+python --version >nul 2>nul
+if errorlevel 1 (
+  set "PY=py -3"
+  py -3 --version >nul 2>nul
+  if errorlevel 1 (
+    echo Python was not found. Install Python 3 or add it to PATH.
+    echo.
+    pause
+    exit /b 1
+  )
 )
 
 if /i "%~1"=="verify" goto vnp
@@ -83,7 +86,7 @@ if "%preset_choice%"=="4" set "preset=value_feasibility"
 if "%preset_choice%"=="5" set "preset=urgency_importance"
 if "%preset_choice%"=="6" set "preset=custom"
 echo.
-"%PY%" "%ROOT%scripts\new_two_by_two_matrix.py" "%name%" --format "%format%" --preset "%preset%"
+%PY% "%ROOT%scripts\new_two_by_two_matrix.py" "%name%" --format "%format%" --preset "%preset%"
 echo.
 pause
 goto menu
@@ -97,7 +100,7 @@ if "%name%"=="" (
   goto menu
 )
 echo.
-"%PY%" "%ROOT%scripts\render_two_by_two_matrix_work.py" "%name%"
+%PY% "%ROOT%scripts\render_two_by_two_matrix_work.py" "%name%"
 echo.
 pause
 goto menu
@@ -111,7 +114,7 @@ if "%name%"=="" (
   goto menu
 )
 echo.
-"%PY%" "%ROOT%scripts\export_two_by_two_matrix_png.py" "%name%"
+%PY% "%ROOT%scripts\export_two_by_two_matrix_png.py" "%name%"
 echo.
 pause
 goto menu
@@ -121,40 +124,40 @@ if "%~2"=="" (
   echo Diagram name is required.
   exit /b 1
 )
-"%PY%" "%ROOT%scripts\export_two_by_two_matrix_png.py" "%~2"
+%PY% "%ROOT%scripts\export_two_by_two_matrix_png.py" "%~2"
 exit /b %ERRORLEVEL%
 
 :verify
 echo.
-"%PY%" "%ROOT%scripts\verify_testcases.py"
+%PY% "%ROOT%scripts\verify_testcases.py"
 echo.
 pause
 goto menu
 
 :vnp
-"%PY%" "%ROOT%scripts\verify_testcases.py"
+%PY% "%ROOT%scripts\verify_testcases.py"
 exit /b %ERRORLEVEL%
 
 :stress
 echo.
-"%PY%" "%ROOT%scripts\render_stresscases.py"
+%PY% "%ROOT%scripts\render_stresscases.py"
 echo.
 pause
 goto menu
 
 :snp
-"%PY%" "%ROOT%scripts\render_stresscases.py"
+%PY% "%ROOT%scripts\render_stresscases.py"
 exit /b %ERRORLEVEL%
 
 :vstress
 echo.
-"%PY%" "%ROOT%scripts\verify_stresscases.py"
+%PY% "%ROOT%scripts\verify_stresscases.py"
 echo.
 pause
 goto menu
 
 :vstressnp
-"%PY%" "%ROOT%scripts\verify_stresscases.py"
+%PY% "%ROOT%scripts\verify_stresscases.py"
 exit /b %ERRORLEVEL%
 
 :done

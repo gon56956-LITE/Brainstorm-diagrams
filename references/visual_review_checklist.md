@@ -7,13 +7,13 @@ Use this checklist after changing fishbone layout logic, especially row spacing,
 1. Regenerate the stresscase SVG:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\render_stresscases.py
+python scripts\render_stresscases.py
 ```
 
 2. Verify the stresscase structure:
 
 ```powershell
-& "C:\Users\gon56956\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\verify_stresscases.py
+python scripts\verify_stresscases.py
 ```
 
 3. Open `stresscases/fishbone/full-stress.svg` and inspect it by eye.
